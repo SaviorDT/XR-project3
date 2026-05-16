@@ -1,68 +1,221 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class PlayerForceInput : MonoBehaviour
+public class PlayerForceMovement : MonoBehaviour
 {
-    public Flying playerMovement;
+    [Header("References")]
+    public Flying flying;
+    public Transform cameraTransform;
 
-    [Header("Force Settings")]
-    public float forwardUpForce = 10f;
-    public float sideForce = 8f;
+    [Header("Walk Mode")]
+    public float walkSpeed = 5f;
+    public float walkTurnSpeed = 120f;
+
+    [Header("Fly Mode")]
+    public float boostForce = 25f;
+    public float boostDuration = 1f;
+    public float boostCooldown = 3f;
+    public float flyTurnForce = 8f;
+
+
+    [Header("Mouse Look")]
+    public float mouseSensitivity = 2f;
+    public float minPitch = -70f;
+    public float maxPitch = 70f;
+
+    [Header("Camera Reset")]
+    public float cameraResetSpeed = 6f;
+
+    private float cameraPitch = 0f;
+    private float cameraYaw = 0f;
+
+    private float nextBoostTime = 0f;
 
     private Vector3 qForce;
     private Vector3 eForce;
 
-    private bool qPressed = false;
-    private bool ePressed = false;
+    private bool qPressed;
+    private bool ePressed;
+
+    void Awake()
+    {
+        if (flying == null)
+            flying = GetComponent<Flying>();
+
+        if (cameraTransform == null)
+        {
+            Camera cam = GetComponentInChildren<Camera>();
+            if (cam != null)
+                cameraTransform = cam.transform;
+        }
+    }
 
     void Update()
     {
-        // 按下 W：給一個向前上的力，1 秒後解除
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            Vector3 force = playerMovement.transform.forward + playerMovement.transform.up;
-            force = force.normalized * forwardUpForce;
+        if (Keyboard.current == null) return;
 
-            StartCoroutine(ApplyForceForOneSecond(force));
+        if (flying.IsFlyingMode)
+        {
+            HandleFlyMode();
+        }
+        else
+        {
+            HandleWalkMode();
         }
 
-        // 按住 Q：向左施力
-        if (Input.GetKeyDown(KeyCode.Q))
+        HandleMouseLook();
+        HandleCameraResetWhenWalkMode();
+    }
+
+    private void HandleWalkMode()
+    {
+        Rigidbody rb = flying.GetRigidbody();
+
+        Vector3 moveDir = Vector3.zero;
+
+        if (Keyboard.current.wKey.isPressed)
+            moveDir += transform.forward;
+
+        if (Keyboard.current.sKey.isPressed)
+            moveDir -= transform.forward;
+
+        if (Keyboard.current.qKey.isPressed)
+            moveDir -= transform.right;
+
+        if (Keyboard.current.eKey.isPressed)
+            moveDir += transform.right;
+
+        if (Keyboard.current.aKey.isPressed)
+            transform.Rotate(Vector3.up, -walkTurnSpeed * Time.deltaTime);
+
+        if (Keyboard.current.dKey.isPressed)
+            transform.Rotate(Vector3.up, walkTurnSpeed * Time.deltaTime);
+
+        if (moveDir.sqrMagnitude > 0.001f)
         {
-            qForce = -playerMovement.transform.right * sideForce;
-            playerMovement.AddForce(qForce);
+            Vector3 displacement = moveDir.normalized * walkSpeed * Time.deltaTime;
+            rb.MovePosition(rb.position + displacement);
+        }
+
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            TryBoost();
+        }
+    }
+
+    private void HandleFlyMode()
+    {
+        if (Keyboard.current.wKey.wasPressedThisFrame)
+        {
+            TryBoost();
+        }
+
+        if (Keyboard.current.qKey.wasPressedThisFrame)
+        {
+            qForce = -transform.right * flyTurnForce;
+            flying.AddForce(qForce);
             qPressed = true;
         }
 
-        // 放開 Q：解除向左的力
-        if (Input.GetKeyUp(KeyCode.Q) && qPressed)
+        if (Keyboard.current.qKey.wasReleasedThisFrame && qPressed)
         {
-            playerMovement.RemoveForce(qForce);
+            flying.RemoveForce(qForce);
             qPressed = false;
         }
 
-        // 按住 E：向右施力
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Keyboard.current.eKey.wasPressedThisFrame)
         {
-            eForce = playerMovement.transform.right * sideForce;
-            playerMovement.AddForce(eForce);
+            eForce = transform.right * flyTurnForce;
+            flying.AddForce(eForce);
             ePressed = true;
         }
 
-        // 放開 E：解除向右的力
-        if (Input.GetKeyUp(KeyCode.E) && ePressed)
+        if (Keyboard.current.eKey.wasReleasedThisFrame && ePressed)
         {
-            playerMovement.RemoveForce(eForce);
+            flying.RemoveForce(eForce);
             ePressed = false;
         }
     }
 
-    private IEnumerator ApplyForceForOneSecond(Vector3 force)
+    private void TryBoost()
     {
-        playerMovement.AddForce(force);
+        if (Time.time < nextBoostTime) return;
 
-        yield return new WaitForSeconds(1f);
+        Vector3 force = (transform.forward + transform.up).normalized * boostForce;
 
-        playerMovement.RemoveForce(force);
+        flying.ForceFlyMode();
+        StartCoroutine(ApplyBoostForce(force));
+
+        nextBoostTime = Time.time + boostCooldown;
+    }
+
+    private IEnumerator ApplyBoostForce(Vector3 force)
+    {
+        flying.AddForce(force);
+
+        yield return new WaitForSeconds(boostDuration);
+
+        flying.RemoveForce(force);
+    }
+
+    private void HandleMouseLook()
+    {
+        if (Mouse.current == null || cameraTransform == null) return;
+
+        if (!Mouse.current.rightButton.isPressed) return;
+
+        Vector2 mouseDelta = Mouse.current.delta.ReadValue();
+
+        float yawDelta = mouseDelta.x * mouseSensitivity;
+        float pitchDelta = mouseDelta.y * mouseSensitivity;
+
+        cameraPitch -= pitchDelta;
+        cameraPitch = Mathf.Clamp(cameraPitch, minPitch, maxPitch);
+
+        if (flying.IsFlyingMode)
+        {
+            // Fly Mode：
+            // 只有 Camera 自己轉，PlayerRoot 完全不受影響
+            cameraYaw += yawDelta;
+
+            cameraTransform.localRotation = Quaternion.Euler(
+                cameraPitch,
+                cameraYaw,
+                0f
+            );
+        }
+        else
+        {
+            // Walk Mode：
+            // 左右轉 PlayerRoot，上下只轉 Camera
+            transform.Rotate(Vector3.up, yawDelta);
+
+            cameraYaw = 0f;
+
+            cameraTransform.localRotation = Quaternion.Euler(
+                cameraPitch,
+                0f,
+                0f
+            );
+        }
+    }
+
+    private void HandleCameraResetWhenWalkMode()
+    {
+        if (cameraTransform == null) return;
+        if (flying.IsFlyingMode) return;
+        if (Mouse.current != null && Mouse.current.rightButton.isPressed) return;
+
+        // 落地後，把 Camera 的 yaw 慢慢回正到 PlayerRoot 方向
+        cameraYaw = Mathf.Lerp(cameraYaw, 0f, cameraResetSpeed * Time.deltaTime);
+
+        Quaternion targetRotation = Quaternion.Euler(cameraPitch, 0f, 0f);
+
+        cameraTransform.localRotation = Quaternion.Slerp(
+            cameraTransform.localRotation,
+            targetRotation,
+            cameraResetSpeed * Time.deltaTime
+        );
     }
 }
