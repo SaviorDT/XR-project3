@@ -163,6 +163,8 @@ GameObject:
   - component: {fileID: 181555287}
   - component: {fileID: 181555286}
   - component: {fileID: 181555290}
+  - component: {fileID: 181555291}
+  - component: {fileID: 181555292}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -277,11 +279,88 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RandomPrefabSpawner
   prefab: {fileID: 2069924471238238773, guid: bca0d528741d65540b10264a66a6e3a9, type: 3}
   spawnCount: 10000
-  areaSize: {x: 10000, y: 100, z: 10000}
+  areaSize: {x: 1000, y: 500, z: 1000}
   maxTryPerObject: 100
   collisionMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  randomRotationX: 0
+  randomRotationY: 0
+  randomRotationZ: 0
+  fixRotation: {x: 0, y: 0, z: 0}
+  randomScale: 1
+  fixedScale: {x: 1, y: 1, z: 1}
+  randomXRange: {x: 1, y: 30}
+  randomYRange: {x: 1, y: 5}
+  randomZRange: {x: 1, y: 30}
+  limitXZRatio: 1
+  maxXZRatio: 4
+  useCustomCenter: 1
+  customCenter: {x: 0, y: 250, z: 0}
+--- !u!114 &181555291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 181555285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bb7ebd18f15c764dbeed1a0800fbe08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RandomPrefabSpawner
+  prefab: {fileID: 870086553576856809, guid: 88023ff95a03b9543a0ffd8caebc8f36, type: 3}
+  spawnCount: 1000
+  areaSize: {x: 1000, y: 500, z: 1000}
+  maxTryPerObject: 100
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  randomRotationX: 1
+  randomRotationY: 1
+  randomRotationZ: 1
+  fixRotation: {x: 0, y: 0, z: 0}
+  randomScale: 0
+  fixedScale: {x: 1, y: 1, z: 1}
+  randomXRange: {x: 1, y: 30}
+  randomYRange: {x: 1, y: 5}
+  randomZRange: {x: 1, y: 30}
+  limitXZRatio: 1
+  maxXZRatio: 4
+  useCustomCenter: 1
+  customCenter: {x: 0, y: 250, z: 0}
+--- !u!114 &181555292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 181555285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bb7ebd18f15c764dbeed1a0800fbe08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RandomPrefabSpawner
+  prefab: {fileID: 870086553576856809, guid: 88023ff95a03b9543a0ffd8caebc8f36, type: 3}
+  spawnCount: 300
+  areaSize: {x: 1000, y: 0, z: 1000}
+  maxTryPerObject: 100
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  randomRotationX: 0
+  randomRotationY: 0
+  randomRotationZ: 0
+  fixRotation: {x: 180, y: 0, z: 0}
+  randomScale: 0
+  fixedScale: {x: 1, y: 1, z: 1}
+  randomXRange: {x: 1, y: 30}
+  randomYRange: {x: 1, y: 5}
+  randomZRange: {x: 1, y: 30}
+  limitXZRatio: 1
+  maxXZRatio: 4
+  useCustomCenter: 1
+  customCenter: {x: 0, y: 2, z: 0}
 --- !u!1 &437229387
 GameObject:
   m_ObjectHideFlags: 0

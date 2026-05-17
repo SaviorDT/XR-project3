@@ -187,8 +187,6 @@ public class PlayerForceMovement : MonoBehaviour
         }
         else
         {
-            // Walk Mode：
-            // 左右轉 PlayerRoot，上下只轉 Camera
             transform.Rotate(Vector3.up, yawDelta);
 
             cameraYaw = 0f;
@@ -207,15 +205,33 @@ public class PlayerForceMovement : MonoBehaviour
         if (flying.IsFlyingMode) return;
         if (Mouse.current != null && Mouse.current.rightButton.isPressed) return;
 
-        // 落地後，把 Camera 的 yaw 慢慢回正到 PlayerRoot 方向
-        cameraYaw = Mathf.Lerp(cameraYaw, 0f, cameraResetSpeed * Time.deltaTime);
+        // 只處理 Camera 的 yaw 差異，pitch 保留
+        float currentCameraYaw = cameraYaw;
 
-        Quaternion targetRotation = Quaternion.Euler(cameraPitch, 0f, 0f);
+        if (Mathf.Abs(currentCameraYaw) < 0.1f)
+        {
+            cameraYaw = 0f;
+            cameraTransform.localRotation = Quaternion.Euler(cameraPitch, 0f, 0f);
+            return;
+        }
 
-        cameraTransform.localRotation = Quaternion.Slerp(
-            cameraTransform.localRotation,
-            targetRotation,
+        // 這一幀要把多少 yaw 從 Camera 轉移到 PlayerRoot
+        float yawStep = Mathf.Lerp(
+            0f,
+            currentCameraYaw,
             cameraResetSpeed * Time.deltaTime
+        );
+
+        // PlayerRoot 往 Camera 方向轉
+        transform.Rotate(Vector3.up, yawStep, Space.World);
+
+        // Camera 反方向扣掉同樣的 yaw，抵銷 PlayerRoot 旋轉造成的畫面變化
+        cameraYaw -= yawStep;
+
+        cameraTransform.localRotation = Quaternion.Euler(
+            cameraPitch,
+            cameraYaw,
+            0f
         );
     }
 }
