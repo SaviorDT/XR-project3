@@ -111,27 +111,27 @@ public class PlayerForceMovement : MonoBehaviour
             TryBoost();
         }
 
-        if (Keyboard.current.qKey.wasPressedThisFrame)
+        if (Keyboard.current.aKey.wasPressedThisFrame)
         {
             qForce = -transform.right * flyTurnForce;
             flying.AddForce(qForce);
             qPressed = true;
         }
 
-        if (Keyboard.current.qKey.wasReleasedThisFrame && qPressed)
+        if (Keyboard.current.aKey.wasReleasedThisFrame && qPressed)
         {
             flying.RemoveForce(qForce);
             qPressed = false;
         }
 
-        if (Keyboard.current.eKey.wasPressedThisFrame)
+        if (Keyboard.current.dKey.wasPressedThisFrame)
         {
             eForce = transform.right * flyTurnForce;
             flying.AddForce(eForce);
             ePressed = true;
         }
 
-        if (Keyboard.current.eKey.wasReleasedThisFrame && ePressed)
+        if (Keyboard.current.dKey.wasReleasedThisFrame && ePressed)
         {
             flying.RemoveForce(eForce);
             ePressed = false;
