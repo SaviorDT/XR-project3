@@ -6,31 +6,25 @@ public class WindForceZone : MonoBehaviour
     public Vector3 localWindDirection = Vector3.down;
     public float windStrength = 20f;
 
-    private Flying currentPlayer;
     private Vector3 appliedForce;
-
-    private void OnTriggerEnter(Collider other)
+    void Awake()
     {
-        Flying player = other.GetComponentInParent<Flying>();
-        if (player == null) return;
-
-        currentPlayer = player;
-
         Vector3 worldDirection = transform.TransformDirection(localWindDirection).normalized;
         appliedForce = worldDirection * windStrength;
-
-        currentPlayer.AddForce(appliedForce);
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        PlayerFlyController player = other.GetComponentInParent<PlayerFlyController>();
+        if (player == null) return;
+        player.SetWindVelocity(appliedForce);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Flying player = other.GetComponentInParent<Flying>();
+        PlayerFlyController player = other.GetComponentInParent<PlayerFlyController>();
         if (player == null) return;
-        if (player != currentPlayer) return;
 
-        currentPlayer.RemoveForce(appliedForce);
+        player.SetWindVelocity(-appliedForce);
 
-        currentPlayer = null;
-        appliedForce = Vector3.zero;
     }
 }

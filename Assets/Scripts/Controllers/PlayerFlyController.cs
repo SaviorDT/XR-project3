@@ -141,6 +141,6 @@ public class PlayerFlyController : MonoBehaviour
 
     public void SetWindVelocity(Vector3 velocity)
     {
-        WindVelocity = velocity;
+        WindVelocity += velocity;
     }
 }

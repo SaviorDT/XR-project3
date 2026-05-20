@@ -34,6 +34,10 @@ public class EnemyAI : MonoBehaviour
     void Awake()
     {
         physics = GetComponent<EnemyPhysics>();
+        if(player == null)
+        {
+            player = FindFirstObjectByType<PlayerFlyController>().transform;
+        }
     }
 
     void FixedUpdate()

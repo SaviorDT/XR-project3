@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 6002373474955080772}
   - component: {fileID: 7225717918225113100}
   - component: {fileID: 8374176059725432980}
-  - component: {fileID: 6725966398515007147}
+  - component: {fileID: 8305574982284056041}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -194,7 +194,7 @@ MonoBehaviour:
   gravityForce: {x: 0, y: -9.8, z: 0}
   rotateSpeed: 6
   faceMovingDirection: 1
---- !u!114 &6725966398515007147
+--- !u!114 &8305574982284056041
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -207,11 +207,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
   player: {fileID: 0}
-  forwardForce: 18
-  sideForce: 10
-  upForce: 12
+  detectDistance: 30
+  chaseForwardForce: 18
+  chaseSideForce: 10
+  chaseUpForce: 12
   diveForce: 18
-  chaseDistance: 50
-  diveDistance: 15
   heightTolerance: 2
   turnAngleThreshold: 10
+  randomForce: 10
+  randomVerticalForce: 6
+  randomChangeInterval: 2
