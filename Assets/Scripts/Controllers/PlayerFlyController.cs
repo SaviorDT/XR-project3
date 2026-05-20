@@ -9,12 +9,13 @@ public class PlayerFlyController : MonoBehaviour
     [SerializeField] private float RollSteeringRatio = 1.0f;
     [Tooltip("玩家的平移距離超過此閾值才會被視為俯衝或抬頭")]
     [SerializeField] private float PlayerPitchThreshold = 0.1f;
+    [SerializeField] private float PlayerControllerRotateToPitchRatio = 1.0f;
     [SerializeField] private float Gravity = 30f;
     [SerializeField] private float WindForce = 1.0f;
     [SerializeField] private float DownToForwardRatio = 4.0f, DownToForwardLossRatio = 0.5f;
     [SerializeField] private float VelocityToUpRatio = 4.0f, VelocityToUpLossRatio = 0.3f;
     [Tooltip("1秒後，玩家的速度會有多少比例轉向當前的飛行方向")]
-    [SerializeField] private float SteeringSpeed = 2.0f;
+    [SerializeField] private float SteeringSpeed = 1.5f;
     [SerializeField] private Vector3 WindResistance = new(0.5f, 0.1f, 0.5f);
     // 1. 轉向目前速度方向
     // 1. 將玩家歪頭套用到轉向
@@ -31,19 +32,53 @@ public class PlayerFlyController : MonoBehaviour
     private float PlayerRoll = 0.0f;
     private enum EPitchState { Up, Neutral, Down }
     private EPitchState PlayerPitchState = EPitchState.Neutral;
-    [SerializeField] private float DiveAngle = -82.0f, ClimbAngle = 82.0f;
+    private float PlayerControllerRotateBias = 0.0f;
+    private float PlayerControllerRotateY = 0.0f;
+    [SerializeField] private float DiveAngle = -70.0f, ClimbAngle = 70.0f;
     private Vector3 WindVelocity = Vector3.zero;
     private InputDevice HeadDevice;
+    private InputDevice LeftHandDevice;
+    private InputDevice RightHandDevice;
+    private Vector3 PreviousPosition;
+    private Vector3 CurrentPosition;
+    private Quaternion PreviousRotation;
+    private Quaternion CurrentRotation;
+    private float LastFixedTime;
+    private bool HasSimState;
     
     void Start()
     {
+        PreviousPosition = transform.position;
+        CurrentPosition = transform.position;
+        PreviousRotation = transform.rotation;
+        CurrentRotation = transform.rotation;
+        LastFixedTime = Time.time;
+        HasSimState = true;
     }
 
     void Update()
     {
+        if (HasSimState)
+        {
+            float t = (Time.time - LastFixedTime) / Time.fixedDeltaTime;
+            t = Mathf.Clamp01(t);
+            transform.position = Vector3.Lerp(PreviousPosition, CurrentPosition, t);
+            transform.rotation = Quaternion.Slerp(PreviousRotation, CurrentRotation, t);
+        }
+
         if (!HeadDevice.isValid)
         {
             HeadDevice = InputDevices.GetDeviceAtXRNode(XRNode.Head);
+        }
+
+        if (!LeftHandDevice.isValid)
+        {
+            LeftHandDevice = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
+        }
+
+        if (!RightHandDevice.isValid)
+        {
+            RightHandDevice = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
         }
 
         if (HeadDevice.TryGetFeatureValue(CommonUsages.deviceRotation, out var headRotation))
@@ -68,10 +103,32 @@ public class PlayerFlyController : MonoBehaviour
                 PlayerPitchState = EPitchState.Neutral;
             }
         }
+
+        if (LeftHandDevice.TryGetFeatureValue(CommonUsages.deviceRotation, out var leftRotation) &&
+            RightHandDevice.TryGetFeatureValue(CommonUsages.deviceRotation, out var rightRotation))
+        {
+            PlayerControllerRotateY = (leftRotation.y + rightRotation.y) * 0.5f * Mathf.Rad2Deg;
+        }
     }
     
     void FixedUpdate()
     {
+        if (!HasSimState)
+        {
+            PreviousPosition = transform.position;
+            CurrentPosition = transform.position;
+            PreviousRotation = transform.rotation;
+            CurrentRotation = transform.rotation;
+            LastFixedTime = Time.time;
+            HasSimState = true;
+        }
+
+        transform.position = CurrentPosition;
+        transform.rotation = CurrentRotation;
+        PreviousPosition = CurrentPosition;
+        PreviousRotation = CurrentRotation;
+        LastFixedTime = Time.time;
+
         // 轉向
         Vector3 horizontalVelocity = new(Velocity.x, 0.0f, Velocity.z);
         if (horizontalVelocity.sqrMagnitude > 0.0001f)
@@ -97,6 +154,7 @@ public class PlayerFlyController : MonoBehaviour
         {
             pitch += DiveAngle;
         }
+        pitch += (PlayerControllerRotateY - PlayerControllerRotateBias) * PlayerControllerRotateToPitchRatio;
         pitch = Mathf.Clamp(pitch, -89.9f, 89.9f);
 
         // 重力加速度
@@ -114,7 +172,6 @@ public class PlayerFlyController : MonoBehaviour
             float ReducedDownSpeed = -Velocity.y * DownToForwardRatio * Mathf.Cos(pitch * Mathf.Deg2Rad) * Mathf.Cos(pitch * Mathf.Deg2Rad) * Time.fixedDeltaTime;
             Velocity.y += ReducedDownSpeed;
             Velocity += ReducedDownSpeed * (1 - DownToForwardLossRatio) * transform.forward;
-            Debug.Log($"Down to forward: {ReducedDownSpeed}, Velocity: {Velocity}, Pitch: {pitch}");
         }
 
         // 相對速度轉往上
@@ -125,7 +182,6 @@ public class PlayerFlyController : MonoBehaviour
                                     Time.fixedDeltaTime;
         Velocity += ReducedForwardSpeed * RelativeVelocity.normalized;
         Velocity.y += ReducedForwardSpeed * (1 - VelocityToUpLossRatio) * (pitch > 0 ? -1 : 1);
-        Debug.Log($"Forward to up: {ReducedForwardSpeed}, Velocity: {Velocity}, Pitch: {pitch}");
 
         // 速度轉向前面
         Vector3 ReducedSidewaysVelocity = SteeringSpeed * Time.fixedDeltaTime * -new Vector3(Velocity.x, 0.0f, Velocity.z);
@@ -137,10 +193,18 @@ public class PlayerFlyController : MonoBehaviour
 
         // 移動
         transform.position += Velocity * Time.fixedDeltaTime;
+
+        CurrentPosition = transform.position;
+        CurrentRotation = transform.rotation;
     }
 
     public void SetWindVelocity(Vector3 velocity)
     {
         WindVelocity += velocity;
+    }
+
+    public void SetPlayerControllerRotateBias()
+    {
+        PlayerControllerRotateBias = PlayerControllerRotateY;
     }
 }
