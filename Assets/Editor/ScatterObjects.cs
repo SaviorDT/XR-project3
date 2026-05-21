@@ -13,6 +13,10 @@ public class PrefabScatterWindow : EditorWindow
     private int spawnCount = 10;
     private float minDistance = 1.5f; 
     
+    // 新增：隨機旋轉的設定
+    private bool enableRandomRotation = false;
+    private Vector3 maxRotationAngles = new Vector3(0f, 180f, 0f); // 預設只在 Y 軸旋轉
+    
     private Vector2 scrollPos;
     
     // 用於原生繪製 List 的變數
@@ -43,6 +47,16 @@ public class PrefabScatterWindow : EditorWindow
         ellipsoidRadii = EditorGUILayout.Vector3Field("生成半徑 (X, Y, Z)", ellipsoidRadii);
         spawnCount = EditorGUILayout.IntField("生成嘗試次數", spawnCount);
         minDistance = EditorGUILayout.FloatField("最小間距 (Min Distance)", minDistance);
+
+        GUILayout.Space(15);
+        GUILayout.Label("旋轉設定 (Rotation Settings)", EditorStyles.boldLabel);
+        
+        // 隨機旋轉開關與數值輸入
+        enableRandomRotation = EditorGUILayout.Toggle("啟用隨機旋轉", enableRandomRotation);
+        if (enableRandomRotation)
+        {
+            maxRotationAngles = EditorGUILayout.Vector3Field("隨機旋轉範圍 (+- 角度)", maxRotationAngles);
+        }
 
         GUILayout.Space(15);
         GUILayout.Label("目標物件 (Prefabs)", EditorStyles.boldLabel);
@@ -102,6 +116,17 @@ public class PrefabScatterWindow : EditorWindow
             GameObject newObj = (GameObject)PrefabUtility.InstantiatePrefab(prefabToSpawn);
             newObj.transform.position = spawnPos;
             newObj.transform.SetParent(centerObject);
+
+            // 處理隨機旋轉
+            if (enableRandomRotation)
+            {
+                float rotX = Random.Range(-maxRotationAngles.x, maxRotationAngles.x);
+                float rotY = Random.Range(-maxRotationAngles.y, maxRotationAngles.y);
+                float rotZ = Random.Range(-maxRotationAngles.z, maxRotationAngles.z);
+                
+                // 使用 localRotation 以確保旋轉是相對於父物件的座標系
+                newObj.transform.localRotation = Quaternion.Euler(rotX, rotY, rotZ);
+            }
 
             Undo.RegisterCreatedObjectUndo(newObj, "Scatter Prefab");
             
