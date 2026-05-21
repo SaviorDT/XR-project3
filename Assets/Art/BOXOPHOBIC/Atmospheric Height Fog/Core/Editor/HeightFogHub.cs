@@ -3,7 +3,7 @@
 using UnityEngine;
 using UnityEditor;
 using Boxophobic.StyledGUI;
-using Boxophobic.Utils;
+using Boxophobic.Utility;
 using System.IO;
 
 public class HeightFogHub : EditorWindow
