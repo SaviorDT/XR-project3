@@ -1,14 +1,9 @@
 fileFormatVersion: 2
-guid: 05322a4cbf64c6247abf4977fc89a050
+guid: 85748115a87cc7440ac72119e7d9a583
 ModelImporter:
-  serializedVersion: 22200
+  serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material
-    second: {fileID: 2100000, guid: cb1b3563d3837304a9855da8536b8020, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -61,6 +56,9 @@ ModelImporter:
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
     optimizeBones: 1
+    generateMeshLods: 0
+    meshLodGenerationFlags: 0
+    maximumMeshLod: -1
     meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
@@ -110,10 +108,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 333554
-  packageName: Low-Poly Desert Environment Pack
-  packageVersion: 1.0
-  assetPath: Assets/Tiny Teacup Studio/Low Poly Desert Environment/Meshes/CliffCorner_01.fbx
-  uploadId: 800150

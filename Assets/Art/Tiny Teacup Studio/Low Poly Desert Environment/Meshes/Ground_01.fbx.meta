@@ -1,14 +1,9 @@
 fileFormatVersion: 2
-guid: 522fa0e85f9091846822ca01c0d8de71
+guid: ee6e8de1316a55d4e990e7f3d40b9d7c
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material
-    second: {fileID: 2100000, guid: cb1b3563d3837304a9855da8536b8020, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -113,10 +108,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 333554
-  packageName: Low-Poly Desert Environment Pack
-  packageVersion: 1.0
-  assetPath: Assets/Tiny Teacup Studio/Low Poly Desert Environment/Meshes/Ground_01.fbx
-  uploadId: 800150
