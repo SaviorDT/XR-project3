@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: a2cb5aa29e8a5cc4c9e4894b5768bbd3
+guid: cb0d76b637ba4cd4a8e715a99eb23ae6
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: cb1b3563d3837304a9855da8536b8020, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -108,3 +113,10 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 333554
+  packageName: Low-Poly Desert Environment Pack
+  packageVersion: 1.0
+  assetPath: Assets/Art/Tiny Teacup Studio/Low Poly Desert Environment/Meshes/Cactus_02.fbx
+  uploadId: 800150

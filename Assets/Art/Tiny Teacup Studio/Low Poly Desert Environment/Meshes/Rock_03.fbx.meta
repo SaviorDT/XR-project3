@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: c49008245c85af54b89bcbdc4b5716b7
+guid: 68d9dbbd4c7c3454789a7a143623f829
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: cb1b3563d3837304a9855da8536b8020, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -108,3 +113,10 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 333554
+  packageName: Low-Poly Desert Environment Pack
+  packageVersion: 1.0
+  assetPath: Assets/Art/Tiny Teacup Studio/Low Poly Desert Environment/Meshes/Rock_03.fbx
+  uploadId: 800150
