@@ -56,9 +56,9 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _DirectionalLightColor: {r: 1, g: 0.91764706, b: 0.74509805, a: 1}
+    - _DirectionalLightColor: {r: 1, g: 0.96530825, b: 0.8207547, a: 1}
     - _EmissionColor: {r: 0.43867922, g: 0.75594753, b: 1, a: 1}
-    - _GroundColor: {r: 0.4764151, g: 0.43684214, b: 0.4157396, a: 1}
-    - _SkyColor: {r: 0.6421324, g: 0.7174404, b: 0.735849, a: 1}
+    - _GroundColor: {r: 0.56554824, g: 0.7020991, b: 0.8443396, a: 1}
+    - _SkyColor: {r: 0, g: 0.59375006, b: 0.75, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
