@@ -8,7 +8,7 @@ public class PlayerFlyController : MonoBehaviour
     [SerializeField] private float VelocitySteeringRatio = 1.0f;
     [SerializeField] private float CorrectPitchRatio = 0.3f;
     [SerializeField] private float PlayerRollThreshold = 5.0f;
-    [SerializeField] private float RollSteeringRatio = 1.0f;
+    [SerializeField] private float RollSteeringRatio = 3.0f;
     [Tooltip("玩家的平移距離超過此閾值才會被視為俯衝或抬頭")]
     [SerializeField] private float PlayerPitchThreshold = 0.1f;
     [SerializeField] private float PlayerControllerRotateToPitchRatio = 1.0f;
@@ -19,6 +19,7 @@ public class PlayerFlyController : MonoBehaviour
     [Tooltip("1秒後，玩家的速度會有多少比例轉向當前的飛行方向")]
     [SerializeField] private float SteeringSpeed = 1.5f;
     [SerializeField] private Vector3 WindResistance = new(0.5f, 0.5f, 0.5f);
+    [SerializeField] private Transform FixRotationTarget;
     // 1. 轉向目前速度方向
     // 1. 將玩家歪頭套用到轉向
     // 1. 計算俯仰角
@@ -42,6 +43,8 @@ public class PlayerFlyController : MonoBehaviour
     private InputDevice LeftHandDevice;
     private InputDevice RightHandDevice;
     private Rigidbody PlayerRigidbody;
+    private Vector3 CenterPosition = Vector3.zero;
+    private float ForwardRotation = 0.0f;
     
     void Start()
     {
@@ -69,9 +72,19 @@ public class PlayerFlyController : MonoBehaviour
             RightHandDevice = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
         }
 
+        if (CenterPosition == Vector3.zero && HeadDevice.isValid &&
+            HeadDevice.TryGetFeatureValue(CommonUsages.devicePosition, out var initialPosition) &&
+            HeadDevice.TryGetFeatureValue(CommonUsages.deviceRotation, out var initialRotation))
+        {
+            CenterPosition = initialPosition;
+            ForwardRotation = initialRotation.eulerAngles.y;
+            FixRotationTarget.localRotation = Quaternion.Euler(0.0f, -ForwardRotation, 0.0f);
+        }
+
         if (HeadDevice.TryGetFeatureValue(CommonUsages.deviceRotation, out var headRotation))
         {
-            var roll = headRotation.eulerAngles.z;
+            Quaternion relativeRotation = Quaternion.Inverse(Quaternion.Euler(0.0f, ForwardRotation, 0.0f)) * headRotation;
+            var roll = relativeRotation.eulerAngles.z;
             if (roll > 180.0f)
             {
                 roll -= 360.0f;
@@ -82,10 +95,11 @@ public class PlayerFlyController : MonoBehaviour
 
         if (HeadDevice.TryGetFeatureValue(CommonUsages.devicePosition, out var headPosition))
         {
-            // PlayerControllerRotateY = headPosition.x * 100.0f;
-            if (Mathf.Abs(headPosition.z) > PlayerPitchThreshold)
+            Vector3 relativePosition = Quaternion.Inverse(Quaternion.Euler(0.0f, ForwardRotation, 0.0f)) * (headPosition - CenterPosition);
+            // PlayerControllerRotateY = relativePosition.x * 100.0f;
+            if (Mathf.Abs(relativePosition.z) > PlayerPitchThreshold)
             {
-                PlayerPitchState = headPosition.z > 0.0f ? EPitchState.Down : EPitchState.Up;
+                PlayerPitchState = relativePosition.z > 0.0f ? EPitchState.Down : EPitchState.Up;
             }
             else
             {
@@ -96,7 +110,10 @@ public class PlayerFlyController : MonoBehaviour
         if (LeftHandDevice.TryGetFeatureValue(CommonUsages.deviceRotation, out var leftRotation) &&
             RightHandDevice.TryGetFeatureValue(CommonUsages.deviceRotation, out var rightRotation))
         {
-            PlayerControllerRotateY = (leftRotation.y + rightRotation.y) * 0.5f * Mathf.Rad2Deg;
+            Quaternion relativeRotation = Quaternion.Inverse(leftRotation) * rightRotation;
+            float relativeYaw = Mathf.DeltaAngle(0.0f, relativeRotation.eulerAngles.y);
+            PlayerControllerRotateY = relativeYaw * 0.5f;
+            Debug.Log($"Relative Yaw: {relativeYaw}, PlayerControllerRotateY: {PlayerControllerRotateY}");
         }
     }
     
@@ -117,7 +134,7 @@ public class PlayerFlyController : MonoBehaviour
         if (Mathf.Abs(PlayerRoll) > PlayerRollThreshold)
         {
             targetRotation = Quaternion.AngleAxis(-PlayerRoll * RollSteeringRatio, Vector3.up) * targetRotation;
-            Debug.Log($"PlayerRoll: {PlayerRoll}, PlayerControllerRotateY: {PlayerControllerRotateY}");
+            // Debug.Log($"PlayerRoll: {PlayerRoll}, PlayerControllerRotateY: {PlayerControllerRotateY}");
         }
 
         // 改平（保留 yaw）
