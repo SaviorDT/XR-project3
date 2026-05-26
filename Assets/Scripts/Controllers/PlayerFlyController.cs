@@ -12,7 +12,7 @@ public class PlayerFlyController : MonoBehaviour
     [Tooltip("玩家的平移距離超過此閾值才會被視為俯衝或抬頭")]
     [SerializeField] private float PlayerPitchThreshold = 0.1f;
     [SerializeField] private float PlayerControllerRotateToPitchRatio = 1.0f;
-    [SerializeField] private float Gravity = 50f, ReducedGravityRatio = 0.75f, StallSpeed = 5.0f;
+    [SerializeField] private float Gravity = 9.8f, ReducedGravityRatio = 0.75f, StallSpeed = 5.0f;
     [SerializeField] private float WindForce = 1.0f;
     [SerializeField] private float DownToForwardRatio = 2.0f, DownToForwardLossRatio = 0.0f;
     [SerializeField] private float VelocityToUpRatio = 0.8f, VelocityToUpLossRatio = -2f;
@@ -43,12 +43,17 @@ public class PlayerFlyController : MonoBehaviour
     private InputDevice LeftHandDevice;
     private InputDevice RightHandDevice;
     private Rigidbody PlayerRigidbody;
+    [SerializeField] private BoxCollider PlayerCollider;
     private Vector3 CenterPosition = Vector3.zero;
     private float ForwardRotation = 0.0f;
     
     void Start()
     {
         PlayerRigidbody = GetComponent<Rigidbody>();
+        if (PlayerCollider == null)
+        {
+            PlayerCollider = GetComponent<BoxCollider>();
+        }
         if (PlayerRigidbody != null)
         {
             PlayerRigidbody.interpolation = RigidbodyInterpolation.Interpolate;
@@ -113,12 +118,19 @@ public class PlayerFlyController : MonoBehaviour
             Quaternion relativeRotation = Quaternion.Inverse(leftRotation) * rightRotation;
             float relativeYaw = Mathf.DeltaAngle(0.0f, relativeRotation.eulerAngles.y);
             PlayerControllerRotateY = relativeYaw * 0.5f;
-            Debug.Log($"Relative Yaw: {relativeYaw}, PlayerControllerRotateY: {PlayerControllerRotateY}");
+            // Debug.Log($"Relative Yaw: {relativeYaw}, PlayerControllerRotateY: {PlayerControllerRotateY}");
         }
     }
     
     void FixedUpdate()
     {
+        // 著地時不飛行
+        if (IsGrounded())
+        {
+            Velocity = Vector3.zero;
+            PlayerRigidbody.linearVelocity = Vector3.zero;
+            return;
+        }
         // 轉向
         Vector3 horizontalVelocity = new(Velocity.x, 0.0f, Velocity.z);
         Quaternion targetRotation = PlayerRigidbody.rotation;
@@ -233,5 +245,17 @@ public class PlayerFlyController : MonoBehaviour
     public void SetPlayerControllerRotateBias()
     {
         PlayerControllerRotateBias = PlayerControllerRotateY;
+    }
+
+    private bool IsGrounded() {
+        if (PlayerCollider == null)
+        {
+            return false;
+        }
+
+        Bounds bounds = PlayerCollider.bounds;
+        Vector3 origin = bounds.center + Vector3.up * 0.01f;
+        float groundCheckDistance = bounds.extents.y + 0.05f;
+        return Physics.Raycast(origin, Vector3.down, groundCheckDistance, ~0, QueryTriggerInteraction.Ignore);
     }
 }

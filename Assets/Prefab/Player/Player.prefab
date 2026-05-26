@@ -196,7 +196,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 247, z: -266.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.9872923, z: 1.0933433}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2569367929361411795}
@@ -220,7 +220,7 @@ MonoBehaviour:
   RollSteeringRatio: 3
   PlayerPitchThreshold: 0.1
   PlayerControllerRotateToPitchRatio: 1
-  Gravity: 50
+  Gravity: 9.8
   ReducedGravityRatio: 0.75
   StallSpeed: 5
   WindForce: 1
@@ -230,9 +230,11 @@ MonoBehaviour:
   VelocityToUpLossRatio: -2
   SteeringSpeed: 1.5
   WindResistance: {x: 0.5, y: 0.5, z: 0.5}
+  FixRotationTarget: {fileID: 2569367929361411795}
   Velocity: {x: 0, y: 0, z: 0}
   DiveAngle: -70
   ClimbAngle: 70
+  PlayerCollider: {fileID: 1657449077907631806}
 --- !u!54 &9218127325971486271
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -244,7 +246,7 @@ Rigidbody:
   m_Mass: 1
   m_LinearDamping: 0.7
   m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: -1}
+  m_CenterOfMass: {x: 0, y: 0.8, z: -0.4}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
   m_IncludeLayers:
@@ -279,8 +281,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.5, y: 3, z: 2}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.4, y: 1.6, z: 0.8}
+  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!136 &3813517108462077654
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -300,10 +302,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 3
+  m_Radius: 0.2
+  m_Height: 1.6
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 1}
+  m_Center: {x: 0, y: 0.8, z: 0.4}
 --- !u!1 &5601274134259908154
 GameObject:
   m_ObjectHideFlags: 0
