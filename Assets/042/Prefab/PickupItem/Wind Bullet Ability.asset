@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1d50a8b5882a7145be8b247966153d5, type: 3}
+  m_Name: Wind Bullet Ability
+  m_EditorClassIdentifier: Assembly-CSharp::WindBulletAbility
+  abilityName: WindBulletAbility
+  abilityType: 1
+  appearancePrefab: {fileID: 2005411915932503488, guid: 2d4e66832e5826d40b423704c78953c5, type: 3}
+  maxLevel: 5
+  windBulletPrefab: {fileID: 8910929923877635132, guid: 5d65848b59eced04cac596d831ee2c28, type: 3}
+  baseDamage: 20
+  damagePerLevel: 10
+  bulletSpeed: 25
+  lifeTime: 5
+  spawnForwardOffset: 1.5
+  spawnUpOffset: 0.3

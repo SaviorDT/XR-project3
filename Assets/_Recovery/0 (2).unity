@@ -798,9 +798,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickupSpawner
   pickupPrefab: {fileID: 7695265015446847808, guid: 8d71e5ecb519ff64eb325cccd8ec808f, type: 3}
-  possibleAbilities:
-  - {fileID: 11400000, guid: 47a712d9130887a4b8dc6d1243e281ae, type: 2}
-  - {fileID: 11400000, guid: e52842d946595e34789b3ff635cacc41, type: 2}
+  possibleAbilities: []
   spawnCount: 100
   areaSize: {x: 1000, y: 200, z: 1000}
   spawnCenter: {x: 0, y: 100, z: 0}

@@ -3,7 +3,8 @@ using UnityEngine;
 public enum AbilityType
 {
     Passive,
-    Active
+    Active,
+    Item
 }
 
 public abstract class AbilityBase : ScriptableObject
