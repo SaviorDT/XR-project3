@@ -5,10 +5,14 @@ using UnityEngine.XR;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerFlyController : MonoBehaviour
 {
+    [SerializeField] private Vector3 FlappingWingForce = new(0.0f, 5.0f, 2.0f);
+    [SerializeField] private Vector3 TakeOffVelocity = new(0.0f, 5.0f, 2.0f);
+    [SerializeField] private float FlappingWingThreshold = 0.5f;
     [SerializeField] private float VelocitySteeringRatio = 1.0f;
     [SerializeField] private float CorrectPitchRatio = 0.3f;
     [SerializeField] private float PlayerRollThreshold = 5.0f;
     [SerializeField] private float RollSteeringRatio = 3.0f;
+    [SerializeField] private float MaxAngularVelocityY = 90.0f;
     [Tooltip("玩家的平移距離超過此閾值才會被視為俯衝或抬頭")]
     [SerializeField] private float PlayerPitchThreshold = 0.1f;
     [SerializeField] private float PlayerControllerRotateToPitchRatio = 1.0f;
@@ -77,13 +81,9 @@ public class PlayerFlyController : MonoBehaviour
             RightHandDevice = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
         }
 
-        if (CenterPosition == Vector3.zero && HeadDevice.isValid &&
-            HeadDevice.TryGetFeatureValue(CommonUsages.devicePosition, out var initialPosition) &&
-            HeadDevice.TryGetFeatureValue(CommonUsages.deviceRotation, out var initialRotation))
+        if (CenterPosition == Vector3.zero)
         {
-            CenterPosition = initialPosition;
-            ForwardRotation = initialRotation.eulerAngles.y;
-            FixRotationTarget.localRotation = Quaternion.Euler(0.0f, -ForwardRotation, 0.0f);
+            ResetPlayerPose(false);
         }
 
         if (HeadDevice.TryGetFeatureValue(CommonUsages.deviceRotation, out var headRotation))
@@ -125,29 +125,50 @@ public class PlayerFlyController : MonoBehaviour
     void FixedUpdate()
     {
         // 著地時不飛行
+        float flappingSpeed = GetFlappingWingSpeed();
         if (IsGrounded())
         {
-            Velocity = Vector3.zero;
-            PlayerRigidbody.linearVelocity = Vector3.zero;
+            // 起飛
+            if (flappingSpeed > FlappingWingThreshold)
+            {
+                ResetPlayerPose(true);
+                Velocity = transform.TransformDirection(TakeOffVelocity);
+            }
+            else {
+                Velocity = Vector3.zero;
+            }
+            PlayerRigidbody.linearVelocity = Velocity;
+            PlayerRigidbody.angularVelocity = Vector3.zero;
             return;
         }
+
+        // 空中揮翅
+        if (flappingSpeed > FlappingWingThreshold)
+        {
+            Velocity += flappingSpeed * transform.TransformDirection(FlappingWingForce);
+        }
+
         // 轉向
         Vector3 horizontalVelocity = new(Velocity.x, 0.0f, Velocity.z);
         Quaternion targetRotation = PlayerRigidbody.rotation;
+        float yawDelta = 0.0f;
         if (horizontalVelocity.sqrMagnitude > 0.0001f)
         {
             // 轉向前進方向
             Vector3 horizontalForward = new Vector3(transform.forward.x, 0.0f, transform.forward.z).normalized;
             float thetaY = Vector3.SignedAngle(horizontalForward, horizontalVelocity.normalized, Vector3.up);
-            targetRotation = Quaternion.AngleAxis(thetaY * VelocitySteeringRatio, Vector3.up) * targetRotation;
+            yawDelta += thetaY * VelocitySteeringRatio;
         }
 
         // 玩家歪頭轉向
         if (Mathf.Abs(PlayerRoll) > PlayerRollThreshold)
         {
-            targetRotation = Quaternion.AngleAxis(-PlayerRoll * RollSteeringRatio, Vector3.up) * targetRotation;
+            yawDelta += -PlayerRoll * RollSteeringRatio;
             // Debug.Log($"PlayerRoll: {PlayerRoll}, PlayerControllerRotateY: {PlayerControllerRotateY}");
         }
+
+        yawDelta = Mathf.Clamp(yawDelta, -MaxAngularVelocityY, MaxAngularVelocityY);
+        targetRotation = Quaternion.AngleAxis(yawDelta, Vector3.up) * targetRotation;
 
         // 改平（保留 yaw）
         Vector3 flatForward = Vector3.ProjectOnPlane(targetRotation * Vector3.forward, Vector3.up);
@@ -257,5 +278,37 @@ public class PlayerFlyController : MonoBehaviour
         Vector3 origin = bounds.center + Vector3.up * 0.01f;
         float groundCheckDistance = bounds.extents.y + 0.05f;
         return Physics.Raycast(origin, Vector3.down, groundCheckDistance, ~0, QueryTriggerInteraction.Ignore);
+    }
+
+    private float GetFlappingWingSpeed() {
+        if (LeftHandDevice.TryGetFeatureValue(CommonUsages.deviceVelocity, out var leftVelocity) &&
+            RightHandDevice.TryGetFeatureValue(CommonUsages.deviceVelocity, out var rightVelocity))
+        {
+            float leftFlap = Vector3.Dot(leftVelocity, Vector3.down);
+            float rightFlap = Vector3.Dot(rightVelocity, Vector3.down);
+            return (leftFlap + rightFlap) * 0.5f;
+        }
+        return 0.0f;
+    }
+
+    private void ResetPlayerPose(bool resetRotation)
+    {
+        if (HeadDevice.isValid &&
+            HeadDevice.TryGetFeatureValue(CommonUsages.devicePosition, out var initialPosition) &&
+            HeadDevice.TryGetFeatureValue(CommonUsages.deviceRotation, out var initialRotation))
+        {
+            CenterPosition = initialPosition;
+            ForwardRotation = initialRotation.eulerAngles.y;
+
+            if (resetRotation)
+            {
+                transform.rotation = Quaternion.Euler(0.0f, ForwardRotation, 0.0f);
+                FixRotationTarget.localRotation = Quaternion.identity;
+            }
+            else
+            {
+                FixRotationTarget.localRotation = Quaternion.Euler(0.0f, -ForwardRotation, 0.0f);
+            }
+        }
     }
 }
