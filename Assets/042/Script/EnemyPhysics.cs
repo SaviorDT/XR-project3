@@ -27,8 +27,8 @@ public class EnemyPhysics : MonoBehaviour
         rb.useGravity = false;
         rb.mass = mass;
 
-        rb.constraints = RigidbodyConstraints.FreezeRotationX |
-                         RigidbodyConstraints.FreezeRotationZ;
+        // 避免撞到物體後被物理亂轉
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
 
         currentHP = maxHP;
     }
@@ -66,7 +66,7 @@ public class EnemyPhysics : MonoBehaviour
         Vector3 dir = rb.linearVelocity;
         dir.y = 0f;
 
-        if (dir.sqrMagnitude < 0.001f) return;
+        if (dir.sqrMagnitude < 0.05f) return;
 
         Quaternion targetRotation = Quaternion.LookRotation(dir.normalized, Vector3.up);
 

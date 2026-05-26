@@ -12,15 +12,31 @@ public class EnemyAI : MonoBehaviour
     [Header("Chase Forces")]
     public float chaseForwardForce = 18f;
     public float chaseSideForce = 10f;
-    public float chaseUpForce = 12f;
-    public float diveForce = 18f;
+    public float chaseUpForce = 25f;
+    public float diveForce = 20f;
     public float heightTolerance = 2f;
     public float turnAngleThreshold = 10f;
 
     [Header("Random Movement")]
-    public float randomForce = 10f;
-    public float randomVerticalForce = 6f;
+    public float randomForce = 15f;
+    public float randomVerticalForce = 25f;
     public float randomChangeInterval = 2f;
+
+    [Header("Random Height Control")]
+    public LayerMask groundMask = ~0;
+    public float groundCheckDistance = 50f;
+
+    public float lowHeight = 5f;
+    public float highHeight = 20f;
+
+    [Range(0f, 1f)]
+    public float lowHeightUpChance = 0.8f;
+
+    [Range(0f, 1f)]
+    public float midHeightUpChance = 0.35f;
+
+    [Range(0f, 1f)]
+    public float highHeightUpChance = 0.05f;
 
     private EnemyPhysics physics;
 
@@ -34,9 +50,39 @@ public class EnemyAI : MonoBehaviour
     void Awake()
     {
         physics = GetComponent<EnemyPhysics>();
-        if(player == null)
+
+        if (physics == null)
         {
-            player = FindFirstObjectByType<PlayerFlyController>().transform;
+            Debug.LogError("EnemyAI 找不到 EnemyPhysics", this);
+            enabled = false;
+            return;
+        }
+
+        if (player == null)
+        {
+            PlayerFlyController playerFly =
+                FindFirstObjectByType<PlayerFlyController>();
+
+            if (playerFly != null)
+            {
+                player = playerFly.transform;
+            }
+        }
+
+        if (player == null)
+        {
+            Flying flyingPlayer =
+                FindFirstObjectByType<Flying>();
+
+            if (flyingPlayer != null)
+            {
+                player = flyingPlayer.transform;
+            }
+        }
+
+        if (player == null)
+        {
+            Debug.LogWarning("EnemyAI 找不到 Player，將先隨機移動", this);
         }
     }
 
@@ -110,9 +156,33 @@ public class EnemyAI : MonoBehaviour
     {
         if (Time.time >= nextRandomChangeTime)
         {
+            float heightFromGround = GetHeightFromGround();
+
+            float upChance = midHeightUpChance;
+
+            if (heightFromGround < lowHeight)
+            {
+                upChance = lowHeightUpChance;
+            }
+            else if (heightFromGround > highHeight)
+            {
+                upChance = highHeightUpChance;
+            }
+
+            float yDir;
+
+            if (Random.value < upChance)
+            {
+                yDir = Random.Range(0.2f, 1f);
+            }
+            else
+            {
+                yDir = Random.Range(-0.8f, 0.2f);
+            }
+
             Vector3 randomDir = new Vector3(
                 Random.Range(-1f, 1f),
-                Random.Range(-0.5f, 0.5f),
+                yDir,
                 Random.Range(-1f, 1f)
             ).normalized;
 
@@ -128,6 +198,23 @@ public class EnemyAI : MonoBehaviour
         physics.AddForce(currentRandomForce);
     }
 
+    private float GetHeightFromGround()
+    {
+        if (Physics.Raycast(
+            transform.position,
+            Vector3.down,
+            out RaycastHit hit,
+            groundCheckDistance,
+            groundMask,
+            QueryTriggerInteraction.Ignore
+        ))
+        {
+            return hit.distance;
+        }
+
+        return groundCheckDistance;
+    }
+
     private void ClearPreviousAIForces()
     {
         physics.RemoveForce(currentForwardForce);
@@ -139,7 +226,6 @@ public class EnemyAI : MonoBehaviour
         currentSideForce = Vector3.zero;
         currentVerticalForce = Vector3.zero;
 
-        // currentRandomForce 不要在這裡歸零
-        // 否則隨機方向每幀都會消失
+        // currentRandomForce 不歸零，讓隨機方向持續到下一次更換
     }
 }

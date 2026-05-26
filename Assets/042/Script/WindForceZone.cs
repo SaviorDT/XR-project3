@@ -15,16 +15,27 @@ public class WindForceZone : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         PlayerFlyController player = other.GetComponentInParent<PlayerFlyController>();
-        if (player == null) return;
-        player.SetWindVelocity(appliedForce);
+        Flying test = other.GetComponentInParent<Flying>();
+        if (player == null)
+            if (test == null)
+                return;
+            else
+                test.AddForce(appliedForce);
+        else
+            player.SetWindVelocity(appliedForce);
     }
 
     private void OnTriggerExit(Collider other)
     {
         PlayerFlyController player = other.GetComponentInParent<PlayerFlyController>();
-        if (player == null) return;
-
-        player.SetWindVelocity(-appliedForce);
+        Flying test = other.GetComponentInParent<Flying>();
+        if (player == null)
+            if (test == null)
+                return;
+            else
+                test.AddForce(-appliedForce);
+        else
+            player.SetWindVelocity(-appliedForce);
 
     }
 }

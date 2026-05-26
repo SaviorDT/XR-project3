@@ -39,6 +39,7 @@ public class PickupItem : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Trigger");
         PlayerAbilityManager manager =
             other.GetComponentInParent<PlayerAbilityManager>();
 

@@ -11,6 +11,7 @@ public class PickupSpawner : MonoBehaviour
     [Header("Spawn")]
     public int spawnCount = 10;
     public Vector3 areaSize = new Vector3(50f, 10f, 50f);
+    public Vector3 spawnCenter = new Vector3(0f, 0f, 0f);
 
     void Start()
     {
@@ -44,7 +45,7 @@ public class PickupSpawner : MonoBehaviour
 
     private Vector3 GetRandomPosition()
     {
-        Vector3 center = transform.position;
+        Vector3 center = spawnCenter;
 
         float x = Random.Range(-areaSize.x / 2f, areaSize.x / 2f);
         float y = Random.Range(-areaSize.y / 2f, areaSize.y / 2f);
