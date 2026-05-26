@@ -214,10 +214,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1cc4941973dace45a9b2328eee62c3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  VelocitySteeringRatio: 1
+  FlappingWingForce: {x: 0, y: 0.5, z: 0.2}
+  TakeOffVelocity: {x: 0, y: 0.35, z: 0.2}
+  FlappingWingThreshold: 0.5
+  VelocitySteeringRatio: 0.5
   CorrectPitchRatio: 0.5
   PlayerRollThreshold: 5
-  RollSteeringRatio: 3
+  RollSteeringRatio: 1
+  MaxAngularVelocityY: 90
   PlayerPitchThreshold: 0.1
   PlayerControllerRotateToPitchRatio: 1
   Gravity: 9.8
@@ -235,6 +239,7 @@ MonoBehaviour:
   DiveAngle: -70
   ClimbAngle: 70
   PlayerCollider: {fileID: 1657449077907631806}
+  CameraTransform: {fileID: 5137695498015988599}
 --- !u!54 &9218127325971486271
 Rigidbody:
   m_ObjectHideFlags: 0

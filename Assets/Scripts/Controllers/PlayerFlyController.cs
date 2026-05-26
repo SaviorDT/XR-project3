@@ -5,17 +5,18 @@ using UnityEngine.XR;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerFlyController : MonoBehaviour
 {
-    [SerializeField] private Vector3 FlappingWingForce = new(0.0f, 5.0f, 2.0f);
-    [SerializeField] private Vector3 TakeOffVelocity = new(0.0f, 5.0f, 2.0f);
+    [SerializeField] private Vector3 FlappingWingForce = new(0.0f, 0.5f, 0.2f);
+    [SerializeField] private Vector3 TakeOffVelocity = new(0.0f, 0.35f, 0.2f);
     [SerializeField] private float FlappingWingThreshold = 0.5f;
-    [SerializeField] private float VelocitySteeringRatio = 1.0f;
+    [SerializeField] private float VelocitySteeringRatio = 0.5f;
     [SerializeField] private float CorrectPitchRatio = 0.3f;
     [SerializeField] private float PlayerRollThreshold = 5.0f;
-    [SerializeField] private float RollSteeringRatio = 3.0f;
+    [SerializeField] private float RollSteeringRatio = 1.0f;
     [SerializeField] private float MaxAngularVelocityY = 90.0f;
     [Tooltip("玩家的平移距離超過此閾值才會被視為俯衝或抬頭")]
     [SerializeField] private float PlayerPitchThreshold = 0.1f;
     [SerializeField] private float PlayerControllerRotateToPitchRatio = 1.0f;
+    [SerializeField] private Vector3 PlayerControllerHorizontalForward = new(0, -0.8f, 0.6f);
     [SerializeField] private float Gravity = 9.8f, ReducedGravityRatio = 0.75f, StallSpeed = 5.0f;
     [SerializeField] private float WindForce = 1.0f;
     [SerializeField] private float DownToForwardRatio = 2.0f, DownToForwardLossRatio = 0.0f;
@@ -23,24 +24,29 @@ public class PlayerFlyController : MonoBehaviour
     [Tooltip("1秒後，玩家的速度會有多少比例轉向當前的飛行方向")]
     [SerializeField] private float SteeringSpeed = 1.5f;
     [SerializeField] private Vector3 WindResistance = new(0.5f, 0.5f, 0.5f);
-    [SerializeField] private Transform FixRotationTarget;
-    // 1. 轉向目前速度方向
-    // 1. 將玩家歪頭套用到轉向
-    // 1. 計算俯仰角
-    // 2. 套用重力加速度
-    // 3. 套用風力加速度
-    // 4. 將當前往下的速度轉換為往前的速度
-    // 5. 將當前往前的速度轉換為往上的速度
-    // 1. 將速度轉向前面
-    // 6. 套用風阻
+    [SerializeField] private Transform FixPoseTarget;
+    // 1. 偵測是否在地面，如果是，除了起飛以外不進行其他運算
+    // 2. 偵測起飛、拍翅膀
+
+    // 調整姿態
+    // 3. 轉向目前速度方向
+    // 4. 將玩家歪頭套用到轉向
+    // 5. 計算俯仰角
+
+    // 計算速度
+    // 6. 套用重力加速度
+    // 7. 套用風力加速度
+    // 8. 將當前往下的速度轉換為往前的速度
+    // 9. 將當前往前的速度轉換為往上的速度
+    // 10. 將速度轉向前面（避免轉向後持續橫向飛行）
+    // 11. 套用風阻
 
     // 以下為計算用變數
     [SerializeField] private Vector3 Velocity = Vector3.zero;
     private float PlayerRoll = 0.0f;
     private enum EPitchState { Up, Neutral, Down }
     private EPitchState PlayerPitchState = EPitchState.Neutral;
-    private float PlayerControllerRotateBias = 0.0f;
-    private float PlayerControllerRotateY = 0.0f;
+    private float PlayerControllerPitch = 0.0f;
     [SerializeField] private float DiveAngle = -70.0f, ClimbAngle = 70.0f;
     private Vector3 WindVelocity = Vector3.zero;
     private InputDevice HeadDevice;
@@ -48,6 +54,7 @@ public class PlayerFlyController : MonoBehaviour
     private InputDevice RightHandDevice;
     private Rigidbody PlayerRigidbody;
     [SerializeField] private BoxCollider PlayerCollider;
+    [SerializeField] private Transform CameraTransform;
     private Vector3 CenterPosition = Vector3.zero;
     private float ForwardRotation = 0.0f;
     
@@ -83,7 +90,7 @@ public class PlayerFlyController : MonoBehaviour
 
         if (CenterPosition == Vector3.zero)
         {
-            ResetPlayerPose(false);
+            InitPlayerPose();
         }
 
         if (HeadDevice.TryGetFeatureValue(CommonUsages.deviceRotation, out var headRotation))
@@ -115,10 +122,12 @@ public class PlayerFlyController : MonoBehaviour
         if (LeftHandDevice.TryGetFeatureValue(CommonUsages.deviceRotation, out var leftRotation) &&
             RightHandDevice.TryGetFeatureValue(CommonUsages.deviceRotation, out var rightRotation))
         {
-            Quaternion relativeRotation = Quaternion.Inverse(leftRotation) * rightRotation;
-            float relativeYaw = Mathf.DeltaAngle(0.0f, relativeRotation.eulerAngles.y);
-            PlayerControllerRotateY = relativeYaw * 0.5f;
-            // Debug.Log($"Relative Yaw: {relativeYaw}, PlayerControllerRotateY: {PlayerControllerRotateY}");
+            Vector3 leftHorizontalForward = leftRotation * PlayerControllerHorizontalForward;
+            Vector3 rightHorizontalForward = rightRotation * PlayerControllerHorizontalForward;
+            
+            float leftPitch = Mathf.Asin(leftHorizontalForward.y) ;
+            float rightPitch = Mathf.Asin(rightHorizontalForward.y);
+            PlayerControllerPitch = (leftPitch + rightPitch) * 0.5f;
         }
     }
     
@@ -131,7 +140,7 @@ public class PlayerFlyController : MonoBehaviour
             // 起飛
             if (flappingSpeed > FlappingWingThreshold)
             {
-                ResetPlayerPose(true);
+                ResetPlayerPose();
                 Velocity = transform.TransformDirection(TakeOffVelocity);
             }
             else {
@@ -203,7 +212,7 @@ public class PlayerFlyController : MonoBehaviour
         {
             pitch += DiveAngle;
         }
-        pitch += (PlayerControllerRotateY - PlayerControllerRotateBias) * PlayerControllerRotateToPitchRatio;
+        pitch += PlayerControllerPitch * PlayerControllerRotateToPitchRatio;
         pitch = Mathf.Clamp(pitch, -89.9f, 89.9f) * Mathf.Deg2Rad;
 
         // 重力加速度
@@ -237,7 +246,7 @@ public class PlayerFlyController : MonoBehaviour
         Vector3 RelativeVelocity = Velocity - WindVelocity;
         float ReducedForwardSpeed = -VelocityToUpRatio * 
                                     new Vector3(RelativeVelocity.x, 0, RelativeVelocity.z).magnitude * 
-                                    Mathf.Sin(pitch) * Mathf.Sin(pitch) *
+                                    Mathf.Abs(Mathf.Sin(pitch)) *
                                     Time.fixedDeltaTime;
         
         Velocity += ReducedForwardSpeed * RelativeVelocity.normalized;
@@ -263,11 +272,6 @@ public class PlayerFlyController : MonoBehaviour
         WindVelocity += velocity;
     }
 
-    public void SetPlayerControllerRotateBias()
-    {
-        PlayerControllerRotateBias = PlayerControllerRotateY;
-    }
-
     private bool IsGrounded() {
         if (PlayerCollider == null)
         {
@@ -291,7 +295,7 @@ public class PlayerFlyController : MonoBehaviour
         return 0.0f;
     }
 
-    private void ResetPlayerPose(bool resetRotation)
+    private void InitPlayerPose()
     {
         if (HeadDevice.isValid &&
             HeadDevice.TryGetFeatureValue(CommonUsages.devicePosition, out var initialPosition) &&
@@ -299,16 +303,24 @@ public class PlayerFlyController : MonoBehaviour
         {
             CenterPosition = initialPosition;
             ForwardRotation = initialRotation.eulerAngles.y;
+            FixPoseTarget.SetLocalPositionAndRotation(new Vector3(-CenterPosition.x, 0, -CenterPosition.z), 
+                                                            Quaternion.Euler(0.0f, -ForwardRotation, 0.0f));
+        }
+    }
 
-            if (resetRotation)
-            {
-                transform.rotation = Quaternion.Euler(0.0f, ForwardRotation, 0.0f);
-                FixRotationTarget.localRotation = Quaternion.identity;
-            }
-            else
-            {
-                FixRotationTarget.localRotation = Quaternion.Euler(0.0f, -ForwardRotation, 0.0f);
-            }
+    private void ResetPlayerPose()
+    {
+        if (HeadDevice.isValid &&
+            HeadDevice.TryGetFeatureValue(CommonUsages.devicePosition, out var newPosition) &&
+            HeadDevice.TryGetFeatureValue(CommonUsages.deviceRotation, out var newRotation))
+        {
+            CenterPosition = newPosition;
+            ForwardRotation = newRotation.eulerAngles.y;
+
+            PlayerRigidbody.MoveRotation(Quaternion.Euler(0.0f, CameraTransform.eulerAngles.y, 0.0f));
+            PlayerRigidbody.MovePosition(new Vector3(CameraTransform.position.x, PlayerRigidbody.position.y, CameraTransform.position.z));
+            FixPoseTarget.SetLocalPositionAndRotation(-new Vector3(CameraTransform.localPosition.x, 0, CameraTransform.localPosition.z), 
+                                                            Quaternion.Euler(0.0f, -CameraTransform.localEulerAngles.y, 0.0f));
         }
     }
 }
