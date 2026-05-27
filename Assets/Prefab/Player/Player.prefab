@@ -224,6 +224,7 @@ MonoBehaviour:
   MaxAngularVelocityY: 90
   PlayerPitchThreshold: 0.1
   PlayerControllerRotateToPitchRatio: 1
+  PlayerControllerHorizontalForward: {x: 0, y: -0.8, z: 0.6}
   Gravity: 9.8
   ReducedGravityRatio: 0.75
   StallSpeed: 5
@@ -234,7 +235,7 @@ MonoBehaviour:
   VelocityToUpLossRatio: -2
   SteeringSpeed: 1.5
   WindResistance: {x: 0.5, y: 0.5, z: 0.5}
-  FixRotationTarget: {fileID: 2569367929361411795}
+  FixPoseTarget: {fileID: 2569367929361411795}
   Velocity: {x: 0, y: 0, z: 0}
   DiveAngle: -70
   ClimbAngle: 70

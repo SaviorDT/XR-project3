@@ -125,8 +125,8 @@ public class PlayerFlyController : MonoBehaviour
             Vector3 leftHorizontalForward = leftRotation * PlayerControllerHorizontalForward;
             Vector3 rightHorizontalForward = rightRotation * PlayerControllerHorizontalForward;
             
-            float leftPitch = Mathf.Asin(leftHorizontalForward.y) ;
-            float rightPitch = Mathf.Asin(rightHorizontalForward.y);
+            float leftPitch = Mathf.Asin(leftHorizontalForward.y) * Mathf.Rad2Deg;
+            float rightPitch = Mathf.Asin(rightHorizontalForward.y) * Mathf.Rad2Deg;
             PlayerControllerPitch = (leftPitch + rightPitch) * 0.5f;
         }
     }
