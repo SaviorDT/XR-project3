@@ -17,6 +17,7 @@ public class RandomWind : EditorWindow
     private int pillarTopDeg60Count = 5;
     private int pillarTopDeg45Count = 5;
     private int pillarSideDeg90Count = 10;
+    private int pillarSideDeg75Count = 20;
     private int pillarSideDeg60Count = 20;
     private int pillarSideDeg45Count = 20;
     private int pillarSideDeg30Count = 20;
@@ -57,6 +58,7 @@ public class RandomWind : EditorWindow
         pillarTopDeg60Count = EditorGUILayout.IntField("石柱頂部 60 度數量", pillarTopDeg60Count);
         pillarTopDeg45Count = EditorGUILayout.IntField("石柱頂部 45 度數量", pillarTopDeg45Count);
         pillarSideDeg90Count = EditorGUILayout.IntField("石柱側面 90 度數量", pillarSideDeg90Count);
+        pillarSideDeg75Count = EditorGUILayout.IntField("石柱側面 75 度數量", pillarSideDeg75Count);
         pillarSideDeg60Count = EditorGUILayout.IntField("石柱側面 60 度數量", pillarSideDeg60Count);
         pillarSideDeg45Count = EditorGUILayout.IntField("石柱側面 45 度數量", pillarSideDeg45Count);
         pillarSideDeg30Count = EditorGUILayout.IntField("石柱側面 30 度數量", pillarSideDeg30Count);
@@ -145,8 +147,8 @@ public class RandomWind : EditorWindow
                 inst.transform.position = new Vector3(pi.center.x, pi.highestY, pi.center.z);
                 float ry = Random.Range(0f, 360f);
                 inst.transform.rotation = Quaternion.Euler(-deg, ry, 0f);
-                float a = Random.Range(4f, 6f);
-                float b = Random.Range(5f, 8f);
+                float a = Random.Range(4f, 7f);
+                float b = Random.Range(6f, 10f);
                 inst.transform.localScale = new Vector3(a, a, b);
             }
         }
@@ -172,8 +174,8 @@ public class RandomWind : EditorWindow
                 inst.transform.position = pos;
                 float ry = rotationY + Random.Range(-30f, 30f);
                 inst.transform.rotation = Quaternion.Euler(-deg, ry, 0f);
-                float a = Random.Range(4f, 6f);
-                float b = Random.Range(5f, 8f);
+                float a = Random.Range(4f, 7f);
+                float b = Random.Range(6f, 10f);
                 inst.transform.localScale = new Vector3(a, a, b);
             }
         }
