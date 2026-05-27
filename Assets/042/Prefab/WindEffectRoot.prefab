@@ -10,6 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4260974011103557058}
   - component: {fileID: 6456492530309259675}
+  - component: {fileID: 5392609462913333411}
+  - component: {fileID: -6276886968782103404}
+  - component: {fileID: 682207290686032959}
   m_Layer: 0
   m_Name: WindEffectRoot
   m_TagString: Untagged
@@ -28,7 +31,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 1
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5981537357974639691}
   m_Father: {fileID: 0}
@@ -54,6 +57,62 @@ MonoBehaviour:
   forwardSpeedRange: {x: 4, y: 6}
   rotateSpeedRange: {x: 600, y: 1200}
   noiseStrengthRange: {x: 0.2, y: 0.4}
+--- !u!114 &5392609462913333411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4431431471284168624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0c0c4646112c854c907fe81dcd399ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WindForceZone
+  localWindDirection: {x: 0, y: 0, z: 1}
+  windStrength: 20
+--- !u!136 &-6276886968782103404
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4431431471284168624}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &682207290686032959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4431431471284168624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37f6345059dfaaf46a0ee5e028b12757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WindColliderScaler
+  windRoot: {fileID: 4260974011103557058}
+  localPositionOffset: {x: 0, y: 0, z: 0}
+  direction: 2
+  baseRadius: 1
+  baseHeight: 6
+  radiusScaleMultiplier: 1
+  heightScaleMultiplier: 1
 --- !u!1 &4587116461962315148
 GameObject:
   m_ObjectHideFlags: 0
