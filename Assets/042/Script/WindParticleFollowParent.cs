@@ -52,19 +52,27 @@ public class WindParticleFollowParent : MonoBehaviour
         main.scalingMode = ParticleSystemScalingMode.Shape;
     }
 
+    void Start()
+    {
+        ApplyTransformSettings();
+        ApplyParticleSettings();
+    }
+
     void LateUpdate()
+    {
+        if (!TestModeController.ShouldUpdateEveryFrame()) return;
+
+        ApplyTransformSettings();
+        ApplyParticleSettings();
+    }
+    private void ApplyTransformSettings()
     {
         if (windRoot == null) return;
 
         transform.position = windRoot.TransformPoint(localPositionOffset);
         transform.rotation = windRoot.rotation * Quaternion.Euler(localEulerOffset);
-
-        // 不要縮放 ParticleSystem 本體，避免風向被非等比 scale 影響
         transform.localScale = initialLocalScale;
-
-        ApplyParticleSettings();
     }
-
     private void ApplyParticleSettings()
     {
         Vector3 rootScale = AbsVector(windRoot.lossyScale);

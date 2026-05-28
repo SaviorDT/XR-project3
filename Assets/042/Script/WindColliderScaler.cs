@@ -23,12 +23,21 @@ public class WindColliderScaler : MonoBehaviour
         capsule.isTrigger = true;
     }
 
+    void Start()
+    {
+        ApplyColliderSettings();
+    }
+
     void LateUpdate()
+    {
+        if (!TestModeController.ShouldUpdateEveryFrame()) return;
+
+        ApplyColliderSettings();
+    }
+    private void ApplyColliderSettings()
     {
         capsule.direction = direction;
 
-        // 注意：這裡是 collider 的 local size
-        // 如果父物件 WindRoot 放大，Unity 會自動把 collider 世界大小放大
         capsule.radius = baseRadius;
         capsule.height = Mathf.Max(baseHeight, baseRadius * 2f);
 
