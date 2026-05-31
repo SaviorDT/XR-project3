@@ -17,10 +17,10 @@ public class FitCameraToWorldCanvas : MonoBehaviour
         Fit();
     }
 
-    void LateUpdate()
+    /*void LateUpdate()
     {
         Fit();
-    }
+    }*/
 
     void Fit()
     {

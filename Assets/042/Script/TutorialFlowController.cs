@@ -36,7 +36,10 @@ public class TutorialFlowController : MonoBehaviour
         [Header("本階段要升起的地形")]
         public List<RisingTerrain> terrainsToRise;
 
-        
+        [Header("本階段要隱藏的地形")]
+        public List<RisingTerrain> terrainsToHide;
+
+
     }
 
     [Header("玩家")]
@@ -141,15 +144,20 @@ public class TutorialFlowController : MonoBehaviour
                 fadeCoroutine = StartCoroutine(ChangeTextWithFade(step.instructionTextEN));
             }
         }
-
-
-            foreach (RisingTerrain terrain in step.terrainsToRise)
+        foreach (RisingTerrain terrain in step.terrainsToRise)
+        {
+            if (terrain != null)
             {
-                if (terrain != null)
-                {
-                    terrain.Rise();
-                }
+                terrain.Rise();
             }
+        }
+        foreach (RisingTerrain terrain in step.terrainsToHide)
+        {
+            if (terrain != null)
+            {
+                terrain.Hide();
+            }
+        }
     }
 
     private bool IsStepCompleted(TutorialStep step)
