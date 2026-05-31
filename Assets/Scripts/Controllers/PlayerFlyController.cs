@@ -5,6 +5,8 @@ using UnityEngine.XR;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerFlyController : MonoBehaviour
 {
+    [SerializeField] private float OnGroundRotateAngle = 30.0f;
+    [SerializeField] private float OnGroundRotateCoolDown = 0.5f;
     [SerializeField] private Vector3 FlappingWingForce = new(0.0f, 0.35f, 0.2f);
     [SerializeField] private Vector3 TakeOffVelocity = new(0.0f, 5.0f, 2.0f);
     [SerializeField] private float FlappingWingThreshold = 0.5f;
@@ -36,7 +38,7 @@ public class PlayerFlyController : MonoBehaviour
 
     // 調整姿態
     // 3. 轉向目前速度方向
-    // 4. 將玩家歪頭套用到轉向
+    // 4. 將玩家輸入套用到轉向
     // 5. 計算俯仰角
 
     // 計算速度
@@ -67,6 +69,7 @@ public class PlayerFlyController : MonoBehaviour
     [SerializeField] private Transform CameraTransform;
     private Vector3 CenterPosition = Vector3.zero;
     private float ForwardRotation = 0.0f;
+    private float NextOnGroundRotateTime = 0.0f;
     
     void Start()
     {
@@ -105,6 +108,7 @@ public class PlayerFlyController : MonoBehaviour
 
         TryAttachBar();
         TryDetectPlayerInput();
+        TryRotateOnGround();
     }
     
     void FixedUpdate()
@@ -116,7 +120,7 @@ public class PlayerFlyController : MonoBehaviour
             // 起飛
             if (flappingSpeed > FlappingWingThreshold)
             {
-                ResetPlayerPose();
+                // ResetPlayerPose();
                 Velocity = transform.TransformDirection(TakeOffVelocity);
             }
             else {
@@ -287,21 +291,21 @@ public class PlayerFlyController : MonoBehaviour
         }
     }
 
-    private void ResetPlayerPose()
-    {
-        if (HeadDevice.isValid &&
-            HeadDevice.TryGetFeatureValue(CommonUsages.devicePosition, out var newPosition) &&
-            HeadDevice.TryGetFeatureValue(CommonUsages.deviceRotation, out var newRotation))
-        {
-            CenterPosition = newPosition;
-            ForwardRotation = newRotation.eulerAngles.y;
+    // private void ResetPlayerPose()
+    // {
+    //     if (HeadDevice.isValid &&
+    //         HeadDevice.TryGetFeatureValue(CommonUsages.devicePosition, out var newPosition) &&
+    //         HeadDevice.TryGetFeatureValue(CommonUsages.deviceRotation, out var newRotation))
+    //     {
+    //         CenterPosition = newPosition;
+    //         ForwardRotation = newRotation.eulerAngles.y;
 
-            PlayerRigidbody.MoveRotation(Quaternion.Euler(0.0f, CameraTransform.eulerAngles.y, 0.0f));
-            PlayerRigidbody.MovePosition(new Vector3(CameraTransform.position.x, PlayerRigidbody.position.y, CameraTransform.position.z));
-            FixPoseTarget.SetLocalPositionAndRotation(-new Vector3(CameraTransform.localPosition.x, 0, CameraTransform.localPosition.z), 
-                                                            Quaternion.Euler(0.0f, -CameraTransform.localEulerAngles.y, 0.0f));
-        }
-    }
+    //         PlayerRigidbody.MoveRotation(Quaternion.Euler(0.0f, CameraTransform.eulerAngles.y, 0.0f));
+    //         PlayerRigidbody.MovePosition(new Vector3(CameraTransform.position.x, PlayerRigidbody.position.y, CameraTransform.position.z));
+    //         FixPoseTarget.SetLocalPositionAndRotation(-new Vector3(CameraTransform.localPosition.x, 0, CameraTransform.localPosition.z), 
+    //                                                         Quaternion.Euler(0.0f, -CameraTransform.localEulerAngles.y, 0.0f));
+    //     }
+    // }
 
 
     void TryAttachBar()
@@ -396,5 +400,43 @@ public class PlayerFlyController : MonoBehaviour
         PlayerControllerPitch = (rightPitchOffset + leftPitchOffset) * 0.5f * FrontBarDistanceToPitchRatio;
         // Limit controller pitch coming from front bars to configured maximum
         PlayerControllerPitch = Mathf.Clamp(PlayerControllerPitch, -MaxPitchFromBar, MaxPitchFromBar);
+    }
+
+    private void TryRotateOnGround()
+    {
+        if (!IsGrounded())
+        {
+            return;
+        }
+
+        if (Time.time < NextOnGroundRotateTime)
+        {
+            return;
+        }
+
+        if (!LeftHandDevice.isValid ||
+            !LeftHandDevice.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 leftStick))
+        {
+            return;
+        }
+
+        float rotateDirection = 0.0f;
+        if (leftStick.x <= -0.5f)
+        {
+            rotateDirection = -1.0f;
+        }
+        else if (leftStick.x >= 0.5f)
+        {
+            rotateDirection = 1.0f;
+        }
+
+        if (rotateDirection == 0.0f)
+        {
+            return;
+        }
+
+        float targetYaw = PlayerRigidbody.rotation.eulerAngles.y + rotateDirection * OnGroundRotateAngle;
+        PlayerRigidbody.MoveRotation(Quaternion.Euler(0.0f, targetYaw, 0.0f));
+        NextOnGroundRotateTime = Time.time + OnGroundRotateCoolDown;
     }
 }
