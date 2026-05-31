@@ -5,18 +5,24 @@ using UnityEngine.XR;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerFlyController : MonoBehaviour
 {
-    [SerializeField] private Vector3 FlappingWingForce = new(0.0f, 0.5f, 0.2f);
-    [SerializeField] private Vector3 TakeOffVelocity = new(0.0f, 0.35f, 0.2f);
+    [SerializeField] private Vector3 FlappingWingForce = new(0.0f, 0.35f, 0.2f);
+    [SerializeField] private Vector3 TakeOffVelocity = new(0.0f, 5.0f, 2.0f);
     [SerializeField] private float FlappingWingThreshold = 0.5f;
     [SerializeField] private float VelocitySteeringRatio = 0.5f;
     [SerializeField] private float CorrectPitchRatio = 0.3f;
-    [SerializeField] private float PlayerRollThreshold = 5.0f;
-    [SerializeField] private float RollSteeringRatio = 1.0f;
+    [SerializeField] private Vector3 FrontBarRPosition = new(0.15f, -0.0f, 0.2f), FrontBarLPosition = new(-0.15f, -0.0f, 0.2f);
+    [SerializeField] private float FrontBarAttachDistance = 0.15f;
+    [SerializeField] private float FrontBarDistanceToPitchRatio = 20.0f;
+    [SerializeField] private float MaxPitchFromBar = 70.0f;
+    [SerializeField] private float RollMinDiff = 0.1f;
+    [SerializeField] private float SideBarMinDistance = 0.5f;
+    // [SerializeField] private float PlayerRollThreshold = 5.0f;
+    // [SerializeField] private float RollSteeringRatio = 1.0f;
     [SerializeField] private float MaxAngularVelocityY = 90.0f;
     [Tooltip("玩家的平移距離超過此閾值才會被視為俯衝或抬頭")]
-    [SerializeField] private float PlayerPitchThreshold = 0.1f;
-    [SerializeField] private float PlayerControllerRotateToPitchRatio = 1.0f;
-    [SerializeField] private Vector3 PlayerControllerHorizontalForward = new(0, -0.8f, 0.6f);
+    // [SerializeField] private float PlayerPitchThreshold = 0.1f;
+    // [SerializeField] private float PlayerControllerRotateToPitchRatio = 1.0f;
+    // [SerializeField] private Vector3 PlayerControllerHorizontalForward = new(0, -0.8f, 0.6f);
     [SerializeField] private float Gravity = 9.8f, ReducedGravityRatio = 0.75f, StallSpeed = 5.0f;
     [SerializeField] private float WindForce = 1.0f;
     [SerializeField] private float DownToForwardRatio = 2.0f, DownToForwardLossRatio = 0.0f;
@@ -44,10 +50,14 @@ public class PlayerFlyController : MonoBehaviour
     // 以下為計算用變數
     [SerializeField] private Vector3 Velocity = Vector3.zero;
     private float PlayerRoll = 0.0f;
-    private enum EPitchState { Up, Neutral, Down }
-    private EPitchState PlayerPitchState = EPitchState.Neutral;
+    // private enum EPitchState { Up, Neutral, Down }
+    // private EPitchState PlayerPitchState = EPitchState.Neutral;
     private float PlayerControllerPitch = 0.0f;
-    [SerializeField] private float DiveAngle = -70.0f, ClimbAngle = 70.0f;
+    // [SerializeField] private float DiveAngle = -70.0f, ClimbAngle = 70.0f;
+    private bool GrabRPressed = false, GrabLPressed = false;
+    private bool FrontBarRAttached = false, FrontBarLAttached = false;
+    private float FrontBarRAttachY = 0.0f, FrontBarLAttachY = 0.0f;
+    private bool SideBarRAttached = false, SideBarLAttached = false;
     private Vector3 WindVelocity = Vector3.zero;
     private InputDevice HeadDevice;
     private InputDevice LeftHandDevice;
@@ -93,42 +103,8 @@ public class PlayerFlyController : MonoBehaviour
             InitPlayerPose();
         }
 
-        if (HeadDevice.TryGetFeatureValue(CommonUsages.deviceRotation, out var headRotation))
-        {
-            Quaternion relativeRotation = Quaternion.Inverse(Quaternion.Euler(0.0f, ForwardRotation, 0.0f)) * headRotation;
-            var roll = relativeRotation.eulerAngles.z;
-            if (roll > 180.0f)
-            {
-                roll -= 360.0f;
-            }
-
-            PlayerRoll = roll;
-        }
-
-        if (HeadDevice.TryGetFeatureValue(CommonUsages.devicePosition, out var headPosition))
-        {
-            Vector3 relativePosition = Quaternion.Inverse(Quaternion.Euler(0.0f, ForwardRotation, 0.0f)) * (headPosition - CenterPosition);
-            // PlayerControllerRotateY = relativePosition.x * 100.0f;
-            if (Mathf.Abs(relativePosition.z) > PlayerPitchThreshold)
-            {
-                PlayerPitchState = relativePosition.z > 0.0f ? EPitchState.Down : EPitchState.Up;
-            }
-            else
-            {
-                PlayerPitchState = EPitchState.Neutral;
-            }
-        }
-
-        if (LeftHandDevice.TryGetFeatureValue(CommonUsages.deviceRotation, out var leftRotation) &&
-            RightHandDevice.TryGetFeatureValue(CommonUsages.deviceRotation, out var rightRotation))
-        {
-            Vector3 leftHorizontalForward = leftRotation * PlayerControllerHorizontalForward;
-            Vector3 rightHorizontalForward = rightRotation * PlayerControllerHorizontalForward;
-            
-            float leftPitch = Mathf.Asin(leftHorizontalForward.y) * Mathf.Rad2Deg;
-            float rightPitch = Mathf.Asin(rightHorizontalForward.y) * Mathf.Rad2Deg;
-            PlayerControllerPitch = (leftPitch + rightPitch) * 0.5f;
-        }
+        TryAttachBar();
+        TryDetectPlayerInput();
     }
     
     void FixedUpdate()
@@ -169,12 +145,8 @@ public class PlayerFlyController : MonoBehaviour
             yawDelta += thetaY * VelocitySteeringRatio;
         }
 
-        // 玩家歪頭轉向
-        if (Mathf.Abs(PlayerRoll) > PlayerRollThreshold)
-        {
-            yawDelta += -PlayerRoll * RollSteeringRatio;
-            // Debug.Log($"PlayerRoll: {PlayerRoll}, PlayerControllerRotateY: {PlayerControllerRotateY}");
-        }
+        // 玩家控制轉向
+        yawDelta += PlayerRoll;
 
         yawDelta = Mathf.Clamp(yawDelta, -MaxAngularVelocityY, MaxAngularVelocityY);
         targetRotation = Quaternion.AngleAxis(yawDelta, Vector3.up) * targetRotation;
@@ -204,15 +176,15 @@ public class PlayerFlyController : MonoBehaviour
         {
             pitch = Vector3.SignedAngle(forwardHorizontal.normalized, transform.forward.normalized, transform.right);
         }
-        if (PlayerPitchState == EPitchState.Up)
-        {
-            pitch += ClimbAngle;
-        }
-        else if (PlayerPitchState == EPitchState.Down)
-        {
-            pitch += DiveAngle;
-        }
-        pitch += PlayerControllerPitch * PlayerControllerRotateToPitchRatio;
+        // if (PlayerPitchState == EPitchState.Up)
+        // {
+        //     pitch += ClimbAngle;
+        // }
+        // else if (PlayerPitchState == EPitchState.Down)
+        // {
+        //     pitch += DiveAngle;
+        // }
+        pitch += PlayerControllerPitch;
         pitch = Mathf.Clamp(pitch, -89.9f, 89.9f) * Mathf.Deg2Rad;
 
         // 重力加速度
@@ -285,6 +257,12 @@ public class PlayerFlyController : MonoBehaviour
     }
 
     private float GetFlappingWingSpeed() {
+        // Require both side bars attached before counting flapping input
+        if (!(SideBarRAttached && SideBarLAttached))
+        {
+            return 0.0f;
+        }
+
         if (LeftHandDevice.TryGetFeatureValue(CommonUsages.deviceVelocity, out var leftVelocity) &&
             RightHandDevice.TryGetFeatureValue(CommonUsages.deviceVelocity, out var rightVelocity))
         {
@@ -292,6 +270,7 @@ public class PlayerFlyController : MonoBehaviour
             float rightFlap = Vector3.Dot(rightVelocity, Vector3.down);
             return (leftFlap + rightFlap) * 0.5f;
         }
+
         return 0.0f;
     }
 
@@ -322,5 +301,100 @@ public class PlayerFlyController : MonoBehaviour
             FixPoseTarget.SetLocalPositionAndRotation(-new Vector3(CameraTransform.localPosition.x, 0, CameraTransform.localPosition.z), 
                                                             Quaternion.Euler(0.0f, -CameraTransform.localEulerAngles.y, 0.0f));
         }
+    }
+
+
+    void TryAttachBar()
+    {
+        TryAttachBarForHand(
+            RightHandDevice,
+            FrontBarRPosition,
+            ref GrabRPressed,
+            ref FrontBarRAttached,
+            ref SideBarRAttached,
+            ref FrontBarRAttachY
+        );
+
+        TryAttachBarForHand(
+            LeftHandDevice,
+            FrontBarLPosition,
+            ref GrabLPressed,
+            ref FrontBarLAttached,
+            ref SideBarLAttached,
+            ref FrontBarLAttachY
+        );
+    }
+
+    private void TryAttachBarForHand(
+        InputDevice handDevice,
+        Vector3 frontBarPosition,
+        ref bool grabPressed,
+        ref bool frontBarAttached,
+        ref bool sideBarAttached,
+        ref float frontBarAttachY)
+    {
+        if (!handDevice.isValid || !handDevice.TryGetFeatureValue(CommonUsages.gripButton, out bool isGrabPressed) || !isGrabPressed)
+        {
+            grabPressed = false;
+            frontBarAttached = false;
+            sideBarAttached = false;
+            return;
+        }
+
+        if (grabPressed)
+        {
+            return;
+        }
+
+        grabPressed = true;
+        frontBarAttached = false;
+        sideBarAttached = false;
+
+        if (handDevice.TryGetFeatureValue(CommonUsages.devicePosition, out var controllerPosition))
+        {
+            if (Vector3.Distance(controllerPosition, frontBarPosition) <= FrontBarAttachDistance)
+            {
+                frontBarAttached = true;
+                frontBarAttachY = controllerPosition.y;
+            }
+
+            if (controllerPosition.x >= SideBarMinDistance ||
+                controllerPosition.x <= -SideBarMinDistance)
+            {
+                sideBarAttached = true;
+            }
+        }
+    }
+
+    private void TryDetectPlayerInput()
+    {
+        PlayerRoll = 0.0f;
+        PlayerControllerPitch = 0.0f;
+
+        if (!FrontBarRAttached || !FrontBarLAttached)
+        {
+            return;
+        }
+
+        if (!RightHandDevice.TryGetFeatureValue(CommonUsages.devicePosition, out var rightControllerPosition) ||
+            !LeftHandDevice.TryGetFeatureValue(CommonUsages.devicePosition, out var leftControllerPosition))
+        {
+            return;
+        }
+
+        float controllerHeightDiff = rightControllerPosition.y - leftControllerPosition.y;
+        if (Mathf.Abs(controllerHeightDiff) > RollMinDiff)
+        {
+            float horizontalDiffX = rightControllerPosition.x - leftControllerPosition.x;
+            float horizontalDiffY = leftControllerPosition.y - rightControllerPosition.y;
+            PlayerRoll = Mathf.Atan2(horizontalDiffY, horizontalDiffX) * Mathf.Rad2Deg;
+            return;
+        }
+
+        float rightPitchOffset = rightControllerPosition.y - FrontBarRAttachY;
+        float leftPitchOffset = leftControllerPosition.y - FrontBarLAttachY;
+        PlayerControllerPitch = (rightPitchOffset + leftPitchOffset) * 0.5f * FrontBarDistanceToPitchRatio;
+        // Limit controller pitch coming from front bars to configured maximum
+        PlayerControllerPitch = Mathf.Clamp(PlayerControllerPitch, -MaxPitchFromBar, MaxPitchFromBar);
     }
 }
