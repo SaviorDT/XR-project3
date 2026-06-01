@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 public class TutorialFlowController : MonoBehaviour
 {
     public enum TaskType
@@ -73,6 +74,10 @@ public class TutorialFlowController : MonoBehaviour
     private float stepTimer = 0f;
     private bool tutorialFinished = false;
 
+    [Header("完成後切換場景")]
+    public bool loadSceneWhenFinished = true;
+    public string nextSceneName;
+    public float loadSceneDelay = 1f;
     void Start()
     {
         CollectCanvasGroups();
@@ -232,7 +237,19 @@ public class TutorialFlowController : MonoBehaviour
                 }
             }
         }
-        
+        if (loadSceneWhenFinished)
+        {
+            StartCoroutine(LoadNextSceneAfterDelay());
+        }
+    }
+    private IEnumerator LoadNextSceneAfterDelay()
+    {
+        yield return new WaitForSeconds(loadSceneDelay);
+
+        if (!string.IsNullOrEmpty(nextSceneName))
+        {
+            SceneManager.LoadScene(nextSceneName);
+        }
     }
     private IEnumerator ChangeTextWithFade(string newText)
     {
