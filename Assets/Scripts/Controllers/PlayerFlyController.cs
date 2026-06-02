@@ -5,6 +5,7 @@ using UnityEngine.XR;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerFlyController : MonoBehaviour
 {
+    [SerializeField] private float PlayerHeight = 1.4f;
     [SerializeField] private float OnGroundRotateAngle = 30.0f;
     [SerializeField] private float OnGroundRotateCoolDown = 0.5f;
     [SerializeField] private Vector3 FlappingWingForce = new(0.0f, 0.35f, 0.2f);
@@ -13,12 +14,17 @@ public class PlayerFlyController : MonoBehaviour
     [SerializeField] private float FlyCoolDown = 20.0f;
     [SerializeField] private float VelocitySteeringRatio = 0.5f;
     [SerializeField] private float CorrectPitchRatio = 0.3f;
-    [SerializeField] private Vector3 FrontBarRPosition = new(0.15f, -0.0f, 0.2f), FrontBarLPosition = new(-0.15f, -0.0f, 0.2f);
-    [SerializeField] private float FrontBarAttachDistance = 0.15f;
-    [SerializeField] private float FrontBarDistanceToPitchRatio = 20.0f;
-    [SerializeField] private float MaxPitchFromBar = 70.0f;
+    [SerializeField] private Vector3 FrontBarRPosition = new(0.1385f, 0.9515f, 0.2f);
+    [SerializeField] private float FrontBarHeight = 0.076f;
+    [SerializeField] private Vector3 FrontBarLPosition = new(-0.1385f, 0.9515f, 0.2f);
+    [SerializeField] private Transform SideBarRPosition;
+    [SerializeField] private Transform SideBarLPosition;
+    [SerializeField] private float FrontBarAttachDistance = 0.03f;
+    [SerializeField] private float SideBarAttachDistance = 0.05f;
+    [SerializeField] private float FrontBarDistanceToPitchRatio = 35.0f;
+    [SerializeField] private float FrontBarDistanceToRollRatio = 45.0f;
     [SerializeField] private float RollMinDiff = 0.1f;
-    [SerializeField] private float SideBarMinDistance = 0.5f;
+    // [SerializeField] private float SideBarMinDistance = 0.5f;
     // [SerializeField] private float PlayerRollThreshold = 5.0f;
     // [SerializeField] private float RollSteeringRatio = 1.0f;
     [SerializeField] private float MaxAngularVelocityY = 90.0f;
@@ -59,7 +65,7 @@ public class PlayerFlyController : MonoBehaviour
     // [SerializeField] private float DiveAngle = -70.0f, ClimbAngle = 70.0f;
     private bool GrabRPressed = false, GrabLPressed = false;
     private bool FrontBarRAttached = false, FrontBarLAttached = false;
-    private float FrontBarRAttachY = 0.0f, FrontBarLAttachY = 0.0f;
+    // private float FrontBarRAttachY = 0.0f, FrontBarLAttachY = 0.0f;
     private bool SideBarRAttached = false, SideBarLAttached = false;
     private Vector3 WindVelocity = Vector3.zero;
     private InputDevice HeadDevice;
@@ -75,6 +81,7 @@ public class PlayerFlyController : MonoBehaviour
     private bool IsFlapping = false;
     private float FlappingAmount = 0.0f;
     private float FlappingAmountBuffer = 0.0f;
+    [SerializeField] private GliderController _GliderController;
     
     void Start()
     {
@@ -109,6 +116,11 @@ public class PlayerFlyController : MonoBehaviour
         if (CenterPosition == Vector3.zero)
         {
             InitPlayerPose();
+        }
+
+        if (IsGrounded())
+        {
+            NextFlyTime = 0.0f;
         }
 
         TryAttachBar();
@@ -287,7 +299,9 @@ public class PlayerFlyController : MonoBehaviour
         }
 
         if (!LeftHandDevice.TryGetFeatureValue(CommonUsages.deviceVelocity, out var leftVelocity) ||
-            !RightHandDevice.TryGetFeatureValue(CommonUsages.deviceVelocity, out var rightVelocity))
+            !RightHandDevice.TryGetFeatureValue(CommonUsages.deviceVelocity, out var rightVelocity) ||
+            !LeftHandDevice.TryGetFeatureValue(CommonUsages.devicePosition, out var leftPosition) ||
+            !RightHandDevice.TryGetFeatureValue(CommonUsages.devicePosition, out var rightPosition))
         {
             IsFlapping = false;
             FlappingAmount = FlappingAmountBuffer;
@@ -295,9 +309,14 @@ public class PlayerFlyController : MonoBehaviour
             return;
         }
 
+        Vector3 leftWorldPosition = transform.TransformPoint(Quaternion.Inverse(Quaternion.Euler(0.0f, ForwardRotation, 0.0f)) * (leftPosition - CenterPosition));
+        Vector3 rightWorldPosition = transform.TransformPoint(Quaternion.Inverse(Quaternion.Euler(0.0f, ForwardRotation, 0.0f)) * (rightPosition - CenterPosition));
+        _GliderController.SetLeftHandleTargetLocation(leftWorldPosition);
+        _GliderController.SetRightHandleTargetLocation(rightWorldPosition);
+
         float leftFlap = Vector3.Dot(leftVelocity, Vector3.down);
         float rightFlap = Vector3.Dot(rightVelocity, Vector3.down);
-        float currentFlappingAmount = (leftFlap + rightFlap) * 0.5f;
+        float currentFlappingAmount = leftFlap + rightFlap;
 
         if (currentFlappingAmount > FlappingWingThreshold)
         {
@@ -330,8 +349,11 @@ public class PlayerFlyController : MonoBehaviour
         {
             CenterPosition = initialPosition;
             ForwardRotation = initialRotation.eulerAngles.y;
-            FixPoseTarget.SetLocalPositionAndRotation(new Vector3(-CenterPosition.x, 0, -CenterPosition.z), 
+            FixPoseTarget.SetLocalPositionAndRotation(new (-CenterPosition.x, PlayerHeight - CenterPosition.y, -CenterPosition.z), 
                                                             Quaternion.Euler(0.0f, -ForwardRotation, 0.0f));
+            // FixPoseTarget.SetLocalPositionAndRotation(new (-CenterPosition.x, 0, -CenterPosition.z), 
+            //                                                 Quaternion.Euler(0.0f, -ForwardRotation, 0.0f));
+            // FixPositionYTarget.localPosition = new Vector3(FixPositionYTarget.localPosition.x, PlayerHeight - CenterPosition.y, FixPositionYTarget.localPosition.z);
         }
     }
 
@@ -357,29 +379,32 @@ public class PlayerFlyController : MonoBehaviour
         TryAttachBarForHand(
             RightHandDevice,
             FrontBarRPosition,
+            SideBarRPosition,
+            transform,
             ref GrabRPressed,
             ref FrontBarRAttached,
-            ref SideBarRAttached,
-            ref FrontBarRAttachY
+            ref SideBarRAttached
         );
 
         TryAttachBarForHand(
             LeftHandDevice,
             FrontBarLPosition,
+            SideBarLPosition,
+            transform,
             ref GrabLPressed,
             ref FrontBarLAttached,
-            ref SideBarLAttached,
-            ref FrontBarLAttachY
+            ref SideBarLAttached
         );
     }
 
     private void TryAttachBarForHand(
         InputDevice handDevice,
-        Vector3 frontBarPosition,
+        Vector3 frontBarLocalPosition,
+        Transform sideBarTransform,
+        Transform rootTransform,
         ref bool grabPressed,
         ref bool frontBarAttached,
-        ref bool sideBarAttached,
-        ref float frontBarAttachY)
+        ref bool sideBarAttached)
     {
         if (!handDevice.isValid || !handDevice.TryGetFeatureValue(CommonUsages.gripButton, out bool isGrabPressed) || !isGrabPressed)
         {
@@ -400,16 +425,22 @@ public class PlayerFlyController : MonoBehaviour
 
         if (handDevice.TryGetFeatureValue(CommonUsages.devicePosition, out var controllerPosition))
         {
-            if (Vector3.Distance(controllerPosition, frontBarPosition) <= FrontBarAttachDistance)
+            Vector3 relativeControllerPosition = Quaternion.Inverse(Quaternion.Euler(0.0f, ForwardRotation, 0.0f)) * (controllerPosition - CenterPosition);
+            Debug.Log($"RelativeControllerPosition: {relativeControllerPosition}, FrontBarLocalPosition: {frontBarLocalPosition}");
+
+            if (Vector3.Distance(relativeControllerPosition, frontBarLocalPosition) <= FrontBarAttachDistance)
             {
                 frontBarAttached = true;
-                frontBarAttachY = controllerPosition.y;
+                // frontBarAttachY = controllerPosition.y;
             }
 
-            if (controllerPosition.x >= SideBarMinDistance ||
-                controllerPosition.x <= -SideBarMinDistance)
+            if (sideBarTransform != null)
             {
-                sideBarAttached = true;
+                Vector3 relativeSideBarPos = rootTransform.InverseTransformPoint(sideBarTransform.position);
+                if (Vector3.Distance(relativeControllerPosition, relativeSideBarPos) <= SideBarAttachDistance)
+                {
+                    sideBarAttached = true;
+                }
             }
         }
     }
@@ -430,20 +461,23 @@ public class PlayerFlyController : MonoBehaviour
             return;
         }
 
-        float controllerHeightDiff = rightControllerPosition.y - leftControllerPosition.y;
+        float rightControllerY = (Quaternion.Inverse(Quaternion.Euler(0.0f, ForwardRotation, 0.0f)) * (rightControllerPosition - CenterPosition)).y - FrontBarRPosition.y;
+        rightControllerY /= FrontBarHeight;
+        rightControllerY = Mathf.Clamp(rightControllerY, -1.0f, 1.0f);
+        float leftControllerY = (Quaternion.Inverse(Quaternion.Euler(0.0f, ForwardRotation, 0.0f)) * (leftControllerPosition - CenterPosition)).y - FrontBarLPosition.y;
+        leftControllerY /= FrontBarHeight;
+        leftControllerY = Mathf.Clamp(leftControllerY, -1.0f, 1.0f);
+
+        _GliderController.SetRightControlVal(rightControllerY);
+        _GliderController.SetLeftControlVal(leftControllerY);
+
+        float controllerHeightDiff = rightControllerY - leftControllerY;
         if (Mathf.Abs(controllerHeightDiff) > RollMinDiff)
         {
-            float horizontalDiffX = rightControllerPosition.x - leftControllerPosition.x;
-            float horizontalDiffY = leftControllerPosition.y - rightControllerPosition.y;
-            PlayerRoll = Mathf.Atan2(horizontalDiffY, horizontalDiffX) * Mathf.Rad2Deg;
-            return;
+            PlayerRoll = controllerHeightDiff * FrontBarDistanceToRollRatio;
         }
 
-        float rightPitchOffset = rightControllerPosition.y - FrontBarRAttachY;
-        float leftPitchOffset = leftControllerPosition.y - FrontBarLAttachY;
-        PlayerControllerPitch = (rightPitchOffset + leftPitchOffset) * 0.5f * FrontBarDistanceToPitchRatio;
-        // Limit controller pitch coming from front bars to configured maximum
-        PlayerControllerPitch = Mathf.Clamp(PlayerControllerPitch, -MaxPitchFromBar, MaxPitchFromBar);
+        PlayerControllerPitch = (rightControllerY + leftControllerY) * FrontBarDistanceToPitchRatio;
     }
 
     private void TryRotateOnGround()
