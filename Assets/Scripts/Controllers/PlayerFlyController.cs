@@ -10,6 +10,7 @@ public class PlayerFlyController : MonoBehaviour
     [SerializeField] private Vector3 FlappingWingForce = new(0.0f, 0.35f, 0.2f);
     [SerializeField] private Vector3 TakeOffVelocity = new(0.0f, 5.0f, 2.0f);
     [SerializeField] private float FlappingWingThreshold = 0.5f;
+    [SerializeField] private float FlyCoolDown = 20.0f;
     [SerializeField] private float VelocitySteeringRatio = 0.5f;
     [SerializeField] private float CorrectPitchRatio = 0.3f;
     [SerializeField] private Vector3 FrontBarRPosition = new(0.15f, -0.0f, 0.2f), FrontBarLPosition = new(-0.15f, -0.0f, 0.2f);
@@ -70,6 +71,10 @@ public class PlayerFlyController : MonoBehaviour
     private Vector3 CenterPosition = Vector3.zero;
     private float ForwardRotation = 0.0f;
     private float NextOnGroundRotateTime = 0.0f;
+    private float NextFlyTime = 0.0f;
+    private bool IsFlapping = false;
+    private float FlappingAmount = 0.0f;
+    private float FlappingAmountBuffer = 0.0f;
     
     void Start()
     {
@@ -108,17 +113,18 @@ public class PlayerFlyController : MonoBehaviour
 
         TryAttachBar();
         TryDetectPlayerInput();
+        TryDetectFlapping();
         TryRotateOnGround();
     }
     
     void FixedUpdate()
     {
         // 著地時不飛行
-        float flappingSpeed = GetFlappingWingSpeed();
+        // float flappingSpeed = GetFlappingWingSpeed();
         if (IsGrounded())
         {
             // 起飛
-            if (flappingSpeed > FlappingWingThreshold)
+            if (FlappingAmount > 0.001f)
             {
                 // ResetPlayerPose();
                 Velocity = transform.TransformDirection(TakeOffVelocity);
@@ -126,15 +132,17 @@ public class PlayerFlyController : MonoBehaviour
             else {
                 Velocity = Vector3.zero;
             }
+            FlappingAmount = 0.0f;
             PlayerRigidbody.linearVelocity = Velocity;
             PlayerRigidbody.angularVelocity = Vector3.zero;
             return;
         }
 
         // 空中揮翅
-        if (flappingSpeed > FlappingWingThreshold)
+        if (FlappingAmount > 0.001f)
         {
-            Velocity += flappingSpeed * transform.TransformDirection(FlappingWingForce);
+            Velocity += FlappingAmount * transform.TransformDirection(FlappingWingForce);
+            FlappingAmount = 0.0f;
         }
 
         // 轉向
@@ -260,22 +268,58 @@ public class PlayerFlyController : MonoBehaviour
         return Physics.Raycast(origin, Vector3.down, groundCheckDistance, ~0, QueryTriggerInteraction.Ignore);
     }
 
-    private float GetFlappingWingSpeed() {
+    private void TryDetectFlapping() {
+        if (Time.time < NextFlyTime)
+        {
+            IsFlapping = false;
+            FlappingAmount = FlappingAmountBuffer;
+            FlappingAmountBuffer = 0.0f;
+            return;
+        }
+
         // Require both side bars attached before counting flapping input
         if (!(SideBarRAttached && SideBarLAttached))
         {
-            return 0.0f;
+            IsFlapping = false;
+            FlappingAmount = FlappingAmountBuffer;
+            FlappingAmountBuffer = 0.0f;
+            return;
         }
 
-        if (LeftHandDevice.TryGetFeatureValue(CommonUsages.deviceVelocity, out var leftVelocity) &&
-            RightHandDevice.TryGetFeatureValue(CommonUsages.deviceVelocity, out var rightVelocity))
+        if (!LeftHandDevice.TryGetFeatureValue(CommonUsages.deviceVelocity, out var leftVelocity) ||
+            !RightHandDevice.TryGetFeatureValue(CommonUsages.deviceVelocity, out var rightVelocity))
         {
-            float leftFlap = Vector3.Dot(leftVelocity, Vector3.down);
-            float rightFlap = Vector3.Dot(rightVelocity, Vector3.down);
-            return (leftFlap + rightFlap) * 0.5f;
+            IsFlapping = false;
+            FlappingAmount = FlappingAmountBuffer;
+            FlappingAmountBuffer = 0.0f;
+            return;
         }
 
-        return 0.0f;
+        float leftFlap = Vector3.Dot(leftVelocity, Vector3.down);
+        float rightFlap = Vector3.Dot(rightVelocity, Vector3.down);
+        float currentFlappingAmount = (leftFlap + rightFlap) * 0.5f;
+
+        if (currentFlappingAmount > FlappingWingThreshold)
+        {
+            if (!IsFlapping)
+            {
+                IsFlapping = true;
+                FlappingAmountBuffer = 0.0f;
+            }
+
+            FlappingAmountBuffer += currentFlappingAmount;
+            return;
+        }
+
+        if (!IsFlapping)
+        {
+            return;
+        }
+
+        IsFlapping = false;
+        FlappingAmount = FlappingAmountBuffer;
+        FlappingAmountBuffer = 0.0f;
+        NextFlyTime = Time.time + FlyCoolDown;
     }
 
     private void InitPlayerPose()

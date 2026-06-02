@@ -220,7 +220,6 @@ MonoBehaviour:
     - {fileID: 1008969292}
     terrainsToHide:
     - {fileID: 524521728}
-    - {fileID: 42476318}
   - instructionTextEN: 
     instructionTextCN: "\u8ACB\u518D\u6B21\u8F49\u5411"
     taskType: 0
@@ -244,7 +243,8 @@ MonoBehaviour:
     terrainsToRise:
     - {fileID: 198719015}
     - {fileID: 1600177654}
-    terrainsToHide: []
+    terrainsToHide:
+    - {fileID: 42476318}
   - instructionTextEN: 
     instructionTextCN: "\u5229\u7528\u4FEF\u885D(\u8EAB\u9AD4\u524D\u50BE)\n\u53CA\n\u722C\u5347(\u8EAB\u9AD4\u5F8C\u4EF0)\n\u62B5\u9054\u76EE\u7684\u5730\n"
     taskType: 0
@@ -580,6 +580,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &145870099
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 145870100}
+  - component: {fileID: 145870101}
+  m_Layer: 0
+  m_Name: HUDRenderController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &145870100
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145870099}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.544, y: 2.56387, z: 0.17337}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &145870101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145870099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c36fb493bf14ad46bb5e3beb0934307, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ManualHUDRenderer
+  hudRenderCamera: {fileID: 1045818185}
 --- !u!1 &198719014
 GameObject:
   m_ObjectHideFlags: 0
@@ -897,7 +942,7 @@ GameObject:
   - component: {fileID: 726198729}
   - component: {fileID: 726198728}
   - component: {fileID: 726198727}
-  - component: {fileID: 726198732}
+  - component: {fileID: 726198733}
   m_Layer: 0
   m_Name: CurvedHUD
   m_TagString: Untagged
@@ -980,9 +1025,6 @@ MonoBehaviour:
   localOffset: {x: 0, y: 0, z: 0}
   followYawOnly: 1
   faceTarget: 1
-  smoothFollow: 0
-  positionSmooth: 10
-  rotationSmooth: 10
 --- !u!4 &726198731
 Transform:
   m_ObjectHideFlags: 0
@@ -998,7 +1040,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &726198732
+--- !u!114 &726198733
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1007,15 +1049,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 726198726}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7c00a83af3c2c44e941ffa5ab8f09d6, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e27871ccfc347c49b9f003adc3cb86c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CurvedCanvasSlices
+  m_EditorClassIdentifier: Assembly-CSharp::CylindricalCanvasSurface
   sourceTexture: {fileID: 8400000, guid: cd4d5d6890e24c7429d448c5e00ae8a9, type: 2}
-  sliceCount: 32
-  radius: 1
-  totalAngle: 70
-  height: 0
-  verticalSize: 1.2
+  radius: 0.4
+  totalAngle: 140
+  verticalSize: 0.5
+  xSegments: 96
+  ySegments: 1
   shader: {fileID: 10750, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!1 &748354792
 GameObject:
@@ -3020,3 +3062,4 @@ SceneRoots:
   - {fileID: 113532137}
   - {fileID: 1791319394}
   - {fileID: 772581871}
+  - {fileID: 145870100}
