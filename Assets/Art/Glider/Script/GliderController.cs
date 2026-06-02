@@ -58,7 +58,7 @@ public class GliderController : MonoBehaviour
 
         [Header("物理設定 (傳統 Rigidbody)")]
         [Tooltip("掛在 Handle Tip 上的 Rigidbody")]
-        public Rigidbody handleTipRB;
+        public Rigidbody handleRootRB;
         public float reachThreshold = 0.01f;
         public float inputTimeout = 0.05f; 
 
@@ -104,23 +104,23 @@ public class GliderController : MonoBehaviour
         // 核心改變：切換 Rigidbody 的 Kinematic 狀態
         private void SetPhysicsState(bool enablePhysics)
         {
-            if (handleTipRB == null || isPhysicsDriven == enablePhysics) return;
+            if (handleRootRB == null || isPhysicsDriven == enablePhysics) return;
             isPhysicsDriven = enablePhysics;
 
             if (isPhysicsDriven)
             {
                 // 放手：關閉 Kinematic，讓重力與 Character Joint 接管
-                handleTipRB.isKinematic = false; 
+                handleRootRB.isKinematic = false; 
                 
                 // 消除 IK 殘留的假動能，確保它自然落下
-                handleTipRB.linearVelocity = Vector3.zero;
-                handleTipRB.angularVelocity = Vector3.zero;
-                handleTipRB.WakeUp(); 
+                handleRootRB.linearVelocity = Vector3.zero;
+                handleRootRB.angularVelocity = Vector3.zero;
+                handleRootRB.WakeUp(); 
             }
             else
             {
                 // 抓緊：開啟 Kinematic，變成完全受腳本支配的硬物
-                handleTipRB.isKinematic = true;     
+                handleRootRB.isKinematic = true;     
             }
         }
 
