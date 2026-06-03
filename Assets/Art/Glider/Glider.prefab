@@ -453,7 +453,7 @@ Transform:
   m_GameObject: {fileID: 4029588750873413391}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.32290426, y: -0.05491352, z: 1.3124346}
+  m_LocalPosition: {x: -0.013918579, y: -0.05166936, z: 1.312078}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1123,7 +1123,7 @@ Transform:
   m_GameObject: {fileID: 7359058151624037880}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.32290426, y: -0.05491352, z: 1.3124346}
+  m_LocalPosition: {x: -0.013918579, y: -0.05166936, z: 1.312078}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1371,7 +1371,7 @@ MonoBehaviour:
     ropeAnchor: {fileID: 5693837681294585171}
     handleRoot: {fileID: 3707142957646886621}
     handleTip: {fileID: 3145127580512466866}
-    handleTipRB: {fileID: 3319042852345824067}
+    handleRootRB: {fileID: 0}
     reachThreshold: 0.01
     inputTimeout: 0.05
     hingeAxis: {x: 1, y: 0, z: 0}
@@ -1382,7 +1382,7 @@ MonoBehaviour:
     ropeAnchor: {fileID: 3315282959708861829}
     handleRoot: {fileID: 4199981446697644166}
     handleTip: {fileID: 2053586169811524497}
-    handleTipRB: {fileID: 3913669495414074423}
+    handleRootRB: {fileID: 0}
     reachThreshold: 0.01
     inputTimeout: 0.05
     hingeAxis: {x: 1, y: 0, z: 0}
