@@ -2428,6 +2428,25 @@ MonoBehaviour:
     m_Bits: 1073741847
   groundCheckDistance: 1.2
   groundCheckRadius: 0.3
+  safeAreaMode: 0
+  minX: -100
+  maxX: 400
+  minY: -40
+  maxY: 500
+  minZ: -200
+  maxZ: 200
+  circleCenterXZ: {x: 0, y: 0}
+  circleRadius: 10
+  circleMinY: -2
+  circleMaxY: 5
+  sphereCenter: {x: 0, y: 0, z: 0}
+  sphereRadius: 10
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 1073741847
+  wallCheckRadius: 0.35
+  wallCheckDistance: 0.6
+  wallCheckHeight: 0.8
   respawnYOffset: 1.5
   resetVelocity: 1
 --- !u!1 &1326658988
