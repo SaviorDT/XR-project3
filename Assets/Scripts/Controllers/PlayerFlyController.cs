@@ -14,9 +14,9 @@ public class PlayerFlyController : MonoBehaviour
     [SerializeField] private float FlyCoolDown = 20.0f;
     [SerializeField] private float VelocitySteeringRatio = 0.5f;
     [SerializeField] private float CorrectPitchRatio = 0.3f;
-    [SerializeField] private Vector3 FrontBarRPosition = new(0.1385f, 0.9515f, 0.2f);
-    [SerializeField] private float FrontBarHeight = 0.076f;
-    [SerializeField] private Vector3 FrontBarLPosition = new(-0.1385f, 0.9515f, 0.2f);
+    [SerializeField] private Vector3 FrontBarRPosition = new(0.15f, 0.90f, 0.18f);
+    [SerializeField] private float FrontBarHeight = 0.11f;
+    [SerializeField] private Vector3 FrontBarLPosition = new(-0.15f, 0.90f, 0.18f);
     [SerializeField] private Transform SideBarRPosition;
     [SerializeField] private Transform SideBarLPosition;
     [SerializeField] private float FrontBarAttachDistance = 0.03f;
@@ -261,9 +261,6 @@ public class PlayerFlyController : MonoBehaviour
 
         // 移動
         PlayerRigidbody.linearVelocity = Velocity;
-
-        // Debug.Log($"Velocity: {Velocity}, ReducedDownSpeed: {ReducedDownSpeed}, ReducedForwardSpeed: {ReducedForwardSpeed}");
-        // Debug.Log($"Pitch: {pitch * Mathf.Rad2Deg}, PlayerPitchState: {PlayerPitchState}, PlayerControllerRotateY: {PlayerControllerRotateY}, PlayerControllerRotateBias: {PlayerControllerRotateBias}");
     }
 
     public void SetWindVelocity(Vector3 velocity)
@@ -292,15 +289,6 @@ public class PlayerFlyController : MonoBehaviour
             return;
         }
 
-        // Require both side bars attached before counting flapping input
-        if (!(SideBarRAttached && SideBarLAttached))
-        {
-            IsFlapping = false;
-            FlappingAmount = FlappingAmountBuffer;
-            FlappingAmountBuffer = 0.0f;
-            return;
-        }
-
         if (!LeftHandDevice.TryGetFeatureValue(CommonUsages.deviceVelocity, out var leftVelocity) ||
             !RightHandDevice.TryGetFeatureValue(CommonUsages.deviceVelocity, out var rightVelocity) ||
             !LeftHandDevice.TryGetFeatureValue(CommonUsages.devicePosition, out var leftPosition) ||
@@ -312,10 +300,31 @@ public class PlayerFlyController : MonoBehaviour
             return;
         }
 
-        Vector3 leftWorldPosition = transform.TransformPoint(Quaternion.Inverse(Quaternion.Euler(0.0f, ForwardRotation, 0.0f)) * (leftPosition - CenterPosition));
-        Vector3 rightWorldPosition = transform.TransformPoint(Quaternion.Inverse(Quaternion.Euler(0.0f, ForwardRotation, 0.0f)) * (rightPosition - CenterPosition));
-        _GliderController.SetLeftHandleTargetLocation(leftWorldPosition);
-        _GliderController.SetRightHandleTargetLocation(rightWorldPosition);
+        Vector3 leftWorldPosition = transform.TransformPoint(Quaternion.Inverse(Quaternion.Euler(0.0f, ForwardRotation, 0.0f)) * (leftPosition - CenterPosition + new Vector3(0, PlayerHeight, 0)));
+        Vector3 rightWorldPosition = transform.TransformPoint(Quaternion.Inverse(Quaternion.Euler(0.0f, ForwardRotation, 0.0f)) * (rightPosition - CenterPosition + new Vector3(0, PlayerHeight, 0)));
+
+        leftWorldPosition = Quaternion.Inverse(Quaternion.Euler(0.0f, ForwardRotation, 0.0f)) * (leftPosition - CenterPosition + new Vector3(0, PlayerHeight - 0.65f, 0));
+        rightWorldPosition = Quaternion.Inverse(Quaternion.Euler(0.0f, ForwardRotation, 0.0f)) * (rightPosition - CenterPosition + new Vector3(0, PlayerHeight - 0.65f, 0));
+        // Debug.Log($"Left Hand Position: {leftWorldPosition}, Right Hand Position: {rightWorldPosition}");
+
+        if (SideBarLAttached)
+        {
+            _GliderController.SetRightHandleTargetLocation(leftWorldPosition);
+            Debug.Log($"Setting Left Handle Target Location: {leftWorldPosition}");
+        }
+        if (SideBarRAttached)
+        {
+            _GliderController.SetLeftHandleTargetLocation(rightWorldPosition);
+            Debug.Log($"Setting Right Handle Target Location: {rightWorldPosition}");
+        }
+
+        if (!SideBarLAttached || !SideBarRAttached)
+        {
+            IsFlapping = false;
+            FlappingAmount = FlappingAmountBuffer;
+            FlappingAmountBuffer = 0.0f;
+            return;
+        }
 
         float leftFlap = Vector3.Dot(leftVelocity, Vector3.down);
         float rightFlap = Vector3.Dot(rightVelocity, Vector3.down);
@@ -428,9 +437,8 @@ public class PlayerFlyController : MonoBehaviour
 
         if (handDevice.TryGetFeatureValue(CommonUsages.devicePosition, out var controllerPosition))
         {
-            Vector3 relativeControllerPosition = Quaternion.Inverse(Quaternion.Euler(0.0f, ForwardRotation, 0.0f)) * (controllerPosition - CenterPosition);
-            Debug.Log($"RelativeControllerPosition: {relativeControllerPosition}, FrontBarLocalPosition: {frontBarLocalPosition}");
-
+            Vector3 relativeControllerPosition = Quaternion.Inverse(Quaternion.Euler(0.0f, ForwardRotation, 0.0f)) * (controllerPosition - CenterPosition + new Vector3(0, PlayerHeight, 0));
+            
             if (Vector3.Distance(relativeControllerPosition, frontBarLocalPosition) <= FrontBarAttachDistance)
             {
                 frontBarAttached = true;
@@ -453,29 +461,35 @@ public class PlayerFlyController : MonoBehaviour
         PlayerRoll = 0.0f;
         PlayerControllerPitch = 0.0f;
 
-        if (!FrontBarRAttached || !FrontBarLAttached)
-        {
-            return;
-        }
-
         if (!RightHandDevice.TryGetFeatureValue(CommonUsages.devicePosition, out var rightControllerPosition) ||
             !LeftHandDevice.TryGetFeatureValue(CommonUsages.devicePosition, out var leftControllerPosition))
         {
             return;
         }
 
-        float rightControllerY = (Quaternion.Inverse(Quaternion.Euler(0.0f, ForwardRotation, 0.0f)) * (rightControllerPosition - CenterPosition)).y - FrontBarRPosition.y;
-        rightControllerY /= FrontBarHeight;
-        rightControllerY = Mathf.Clamp(rightControllerY, -1.0f, 1.0f);
-        float leftControllerY = (Quaternion.Inverse(Quaternion.Euler(0.0f, ForwardRotation, 0.0f)) * (leftControllerPosition - CenterPosition)).y - FrontBarLPosition.y;
-        leftControllerY /= FrontBarHeight;
-        leftControllerY = Mathf.Clamp(leftControllerY, -1.0f, 1.0f);
+        float rightControllerY = (Quaternion.Inverse(Quaternion.Euler(0.0f, ForwardRotation, 0.0f)) * (rightControllerPosition - CenterPosition)).y - FrontBarRPosition.y + PlayerHeight;
+        rightControllerY = rightControllerY / FrontBarHeight + 0.5f;
+        rightControllerY = Mathf.Clamp(rightControllerY, 0.0f, 1.0f);
+        float leftControllerY = (Quaternion.Inverse(Quaternion.Euler(0.0f, ForwardRotation, 0.0f)) * (leftControllerPosition - CenterPosition)).y - FrontBarLPosition.y + PlayerHeight;
+        leftControllerY = leftControllerY / FrontBarHeight + 0.5f;
+        leftControllerY = Mathf.Clamp(leftControllerY, 0.0f, 1.0f);
+
+        if (FrontBarRAttached)
+        {
+            _GliderController.SetRightControlVal(rightControllerY);
+        }
+        if (FrontBarLAttached)
+        {
+            _GliderController.SetLeftControlVal(leftControllerY);
+        }
+
+        if (!FrontBarRAttached || !FrontBarLAttached)
+        {
+            return;
+        }
 
         RightControllerLastY = rightControllerY;
         LeftControllerLastY = leftControllerY;
-
-        _GliderController.SetRightControlVal(rightControllerY);
-        _GliderController.SetLeftControlVal(leftControllerY);
 
         float controllerHeightDiff = rightControllerY - leftControllerY;
         if (Mathf.Abs(controllerHeightDiff) > RollMinDiff)
@@ -528,13 +542,13 @@ public class PlayerFlyController : MonoBehaviour
     {
         if (!FrontBarRAttached)
         {
-            float RightControllerNewY = Mathf.Lerp(RightControllerLastY, 0.0f, FrontBarResetSpeed * Time.deltaTime);
+            float RightControllerNewY = Mathf.Lerp(RightControllerLastY, 0.5f, FrontBarResetSpeed * Time.deltaTime);
             RightControllerLastY = RightControllerNewY;
             _GliderController.SetRightControlVal(RightControllerNewY);
         }
         if (!FrontBarLAttached)
         {
-            float LeftControllerNewY = Mathf.Lerp(LeftControllerLastY, 0.0f, FrontBarResetSpeed * Time.deltaTime);
+            float LeftControllerNewY = Mathf.Lerp(LeftControllerLastY, 0.5f, FrontBarResetSpeed * Time.deltaTime);
             LeftControllerLastY = LeftControllerNewY;
             _GliderController.SetLeftControlVal(LeftControllerNewY);
         }
