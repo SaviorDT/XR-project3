@@ -316,18 +316,18 @@ public class PlayerFlyController : MonoBehaviour
         Vector3 leftWorldPosition = transform.TransformPoint(Quaternion.Inverse(Quaternion.Euler(0.0f, ForwardRotation, 0.0f)) * (leftPosition - CenterPosition + new Vector3(0, PlayerHeight, 0)));
         Vector3 rightWorldPosition = transform.TransformPoint(Quaternion.Inverse(Quaternion.Euler(0.0f, ForwardRotation, 0.0f)) * (rightPosition - CenterPosition + new Vector3(0, PlayerHeight, 0)));
 
-        leftWorldPosition = Quaternion.Inverse(Quaternion.Euler(0.0f, ForwardRotation, 0.0f)) * (leftPosition - CenterPosition + new Vector3(0, PlayerHeight - 0.65f, 0));
-        rightWorldPosition = Quaternion.Inverse(Quaternion.Euler(0.0f, ForwardRotation, 0.0f)) * (rightPosition - CenterPosition + new Vector3(0, PlayerHeight - 0.65f, 0));
+        // leftWorldPosition = Quaternion.Inverse(Quaternion.Euler(0.0f, ForwardRotation, 0.0f)) * (leftPosition - CenterPosition + new Vector3(0, PlayerHeight - 0.65f, 0));
+        // rightWorldPosition = Quaternion.Inverse(Quaternion.Euler(0.0f, ForwardRotation, 0.0f)) * (rightPosition - CenterPosition + new Vector3(0, PlayerHeight - 0.65f, 0));
         // Debug.Log($"Left Hand Position: {leftWorldPosition}, Right Hand Position: {rightWorldPosition}");
 
         if (SideBarLAttached)
         {
-            _GliderController.SetRightHandleTargetLocation(leftWorldPosition);
+            _GliderController.SetLeftHandleTargetLocation(leftWorldPosition);
             Debug.Log($"Setting Left Handle Target Location: {leftWorldPosition}");
         }
         if (SideBarRAttached)
         {
-            _GliderController.SetLeftHandleTargetLocation(rightWorldPosition);
+            _GliderController.SetRightHandleTargetLocation(rightWorldPosition);
             Debug.Log($"Setting Right Handle Target Location: {rightWorldPosition}");
         }
 

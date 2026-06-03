@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Glider 專用控制器：支援後端 API 呼叫，並整合 ArticulationBody 物理/IK 狀態切換。
+/// Glider 專用控制器 (純淨版)：支援後端 API 呼叫，並整合 Rigidbody 物理/IK 狀態切換。
 /// </summary>
 public class GliderController : MonoBehaviour
 {
@@ -18,7 +18,7 @@ public class GliderController : MonoBehaviour
         public Vector3 elevatorRotMin;
         public Vector3 elevatorRotMax;
 
-        private float currentVal = 0.5f; // 預設 0.5 (置中)
+        private float currentVal = 0.5f;
 
         // API 呼叫接口
         public void SetValue(float normalizedVal)
@@ -45,7 +45,7 @@ public class GliderController : MonoBehaviour
     }
 
     // ==========================================
-    // 模組 B：剛體 IK 系統 (改用 Rigidbody 系統)
+    // 模組 B：剛體 IK 系統 (API -> Wing & RB Handle)
     // ==========================================
     [System.Serializable]
     public class HandleIKMapping
@@ -57,9 +57,8 @@ public class GliderController : MonoBehaviour
         public Transform handleTip;
 
         [Header("物理設定 (傳統 Rigidbody)")]
-        [Tooltip("掛在 Handle Tip 上的 Rigidbody")]
-        public Rigidbody handleRootRB;
-        public float reachThreshold = 0.01f;
+        [Tooltip("掛在擺盪部位 (Tip) 上的 Rigidbody")]
+        public Rigidbody handleTipRB;
         public float inputTimeout = 0.05f; 
 
         [Header("IK 參數")]
@@ -72,10 +71,10 @@ public class GliderController : MonoBehaviour
 
         // --- 狀態機變數 ---
         private bool isPhysicsDriven = true; 
-        [HideInInspector] public Vector3 activeTargetPos;
+        private Vector3 activeTargetLocal; // 儲存 Local Space 座標，跟隨滑翔傘移動
         private float lastInputTime = -999f;
 
-        public void Init()
+        public void Init(Transform root)
         {
             if (wingPivot && ropeAnchor && handleRoot && handleTip)
             {
@@ -83,48 +82,49 @@ public class GliderController : MonoBehaviour
                 L = Vector3.Distance(ropeAnchor.position, handleTip.position);
                 isInit = true;
 
-                activeTargetPos = handleTip.position;
+                activeTargetLocal = root.InverseTransformPoint(handleTip.position);
                 
                 SetPhysicsState(true); 
             }
         }
 
-        public void SetTarget(Vector3 targetPos)
+        public void SetTarget(Vector3 targetWorldPos, Transform root)
         {
             lastInputTime = Time.time;
 
-            if (Vector3.Distance(activeTargetPos, targetPos) > 0.001f)
+            Vector3 targetLocal = root.InverseTransformPoint(targetWorldPos);
+
+            if (Vector3.Distance(activeTargetLocal, targetLocal) > 0.001f)
             {
-                activeTargetPos = targetPos;
+                activeTargetLocal = targetLocal;
             }
             
             SetPhysicsState(false); 
         }
 
-        // 核心改變：切換 Rigidbody 的 Kinematic 狀態
         private void SetPhysicsState(bool enablePhysics)
         {
-            if (handleRootRB == null || isPhysicsDriven == enablePhysics) return;
+            if (handleTipRB == null || isPhysicsDriven == enablePhysics) return;
             isPhysicsDriven = enablePhysics;
 
             if (isPhysicsDriven)
             {
-                // 放手：關閉 Kinematic，讓重力與 Character Joint 接管
-                handleRootRB.isKinematic = false; 
+                // 放手：關閉 Kinematic，讓重力接管
+                handleTipRB.isKinematic = false; 
                 
-                // 消除 IK 殘留的假動能，確保它自然落下
-                handleRootRB.linearVelocity = Vector3.zero;
-                handleRootRB.angularVelocity = Vector3.zero;
-                handleRootRB.WakeUp(); 
+                // 消除 IK 殘留的假動能，確保它自然落下 (Unity 6 使用 linearVelocity)
+                handleTipRB.linearVelocity = Vector3.zero;
+                handleTipRB.angularVelocity = Vector3.zero;
+                handleTipRB.WakeUp(); 
             }
             else
             {
                 // 抓緊：開啟 Kinematic，變成完全受腳本支配的硬物
-                handleRootRB.isKinematic = true;     
+                handleTipRB.isKinematic = true;     
             }
         }
 
-        public void UpdateIK()
+        public void UpdateIK(Transform root)
         {
             if (!isInit) return;
 
@@ -132,15 +132,18 @@ public class GliderController : MonoBehaviour
 
             if (isPhysicsDriven)
             {
-                // 物理狀態下，我們只需要負責把錨點 (Root) 放在繩子綁點上即可
-                // Tip 會因為 Character Joint 的關係自己甩動
+                // 物理狀態下，只需對齊根部
                 handleRoot.position = ropeAnchor.position;
+                
+                // 同步 Local 座標，避免下次抓取時產生偏移
+                activeTargetLocal = root.InverseTransformPoint(handleTip.position);
                 return;
             }
 
             // --- 執行 IK 解算 ---
+            Vector3 activeTargetWorldPos = root.TransformPoint(activeTargetLocal);
             Vector3 pivotPos = wingPivot.position;
-            Vector3 toTarget = activeTargetPos - pivotPos;
+            Vector3 toTarget = activeTargetWorldPos - pivotPos;
             
             if (toTarget.sqrMagnitude < 0.0001f) return;
 
@@ -162,20 +165,15 @@ public class GliderController : MonoBehaviour
             wingPivot.rotation = Quaternion.AngleAxis(angleToRotate, worldHinge) * wingPivot.rotation;
 
             Vector3 newAnchorPos = pivotPos + (Quaternion.AngleAxis(angleToRotate, worldHinge) * (currentAnchorPos - pivotPos));
-            Vector3 ropeDir = (activeTargetPos - newAnchorPos).normalized;
+            Vector3 ropeDir = (activeTargetWorldPos - newAnchorPos).normalized;
 
             handleRoot.position = newAnchorPos;
             handleRoot.up = -ropeDir;
             
-            // 因為是 Kinematic，Tip 不會受物理影響，我們必須強迫它的 Transform 對齊 Root
-            // 確保切換回物理時，它是在正確的位置上
+            // 強迫 Kinematic 的 Tip 對齊 Root 計算出的位置
             handleTip.position = handleRoot.position + ropeDir * L;
 
-            // --- Reach 判定與狀態切換 ---
-            Vector3 solvedTipPos = pivotPos + projectedTarget * d;
-            bool isReached = Vector3.Distance(handleTip.position, solvedTipPos) <= reachThreshold;
-
-            if (isReached && isUserLetGo)
+            if (isUserLetGo)
             {
                 SetPhysicsState(true); 
             }
@@ -193,22 +191,20 @@ public class GliderController : MonoBehaviour
     public HandleIKMapping leftWingIK;
     public HandleIKMapping rightWingIK;
 
+    private void Start()
+    {
+        // 傳入滑翔傘本體的 transform 作為座標轉換基準
+        leftWingIK.Init(transform);
+        rightWingIK.Init(transform);
+    }
 
     private void LateUpdate()
     {
         leftControl.UpdateMapping();
         rightControl.UpdateMapping();
         
-        leftWingIK.UpdateIK();
-        rightWingIK.UpdateIK();
-
-        bool isManualDragging = enableTestModule && (testMode == TestMode.ManualDrag);
-        
-        if (!isManualDragging)
-        {
-            if (testLeftTarget) testLeftTarget.position = leftWingIK.activeTargetPos;
-            if (testRightTarget) testRightTarget.position = rightWingIK.activeTargetPos;
-        }
+        leftWingIK.UpdateIK(transform);
+        rightWingIK.UpdateIK(transform);
     }
 
     // --- 4 個提供給後端的 Public API ---
@@ -225,91 +221,11 @@ public class GliderController : MonoBehaviour
 
     public void SetLeftHandleTargetLocation(Vector3 targetLocation)
     {
-        leftWingIK.SetTarget(targetLocation);
+        leftWingIK.SetTarget(targetLocation, transform);
     }
 
     public void SetRightHandleTargetLocation(Vector3 targetLocation)
     {
-        rightWingIK.SetTarget(targetLocation);
-    }
-
-// ==========================================
-    // 測試專用模組：手動拖曳 / 自動畫圓 / 物理晃動
-    // ==========================================
-    public enum TestMode
-    {
-        ManualDrag, // 模式 1：允許你在 Scene 中拖曳 Target 物件來測試 IK
-        AutoCircle, // 模式 2：自動畫圓 (模擬後端連續發送變動座標)
-        LetGo       // 模式 3：停止發送 API，測試物理擺盪
-    }
-
-    [Header("自動化測試 (Auto Test)")]
-    public bool enableTestModule = false;
-    
-    [Tooltip("切換測試模式")]
-    public TestMode testMode = TestMode.ManualDrag;
-
-    [Header("手動測試目標 (對應 ManualDrag 模式)")]
-    [Tooltip("將你原本的 Left Pull Target 拖進來")]
-    public Transform testLeftTarget;
-    [Tooltip("將你原本的 Right Pull Target 拖進來")]
-    public Transform testRightTarget;
-
-    private Quaternion originalRotation;
-
-    private Vector3 leftBase;
-    private Vector3 rightBase;
-
-    private void Start()
-    {
-        leftWingIK.Init();
-        rightWingIK.Init();
-        originalRotation = transform.rotation;
-        leftBase = leftWingIK.ropeAnchor.position - transform.up * 0.4f;
-        rightBase = rightWingIK.ropeAnchor.position - transform.up * 0.4f;
-    }
-
-    private void Update()
-    {
-        if (!enableTestModule) return;
-
-        if (testMode == TestMode.ManualDrag)
-        {
-            // --- 狀態 1：手動拖曳模式 ---
-            // 讀取你拖進來的空物件座標，並丟給 API。這樣你就可以在畫面上自由拖拉測試了！
-            if (testLeftTarget) SetLeftHandleTargetLocation(testLeftTarget.position);
-            if (testRightTarget) SetRightHandleTargetLocation(testRightTarget.position);
-            
-            // 為了不干擾，手把數值先維持置中
-            SetLeftControlVal(0.5f);
-            SetRightControlVal(0.5f);
-
-            // 回正滑翔傘
-            transform.rotation = Quaternion.Lerp(transform.rotation, originalRotation, Time.deltaTime * 5f);
-        }
-        else if (testMode == TestMode.AutoCircle)
-        {
-            // --- 狀態 2：自動畫圓 IK 模式 ---
-            float controlVal = (Mathf.Sin(Time.time) + 1f) / 2f; 
-            SetLeftControlVal(controlVal);
-            SetRightControlVal(1f - controlVal); 
-
-            float circleSpeed = 1.5f; 
-            
-            Vector3 leftOffset = (transform.forward * Mathf.Sin(Time.time * circleSpeed)) * 0.2f;
-            Vector3 rightOffset = (transform.right * Mathf.Cos(Time.time * circleSpeed)) * 0.2f;
-
-            SetLeftHandleTargetLocation(leftBase + leftOffset);
-            SetRightHandleTargetLocation(rightBase + rightOffset);
-
-            transform.rotation = Quaternion.Lerp(transform.rotation, originalRotation, Time.deltaTime * 5f);
-        }
-        else if (testMode == TestMode.LetGo)
-        {
-            // --- 狀態 3：放手物理擺盪模式 ---
-            // 刻意不呼叫 SetTarget API，觸發 Timeout 釋放關節
-            float rockAngle = Mathf.Sin(Time.time * 3f) * 20f;
-            transform.rotation = originalRotation * Quaternion.Euler(0, 0, rockAngle);
-        }
+        rightWingIK.SetTarget(targetLocation, transform);
     }
 }
