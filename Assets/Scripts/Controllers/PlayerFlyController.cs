@@ -20,6 +20,7 @@ public class PlayerFlyController : MonoBehaviour
     [SerializeField] private Transform SideBarRPosition;
     [SerializeField] private Transform SideBarLPosition;
     [SerializeField] private float FrontBarAttachDistance = 0.03f;
+    [SerializeField] private float FrontBarResetSpeed = 1.0f;
     [SerializeField] private float SideBarAttachDistance = 0.05f;
     [SerializeField] private float FrontBarDistanceToPitchRatio = 35.0f;
     [SerializeField] private float FrontBarDistanceToRollRatio = 45.0f;
@@ -82,6 +83,7 @@ public class PlayerFlyController : MonoBehaviour
     private float FlappingAmount = 0.0f;
     private float FlappingAmountBuffer = 0.0f;
     [SerializeField] private GliderController _GliderController;
+    private float RightControllerLastY = 0.0f, LeftControllerLastY = 0.0f;
     
     void Start()
     {
@@ -127,6 +129,7 @@ public class PlayerFlyController : MonoBehaviour
         TryDetectPlayerInput();
         TryDetectFlapping();
         TryRotateOnGround();
+        TryResetFrontBar();
     }
     
     void FixedUpdate()
@@ -468,6 +471,9 @@ public class PlayerFlyController : MonoBehaviour
         leftControllerY /= FrontBarHeight;
         leftControllerY = Mathf.Clamp(leftControllerY, -1.0f, 1.0f);
 
+        RightControllerLastY = rightControllerY;
+        LeftControllerLastY = leftControllerY;
+
         _GliderController.SetRightControlVal(rightControllerY);
         _GliderController.SetLeftControlVal(leftControllerY);
 
@@ -516,5 +522,21 @@ public class PlayerFlyController : MonoBehaviour
         float targetYaw = PlayerRigidbody.rotation.eulerAngles.y + rotateDirection * OnGroundRotateAngle;
         PlayerRigidbody.MoveRotation(Quaternion.Euler(0.0f, targetYaw, 0.0f));
         NextOnGroundRotateTime = Time.time + OnGroundRotateCoolDown;
+    }
+
+    private void TryResetFrontBar()
+    {
+        if (!FrontBarRAttached)
+        {
+            float RightControllerNewY = Mathf.Lerp(RightControllerLastY, 0.0f, FrontBarResetSpeed * Time.deltaTime);
+            RightControllerLastY = RightControllerNewY;
+            _GliderController.SetRightControlVal(RightControllerNewY);
+        }
+        if (!FrontBarLAttached)
+        {
+            float LeftControllerNewY = Mathf.Lerp(LeftControllerLastY, 0.0f, FrontBarResetSpeed * Time.deltaTime);
+            LeftControllerLastY = LeftControllerNewY;
+            _GliderController.SetLeftControlVal(LeftControllerNewY);
+        }
     }
 }
