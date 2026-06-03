@@ -13,15 +13,15 @@ public class PlayerFlyController : MonoBehaviour
     [SerializeField] private float FlappingWingThreshold = 0.5f;
     [SerializeField] private float FlyCoolDown = 20.0f;
     [SerializeField] private float VelocitySteeringRatio = 0.5f;
-    [SerializeField] private float CorrectPitchRatio = 0.3f;
-    [SerializeField] private Vector3 FrontBarRPosition = new(0.15f, 0.90f, 0.18f);
-    [SerializeField] private float FrontBarHeight = 0.11f;
-    [SerializeField] private Vector3 FrontBarLPosition = new(-0.15f, 0.90f, 0.18f);
+    [SerializeField] private float CorrectPitchRatio = 0.5f;
+    [SerializeField] private Vector3 FrontBarRPosition = new(0.15f, 0.9515f, 0.18f);
+    [SerializeField] private Vector3 FrontBarLPosition = new(-0.15f, 0.9515f, 0.18f);
+    [SerializeField] private float FrontBarHeight = 0.08f;
     [SerializeField] private Transform SideBarRPosition;
     [SerializeField] private Transform SideBarLPosition;
     [SerializeField] private float FrontBarAttachDistance = 0.03f;
     [SerializeField] private float FrontBarResetSpeed = 1.0f;
-    [SerializeField] private float SideBarAttachDistance = 0.05f;
+    [SerializeField] private float SideBarAttachDistance = 0.1f;
     [SerializeField] private float FrontBarDistanceToPitchRatio = 35.0f;
     [SerializeField] private float FrontBarDistanceToRollRatio = 45.0f;
     [SerializeField] private float RollMinDiff = 0.1f;
@@ -84,6 +84,7 @@ public class PlayerFlyController : MonoBehaviour
     private float FlappingAmountBuffer = 0.0f;
     [SerializeField] private GliderController _GliderController;
     private float RightControllerLastY = 0.0f, LeftControllerLastY = 0.0f;
+    private bool RightBPressedPrev = false;
     
     void Start()
     {
@@ -115,6 +116,16 @@ public class PlayerFlyController : MonoBehaviour
             RightHandDevice = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
         }
 
+        // Detect Meta Quest 3 right controller B button (secondary button).
+        if (RightHandDevice.isValid && RightHandDevice.TryGetFeatureValue(CommonUsages.secondaryButton, out bool rightBPressed))
+        {
+            if (rightBPressed && !RightBPressedPrev)
+            {
+                InitPlayerPose();
+            }
+            RightBPressedPrev = rightBPressed;
+        }
+
         if (CenterPosition == Vector3.zero)
         {
             InitPlayerPose();
@@ -124,6 +135,8 @@ public class PlayerFlyController : MonoBehaviour
         {
             NextFlyTime = 0.0f;
         }
+
+        
 
         TryAttachBar();
         TryDetectPlayerInput();
@@ -361,7 +374,8 @@ public class PlayerFlyController : MonoBehaviour
         {
             CenterPosition = initialPosition;
             ForwardRotation = initialRotation.eulerAngles.y;
-            FixPoseTarget.SetLocalPositionAndRotation(new (-CenterPosition.x, PlayerHeight - CenterPosition.y, -CenterPosition.z), 
+
+            FixPoseTarget.SetLocalPositionAndRotation(new Vector3(0, PlayerHeight, 0) - Quaternion.Euler(0.0f, -ForwardRotation, 0.0f) * new Vector3(CenterPosition.x, CenterPosition.y, CenterPosition.z), 
                                                             Quaternion.Euler(0.0f, -ForwardRotation, 0.0f));
             // FixPoseTarget.SetLocalPositionAndRotation(new (-CenterPosition.x, 0, -CenterPosition.z), 
             //                                                 Quaternion.Euler(0.0f, -ForwardRotation, 0.0f));
