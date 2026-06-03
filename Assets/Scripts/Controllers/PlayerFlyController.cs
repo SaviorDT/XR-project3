@@ -491,19 +491,18 @@ public class PlayerFlyController : MonoBehaviour
         if (FrontBarRAttached)
         {
             _GliderController.SetRightControlVal(rightControllerY);
+            RightControllerLastY = rightControllerY;
         }
         if (FrontBarLAttached)
         {
             _GliderController.SetLeftControlVal(leftControllerY);
+            LeftControllerLastY = leftControllerY;
         }
 
         if (!FrontBarRAttached || !FrontBarLAttached)
         {
             return;
         }
-
-        RightControllerLastY = rightControllerY;
-        LeftControllerLastY = leftControllerY;
 
         float controllerHeightDiff = rightControllerY - leftControllerY;
         if (Mathf.Abs(controllerHeightDiff) > RollMinDiff)
