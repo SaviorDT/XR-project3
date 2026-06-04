@@ -113,8 +113,8 @@ public class GliderController : MonoBehaviour
                 handleTipRB.isKinematic = false; 
                 
                 // 消除 IK 殘留的假動能，確保它自然落下 (Unity 6 使用 linearVelocity)
-                handleTipRB.linearVelocity = Vector3.zero;
-                handleTipRB.angularVelocity = Vector3.zero;
+                // handleTipRB.linearVelocity = Vector3.zero;
+                // handleTipRB.angularVelocity = Vector3.zero;
                 handleTipRB.WakeUp(); 
             }
             else
@@ -137,6 +137,14 @@ public class GliderController : MonoBehaviour
                 
                 // 同步 Local 座標，避免下次抓取時產生偏移
                 activeTargetLocal = root.InverseTransformPoint(handleTip.position);
+
+                float slerpSpeed = 6f; 
+                wingPivot.localRotation = Quaternion.Slerp(
+                    wingPivot.localRotation, 
+                    Quaternion.identity, 
+                    slerpSpeed * Time.deltaTime
+                );
+
                 return;
             }
 
@@ -169,8 +177,6 @@ public class GliderController : MonoBehaviour
 
             handleRoot.position = newAnchorPos;
             handleRoot.up = -ropeDir;
-            
-            // 強迫 Kinematic 的 Tip 對齊 Root 計算出的位置
             handleTip.position = handleRoot.position + ropeDir * L;
 
             if (isUserLetGo)
