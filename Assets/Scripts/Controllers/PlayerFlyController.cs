@@ -5,42 +5,49 @@ using UnityEngine.XR;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerFlyController : MonoBehaviour
 {
+    [SerializeField] private bool DebugMode = false;
+    [Header("Player Control Settings")]
     [SerializeField] private float PlayerHeight = 1.4f;
     [SerializeField] private float OnGroundRotateAngle = 30.0f;
     [SerializeField] private float OnGroundRotateCoolDown = 0.5f;
-    [SerializeField] private Vector3 FlappingWingForce = new(0.0f, 0.35f, 0.2f);
-    [SerializeField] private Vector3 TakeOffVelocity = new(0.0f, 5.0f, 2.0f);
+    [SerializeField] private Vector3 FlappingWingForce = new(0.0f, 1.0f, 1.0f);
+    [SerializeField] private Vector3 TakeOffVelocity = new(0.0f, 15.0f, 3.0f);
     [SerializeField] private float FlappingWingThreshold = 0.5f;
     [SerializeField] private float FlyCoolDown = 20.0f;
-    [SerializeField] private float VelocitySteeringRatio = 0.5f;
-    [SerializeField] private float CorrectPitchRatio = 0.5f;
     [SerializeField] private Vector3 FrontBarRPosition = new(0.15f, 0.9515f, 0.18f);
     [SerializeField] private Vector3 FrontBarLPosition = new(-0.15f, 0.9515f, 0.18f);
-    [SerializeField] private float FrontBarHeight = 0.08f;
+    [SerializeField] private float FrontBarHeight = 0.16f;
+    [SerializeField] private float FrontBarAttachDistance = 0.06f;
+    [SerializeField] private float FrontBarResetSpeed = 3.0f;
+    [SerializeField] private float FrontBarDistanceToPitchRatio = 20.0f;
+    [SerializeField] private float FrontBarDistanceToRollRatio = -15.0f;
+    [SerializeField] private float GliderPitchRatio = 0.5f, GliderPitchSpeed = 1.0f;
+    [SerializeField] private float GliderRollRatio = 0.3f, GliderRollSpeed = 1.0f;
     [SerializeField] private Transform SideBarRPosition;
     [SerializeField] private Transform SideBarLPosition;
-    [SerializeField] private float FrontBarAttachDistance = 0.03f;
-    [SerializeField] private float FrontBarResetSpeed = 1.0f;
     [SerializeField] private float SideBarAttachDistance = 0.1f;
-    [SerializeField] private float FrontBarDistanceToPitchRatio = 35.0f;
-    [SerializeField] private float FrontBarDistanceToRollRatio = 45.0f;
     [SerializeField] private float RollMinDiff = 0.1f;
-    // [SerializeField] private float SideBarMinDistance = 0.5f;
-    // [SerializeField] private float PlayerRollThreshold = 5.0f;
-    // [SerializeField] private float RollSteeringRatio = 1.0f;
+    [Header("Flight Pose Settings")]
+    [SerializeField] private float VelocitySteeringRatio = 0.5f;
+    [SerializeField] private float CorrectPitchRatio = 0.5f;
     [SerializeField] private float MaxAngularVelocityY = 90.0f;
-    [Tooltip("玩家的平移距離超過此閾值才會被視為俯衝或抬頭")]
-    // [SerializeField] private float PlayerPitchThreshold = 0.1f;
-    // [SerializeField] private float PlayerControllerRotateToPitchRatio = 1.0f;
-    // [SerializeField] private Vector3 PlayerControllerHorizontalForward = new(0, -0.8f, 0.6f);
-    [SerializeField] private float Gravity = 9.8f, ReducedGravityRatio = 0.75f, StallSpeed = 5.0f;
+    [Header("Flight Physics Settings")]
+    [SerializeField] private float Gravity = 9.8f;
+    [SerializeField] private float ReducedGravityRatio = 0.75f;
+    [SerializeField] private float StallSpeed = 5.0f;
     [SerializeField] private float WindForce = 1.0f;
     [SerializeField] private float DownToForwardRatio = 2.0f, DownToForwardLossRatio = 0.0f;
     [SerializeField] private float VelocityToUpRatio = 0.8f, VelocityToUpLossRatio = -2f;
     [Tooltip("1秒後，玩家的速度會有多少比例轉向當前的飛行方向")]
     [SerializeField] private float SteeringSpeed = 1.5f;
     [SerializeField] private Vector3 WindResistance = new(0.5f, 0.5f, 0.5f);
+    [Header("References")]
     [SerializeField] private Transform FixPoseTarget;
+    [SerializeField] private BoxCollider PlayerCollider;
+    [SerializeField] private Transform CameraTransform;
+    [SerializeField] private GliderController _GliderController;
+    [SerializeField] private Transform FixGliderTarget;
+    [SerializeField] private GameObject[] FlappableWingEffect;
     // 1. 偵測是否在地面，如果是，除了起飛以外不進行其他運算
     // 2. 偵測起飛、拍翅膀
 
@@ -59,22 +66,18 @@ public class PlayerFlyController : MonoBehaviour
 
     // 以下為計算用變數
     [SerializeField] private Vector3 Velocity = Vector3.zero;
-    private float PlayerRoll = 0.0f;
-    // private enum EPitchState { Up, Neutral, Down }
-    // private EPitchState PlayerPitchState = EPitchState.Neutral;
+    private float PlayerControllerYaw = 0.0f;
+    private float GliderRoll = 0.0f;
     private float PlayerControllerPitch = 0.0f;
-    // [SerializeField] private float DiveAngle = -70.0f, ClimbAngle = 70.0f;
+    private float GliderPitch = 0.0f;
     private bool GrabRPressed = false, GrabLPressed = false;
     private bool FrontBarRAttached = false, FrontBarLAttached = false;
-    // private float FrontBarRAttachY = 0.0f, FrontBarLAttachY = 0.0f;
     private bool SideBarRAttached = false, SideBarLAttached = false;
     private Vector3 WindVelocity = Vector3.zero;
     private InputDevice HeadDevice;
     private InputDevice LeftHandDevice;
     private InputDevice RightHandDevice;
     private Rigidbody PlayerRigidbody;
-    [SerializeField] private BoxCollider PlayerCollider;
-    [SerializeField] private Transform CameraTransform;
     private Vector3 CenterPosition = Vector3.zero;
     private float ForwardRotation = 0.0f;
     private float NextOnGroundRotateTime = 0.0f;
@@ -82,7 +85,6 @@ public class PlayerFlyController : MonoBehaviour
     private bool IsFlapping = false;
     private float FlappingAmount = 0.0f;
     private float FlappingAmountBuffer = 0.0f;
-    [SerializeField] private GliderController _GliderController;
     private float RightControllerLastY = 0.0f, LeftControllerLastY = 0.0f;
     private bool RightBPressedPrev = false;
     
@@ -137,12 +139,12 @@ public class PlayerFlyController : MonoBehaviour
         }
 
         
-
         TryAttachBar();
         TryDetectPlayerInput();
         TryDetectFlapping();
         TryRotateOnGround();
         TryResetFrontBar();
+        DebugInput();
     }
     
     void FixedUpdate()
@@ -173,6 +175,8 @@ public class PlayerFlyController : MonoBehaviour
             FlappingAmount = 0.0f;
         }
 
+        Vector3 oldVelocity = Velocity;
+
         // 轉向
         Vector3 horizontalVelocity = new(Velocity.x, 0.0f, Velocity.z);
         Quaternion targetRotation = PlayerRigidbody.rotation;
@@ -186,7 +190,7 @@ public class PlayerFlyController : MonoBehaviour
         }
 
         // 玩家控制轉向
-        yawDelta += PlayerRoll;
+        yawDelta += PlayerControllerYaw;
 
         yawDelta = Mathf.Clamp(yawDelta, -MaxAngularVelocityY, MaxAngularVelocityY);
         targetRotation = Quaternion.AngleAxis(yawDelta, Vector3.up) * targetRotation;
@@ -216,15 +220,8 @@ public class PlayerFlyController : MonoBehaviour
         {
             pitch = Vector3.SignedAngle(forwardHorizontal.normalized, transform.forward.normalized, transform.right);
         }
-        // if (PlayerPitchState == EPitchState.Up)
-        // {
-        //     pitch += ClimbAngle;
-        // }
-        // else if (PlayerPitchState == EPitchState.Down)
-        // {
-        //     pitch += DiveAngle;
-        // }
         pitch += PlayerControllerPitch;
+
         pitch = Mathf.Clamp(pitch, -89.9f, 89.9f) * Mathf.Deg2Rad;
 
         // 重力加速度
@@ -251,7 +248,7 @@ public class PlayerFlyController : MonoBehaviour
         {
             ReducedDownSpeed = -Velocity.y * DownToForwardRatio * Mathf.Cos(pitch) * Mathf.Cos(pitch) * Time.fixedDeltaTime;
             Velocity.y += ReducedDownSpeed;
-            Velocity += ReducedDownSpeed * (1 - DownToForwardLossRatio) * transform.forward;
+            Velocity += ReducedDownSpeed * (1 - DownToForwardLossRatio) * new Vector3(transform.forward.x, 0, transform.forward.z).normalized;
         }
 
         // 相對速度轉往上
@@ -261,15 +258,21 @@ public class PlayerFlyController : MonoBehaviour
                                     Mathf.Abs(Mathf.Sin(pitch)) *
                                     Time.fixedDeltaTime;
         
-        Velocity += ReducedForwardSpeed * RelativeVelocity.normalized;
-        Velocity.y += ReducedForwardSpeed * (1 - VelocityToUpLossRatio) * (pitch > 0 ? -1 : 1);
+        if (pitch > 0)
+        {
+            Velocity += ReducedForwardSpeed * RelativeVelocity.normalized;
+            Velocity.y += ReducedForwardSpeed * (1 - VelocityToUpLossRatio) * -1;
+        }
 
         // 速度轉向前面
         Vector3 ReducedSidewaysVelocity = SteeringSpeed * Time.fixedDeltaTime * -new Vector3(Velocity.x, 0.0f, Velocity.z);
         Velocity += ReducedSidewaysVelocity;
         Velocity -= Vector3.Project(ReducedSidewaysVelocity, transform.forward);
 
+
         // 風阻
+        Velocity.x = Mathf.Lerp(oldVelocity.x, Velocity.x, 0.9f);
+        Velocity.z = Mathf.Lerp(oldVelocity.z, Velocity.z, 0.9f);
         Velocity = Vector3.Scale(Velocity, WindResistance * Time.fixedDeltaTime + Vector3.one * (1 - Time.fixedDeltaTime));
 
         // 移動
@@ -299,8 +302,18 @@ public class PlayerFlyController : MonoBehaviour
             IsFlapping = false;
             FlappingAmount = FlappingAmountBuffer;
             FlappingAmountBuffer = 0.0f;
+            foreach (var effect in FlappableWingEffect)
+            {
+                effect.SetActive(false);
+            }
             return;
         }
+
+        
+            foreach (var effect in FlappableWingEffect)
+            {
+                effect.SetActive(true);
+            }
 
         if (!LeftHandDevice.TryGetFeatureValue(CommonUsages.deviceVelocity, out var leftVelocity) ||
             !RightHandDevice.TryGetFeatureValue(CommonUsages.deviceVelocity, out var rightVelocity) ||
@@ -315,10 +328,6 @@ public class PlayerFlyController : MonoBehaviour
 
         Vector3 leftWorldPosition = transform.TransformPoint(Quaternion.Inverse(Quaternion.Euler(0.0f, ForwardRotation, 0.0f)) * (leftPosition - CenterPosition + new Vector3(0, PlayerHeight, 0)));
         Vector3 rightWorldPosition = transform.TransformPoint(Quaternion.Inverse(Quaternion.Euler(0.0f, ForwardRotation, 0.0f)) * (rightPosition - CenterPosition + new Vector3(0, PlayerHeight, 0)));
-
-        // leftWorldPosition = Quaternion.Inverse(Quaternion.Euler(0.0f, ForwardRotation, 0.0f)) * (leftPosition - CenterPosition + new Vector3(0, PlayerHeight - 0.65f, 0));
-        // rightWorldPosition = Quaternion.Inverse(Quaternion.Euler(0.0f, ForwardRotation, 0.0f)) * (rightPosition - CenterPosition + new Vector3(0, PlayerHeight - 0.65f, 0));
-        // Debug.Log($"Left Hand Position: {leftWorldPosition}, Right Hand Position: {rightWorldPosition}");
 
         if (SideBarLAttached)
         {
@@ -472,7 +481,7 @@ public class PlayerFlyController : MonoBehaviour
 
     private void TryDetectPlayerInput()
     {
-        PlayerRoll = 0.0f;
+        PlayerControllerYaw = 0.0f;
         PlayerControllerPitch = 0.0f;
 
         if (!RightHandDevice.TryGetFeatureValue(CommonUsages.devicePosition, out var rightControllerPosition) ||
@@ -501,16 +510,26 @@ public class PlayerFlyController : MonoBehaviour
 
         if (!FrontBarRAttached || !FrontBarLAttached)
         {
+            GliderRoll = Mathf.Lerp(GliderRoll, 0.0f, GliderRollSpeed * Time.deltaTime);
+            GliderPitch = Mathf.Lerp(GliderPitch, 0.0f, GliderPitchSpeed * Time.deltaTime);
+
+            FixGliderTarget.localRotation = Quaternion.Euler(GliderPitch, 0.0f, -GliderRoll);
+
             return;
         }
 
         float controllerHeightDiff = rightControllerY - leftControllerY;
         if (Mathf.Abs(controllerHeightDiff) > RollMinDiff)
         {
-            PlayerRoll = controllerHeightDiff * FrontBarDistanceToRollRatio;
+            PlayerControllerYaw = controllerHeightDiff * FrontBarDistanceToRollRatio;
         }
 
         PlayerControllerPitch = (rightControllerY + leftControllerY) * FrontBarDistanceToPitchRatio;
+
+        GliderRoll = Mathf.Lerp(GliderRoll, PlayerControllerYaw * GliderRollRatio, GliderRollSpeed * Time.deltaTime);
+        GliderPitch = Mathf.Lerp(GliderPitch, PlayerControllerPitch * GliderPitchRatio, GliderPitchSpeed * Time.deltaTime);
+
+        FixGliderTarget.localRotation = Quaternion.Euler(GliderPitch, 0.0f, -GliderRoll);
     }
 
     private void TryRotateOnGround()
@@ -564,6 +583,52 @@ public class PlayerFlyController : MonoBehaviour
             float LeftControllerNewY = Mathf.Lerp(LeftControllerLastY, 0.5f, FrontBarResetSpeed * Time.deltaTime);
             LeftControllerLastY = LeftControllerNewY;
             _GliderController.SetLeftControlVal(LeftControllerNewY);
+        }
+    }
+
+    private void DebugInput()
+    {
+        if (!DebugMode)
+        {
+            return;
+        }
+
+        if (!HeadDevice.isValid)
+        {
+            HeadDevice = InputDevices.GetDeviceAtXRNode(XRNode.Head);
+        }
+
+        if (HeadDevice.isValid && HeadDevice.TryGetFeatureValue(CommonUsages.devicePosition, out Vector3 devicePos))
+        {
+            devicePos -= CenterPosition;
+            PlayerControllerYaw = devicePos.x * 90.0f;
+            PlayerControllerPitch = devicePos.z * 90.0f;
+        }
+
+        if (Time.time > NextFlyTime)
+        {
+            foreach (var effect in FlappableWingEffect)
+            {
+                effect.SetActive(true);
+            }
+        }
+        else
+        {
+            foreach (var effect in FlappableWingEffect)
+            {
+                effect.SetActive(false);
+            }
+        }
+
+        if (!RightHandDevice.isValid)
+        {
+            RightHandDevice = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
+        }
+
+        if (RightHandDevice.isValid && RightHandDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool aPressed) && aPressed)
+        {
+            FlappingAmount = 10.0f;
+            NextFlyTime = Time.time + FlyCoolDown;
         }
     }
 }
