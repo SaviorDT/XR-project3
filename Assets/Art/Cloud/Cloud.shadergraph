@@ -539,8 +539,8 @@
     },
     "m_FragmentContext": {
         "m_Position": {
-            "x": 456.0,
-            "y": 272.8000183105469
+            "x": 945.9999389648438,
+            "y": 335.5
         },
         "m_Blocks": [
             {
@@ -2007,10 +2007,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 833.5999755859375,
-            "y": 444.0,
-            "width": 208.0,
-            "height": 325.60003662109377
+            "x": 789.0000610351563,
+            "y": 525.0000610351563,
+            "width": 185.50006103515626,
+            "height": 142.0
         }
     },
     "m_Slots": [
@@ -2029,7 +2029,7 @@
     ],
     "synonyms": [],
     "m_Precision": 0,
-    "m_PreviewExpanded": true,
+    "m_PreviewExpanded": false,
     "m_DismissedVersion": 0,
     "m_PreviewMode": 0,
     "m_CustomColors": {
@@ -3203,7 +3203,7 @@
         "perlin noise"
     ],
     "m_Precision": 0,
-    "m_PreviewExpanded": true,
+    "m_PreviewExpanded": false,
     "m_DismissedVersion": 0,
     "m_PreviewMode": 0,
     "m_CustomColors": {
@@ -3385,8 +3385,8 @@
     "m_ShaderOutputName": "OutMinMax",
     "m_StageCapability": 3,
     "m_Value": {
-        "x": 0.4000000059604645,
-        "y": 1.0
+        "x": 0.20000000298023225,
+        "y": 0.4000000059604645
     },
     "m_DefaultValue": {
         "x": 0.0,
