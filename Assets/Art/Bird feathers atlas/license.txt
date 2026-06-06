@@ -1,0 +1,11 @@
+Model Information:
+* title:	Bird feathers atlas
+* source:	https://sketchfab.com/3d-models/bird-feathers-atlas-3251932626ff424889c2a1c9479e1e13
+* author:	den4ik4irik (https://sketchfab.com/den4ik4irik)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Bird feathers atlas" (https://sketchfab.com/3d-models/bird-feathers-atlas-3251932626ff424889c2a1c9479e1e13) by den4ik4irik (https://sketchfab.com/den4ik4irik) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
