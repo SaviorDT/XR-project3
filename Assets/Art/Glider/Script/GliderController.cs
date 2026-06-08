@@ -73,6 +73,9 @@ public class GliderController : MonoBehaviour
         private Vector3 activeTargetLocal; // 儲存 Local Space 座標，跟隨滑翔傘移動
         private float lastInputTime = -999f;
 
+        private CharacterJoint handleJoint;
+        private Rigidbody cachedConnectedBody;
+
         public void Init(Transform root)
         {
             if (wingPivot && handleRoot && handleTip)
@@ -82,6 +85,13 @@ public class GliderController : MonoBehaviour
                 isInit = true;
 
                 activeTargetLocal = root.InverseTransformPoint(handleTip.position);
+
+                handleJoint = handleRoot.GetComponent<CharacterJoint>();
+
+                if (handleJoint)
+                {
+                    cachedConnectedBody = handleJoint.connectedBody;
+                }
                 
                 SetPhysicsState(true); 
             }
@@ -89,6 +99,7 @@ public class GliderController : MonoBehaviour
 
         public void SetTarget(Vector3 targetWorldPos, Transform root)
         {
+            SetPhysicsState(false); 
             lastInputTime = Time.time;
 
             Vector3 targetLocal = root.InverseTransformPoint(targetWorldPos);
@@ -97,8 +108,6 @@ public class GliderController : MonoBehaviour
             {
                 activeTargetLocal = targetLocal;
             }
-            
-            SetPhysicsState(false); 
         }
 
         private void SetPhysicsState(bool enablePhysics)
@@ -109,16 +118,20 @@ public class GliderController : MonoBehaviour
             if (isPhysicsDriven)
             {
                 // 放手：關閉 Kinematic，讓重力接管
+                if (handleJoint)
+                {
+                    handleJoint.connectedBody = cachedConnectedBody;
+                }
                 handleTipRB.isKinematic = false; 
-                
-                // 消除 IK 殘留的假動能，確保它自然落下 (Unity 6 使用 linearVelocity)
-                // handleTipRB.linearVelocity = Vector3.zero;
-                // handleTipRB.angularVelocity = Vector3.zero;
                 handleTipRB.WakeUp(); 
             }
             else
             {
                 // 抓緊：開啟 Kinematic，變成完全受腳本支配的硬物
+                if (handleJoint)
+                {
+                    handleJoint.connectedBody = null; 
+                }
                 handleTipRB.isKinematic = true;     
             }
         }
