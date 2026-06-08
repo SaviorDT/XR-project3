@@ -32330,29 +32330,29 @@ CharacterJoint:
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0.0037497282, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
-  m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 0
+  m_ConnectedAnchor: {x: -0.50442344, y: 1.8200272, z: 0.24881144}
   m_SwingAxis: {x: 0, y: 0, z: 0}
   m_TwistLimitSpring:
     spring: 0
     damper: 0
   m_LowTwistLimit:
-    limit: -20
+    limit: 0
     bounciness: 0
     contactDistance: 0
   m_HighTwistLimit:
-    limit: 70
+    limit: 0
     bounciness: 0
     contactDistance: 0
   m_SwingLimitSpring:
     spring: 0
     damper: 0
   m_Swing1Limit:
-    limit: 60
+    limit: 80
     bounciness: 0
     contactDistance: 0
   m_Swing2Limit:
-    limit: 60
+    limit: 80
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 0
@@ -44003,29 +44003,29 @@ CharacterJoint:
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0.005371809, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
-  m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 0
+  m_ConnectedAnchor: {x: 0.50448096, y: 1.8184044, z: 0.2489565}
   m_SwingAxis: {x: 0, y: 0, z: 0}
   m_TwistLimitSpring:
     spring: 0
     damper: 0
   m_LowTwistLimit:
-    limit: -20
+    limit: 0
     bounciness: 0
     contactDistance: 0
   m_HighTwistLimit:
-    limit: 177
+    limit: 0
     bounciness: 0
     contactDistance: 0
   m_SwingLimitSpring:
     spring: 0
     damper: 0
   m_Swing1Limit:
-    limit: 60
+    limit: 80
     bounciness: 0
     contactDistance: 0
   m_Swing2Limit:
-    limit: 60
+    limit: 80
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 0
@@ -122610,7 +122610,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6258645319645867383}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.8212519, z: -0, w: -0.5705657}
+  m_LocalRotation: {x: -0, y: -0.8212538, z: 0, w: -0.5705632}
   m_LocalPosition: {x: -414.91272, y: 12.39976, z: 541.02905}
   m_LocalScale: {x: 1, y: 0.9872923, z: 1.0933433}
   m_ConstrainProportionsScale: 0
@@ -122645,9 +122645,9 @@ MonoBehaviour:
   FrontBarResetSpeed: 3
   FrontBarDistanceToPitchRatio: 80
   FrontBarDistanceToRollRatio: -15
-  GliderPitchRatio: -0.5
+  GliderPitchRatio: 0
   GliderPitchSpeed: 0.3
-  GliderRollRatio: -1
+  GliderRollRatio: 0
   GliderRollSpeed: 0.5
   SideBarRPosition: {fileID: 7285888072404879038}
   SideBarLPosition: {fileID: 5964698823284304541}
