@@ -52,7 +52,6 @@ public class GliderController : MonoBehaviour
     {
         [Header("骨架設定 (Hierarchy)")]
         public Transform wingPivot;
-        public Transform ropeAnchor;
         public Transform handleRoot;
         public Transform handleTip;
 
@@ -76,10 +75,10 @@ public class GliderController : MonoBehaviour
 
         public void Init(Transform root)
         {
-            if (wingPivot && ropeAnchor && handleRoot && handleTip)
+            if (wingPivot && handleRoot && handleTip)
             {
-                R = Vector3.Distance(wingPivot.position, ropeAnchor.position);
-                L = Vector3.Distance(ropeAnchor.position, handleTip.position);
+                R = Vector3.Distance(wingPivot.position, handleRoot.position);
+                L = Vector3.Distance(handleRoot.position, handleTip.position);
                 isInit = true;
 
                 activeTargetLocal = root.InverseTransformPoint(handleTip.position);
@@ -132,10 +131,6 @@ public class GliderController : MonoBehaviour
 
             if (isPhysicsDriven)
             {
-                // 物理狀態下，只需對齊根部
-                handleRoot.position = ropeAnchor.position;
-                
-                // 同步 Local 座標，避免下次抓取時產生偏移
                 activeTargetLocal = root.InverseTransformPoint(handleTip.position);
 
                 float slerpSpeed = 6f; 
@@ -156,7 +151,7 @@ public class GliderController : MonoBehaviour
             if (toTarget.sqrMagnitude < 0.0001f) return;
 
             Vector3 worldHinge = wingPivot.TransformDirection(hingeAxis).normalized;
-            Vector3 currentAnchorPos = ropeAnchor.position;
+            Vector3 currentAnchorPos = handleRoot.position;
             Vector3 currentAnchorDir = (currentAnchorPos - pivotPos).normalized;
 
             float d = Mathf.Clamp(toTarget.magnitude, Mathf.Abs(R - L), R + L);
@@ -172,10 +167,7 @@ public class GliderController : MonoBehaviour
 
             wingPivot.rotation = Quaternion.AngleAxis(angleToRotate, worldHinge) * wingPivot.rotation;
 
-            Vector3 newAnchorPos = pivotPos + (Quaternion.AngleAxis(angleToRotate, worldHinge) * (currentAnchorPos - pivotPos));
-            Vector3 ropeDir = (activeTargetWorldPos - newAnchorPos).normalized;
-
-            handleRoot.position = newAnchorPos;
+            Vector3 ropeDir = (activeTargetWorldPos - handleRoot.position).normalized;
             handleRoot.up = -ropeDir;
             handleTip.position = handleRoot.position + ropeDir * L;
 
