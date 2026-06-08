@@ -122733,7 +122733,7 @@ Transform:
   m_GameObject: {fileID: 6258645319645867383}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.8212519, z: -0, w: -0.5705657}
-  m_LocalPosition: {x: -410.14, y: 12.632996, z: 541.22}
+  m_LocalPosition: {x: -414.91272, y: 12.39976, z: 541.02905}
   m_LocalScale: {x: 1, y: 0.9872923, z: 1.0933433}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -122756,8 +122756,8 @@ MonoBehaviour:
   PlayerHeight: 1.4
   OnGroundRotateAngle: 30
   OnGroundRotateCoolDown: 0.5
-  FlappingWingForce: {x: 0, y: 1, z: 1}
-  TakeOffVelocity: {x: 0, y: 15, z: 3}
+  FlappingWingForce: {x: 0, y: 0.5, z: 0.5}
+  TakeOffVelocity: {x: 0, y: 10, z: 3}
   FlappingWingThreshold: 0.5
   FlyCoolDown: 20
   FrontBarRPosition: {x: 0.15, y: 0.9515, z: 0.18}
@@ -122765,15 +122765,15 @@ MonoBehaviour:
   FrontBarHeight: 0.16
   FrontBarAttachDistance: 0.06
   FrontBarResetSpeed: 3
-  FrontBarDistanceToPitchRatio: 35
+  FrontBarDistanceToPitchRatio: 80
   FrontBarDistanceToRollRatio: -15
-  GliderPitchRatio: 0.5
-  GliderPitchSpeed: 1
-  GliderRollRatio: 0.3
-  GliderRollSpeed: 1
+  GliderPitchRatio: -0.5
+  GliderPitchSpeed: 0.3
+  GliderRollRatio: -1
+  GliderRollSpeed: 0.5
   SideBarRPosition: {fileID: 7285888072404879038}
   SideBarLPosition: {fileID: 5964698823284304541}
-  SideBarAttachDistance: 0.1
+  SideBarAttachDistance: 0.2
   RollMinDiff: 0.1
   VelocitySteeringRatio: 0.5
   CorrectPitchRatio: 0.5

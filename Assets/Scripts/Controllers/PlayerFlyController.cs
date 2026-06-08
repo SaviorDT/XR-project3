@@ -273,7 +273,10 @@ public class PlayerFlyController : MonoBehaviour
         // 風阻
         Velocity.x = Mathf.Lerp(oldVelocity.x, Velocity.x, 0.9f);
         Velocity.z = Mathf.Lerp(oldVelocity.z, Velocity.z, 0.9f);
-        Velocity = Vector3.Scale(Velocity, WindResistance * Time.fixedDeltaTime + Vector3.one * (1 - Time.fixedDeltaTime));
+        if (new Vector3(Velocity.x, 0.0f, Velocity.z).magnitude > StallSpeed)
+        {
+            Velocity = Vector3.Scale(Velocity, WindResistance * Time.fixedDeltaTime + Vector3.one * (1 - Time.fixedDeltaTime));
+        }
 
         // 移動
         PlayerRigidbody.linearVelocity = Velocity;
@@ -326,18 +329,16 @@ public class PlayerFlyController : MonoBehaviour
             return;
         }
 
-        Vector3 leftWorldPosition = transform.TransformPoint(Quaternion.Inverse(Quaternion.Euler(0.0f, ForwardRotation, 0.0f)) * (leftPosition - CenterPosition + new Vector3(0, PlayerHeight, 0)));
-        Vector3 rightWorldPosition = transform.TransformPoint(Quaternion.Inverse(Quaternion.Euler(0.0f, ForwardRotation, 0.0f)) * (rightPosition - CenterPosition + new Vector3(0, PlayerHeight, 0)));
+        Vector3 leftWorldPosition = FixGliderTarget.TransformPoint(Quaternion.Inverse(Quaternion.Euler(0.0f, ForwardRotation, 0.0f)) * (leftPosition - CenterPosition + new Vector3(0, PlayerHeight, 0)));
+        Vector3 rightWorldPosition = FixGliderTarget.TransformPoint(Quaternion.Inverse(Quaternion.Euler(0.0f, ForwardRotation, 0.0f)) * (rightPosition - CenterPosition + new Vector3(0, PlayerHeight, 0)));
 
         if (SideBarLAttached)
         {
             _GliderController.SetLeftHandleTargetLocation(leftWorldPosition);
-            Debug.Log($"Setting Left Handle Target Location: {leftWorldPosition}");
         }
         if (SideBarRAttached)
         {
             _GliderController.SetRightHandleTargetLocation(rightWorldPosition);
-            Debug.Log($"Setting Right Handle Target Location: {rightWorldPosition}");
         }
 
         if (!SideBarLAttached || !SideBarRAttached)
@@ -415,7 +416,7 @@ public class PlayerFlyController : MonoBehaviour
             RightHandDevice,
             FrontBarRPosition,
             SideBarRPosition,
-            transform,
+            FixGliderTarget,
             ref GrabRPressed,
             ref FrontBarRAttached,
             ref SideBarRAttached
@@ -425,7 +426,7 @@ public class PlayerFlyController : MonoBehaviour
             LeftHandDevice,
             FrontBarLPosition,
             SideBarLPosition,
-            transform,
+            FixGliderTarget,
             ref GrabLPressed,
             ref FrontBarLAttached,
             ref SideBarLAttached
@@ -490,10 +491,10 @@ public class PlayerFlyController : MonoBehaviour
             return;
         }
 
-        float rightControllerY = (Quaternion.Inverse(Quaternion.Euler(0.0f, ForwardRotation, 0.0f)) * (rightControllerPosition - CenterPosition)).y - FrontBarRPosition.y + PlayerHeight;
+        float rightControllerY = rightControllerPosition.y - CenterPosition.y - FrontBarRPosition.y + PlayerHeight;
         rightControllerY = rightControllerY / FrontBarHeight + 0.5f;
         rightControllerY = Mathf.Clamp(rightControllerY, 0.0f, 1.0f);
-        float leftControllerY = (Quaternion.Inverse(Quaternion.Euler(0.0f, ForwardRotation, 0.0f)) * (leftControllerPosition - CenterPosition)).y - FrontBarLPosition.y + PlayerHeight;
+        float leftControllerY = leftControllerPosition.y - CenterPosition.y - FrontBarLPosition.y + PlayerHeight;
         leftControllerY = leftControllerY / FrontBarHeight + 0.5f;
         leftControllerY = Mathf.Clamp(leftControllerY, 0.0f, 1.0f);
 
@@ -513,7 +514,7 @@ public class PlayerFlyController : MonoBehaviour
             GliderRoll = Mathf.Lerp(GliderRoll, 0.0f, GliderRollSpeed * Time.deltaTime);
             GliderPitch = Mathf.Lerp(GliderPitch, 0.0f, GliderPitchSpeed * Time.deltaTime);
 
-            FixGliderTarget.localRotation = Quaternion.Euler(GliderPitch, 0.0f, -GliderRoll);
+            FixGliderTarget.localRotation = Quaternion.Euler(GliderPitch, 0.0f, GliderRoll);
 
             return;
         }
@@ -524,12 +525,12 @@ public class PlayerFlyController : MonoBehaviour
             PlayerControllerYaw = controllerHeightDiff * FrontBarDistanceToRollRatio;
         }
 
-        PlayerControllerPitch = (rightControllerY + leftControllerY) * FrontBarDistanceToPitchRatio;
+        PlayerControllerPitch = (rightControllerY + leftControllerY - 1.0f) * FrontBarDistanceToPitchRatio;
 
         GliderRoll = Mathf.Lerp(GliderRoll, PlayerControllerYaw * GliderRollRatio, GliderRollSpeed * Time.deltaTime);
         GliderPitch = Mathf.Lerp(GliderPitch, PlayerControllerPitch * GliderPitchRatio, GliderPitchSpeed * Time.deltaTime);
 
-        FixGliderTarget.localRotation = Quaternion.Euler(GliderPitch, 0.0f, -GliderRoll);
+        FixGliderTarget.localRotation = Quaternion.Euler(GliderPitch, 0.0f, GliderRoll);
     }
 
     private void TryRotateOnGround()
