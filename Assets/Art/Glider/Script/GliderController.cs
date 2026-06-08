@@ -52,7 +52,6 @@ public class GliderController : MonoBehaviour
     {
         [Header("骨架設定 (Hierarchy)")]
         public Transform wingPivot;
-        public Transform ropeAnchor;
         public Transform handleRoot;
         public Transform handleTip;
 
@@ -74,15 +73,25 @@ public class GliderController : MonoBehaviour
         private Vector3 activeTargetLocal; // 儲存 Local Space 座標，跟隨滑翔傘移動
         private float lastInputTime = -999f;
 
+        private CharacterJoint handleJoint;
+        private Rigidbody cachedConnectedBody;
+
         public void Init(Transform root)
         {
-            if (wingPivot && ropeAnchor && handleRoot && handleTip)
+            if (wingPivot && handleRoot && handleTip)
             {
-                R = Vector3.Distance(wingPivot.position, ropeAnchor.position);
-                L = Vector3.Distance(ropeAnchor.position, handleTip.position);
+                R = Vector3.Distance(wingPivot.position, handleRoot.position);
+                L = Vector3.Distance(handleRoot.position, handleTip.position);
                 isInit = true;
 
                 activeTargetLocal = root.InverseTransformPoint(handleTip.position);
+
+                handleJoint = handleRoot.GetComponent<CharacterJoint>();
+
+                if (handleJoint)
+                {
+                    cachedConnectedBody = handleJoint.connectedBody;
+                }
                 
                 SetPhysicsState(true); 
             }
@@ -90,6 +99,7 @@ public class GliderController : MonoBehaviour
 
         public void SetTarget(Vector3 targetWorldPos, Transform root)
         {
+            SetPhysicsState(false); 
             lastInputTime = Time.time;
 
             Vector3 targetLocal = root.InverseTransformPoint(targetWorldPos);
@@ -98,8 +108,6 @@ public class GliderController : MonoBehaviour
             {
                 activeTargetLocal = targetLocal;
             }
-            
-            SetPhysicsState(false); 
         }
 
         private void SetPhysicsState(bool enablePhysics)
@@ -110,16 +118,20 @@ public class GliderController : MonoBehaviour
             if (isPhysicsDriven)
             {
                 // 放手：關閉 Kinematic，讓重力接管
+                if (handleJoint)
+                {
+                    handleJoint.connectedBody = cachedConnectedBody;
+                }
                 handleTipRB.isKinematic = false; 
-                
-                // 消除 IK 殘留的假動能，確保它自然落下 (Unity 6 使用 linearVelocity)
-                // handleTipRB.linearVelocity = Vector3.zero;
-                // handleTipRB.angularVelocity = Vector3.zero;
                 handleTipRB.WakeUp(); 
             }
             else
             {
                 // 抓緊：開啟 Kinematic，變成完全受腳本支配的硬物
+                if (handleJoint)
+                {
+                    handleJoint.connectedBody = null; 
+                }
                 handleTipRB.isKinematic = true;     
             }
         }
@@ -132,10 +144,6 @@ public class GliderController : MonoBehaviour
 
             if (isPhysicsDriven)
             {
-                // 物理狀態下，只需對齊根部
-                handleRoot.position = ropeAnchor.position;
-                
-                // 同步 Local 座標，避免下次抓取時產生偏移
                 activeTargetLocal = root.InverseTransformPoint(handleTip.position);
 
                 float slerpSpeed = 6f; 
@@ -156,7 +164,7 @@ public class GliderController : MonoBehaviour
             if (toTarget.sqrMagnitude < 0.0001f) return;
 
             Vector3 worldHinge = wingPivot.TransformDirection(hingeAxis).normalized;
-            Vector3 currentAnchorPos = ropeAnchor.position;
+            Vector3 currentAnchorPos = handleRoot.position;
             Vector3 currentAnchorDir = (currentAnchorPos - pivotPos).normalized;
 
             float d = Mathf.Clamp(toTarget.magnitude, Mathf.Abs(R - L), R + L);
@@ -172,10 +180,7 @@ public class GliderController : MonoBehaviour
 
             wingPivot.rotation = Quaternion.AngleAxis(angleToRotate, worldHinge) * wingPivot.rotation;
 
-            Vector3 newAnchorPos = pivotPos + (Quaternion.AngleAxis(angleToRotate, worldHinge) * (currentAnchorPos - pivotPos));
-            Vector3 ropeDir = (activeTargetWorldPos - newAnchorPos).normalized;
-
-            handleRoot.position = newAnchorPos;
+            Vector3 ropeDir = (activeTargetWorldPos - handleRoot.position).normalized;
             handleRoot.up = -ropeDir;
             handleTip.position = handleRoot.position + ropeDir * L;
 
