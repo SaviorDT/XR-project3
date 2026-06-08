@@ -4,22 +4,34 @@ public class DragonSneeze : MonoBehaviour
 {
     public float minInterval = 5f;   // 最短間隔
     public float maxInterval = 8f;   // 最長間隔
+    public float delay = 0.8f;
+    private bool shoot = false;
     private Animator anim;
     private float timer;
     private float nextTime;
-
+    public ProjectileLauncher shooter;
     void Start()
     {
         anim = GetComponent<Animator>();
+        if(shooter == null)
+        {
+            shooter = GetComponent<ProjectileLauncher>();
+        }
         SetNextTime();
     }
 
     void Update()
     {
         timer += Time.deltaTime;
+        if(timer >= delay && shoot == true)
+        {
+            shoot = false;
+            shooter.Fire();
+        }
         if (timer >= nextTime)
         {
             Sneeze();
+            shoot = true;
             timer = 0f;
             SetNextTime();
         }
