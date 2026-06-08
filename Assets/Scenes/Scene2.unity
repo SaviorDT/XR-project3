@@ -2931,9 +2931,9 @@ Transform:
   m_GameObject: {fileID: 23946284}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 79.54063, y: -3000, z: -184.9999}
-  m_LocalScale: {x: 3, y: 2.5, z: 3}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 79.54063, y: -1000, z: -184.9999}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 942404020}
   - {fileID: 1526897476}
@@ -17610,7 +17610,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9e6f558bc28fd4c4095d061589b8890a, type: 2}
+      objectReference: {fileID: 2100000, guid: d2793231207710f4b8ff52ecae96349f, type: 2}
     - target: {fileID: 919132149155446097, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: m_Name
       value: Cloud-plane (4)
@@ -20753,7 +20753,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9e6f558bc28fd4c4095d061589b8890a, type: 2}
+      objectReference: {fileID: 2100000, guid: d2793231207710f4b8ff52ecae96349f, type: 2}
     - target: {fileID: 919132149155446097, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: m_Name
       value: Cloud-plane (6)
@@ -34132,7 +34132,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9e6f558bc28fd4c4095d061589b8890a, type: 2}
+      objectReference: {fileID: 2100000, guid: d2793231207710f4b8ff52ecae96349f, type: 2}
     - target: {fileID: 919132149155446097, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: m_Name
       value: Cloud-plane (2)
@@ -43290,9 +43290,9 @@ Transform:
   m_GameObject: {fileID: 340309576}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3000, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: -1000, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 566496626}
   - {fileID: 2042472716}
@@ -53636,7 +53636,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9e6f558bc28fd4c4095d061589b8890a, type: 2}
+      objectReference: {fileID: 2100000, guid: d2793231207710f4b8ff52ecae96349f, type: 2}
     - target: {fileID: 919132149155446097, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: m_Name
       value: Cloud-plane (8)
@@ -90922,10 +90922,10 @@ MonoBehaviour:
   fogColorStart: {r: 0.88919544, g: 0.95622885, b: 0.9716981, a: 1}
   fogColorEnd: {r: 0, g: 0, b: 0, a: 1}
   fogColorDuo: 0
-  fogDistanceStart: 1000
-  fogDistanceEnd: 3000
+  fogDistanceStart: 0
+  fogDistanceEnd: 1000
   fogDistanceFalloff: 1
-  fogHeightStart: -3000
+  fogHeightStart: -1000
   fogHeightEnd: 0
   fogHeightFalloff: 1
   categorySkybox: 1
@@ -90948,7 +90948,7 @@ MonoBehaviour:
   manualPositionAndScale: 0
   renderPriority: 1
   styledSpace0: 0
-  overrideMaterial: {fileID: 1255718281}
+  overrideMaterial: {fileID: 1332074088}
   overrideCamToVolumeDistance: 1
   overrideVolumeDistanceFade: 0
   version: 0
@@ -90985,7 +90985,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1470276217}
+  - {fileID: 1691763483}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -92182,7 +92182,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -83
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: m_LocalPosition.z
@@ -102978,7 +102978,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9e6f558bc28fd4c4095d061589b8890a, type: 2}
+      objectReference: {fileID: 2100000, guid: d2793231207710f4b8ff52ecae96349f, type: 2}
     - target: {fileID: 919132149155446097, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: m_Name
       value: Cloud-plane (2)
@@ -118390,7 +118390,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9e6f558bc28fd4c4095d061589b8890a, type: 2}
+      objectReference: {fileID: 2100000, guid: d2793231207710f4b8ff52ecae96349f, type: 2}
     - target: {fileID: 919132149155446097, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: m_Name
       value: Cloud-plane (2)
@@ -124276,7 +124276,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9e6f558bc28fd4c4095d061589b8890a, type: 2}
+      objectReference: {fileID: 2100000, guid: d2793231207710f4b8ff52ecae96349f, type: 2}
     - target: {fileID: 919132149155446097, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: m_Name
       value: CenterCloud_top
@@ -124555,7 +124555,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9e6f558bc28fd4c4095d061589b8890a, type: 2}
+      objectReference: {fileID: 2100000, guid: d2793231207710f4b8ff52ecae96349f, type: 2}
     - target: {fileID: 919132149155446097, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: m_Name
       value: Cloud-plane (1)
@@ -130386,7 +130386,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9e6f558bc28fd4c4095d061589b8890a, type: 2}
+      objectReference: {fileID: 2100000, guid: d2793231207710f4b8ff52ecae96349f, type: 2}
     - target: {fileID: 919132149155446097, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: m_Name
       value: CenterCloud
@@ -131704,7 +131704,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9e6f558bc28fd4c4095d061589b8890a, type: 2}
+      objectReference: {fileID: 2100000, guid: d2793231207710f4b8ff52ecae96349f, type: 2}
     - target: {fileID: 919132149155446097, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: m_Name
       value: Cloud-plane (4)
@@ -132181,6 +132181,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: obelisk
       objectReference: {fileID: 0}
+    - target: {fileID: 6859041993082590984, guid: 4ee59027388a5704fb16d72052127fc6, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d2793231207710f4b8ff52ecae96349f, type: 2}
     - target: {fileID: 7762955257237110932, guid: 4ee59027388a5704fb16d72052127fc6, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.39528805
@@ -138823,7 +138827,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9e6f558bc28fd4c4095d061589b8890a, type: 2}
+      objectReference: {fileID: 2100000, guid: d2793231207710f4b8ff52ecae96349f, type: 2}
     - target: {fileID: 919132149155446097, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: m_Name
       value: Cloud-plane (5)
@@ -139353,7 +139357,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9e6f558bc28fd4c4095d061589b8890a, type: 2}
+      objectReference: {fileID: 2100000, guid: d2793231207710f4b8ff52ecae96349f, type: 2}
     - target: {fileID: 919132149155446097, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: m_Name
       value: Cloud-plane (4)
@@ -164963,6 +164967,69 @@ Transform:
   - {fileID: 719516942}
   m_Father: {fileID: 2002186827}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!21 &1332074088
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Override
+  m_Shader: {fileID: 4800000, guid: a3a3bc8785681554d9558e2ea68f100e, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Ints: []
+    m_Floats:
+    - _Banner: 1
+    - _DirectionalCat: 1
+    - _DirectionalFalloff: 2
+    - _DirectionalIntensity: 1
+    - _FogAxisMode: 1
+    - _FogCat: 1
+    - _FogColorDuo: 1
+    - _FogDistanceEnd: 200
+    - _FogDistanceFalloff: 2
+    - _FogDistanceStart: -200
+    - _FogHeightEnd: 200
+    - _FogHeightFalloff: 2
+    - _FogHeightStart: 0
+    - _FogIntensity: 1
+    - _FogLayersMode: 0
+    - _IsHeightFogPreset: 1
+    - _IsHeightFogShader: 1
+    - _NoiseCat: 1
+    - _NoiseDistanceEnd: 50
+    - _NoiseIntensity: 1
+    - _NoiseModeBlend: 1
+    - _NoiseScale: 30
+    - _SkyboxCat: 1
+    - _SkyboxFogBottom: 0
+    - _SkyboxFogFalloff: 1
+    - _SkyboxFogFill: 1
+    - _SkyboxFogHeight: 1
+    - _SkyboxFogIntensity: 1
+    - _SkyboxFogOffset: 0
+    m_Colors:
+    - _DirectionalColor: {r: 1, g: 0.7793103, b: 0.5, a: 1}
+    - _DirectionalDir: {r: 0, g: 0, b: 0, a: 0}
+    - _FogAxisOption: {r: 0, g: 0, b: 0, a: 0}
+    - _FogColorEnd: {r: 0.8862745, g: 1.443137, b: 2, a: 1}
+    - _FogColorStart: {r: 0.4411765, g: 0.722515, b: 1, a: 1}
+    - _NoiseSpeed: {r: 0.5, g: 0, b: 0.5, a: 0}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!1 &1332687359
 GameObject:
   m_ObjectHideFlags: 0
@@ -173730,7 +173797,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9e6f558bc28fd4c4095d061589b8890a, type: 2}
+      objectReference: {fileID: 2100000, guid: d2793231207710f4b8ff52ecae96349f, type: 2}
     - target: {fileID: 919132149155446097, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: m_Name
       value: Cloud-plane (11)
@@ -194232,7 +194299,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9e6f558bc28fd4c4095d061589b8890a, type: 2}
+      objectReference: {fileID: 2100000, guid: d2793231207710f4b8ff52ecae96349f, type: 2}
     - target: {fileID: 919132149155446097, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: m_Name
       value: Cloud-plane (2)
@@ -208269,8 +208336,8 @@ Transform:
   m_GameObject: {fileID: 1683007645}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3000, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalPosition: {x: 0, y: -1000, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 447746626}
@@ -210343,6 +210410,45 @@ Transform:
   - {fileID: 82293645}
   m_Father: {fileID: 1150106288}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!21 &1691763483
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Height Fog Global
+  m_Shader: {fileID: 4800000, guid: 3a7ef1b66bafb7a448a880ef76d2e6e6, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 3001
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Ints: []
+    m_Floats:
+    - _AdvancedCat: 1
+    - _AlphaCutoff: 0.5
+    - _Banner: 1
+    - _DirectionalCat: 1
+    - _FogAxisMode: 1
+    - _FogCat: 1
+    - _HeightFogGlobal: 1
+    - _IsHeightFogShader: 1
+    - _NoiseCat: 1
+    - _SkyboxCat: 1
+    m_Colors:
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!1 &1692194802
 GameObject:
   m_ObjectHideFlags: 0
@@ -223800,7 +223906,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9e6f558bc28fd4c4095d061589b8890a, type: 2}
+      objectReference: {fileID: 2100000, guid: d2793231207710f4b8ff52ecae96349f, type: 2}
     - target: {fileID: 919132149155446097, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: m_Name
       value: Cloud-plane (9)
@@ -229160,7 +229266,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9e6f558bc28fd4c4095d061589b8890a, type: 2}
+      objectReference: {fileID: 2100000, guid: d2793231207710f4b8ff52ecae96349f, type: 2}
     - target: {fileID: 919132149155446097, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: m_Name
       value: Cloud-plane (2)
@@ -240869,7 +240975,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9e6f558bc28fd4c4095d061589b8890a, type: 2}
+      objectReference: {fileID: 2100000, guid: d2793231207710f4b8ff52ecae96349f, type: 2}
     - target: {fileID: 919132149155446097, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: m_Name
       value: Cloud-plane (3)
@@ -241361,7 +241467,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9e6f558bc28fd4c4095d061589b8890a, type: 2}
+      objectReference: {fileID: 2100000, guid: d2793231207710f4b8ff52ecae96349f, type: 2}
     - target: {fileID: 919132149155446097, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: m_Name
       value: Cloud-plane (7)
@@ -250794,7 +250900,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9e6f558bc28fd4c4095d061589b8890a, type: 2}
+      objectReference: {fileID: 2100000, guid: d2793231207710f4b8ff52ecae96349f, type: 2}
     - target: {fileID: 919132149155446097, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: m_Name
       value: Cloud-plane (10)
@@ -260341,7 +260447,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9e6f558bc28fd4c4095d061589b8890a, type: 2}
+      objectReference: {fileID: 2100000, guid: d2793231207710f4b8ff52ecae96349f, type: 2}
     - target: {fileID: 919132149155446097, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: m_Name
       value: Cloud-plane
@@ -265425,7 +265531,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9e6f558bc28fd4c4095d061589b8890a, type: 2}
+      objectReference: {fileID: 2100000, guid: d2793231207710f4b8ff52ecae96349f, type: 2}
     - target: {fileID: 919132149155446097, guid: 11d2eb331255f66479c0e9641beb3afe, type: 3}
       propertyPath: m_Name
       value: Cloud-plane (4)
