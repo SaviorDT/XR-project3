@@ -91,15 +91,16 @@ public class GliderController : MonoBehaviour
                 if (handleJoint)
                 {
                     cachedConnectedBody = handleJoint.connectedBody;
+                    handleJoint.autoConfigureConnectedAnchor = false;
                 }
                 
-                SetPhysicsState(true); 
+                SetPhysicsState(true, root); 
             }
         }
 
         public void SetTarget(Vector3 targetWorldPos, Transform root)
         {
-            SetPhysicsState(false); 
+            SetPhysicsState(false, root); 
             lastInputTime = Time.time;
 
             Vector3 targetLocal = root.InverseTransformPoint(targetWorldPos);
@@ -110,7 +111,7 @@ public class GliderController : MonoBehaviour
             }
         }
 
-        private void SetPhysicsState(bool enablePhysics)
+        private void SetPhysicsState(bool enablePhysics, Transform root)
         {
             if (handleTipRB == null || isPhysicsDriven == enablePhysics) return;
             isPhysicsDriven = enablePhysics;
@@ -121,6 +122,7 @@ public class GliderController : MonoBehaviour
                 if (handleJoint)
                 {
                     handleJoint.connectedBody = cachedConnectedBody;
+                    handleJoint.connectedAnchor = root.InverseTransformPoint(handleRoot.position);
                 }
                 handleTipRB.isKinematic = false; 
                 handleTipRB.WakeUp(); 
@@ -186,7 +188,7 @@ public class GliderController : MonoBehaviour
 
             if (isUserLetGo)
             {
-                SetPhysicsState(true); 
+                SetPhysicsState(true, root); 
             }
         }
     }
