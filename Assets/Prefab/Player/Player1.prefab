@@ -122595,6 +122595,7 @@ GameObject:
   - component: {fileID: 4655799640495558798}
   - component: {fileID: 6623185125686857951}
   - component: {fileID: 9171157208684995813}
+  - component: {fileID: 2453027379578072}
   m_Layer: 3
   m_Name: Player1
   m_TagString: Player
@@ -122634,7 +122635,7 @@ MonoBehaviour:
   PlayerHeight: 1.4
   OnGroundRotateAngle: 30
   OnGroundRotateCoolDown: 0.5
-  FlappingWingForce: {x: 0, y: 0.5, z: 0.5}
+  FlappingWingForce: {x: 0, y: 0.3, z: 0.3}
   TakeOffVelocity: {x: 0, y: 10, z: 3}
   FlappingWingThreshold: 0.5
   FlyCoolDown: 20
@@ -122746,6 +122747,45 @@ CapsuleCollider:
   m_Height: 1.6
   m_Direction: 1
   m_Center: {x: 0, y: 0.8, z: 0.4}
+--- !u!114 &2453027379578072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6258645319645867383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af57435e588e69746a17d502d0d33291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerFallRespawn
+  fallLimitY: -20
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  groundCheckDistance: 1.2
+  groundCheckRadius: 2
+  safeAreaMode: 0
+  minX: -600
+  maxX: 600
+  minY: -100
+  maxY: 600
+  minZ: -600
+  maxZ: 600
+  circleCenterXZ: {x: 0, y: 0}
+  circleRadius: 450
+  circleMinY: -2
+  circleMaxY: 5
+  sphereCenter: {x: 0, y: 0, z: 0}
+  sphereRadius: 10
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  wallCheckRadius: 0.35
+  wallCheckDistance: 0.6
+  wallCheckHeight: 0.8
+  respawnYOffset: 0
+  resetVelocity: 1
 --- !u!1 &6309220446486740688
 GameObject:
   m_ObjectHideFlags: 0
