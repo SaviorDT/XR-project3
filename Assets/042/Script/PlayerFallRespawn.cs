@@ -4,18 +4,18 @@ public class PlayerFallRespawn : MonoBehaviour
 {
     public enum SafeAreaMode
     {
-        XYZBox,      // x/y/z 上下限
-        CircleAndY, // xz 圓形 + y 上下限
-        Sphere      // 球體範圍
+        XYZBox,
+        CircleAndY,
+        Sphere
     }
-
-    [Header("掉落判定")]
-    public float fallLimitY = -20f;
 
     [Header("地面判定")]
     public LayerMask groundLayer;
     public float groundCheckDistance = 1.2f;
     public float groundCheckRadius = 0.3f;
+
+    [Header("立足點坡度限制")]
+    public float maxGroundSlopeAngle = 5f;
 
     [Header("安全範圍模式")]
     public SafeAreaMode safeAreaMode = SafeAreaMode.XYZBox;
@@ -63,7 +63,7 @@ public class PlayerFallRespawn : MonoBehaviour
     {
         UpdateLastGroundPosition();
 
-        if (transform.position.y < fallLimitY)
+        if (!IsInsideSafeArea(transform.position))
         {
             RespawnToLastGround();
         }
@@ -72,6 +72,11 @@ public class PlayerFallRespawn : MonoBehaviour
     private void UpdateLastGroundPosition()
     {
         if (!IsOnGround(out RaycastHit hit))
+            return;
+
+        float slopeAngle = Vector3.Angle(hit.normal, Vector3.up);
+
+        if (slopeAngle >= maxGroundSlopeAngle)
             return;
 
         Vector3 candidate = transform.position;
@@ -110,13 +115,9 @@ public class PlayerFallRespawn : MonoBehaviour
                        pos.z >= minZ && pos.z <= maxZ;
 
             case SafeAreaMode.CircleAndY:
-                {
-                    Vector2 p = new Vector2(pos.x, pos.z);
-                    bool insideCircle = Vector2.Distance(p, circleCenterXZ) <= circleRadius;
-                    bool insideY = pos.y >= circleMinY && pos.y <= circleMaxY;
-
-                    return insideCircle && insideY;
-                }
+                Vector2 p = new Vector2(pos.x, pos.z);
+                return Vector2.Distance(p, circleCenterXZ) <= circleRadius &&
+                       pos.y >= circleMinY && pos.y <= circleMaxY;
 
             case SafeAreaMode.Sphere:
                 return Vector3.Distance(pos, sphereCenter) <= sphereRadius;
@@ -143,17 +144,8 @@ public class PlayerFallRespawn : MonoBehaviour
 
         foreach (Vector3 dir in dirs)
         {
-            if (Physics.SphereCast(
-                origin,
-                wallCheckRadius,
-                dir,
-                out _,
-                wallCheckDistance,
-                wallLayer
-            ))
-            {
+            if (Physics.SphereCast(origin, wallCheckRadius, dir, out _, wallCheckDistance, wallLayer))
                 return true;
-            }
         }
 
         return false;
@@ -184,7 +176,6 @@ public class PlayerFallRespawn : MonoBehaviour
             rb.angularVelocity = Vector3.zero;
         }
     }
-
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
