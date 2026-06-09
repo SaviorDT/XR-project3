@@ -135,13 +135,27 @@ public class RandomWind : EditorWindow
         // --- Top ---
         int[] topDegrees = new int[] { 90, 75, 60, 45 };
         int[] topCounts = new int[] { pillarTopDeg90Count, pillarTopDeg75Count, pillarTopDeg60Count, pillarTopDeg45Count };
+        // total desired top count, clamped to available pillars
+        int totalTop = 0;
+        for (int i = 0; i < topCounts.Length; i++) totalTop += Mathf.Max(0, topCounts[i]);
+        totalTop = Mathf.Clamp(totalTop, 0, pillars.Count);
+        // shuffle indices and pick unique pillars for top
+        List<int> topIdx = new List<int>(pillars.Count);
+        for (int i = 0; i < pillars.Count; i++) topIdx.Add(i);
+        for (int i = 0; i < topIdx.Count; i++)
+        {
+            int j = Random.Range(i, topIdx.Count);
+            int t = topIdx[i]; topIdx[i] = topIdx[j]; topIdx[j] = t;
+        }
+        int topPtr = 0;
+        int generatedTop = 0;
         for (int d = 0; d < topDegrees.Length; d++)
         {
             int deg = topDegrees[d];
-            int count = Mathf.Max(0, topCounts[d]);
-            for (int i = 0; i < count; i++)
+            int want = Mathf.Max(0, topCounts[d]);
+            for (int k = 0; k < want && topPtr < totalTop; k++, topPtr++)
             {
-                var pi = pillars[Random.Range(0, pillars.Count)];
+                var pi = pillars[topIdx[topPtr]];
                 var inst = InstantiateWindPrefab();
                 if (inst == null) continue;
                 inst.transform.position = new Vector3(pi.center.x, pi.highestY, pi.center.z);
@@ -150,19 +164,34 @@ public class RandomWind : EditorWindow
                 float a = Random.Range(4f, 7f);
                 float b = Random.Range(6f, 10f);
                 inst.transform.localScale = new Vector3(a, a, b);
+                generatedTop++;
             }
         }
 
         // --- Side ---
         int[] sideDegrees = new int[] { 90, 60, 45, 30, 15, 0 };
         int[] sideCounts = new int[] { pillarSideDeg90Count, pillarSideDeg60Count, pillarSideDeg45Count, pillarSideDeg30Count, pillarSideDeg15Count, pillarSideDeg0Count };
+        // total desired side count, clamped to available pillars
+        int totalSide = 0;
+        for (int i = 0; i < sideCounts.Length; i++) totalSide += Mathf.Max(0, sideCounts[i]);
+        totalSide = Mathf.Clamp(totalSide, 0, pillars.Count);
+        // shuffle indices and pick unique pillars for side
+        List<int> sideIdx = new List<int>(pillars.Count);
+        for (int i = 0; i < pillars.Count; i++) sideIdx.Add(i);
+        for (int i = 0; i < sideIdx.Count; i++)
+        {
+            int j = Random.Range(i, sideIdx.Count);
+            int t = sideIdx[i]; sideIdx[i] = sideIdx[j]; sideIdx[j] = t;
+        }
+        int sidePtr = 0;
+        int generatedSide = 0;
         for (int d = 0; d < sideDegrees.Length; d++)
         {
             int deg = sideDegrees[d];
-            int count = Mathf.Max(0, sideCounts[d]);
-            for (int i = 0; i < count; i++)
+            int want = Mathf.Max(0, sideCounts[d]);
+            for (int k = 0; k < want && sidePtr < totalSide; k++, sidePtr++)
             {
-                var pi = pillars[Random.Range(0, pillars.Count)];
+                var pi = pillars[sideIdx[sidePtr]];
                 float height = Random.Range(-50f, pi.height);
                 float rotationY = Random.Range(0f, 360f);
                 // place on circumference
@@ -177,11 +206,12 @@ public class RandomWind : EditorWindow
                 float a = Random.Range(4f, 7f);
                 float b = Random.Range(6f, 10f);
                 inst.transform.localScale = new Vector3(a, a, b);
+                generatedSide++;
             }
         }
 
         EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
-        Debug.Log($"GenerateWinds: 已生成 Cover={coverCount}, Top total={topCounts.Sum()}, Side total={sideCounts.Sum()}");
+        Debug.Log($"GenerateWinds: 已生成 Cover={coverCount}, Top total={generatedTop}, Side total={generatedSide}");
     }
 
     // Helper data for each pillar approximation

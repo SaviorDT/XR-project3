@@ -285,6 +285,7 @@ public class PlayerFlyController : MonoBehaviour
     public void SetWindVelocity(Vector3 velocity)
     {
         WindVelocity += velocity;
+        Debug.Log($"SetWindVelocity: {velocity}, current WindVelocity: {WindVelocity}");
     }
 
     private bool IsGrounded() {
@@ -312,11 +313,10 @@ public class PlayerFlyController : MonoBehaviour
             return;
         }
 
-        
-            foreach (var effect in FlappableWingEffect)
-            {
-                effect.SetActive(true);
-            }
+        foreach (var effect in FlappableWingEffect)
+        {
+            effect.SetActive(true);
+        }
 
         if (!LeftHandDevice.TryGetFeatureValue(CommonUsages.deviceVelocity, out var leftVelocity) ||
             !RightHandDevice.TryGetFeatureValue(CommonUsages.deviceVelocity, out var rightVelocity) ||
@@ -387,27 +387,8 @@ public class PlayerFlyController : MonoBehaviour
 
             FixPoseTarget.SetLocalPositionAndRotation(new Vector3(0, PlayerHeight, 0) - Quaternion.Euler(0.0f, -ForwardRotation, 0.0f) * new Vector3(CenterPosition.x, CenterPosition.y, CenterPosition.z), 
                                                             Quaternion.Euler(0.0f, -ForwardRotation, 0.0f));
-            // FixPoseTarget.SetLocalPositionAndRotation(new (-CenterPosition.x, 0, -CenterPosition.z), 
-            //                                                 Quaternion.Euler(0.0f, -ForwardRotation, 0.0f));
-            // FixPositionYTarget.localPosition = new Vector3(FixPositionYTarget.localPosition.x, PlayerHeight - CenterPosition.y, FixPositionYTarget.localPosition.z);
         }
     }
-
-    // private void ResetPlayerPose()
-    // {
-    //     if (HeadDevice.isValid &&
-    //         HeadDevice.TryGetFeatureValue(CommonUsages.devicePosition, out var newPosition) &&
-    //         HeadDevice.TryGetFeatureValue(CommonUsages.deviceRotation, out var newRotation))
-    //     {
-    //         CenterPosition = newPosition;
-    //         ForwardRotation = newRotation.eulerAngles.y;
-
-    //         PlayerRigidbody.MoveRotation(Quaternion.Euler(0.0f, CameraTransform.eulerAngles.y, 0.0f));
-    //         PlayerRigidbody.MovePosition(new Vector3(CameraTransform.position.x, PlayerRigidbody.position.y, CameraTransform.position.z));
-    //         FixPoseTarget.SetLocalPositionAndRotation(-new Vector3(CameraTransform.localPosition.x, 0, CameraTransform.localPosition.z), 
-    //                                                         Quaternion.Euler(0.0f, -CameraTransform.localEulerAngles.y, 0.0f));
-    //     }
-    // }
 
 
     void TryAttachBar()
@@ -604,21 +585,6 @@ public class PlayerFlyController : MonoBehaviour
             devicePos -= CenterPosition;
             PlayerControllerYaw = devicePos.x * 90.0f;
             PlayerControllerPitch = devicePos.z * 90.0f;
-        }
-
-        if (Time.time > NextFlyTime)
-        {
-            foreach (var effect in FlappableWingEffect)
-            {
-                effect.SetActive(true);
-            }
-        }
-        else
-        {
-            foreach (var effect in FlappableWingEffect)
-            {
-                effect.SetActive(false);
-            }
         }
 
         if (!RightHandDevice.isValid)
