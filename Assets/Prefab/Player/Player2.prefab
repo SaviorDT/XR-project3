@@ -21542,6 +21542,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3181012919684654732}
+  - component: {fileID: 8013545111504378714}
   - component: {fileID: 522616327704546227}
   - component: {fileID: 8310813741215016688}
   - component: {fileID: 2695994034707981511}
@@ -21569,6 +21570,45 @@ Transform:
   - {fileID: 5707753647091993833}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -249.57901, z: 0}
+--- !u!114 &8013545111504378714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1653894239229446196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af57435e588e69746a17d502d0d33291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerFallRespawn
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  groundCheckDistance: 1.2
+  groundCheckRadius: 0.3
+  maxGroundSlopeAngle: 5
+  safeAreaMode: 1
+  minX: -10
+  maxX: 10
+  minY: -2
+  maxY: 5
+  minZ: -10
+  maxZ: 10
+  circleCenterXZ: {x: 0, y: 0}
+  circleRadius: 600
+  circleMinY: -100
+  circleMaxY: 600
+  sphereCenter: {x: 0, y: 0, z: 0}
+  sphereRadius: 10
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  wallCheckRadius: 0.35
+  wallCheckDistance: 0.6
+  wallCheckHeight: 0.8
+  respawnYOffset: 0
+  resetVelocity: 1
 --- !u!114 &522616327704546227
 MonoBehaviour:
   m_ObjectHideFlags: 0

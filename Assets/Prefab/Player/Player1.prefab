@@ -123246,12 +123246,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af57435e588e69746a17d502d0d33291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerFallRespawn
-  fallLimitY: -20
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
   groundCheckDistance: 1.2
   groundCheckRadius: 2
+  maxGroundSlopeAngle: 5
   safeAreaMode: 0
   minX: -600
   maxX: 600
