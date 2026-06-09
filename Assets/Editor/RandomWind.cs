@@ -192,7 +192,7 @@ public class RandomWind : EditorWindow
             for (int k = 0; k < want && sidePtr < totalSide; k++, sidePtr++)
             {
                 var pi = pillars[sideIdx[sidePtr]];
-                float height = Random.Range(-50f, pi.height);
+                float height = Random.Range(pi.height - minY, pi.height);
                 float rotationY = Random.Range(0f, 360f);
                 // place on circumference
                 Vector3 dir = Quaternion.Euler(0f, rotationY, 0f) * Vector3.forward;

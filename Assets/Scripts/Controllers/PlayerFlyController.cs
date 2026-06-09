@@ -297,7 +297,8 @@ public class PlayerFlyController : MonoBehaviour
         Bounds bounds = PlayerCollider.bounds;
         Vector3 origin = bounds.center + Vector3.up * 0.01f;
         float groundCheckDistance = bounds.extents.y + 0.05f;
-        return Physics.Raycast(origin, Vector3.down, groundCheckDistance, ~0, QueryTriggerInteraction.Ignore);
+        int layerMask = ~(1 << PlayerCollider.gameObject.layer);
+        return Physics.Raycast(origin, Vector3.down, groundCheckDistance, layerMask, QueryTriggerInteraction.Ignore);
     }
 
     private void TryDetectFlapping() {
