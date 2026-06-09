@@ -344891,14 +344891,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2453027379578072, guid: 23808df3ae0c1554db5d52dd8dc44256, type: 3}
-      propertyPath: respawnYOffset
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2453027379578072, guid: 23808df3ae0c1554db5d52dd8dc44256, type: 3}
-      propertyPath: groundCheckRadius
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 2211979601284084047, guid: 23808df3ae0c1554db5d52dd8dc44256, type: 3}
       propertyPath: m_LocalPosition.x
       value: -416.4
