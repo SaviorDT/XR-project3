@@ -99646,18 +99646,52 @@ MonoBehaviour:
   characterForwardRoot: {fileID: 2074662323}
   tutorialTextEN: {fileID: 1745110501}
   tutorialTextCN: {fileID: 1315915881}
-  chinese: 1
   steps:
   - instructionTextEN: "FLIGHT: \u7FFC\u60F3\u5929\u958B"
-    instructionTextCN: "\n\u6309\u4E0B Trigger \u4F86\u958B\u59CB\u3002"
+    instructionTextCN: "\n\u6309\u4E0B Trigger \u5DF2\u958B\u59CB\u3002"
     taskType: 3
     targetPosition: {fileID: 0}
     reachDistance: 10
     faceTarget: {fileID: 0}
     faceAngleThreshold: 90
     waitTime: 2
-    terrainsToRise:
-    - {fileID: 1269758864}
+    terrainsToRise: []
+    terrainsToHide: []
+    enableFlyOnThisStep: 0
+    disableFlyOnThisStep: 1
+  - instructionTextEN: 
+    instructionTextCN: 
+    taskType: 4
+    targetPosition: {fileID: 0}
+    reachDistance: 10
+    faceTarget: {fileID: 0}
+    faceAngleThreshold: 90
+    waitTime: 1
+    terrainsToRise: []
+    terrainsToHide: []
+    enableFlyOnThisStep: 0
+    disableFlyOnThisStep: 0
+  - instructionTextEN: "\u3010\u5947\u5999\u7684\u7926\u77F3\u3011"
+    instructionTextCN: "\u4F3C\u4E4E\u662F\u5F9E\u4E0A\u9762\u6389\u4E0B\u4F86\u7684\u7926\u77F3\uFF0C\u900F\u8457\u7368\u7279\u7684\u8272\u5F69\u3002"
+    taskType: 3
+    targetPosition: {fileID: 1056030377}
+    reachDistance: 15
+    faceTarget: {fileID: 0}
+    faceAngleThreshold: 90
+    waitTime: 2
+    terrainsToRise: []
+    terrainsToHide: []
+    enableFlyOnThisStep: 0
+    disableFlyOnThisStep: 0
+  - instructionTextEN: "\u3010\u5947\u5999\u7684\u7926\u77F3\u3011"
+    instructionTextCN: "\u53EF\u80FD\u5F97\u4E0A\u53BB\u770B\u770B\u4E86\u3002"
+    taskType: 3
+    targetPosition: {fileID: 1056030377}
+    reachDistance: 15
+    faceTarget: {fileID: 0}
+    faceAngleThreshold: 90
+    waitTime: 2
+    terrainsToRise: []
     terrainsToHide: []
     enableFlyOnThisStep: 0
     disableFlyOnThisStep: 0
@@ -99674,82 +99708,33 @@ MonoBehaviour:
     terrainsToHide: []
     enableFlyOnThisStep: 0
     disableFlyOnThisStep: 0
-  - instructionTextEN: "\u3010\u5947\u5999\u7684\u7926\u77F3\u3011"
-    instructionTextCN: "\u4F3C\u4E4E\u662F\u5F9E\u4E0A\u9762\u6389\u4E0B\u4F86\u7684\u7926\u77F3\uFF0C\u900F\u8457\u7368\u7279\u7684\u8272\u5F69\u3002\n\n\u6309\u4E0BTrigger\u9375\u7E7C\u7E8C"
-    taskType: 3
-    targetPosition: {fileID: 1056030377}
-    reachDistance: 15
-    faceTarget: {fileID: 0}
-    faceAngleThreshold: 90
-    waitTime: 2
-    terrainsToRise: []
-    terrainsToHide: []
-    enableFlyOnThisStep: 0
-    disableFlyOnThisStep: 0
-  - instructionTextEN: "\u3010\u5947\u5999\u7684\u7926\u77F3\u3011"
-    instructionTextCN: "\u53EF\u80FD\u5F97\u4E0A\u53BB\u770B\u770B\u4E86\u3002\n\n\u6309\u4E0BTrigger\u9375\u7E7C\u7E8C"
-    taskType: 3
-    targetPosition: {fileID: 1056030377}
-    reachDistance: 15
-    faceTarget: {fileID: 0}
-    faceAngleThreshold: 90
-    waitTime: 2
-    terrainsToRise: []
-    terrainsToHide: []
-    enableFlyOnThisStep: 0
-    disableFlyOnThisStep: 0
-  - instructionTextEN: 
-    instructionTextCN: 
-    taskType: 4
-    targetPosition: {fileID: 0}
-    reachDistance: 10
-    faceTarget: {fileID: 0}
-    faceAngleThreshold: 90
-    waitTime: 1
-    terrainsToRise:
-    - {fileID: 1269758864}
-    terrainsToHide: []
-    enableFlyOnThisStep: 0
-    disableFlyOnThisStep: 0
   - instructionTextEN: "\u3010\u6559\u5B78 - \u632F\u7FC5\u3011"
-    instructionTextCN: "\u6ED1\u7FD4\u7FFC\u662F\u88DC\u5929\u5320\u53E4\u8001\u7684\u79FB\u52D5\u5DE5\u5177\uFF0C\u900F\u904E\u632F\u7FC5\u53EF\u4EE5\u66F4\u63A5\u8FD1\u5929\u7A7A\u3002\n\n\u6309\u4E0BTrigger\u9375\u7E7C\u7E8C"
+    instructionTextCN: "\u6ED1\u7FD4\u7FFC\u662F\u88DC\u5929\u5320\u53E4\u8001\u7684\u79FB\u52D5\u5DE5\u5177\uFF0C\u900F\u904E\u632F\u7FC5\u53EF\u4EE5\u66F4\u63A5\u8FD1\u5929\u7A7A\u3002"
     taskType: 3
     targetPosition: {fileID: 1056030377}
     reachDistance: 15
     faceTarget: {fileID: 0}
     faceAngleThreshold: 90
-    waitTime: 2
-    terrainsToRise: []
-    terrainsToHide: []
-    enableFlyOnThisStep: 0
-    disableFlyOnThisStep: 0
-  - instructionTextEN: "\u3010\u6559\u5B78 - \u632F\u7FC5\u3011"
-    instructionTextCN: "\u4F7F\u7528\u6642\u6703\u6D88\u8017\u80FD\u91CF\uFF0C\u4E26\u5728\u98DB\u884C\u6642\u6162\u6162\u88DC\u5145\u3002\u7576\u88DC\u5145\u5B8C\u7562\u6642\uFF0C\u62C9\u74B0\u6703\u518D\u5EA6\u4EAE\u8D77\u3002\n\n\u6309\u4E0BTrigger\u9375\u7E7C\u7E8C"
-    taskType: 3
-    targetPosition: {fileID: 1056030377}
-    reachDistance: 15
-    faceTarget: {fileID: 0}
-    faceAngleThreshold: 90
-    waitTime: 2
-    terrainsToRise: []
-    terrainsToHide: []
-    enableFlyOnThisStep: 0
-    disableFlyOnThisStep: 0
-  - instructionTextEN: "\u3010\u6559\u5B78 - \u632F\u7FC5\u3011"
-    instructionTextCN: "\u8ACB\u8A66\u8457\u7528\u529B\u62C9\u52D5\u62C9\u74B0\u4F86\u62CD\u52D5\u7FC5\u8180\uFF0C\u540C\u6642\u62C9\u4E0B\u5169\u908A\u7684\u7FC5\u8180\u4F86\u632F\u7FC5\u8D77\u98DB\u5427\u3002\n\n\u6309\u4E0Btrigger\u9375\u7E7C\u7E8C"
-    taskType: 3
-    targetPosition: {fileID: 0}
-    reachDistance: 5
-    faceTarget: {fileID: 0}
-    faceAngleThreshold: 0
     waitTime: 2
     terrainsToRise:
     - {fileID: 79916587}
     terrainsToHide: []
     enableFlyOnThisStep: 0
+    disableFlyOnThisStep: 1
+  - instructionTextEN: "\u3010\u6559\u5B78 - \u632F\u7FC5\u3011"
+    instructionTextCN: "\u4F7F\u7528\u6642\u6703\u6D88\u8017\u80FD\u91CF\uFF0C\u4E26\u5728\u98DB\u884C\u6642\u6162\u6162\u88DC\u5145\u3002\u7576\u88DC\u5145\u5B8C\u7562\u6642\uFF0C\u62C9\u74B0\u6703\u518D\u5EA6\u4EAE\u8D77\u3002"
+    taskType: 3
+    targetPosition: {fileID: 1056030377}
+    reachDistance: 15
+    faceTarget: {fileID: 0}
+    faceAngleThreshold: 90
+    waitTime: 2
+    terrainsToRise: []
+    terrainsToHide: []
+    enableFlyOnThisStep: 0
     disableFlyOnThisStep: 0
   - instructionTextEN: "\u3010\u6559\u5B78 - \u632F\u7FC5\u3011"
-    instructionTextCN: "\u62B5\u9054\u524D\u65B9\u77F3\u67F1\uFF0C\u62C9\u74B0\u767C\u5149\u6642\u53EF\u518D\u6B21\u62C9\u52D5\u4EE5\u7372\u5F97\u9AD8\u5EA6\uFF0C\u6216\u6309\u4E0B\u4E2D\u6307\u9375\u63E1\u4F4F\u524D\u65B9\u63E1\u628A\u4E26\u540C\u6642\u4E0B\u58D3\u4EE5\u4FEF\u885D"
+    instructionTextCN: "\u8ACB\u8A66\u8457\u7528\u529B\u62C9\u52D5\u62C9\u74B0\u4F86\u62CD\u52D5\u7FC5\u8180\uFF0C\u540C\u6642\u62C9\u4E0B\u5169\u908A\u7684\u7FC5\u8180\u4F86\u632F\u7FC5\u8D77\u98DB\u5427\u3002"
     taskType: 0
     targetPosition: {fileID: 418149549}
     reachDistance: 20
@@ -99758,7 +99743,7 @@ MonoBehaviour:
     waitTime: 2
     terrainsToRise: []
     terrainsToHide: []
-    enableFlyOnThisStep: 0
+    enableFlyOnThisStep: 1
     disableFlyOnThisStep: 0
   - instructionTextEN: 
     instructionTextCN: 
@@ -99782,10 +99767,12 @@ MonoBehaviour:
     faceTarget: {fileID: 0}
     faceAngleThreshold: 0
     waitTime: 0
-    terrainsToRise: []
+    terrainsToRise:
+    - {fileID: 1120908390}
+    - {fileID: 1445868723}
     terrainsToHide: []
     enableFlyOnThisStep: 0
-    disableFlyOnThisStep: 0
+    disableFlyOnThisStep: 1
   - instructionTextEN: "\u3010\u6559\u5B78 - \u8F49\u5411\u3011"
     instructionTextCN: "\u53E6\u5916\uFF0C\u4EFB\u4F55\u6642\u5019\u6309\u4E0B A
       \u90FD\u53EF\u4EE5\u56DE\u5230\u4E0A\u4E00\u500B\u7ACB\u8DB3\u9EDE\u3002\r\n\u5982\u679C\u4E0D\u5C0F\u5FC3\u88AB\u56F0\u4F4F\u4E86\u5C31\u6309\u4E0B
@@ -99801,7 +99788,7 @@ MonoBehaviour:
     enableFlyOnThisStep: 0
     disableFlyOnThisStep: 0
   - instructionTextEN: "\u3010\u6559\u5B78 - \u8F49\u5411\u3011"
-    instructionTextCN: "\u8ACB\u8A66\u8457\u6416\u52D5\u5DE6\u6416\u687F\u4F86\u5C0B\u627E\u6700\u4F73\u7684\u8D77\u98DB\u89D2\u5EA6\u5427\u3002"
+    instructionTextCN: "\u73FE\u5728\uFF0C\u8ACB\u8A66\u8457\u6416\u52D5\u5DE6\u6416\u687F\u4F86\u5C0B\u627E\u6700\u4F73\u7684\u8D77\u98DB\u89D2\u5EA6\u5427\u3002"
     taskType: 1
     targetPosition: {fileID: 0}
     reachDistance: 0
@@ -99811,7 +99798,7 @@ MonoBehaviour:
     terrainsToRise:
     - {fileID: 1120908390}
     terrainsToHide: []
-    enableFlyOnThisStep: 0
+    enableFlyOnThisStep: 1
     disableFlyOnThisStep: 0
   - instructionTextEN: 
     instructionTextCN: 
@@ -99827,7 +99814,7 @@ MonoBehaviour:
     enableFlyOnThisStep: 0
     disableFlyOnThisStep: 0
   - instructionTextEN: "\u3010\u6559\u5B78 - \u8F49\u5F4E\u3011"
-    instructionTextCN: "\u88DC\u5929\u5320\u662F\u9580\u5371\u96AA\u7684\u8077\u696D\uFF0C\u9700\u8981\u6642\u5E38\u9583\u907F\u969C\u7919\u7269\u4F86\u9022\u51F6\u5316\u5409\u3002\n\n\u6309\u4E0BTrigger\u9375\u7E7C\u7E8C"
+    instructionTextCN: "\u88DC\u5929\u5320\u662F\u9580\u5371\u96AA\u7684\u8077\u696D\uFF0C\u9700\u8981\u6642\u5E38\u9583\u907F\u969C\u7919\u7269\u4F86\u9022\u51F6\u5316\u5409\u3002"
     taskType: 3
     targetPosition: {fileID: 1056030377}
     reachDistance: 15
@@ -99837,7 +99824,7 @@ MonoBehaviour:
     terrainsToRise: []
     terrainsToHide: []
     enableFlyOnThisStep: 0
-    disableFlyOnThisStep: 0
+    disableFlyOnThisStep: 1
   - instructionTextEN: "\u3010\u6559\u5B78 - \u8F49\u5F4E\u3011"
     instructionTextCN: "\u8ACB\u8A66\u8457\u4E0A\u4E0B\u62C9\u52D5\u524D\u65B9\u7684\u63A7\u5236\u687F\u4F86\u65CB\u8F49\u524D\u65B9\u7684\u8449\u7247\u5427\u3002\n\n\u6309\u4E0BTrigger\u9375\u7E7C\u7E8C"
     taskType: 3
@@ -99851,7 +99838,7 @@ MonoBehaviour:
     enableFlyOnThisStep: 0
     disableFlyOnThisStep: 0
   - instructionTextEN: "\u3010\u6559\u5B78 - \u8F49\u5F4E\u3011"
-    instructionTextCN: "\u60F3\u5DE6\u8F49\u6642\uFF0C\u5DE6\u624B\u5411\u4E0B\u800C\u53F3\u624B\u5411\u4E0A\u62C9\uFF1B\u53CD\u4E4B\u4EA6\u7136\u3002\n\n\u6309\u4E0BTrigger\u9375\u7E7C\u7E8C"
+    instructionTextCN: "\u60F3\u5DE6\u8F49\u6642\uFF0C\u5DE6\u624B\u5411\u4E0B\u800C\u53F3\u624B\u5411\u4E0A\u62C9\uFF1B\u53CD\u4E4B\u4EA6\u7136\u3002"
     taskType: 3
     targetPosition: {fileID: 1056030377}
     reachDistance: 15
@@ -99870,10 +99857,9 @@ MonoBehaviour:
     faceTarget: {fileID: 0}
     faceAngleThreshold: 90
     waitTime: 2
-    terrainsToRise:
-    - {fileID: 1445868723}
+    terrainsToRise: []
     terrainsToHide: []
-    enableFlyOnThisStep: 0
+    enableFlyOnThisStep: 1
     disableFlyOnThisStep: 0
   - instructionTextEN: 
     instructionTextCN: 
@@ -99905,7 +99891,19 @@ MonoBehaviour:
     enableFlyOnThisStep: 0
     disableFlyOnThisStep: 1
   - instructionTextEN: "\u3010\u6559\u5B78 - \u4FEF\u885D\u8207\u722C\u5347\u3011"
-    instructionTextCN: "\u9700\u8981\u6CE8\u610F\u7684\u662F\uFF0C\u4FEF\u885D\u6642\u901F\u5EA6\u6703\u6F38\u6F38\u52A0\u5FEB\uFF0C\u722C\u5347\u6642\u5247\u6703\u964D\u4F4E\u3002"
+    instructionTextCN: "\u9700\u8981\u6CE8\u610F\u7684\u662F\uFF0C\u4FEF\u885D\u6642\u901F\u5EA6\u6703\u6F38\u6F38\u52A0\u5FEB\uFF0C\u722C\u5347\u6642\u5247\u6703\u6E1B\u6162\u3002"
+    taskType: 3
+    targetPosition: {fileID: 0}
+    reachDistance: 10
+    faceTarget: {fileID: 0}
+    faceAngleThreshold: 90
+    waitTime: 2
+    terrainsToRise: []
+    terrainsToHide: []
+    enableFlyOnThisStep: 0
+    disableFlyOnThisStep: 0
+  - instructionTextEN: "\u3010\u6559\u5B78 - \u4FEF\u885D\u8207\u722C\u5347\u3011"
+    instructionTextCN: "\u5982\u679C\u901F\u5EA6\u592A\u6162\uFF0C\u53EF\u80FD\u53CD\u800C\u52A0\u901F\u4E0B\u589C\u3002"
     taskType: 3
     targetPosition: {fileID: 0}
     reachDistance: 10
@@ -99927,6 +99925,19 @@ MonoBehaviour:
     terrainsToRise: []
     terrainsToHide: []
     enableFlyOnThisStep: 1
+    disableFlyOnThisStep: 0
+  - instructionTextEN: 
+    instructionTextCN: 
+    taskType: 4
+    targetPosition: {fileID: 0}
+    reachDistance: 10
+    faceTarget: {fileID: 0}
+    faceAngleThreshold: 90
+    waitTime: 1
+    terrainsToRise:
+    - {fileID: 1269758864}
+    terrainsToHide: []
+    enableFlyOnThisStep: 0
     disableFlyOnThisStep: 0
   - instructionTextEN: "\u3010\u6559\u5B78 - \u524D\u9032\u7684\u65B9\u5411\u3011"
     instructionTextCN: "\u8ACB\u6D3B\u7528\u6ED1\u7FD4\u7FFC\u8EB2\u907F\u5404\u7A2E\u969C\u7919\u7684\u540C\u6642\uFF0C\u5F80\u5CFD\u8C37\u4E2D\u592E\u7684\u767D\u8272\u88DC\u5929\u67F1\u524D\u9032\u5427\u3002"
@@ -216076,69 +216087,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6652971278594412341, guid: 4b7a52bedb64e9441b7153b0950a7d4e, type: 3}
   m_PrefabInstance: {fileID: 1190032858}
   m_PrefabAsset: {fileID: 0}
---- !u!21 &1190362536
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Override
-  m_Shader: {fileID: 4800000, guid: a3a3bc8785681554d9558e2ea68f100e, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs: []
-    m_Ints: []
-    m_Floats:
-    - _Banner: 1
-    - _DirectionalCat: 1
-    - _DirectionalFalloff: 2
-    - _DirectionalIntensity: 1
-    - _FogAxisMode: 1
-    - _FogCat: 1
-    - _FogColorDuo: 1
-    - _FogDistanceEnd: 200
-    - _FogDistanceFalloff: 2
-    - _FogDistanceStart: -200
-    - _FogHeightEnd: 200
-    - _FogHeightFalloff: 2
-    - _FogHeightStart: 0
-    - _FogIntensity: 1
-    - _FogLayersMode: 0
-    - _IsHeightFogPreset: 1
-    - _IsHeightFogShader: 1
-    - _NoiseCat: 1
-    - _NoiseDistanceEnd: 50
-    - _NoiseIntensity: 1
-    - _NoiseModeBlend: 1
-    - _NoiseScale: 30
-    - _SkyboxCat: 1
-    - _SkyboxFogBottom: 0
-    - _SkyboxFogFalloff: 1
-    - _SkyboxFogFill: 1
-    - _SkyboxFogHeight: 1
-    - _SkyboxFogIntensity: 1
-    - _SkyboxFogOffset: 0
-    m_Colors:
-    - _DirectionalColor: {r: 1, g: 0.7793103, b: 0.5, a: 1}
-    - _DirectionalDir: {r: 0, g: 0, b: 0, a: 0}
-    - _FogAxisOption: {r: 0, g: 0, b: 0, a: 0}
-    - _FogColorEnd: {r: 0.8862745, g: 1.443137, b: 2, a: 1}
-    - _FogColorStart: {r: 0.4411765, g: 0.722515, b: 1, a: 1}
-    - _NoiseSpeed: {r: 0.5, g: 0, b: 0.5, a: 0}
-  m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!1 &1190410419
 GameObject:
   m_ObjectHideFlags: 0
@@ -268165,6 +268113,69 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1464518631}
   m_Mesh: {fileID: 4300000, guid: 64feba6553bf3fe4d941e3b823c33e74, type: 3}
+--- !u!21 &1465291792
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Override
+  m_Shader: {fileID: 4800000, guid: a3a3bc8785681554d9558e2ea68f100e, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Ints: []
+    m_Floats:
+    - _Banner: 1
+    - _DirectionalCat: 1
+    - _DirectionalFalloff: 2
+    - _DirectionalIntensity: 1
+    - _FogAxisMode: 1
+    - _FogCat: 1
+    - _FogColorDuo: 1
+    - _FogDistanceEnd: 200
+    - _FogDistanceFalloff: 2
+    - _FogDistanceStart: -200
+    - _FogHeightEnd: 200
+    - _FogHeightFalloff: 2
+    - _FogHeightStart: 0
+    - _FogIntensity: 1
+    - _FogLayersMode: 0
+    - _IsHeightFogPreset: 1
+    - _IsHeightFogShader: 1
+    - _NoiseCat: 1
+    - _NoiseDistanceEnd: 50
+    - _NoiseIntensity: 1
+    - _NoiseModeBlend: 1
+    - _NoiseScale: 30
+    - _SkyboxCat: 1
+    - _SkyboxFogBottom: 0
+    - _SkyboxFogFalloff: 1
+    - _SkyboxFogFill: 1
+    - _SkyboxFogHeight: 1
+    - _SkyboxFogIntensity: 1
+    - _SkyboxFogOffset: 0
+    m_Colors:
+    - _DirectionalColor: {r: 1, g: 0.7793103, b: 0.5, a: 1}
+    - _DirectionalDir: {r: 0, g: 0, b: 0, a: 0}
+    - _FogAxisOption: {r: 0, g: 0, b: 0, a: 0}
+    - _FogColorEnd: {r: 0.8862745, g: 1.443137, b: 2, a: 1}
+    - _FogColorStart: {r: 0.4411765, g: 0.722515, b: 1, a: 1}
+    - _NoiseSpeed: {r: 0.5, g: 0, b: 0.5, a: 0}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!1001 &1465817645
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -273958,6 +273969,45 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1492236129}
   m_Mesh: {fileID: 4300000, guid: 6ed1a8a3d24f3504aa374cdee32101b5, type: 3}
+--- !u!21 &1492945640
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Height Fog Global
+  m_Shader: {fileID: 4800000, guid: 3a7ef1b66bafb7a448a880ef76d2e6e6, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 3001
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Ints: []
+    m_Floats:
+    - _AdvancedCat: 1
+    - _AlphaCutoff: 0.5
+    - _Banner: 1
+    - _DirectionalCat: 1
+    - _FogAxisMode: 1
+    - _FogCat: 1
+    - _HeightFogGlobal: 1
+    - _IsHeightFogShader: 1
+    - _NoiseCat: 1
+    - _SkyboxCat: 1
+    m_Colors:
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!1 &1493171100
 GameObject:
   m_ObjectHideFlags: 0
@@ -335446,7 +335496,7 @@ MonoBehaviour:
   manualPositionAndScale: 0
   renderPriority: 1
   styledSpace0: 0
-  overrideMaterial: {fileID: 1190362536}
+  overrideMaterial: {fileID: 1465291792}
   overrideCamToVolumeDistance: 1
   overrideVolumeDistanceFade: 0
   version: 0
@@ -335483,7 +335533,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1846778343}
+  - {fileID: 1492945640}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -342029,45 +342079,6 @@ Transform:
   - {fileID: 803361446}
   m_Father: {fileID: 1051674859}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!21 &1846778343
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Height Fog Global
-  m_Shader: {fileID: 4800000, guid: 3a7ef1b66bafb7a448a880ef76d2e6e6, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3001
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs: []
-    m_Ints: []
-    m_Floats:
-    - _AdvancedCat: 1
-    - _AlphaCutoff: 0.5
-    - _Banner: 1
-    - _DirectionalCat: 1
-    - _FogAxisMode: 1
-    - _FogCat: 1
-    - _HeightFogGlobal: 1
-    - _IsHeightFogShader: 1
-    - _NoiseCat: 1
-    - _SkyboxCat: 1
-    m_Colors:
-    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-  m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!1001 &1847405151
 PrefabInstance:
   m_ObjectHideFlags: 0
