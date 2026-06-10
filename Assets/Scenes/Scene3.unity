@@ -11731,6 +11731,58 @@ PrefabInstance:
       propertyPath: starPrefab
       value: 
       objectReference: {fileID: 3540496844595909058, guid: 2e765ef142e64254bb19c309059f4329, type: 3}
+    - target: {fileID: 5593466215853929122, guid: d6221660abff6134ba42e1c091b7215c, type: 3}
+      propertyPath: meteorASpeed
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 5593466215853929122, guid: d6221660abff6134ba42e1c091b7215c, type: 3}
+      propertyPath: spitSpeedRange.x
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 5593466215853929122, guid: d6221660abff6134ba42e1c091b7215c, type: 3}
+      propertyPath: spitSpeedRange.y
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 5593466215853929122, guid: d6221660abff6134ba42e1c091b7215c, type: 3}
+      propertyPath: starSpeedRange.x
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 5593466215853929122, guid: d6221660abff6134ba42e1c091b7215c, type: 3}
+      propertyPath: starSpeedRange.y
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 5593466215853929122, guid: d6221660abff6134ba42e1c091b7215c, type: 3}
+      propertyPath: meteorBSpeedRange.x
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 5593466215853929122, guid: d6221660abff6134ba42e1c091b7215c, type: 3}
+      propertyPath: meteorBSpeedRange.y
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 5593466215853929122, guid: d6221660abff6134ba42e1c091b7215c, type: 3}
+      propertyPath: meteorCSpeedRange.x
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 5593466215853929122, guid: d6221660abff6134ba42e1c091b7215c, type: 3}
+      propertyPath: meteorCSpeedRange.y
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 5593466215853929122, guid: d6221660abff6134ba42e1c091b7215c, type: 3}
+      propertyPath: starUpwardSpeedRange.x
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5593466215853929122, guid: d6221660abff6134ba42e1c091b7215c, type: 3}
+      propertyPath: starUpwardSpeedRange.y
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5593466215853929122, guid: d6221660abff6134ba42e1c091b7215c, type: 3}
+      propertyPath: starAngularSpeedRange.x
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 5593466215853929122, guid: d6221660abff6134ba42e1c091b7215c, type: 3}
+      propertyPath: starAngularSpeedRange.y
+      value: 540
+      objectReference: {fileID: 0}
     - target: {fileID: 5701355045054572602, guid: d6221660abff6134ba42e1c091b7215c, type: 3}
       propertyPath: m_Name
       value: DragonSD_06 (1)
