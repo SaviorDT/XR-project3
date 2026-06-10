@@ -68,7 +68,8 @@ public class PlayerFlyController : MonoBehaviour
     [Header("Sound Settings")]
     [SerializeField] private AudioSource RingReadyAudio;
     [SerializeField] private AudioSource WindAudio, ClothAudio, FlapAudio;
-    [SerializeField] private float PlayClothSpeedThreshold = 5.0f;
+    [SerializeField] private float ClothVolumeMax = 0.8f, ClothVolumeMin = 0.3f;
+    [SerializeField] private float PlayClothSpeedThreshold = 6.0f, ClothVolumeSpeedMax = 40.0f;
     private bool RingReadyPlayed = true, ClothPlayed = false, FlapPlayed = false;
 
 
@@ -92,6 +93,7 @@ public class PlayerFlyController : MonoBehaviour
     private float ForwardRotation = 0.0f;
     private float NextOnGroundRotateTime = 0.0f;
     private float NextFlyTime = 0.0f;
+    private float NextOngroundDetectTime = 0.0f;
     private bool IsFlapping = false;
     private float FlappingAmount = 0.0f;
     private float FlappingAmountBuffer = 0.0f;
@@ -150,6 +152,7 @@ public class PlayerFlyController : MonoBehaviour
 
         if (Velocity.magnitude > PlayClothSpeedThreshold)
         {
+            ClothAudio.volume = Mathf.Lerp(ClothVolumeMin, ClothVolumeMax, (Velocity.magnitude - PlayClothSpeedThreshold) / (ClothVolumeSpeedMax - PlayClothSpeedThreshold));
             if (!ClothPlayed)
             {
                 ClothAudio.Play();
@@ -185,6 +188,7 @@ public class PlayerFlyController : MonoBehaviour
             {
                 // ResetPlayerPose();
                 Velocity = transform.TransformDirection(TakeOffVelocity * FlappingAmount / MaxFlappingAmount);
+                NextOngroundDetectTime = Time.time + 0.021f;
             }
             else {
                 Velocity = Vector3.zero;
@@ -324,6 +328,10 @@ public class PlayerFlyController : MonoBehaviour
 
     public bool IsGrounded() {
         if (PlayerCollider == null)
+        {
+            return false;
+        }
+        if (Time.time < NextOngroundDetectTime)
         {
             return false;
         }
@@ -665,5 +673,10 @@ public class PlayerFlyController : MonoBehaviour
             FlappingAmount = 10.0f;
             NextFlyTime = Time.time + FlyCoolDown;
         }
+    }
+
+    public void ResetVelocity()
+    {
+        Velocity = Vector3.zero;
     }
 }

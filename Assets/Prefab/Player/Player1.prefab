@@ -21534,7 +21534,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: 5817f7c0-f2a5-45f9-a5ca-64264e0166e8
-  instanceId: 744efaa8-c481-4b52-9f6c-5dc906b2cb6c
+  instanceId: 1a9e086d-a225-4a0f-aa69-97119d27adc0
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -21679,7 +21679,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: 8b26b298-7bf4-490e-b245-a039c0184303
-  instanceId: e382a43c-f2a5-4305-ac7f-4f47cd07e8a2
+  instanceId: d0a378aa-1508-488e-a2b7-16510178d357
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -43696,7 +43696,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: 8b26b298-7bf4-490e-b245-a039c0184303
-  instanceId: 4c3f26f9-fdc5-48c9-a586-ace3cab584e2
+  instanceId: a5d09667-a91a-433a-b055-4ff421a18e0f
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -123260,10 +123260,10 @@ MonoBehaviour:
   WindAudio: {fileID: 7327438324856918622}
   ClothAudio: {fileID: 893002033461123925}
   FlapAudio: {fileID: 5486240636268113104}
-  ClothVolumeMax: 0.6
+  ClothVolumeMax: 0.8
   ClothVolumeMin: 0.3
-  PlayClothSpeedThreshold: 5
-  ClothVolumeSpeedMax: 20
+  PlayClothSpeedThreshold: 6
+  ClothVolumeSpeedMax: 40
   Velocity: {x: 0, y: 0, z: 0}
   WindVelocity: {x: 0, y: 0, z: 0}
 --- !u!54 &4655799640495558798
@@ -130405,7 +130405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: e47682b9-c270-40b1-b16d-90b627a5ce1b
-  instanceId: 21487b16-ba51-469f-a10e-c736f51ab7c1
+  instanceId: 633e49d2-0ae3-4c50-a741-370706e053a4
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -130816,7 +130816,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: 5817f7c0-f2a5-45f9-a5ca-64264e0166e8
-  instanceId: d13dd814-e8a0-4dbf-9420-65c7c147ec31
+  instanceId: 96f8c4f2-185a-4ed0-862c-40176faed4a1
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 

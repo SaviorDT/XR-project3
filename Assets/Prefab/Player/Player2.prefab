@@ -21671,10 +21671,10 @@ MonoBehaviour:
   WindAudio: {fileID: 7257182968097125914}
   ClothAudio: {fileID: 7868877354382189847}
   FlapAudio: {fileID: 2664063469808113504}
-  ClothVolumeMax: 0.6
+  ClothVolumeMax: 0.8
   ClothVolumeMin: 0.3
-  PlayClothSpeedThreshold: 5
-  ClothVolumeSpeedMax: 20
+  PlayClothSpeedThreshold: 6
+  ClothVolumeSpeedMax: 40
   Velocity: {x: 0, y: 0, z: 0}
   WindVelocity: {x: 0, y: 0, z: 0}
 --- !u!54 &8310813741215016688
