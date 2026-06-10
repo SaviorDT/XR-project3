@@ -6,6 +6,7 @@ using UnityEngine.XR;
 public class PlayerFlyController : MonoBehaviour
 {
     [SerializeField] private bool DebugMode = false;
+    [SerializeField] private bool InUniverse = false;
     [Header("Player Control Settings")]
     [SerializeField] private float PlayerHeight = 1.4f;
     [SerializeField] private float OnGroundRotateAngle = 30.0f;
@@ -111,7 +112,7 @@ public class PlayerFlyController : MonoBehaviour
         }
         if (PlayerRigidbody != null)
         {
-            PlayerRigidbody.interpolation = RigidbodyInterpolation.Interpolate;
+            // PlayerRigidbody.interpolation = RigidbodyInterpolation.Interpolate;
         }
     }
 
@@ -152,7 +153,7 @@ public class PlayerFlyController : MonoBehaviour
             NextFlyTime = 0.0f;
         }
 
-        if (Velocity.magnitude > PlayClothSpeedThreshold)
+        if (Velocity.magnitude > PlayClothSpeedThreshold && !InUniverse)
         {
             ClothAudio.volume = Mathf.Lerp(ClothVolumeMin, ClothVolumeMax, (Velocity.magnitude - PlayClothSpeedThreshold) / (ClothVolumeSpeedMax - PlayClothSpeedThreshold));
             if (!ClothPlayed)
@@ -292,10 +293,10 @@ public class PlayerFlyController : MonoBehaviour
                                     Mathf.Abs(Mathf.Sin(pitch)) *
                                     Time.fixedDeltaTime;
         
-        if (pitch > 0)
+        if (pitch > 0 || InUniverse)
         {
             Velocity += ReducedForwardSpeed * RelativeVelocity.normalized;
-            Velocity.y += ReducedForwardSpeed * (1 - VelocityToUpLossRatio) * -1;
+            Velocity.y += ReducedForwardSpeed * (1 - VelocityToUpLossRatio) * (pitch > 0 ? -1 : 1);
         }
 
         // 速度轉向前面
