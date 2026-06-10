@@ -21625,13 +21625,13 @@ MonoBehaviour:
   PlayerHeight: 1.4
   OnGroundRotateAngle: 30
   OnGroundRotateCoolDown: 0.5
-  FlappingWingForce: {x: 0, y: 0.6, z: 0.6}
+  FlappingWingForce: {x: 0, y: 0.5, z: 0.5}
   TakeOffVelocity: {x: 0, y: 10, z: 3}
   FlappingWingThreshold: 0.5
   MaxFlappingAmount: 30
   FlyCoolDown: 20
-  FrontBarRPosition: {x: 0.0328, y: 1.0518, z: 0.194}
-  FrontBarLPosition: {x: -0.1828, y: 1.0518, z: 0.194}
+  FrontBarRPosition: {x: 0.0328, y: 1.0518, z: 0.294}
+  FrontBarLPosition: {x: -0.1828, y: 1.0518, z: 0.294}
   FrontBarHeight: 0.16
   FrontBarLength: 0.15
   FrontBarAttachDistance: 0.06

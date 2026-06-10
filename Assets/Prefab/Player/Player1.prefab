@@ -21534,7 +21534,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: 5817f7c0-f2a5-45f9-a5ca-64264e0166e8
-  instanceId: fd7187a0-54e4-425f-8781-d4508b4694ae
+  instanceId: 34dc88f5-a464-4108-b701-b3a992e8ec6d
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -21679,7 +21679,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: 8b26b298-7bf4-490e-b245-a039c0184303
-  instanceId: 58381f56-7c08-4cac-b448-288be31e1db6
+  instanceId: 2e563acb-49a7-465e-b694-8c6e3fa5f4ca
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -43696,7 +43696,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: 8b26b298-7bf4-490e-b245-a039c0184303
-  instanceId: fe7b3233-5e47-45f4-b39d-27b6f868bb50
+  instanceId: 2c1ead2d-cdf9-4f7a-85f4-6e106900d29a
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -123214,13 +123214,13 @@ MonoBehaviour:
   PlayerHeight: 1.4
   OnGroundRotateAngle: 30
   OnGroundRotateCoolDown: 0.5
-  FlappingWingForce: {x: 0, y: 0.6, z: 0.6}
+  FlappingWingForce: {x: 0, y: 0.5, z: 0.5}
   TakeOffVelocity: {x: 0, y: 10, z: 3}
   FlappingWingThreshold: 0.5
   MaxFlappingAmount: 30
   FlyCoolDown: 20
-  FrontBarRPosition: {x: 0.0328, y: 1.0518, z: 0.194}
-  FrontBarLPosition: {x: -0.1828, y: 1.0518, z: 0.194}
+  FrontBarRPosition: {x: 0.0328, y: 1.0518, z: 0.294}
+  FrontBarLPosition: {x: -0.1828, y: 1.0518, z: 0.294}
   FrontBarHeight: 0.16
   FrontBarLength: 0.15
   FrontBarAttachDistance: 0.06
@@ -130402,7 +130402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: e47682b9-c270-40b1-b16d-90b627a5ce1b
-  instanceId: 4a595b7a-a935-4188-acdb-59b4dad0cbb3
+  instanceId: c5bd45da-0f31-4382-bb25-f2f2081ddca4
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -130813,7 +130813,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: 5817f7c0-f2a5-45f9-a5ca-64264e0166e8
-  instanceId: d28c92ea-3cba-481f-968b-5ec9637fac1a
+  instanceId: 4ed37228-c44f-4fcb-be92-15d99c0851f3
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
