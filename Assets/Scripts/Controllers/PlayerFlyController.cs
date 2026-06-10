@@ -192,7 +192,7 @@ public class PlayerFlyController : MonoBehaviour
             {
                 // ResetPlayerPose();
                 Velocity = transform.TransformDirection(TakeOffVelocity * FlappingAmount / MaxFlappingAmount);
-                NextOngroundDetectTime = Time.time + 0.021f;
+                NextOngroundDetectTime = Time.time + 0.041f;
             }
             else {
                 Velocity = Vector3.zero;
