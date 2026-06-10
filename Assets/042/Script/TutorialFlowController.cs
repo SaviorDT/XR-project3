@@ -56,7 +56,6 @@ public class TutorialFlowController : MonoBehaviour
     [Header("UI")]
     public TMP_Text tutorialTextEN;
     public TMP_Text tutorialTextCN;
-    public bool chinese;
 
     [Header("教學步驟")]
     public List<TutorialStep> steps = new List<TutorialStep>();
@@ -163,34 +162,9 @@ public class TutorialFlowController : MonoBehaviour
 
         ApplyFlySetting(step);
         SpawnTargetBeam(step);
-        if (chinese)
-        {
-            if (tutorialTextCN != null)
-            {
-                tutorialTextCN.gameObject.SetActive(true);
 
-                if (fadeCoroutine != null)
-                {
-                    StopCoroutine(fadeCoroutine);
-                }
+        fadeCoroutine = StartCoroutine(ChangeTextWithFade(step));
 
-                fadeCoroutine = StartCoroutine(ChangeTextWithFade(step.instructionTextCN));
-            }
-        }
-        else
-        {
-            if (tutorialTextEN != null)
-            {
-                tutorialTextEN.gameObject.SetActive(true);
-
-                if (fadeCoroutine != null)
-                {
-                    StopCoroutine(fadeCoroutine);
-                }
-
-                fadeCoroutine = StartCoroutine(ChangeTextWithFade(step.instructionTextEN));
-            }
-        }
         foreach (RisingTerrain terrain in step.terrainsToRise)
         {
             if (terrain != null)
@@ -349,30 +323,7 @@ public class TutorialFlowController : MonoBehaviour
     private void FinishTutorial()
     {
         tutorialFinished = true;
-        if (chinese)
-        {
-            if (tutorialTextCN != null)
-            {
-                tutorialTextCN.text = "教學完成！";
 
-                if (hideTextWhenFinished)
-                {
-                    tutorialTextCN.gameObject.SetActive(false);
-                }
-            }
-        }
-        else
-        {
-            if (tutorialTextEN != null)
-            {
-                tutorialTextEN.text = "Tutorial End！";
-
-                if (hideTextWhenFinished)
-                {
-                    tutorialTextEN.gameObject.SetActive(false);
-                }
-            }
-        }
         if (loadSceneWhenFinished)
         {
             StartCoroutine(LoadNextSceneAfterDelay());
@@ -387,20 +338,14 @@ public class TutorialFlowController : MonoBehaviour
             SceneManager.LoadScene(nextSceneName);
         }
     }
-    private IEnumerator ChangeTextWithFade(string newText)
+    private IEnumerator ChangeTextWithFade(TutorialStep step)
     {
         isFading = true;
 
         yield return FadeAllCanvasGroups(1f, 0f, fadeOutDuration);
-        if (chinese)
-        {
-            tutorialTextCN.text = newText;
-        }
-        else
-        {
-            tutorialTextEN.text = newText;
-        }
 
+        if (tutorialTextCN) tutorialTextCN.text = step.instructionTextCN;
+        if (tutorialTextEN) tutorialTextEN.text = step.instructionTextEN;
 
         yield return FadeAllCanvasGroups(0f, 1f, fadeInDuration);
 
