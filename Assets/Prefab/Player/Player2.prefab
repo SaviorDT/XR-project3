@@ -21671,7 +21671,10 @@ MonoBehaviour:
   WindAudio: {fileID: 7257182968097125914}
   ClothAudio: {fileID: 7868877354382189847}
   FlapAudio: {fileID: 2664063469808113504}
-  PlayClothSpeedThreshold: 5
+  ClothVolumeMax: 0.8
+  ClothVolumeMin: 0.3
+  PlayClothSpeedThreshold: 6
+  ClothVolumeSpeedMax: 40
   Velocity: {x: 0, y: 0, z: 0}
   WindVelocity: {x: 0, y: 0, z: 0}
 --- !u!54 &8310813741215016688
@@ -125609,7 +125612,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 5b0f97d733253ea44aa1bc256184d68f, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.6
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
   Mute: 0
