@@ -10367,7 +10367,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 258002839398099114}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -10484,7 +10484,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: ca51d6bb378467c4fbfd70a06579adc2, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -21534,7 +21534,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: 5817f7c0-f2a5-45f9-a5ca-64264e0166e8
-  instanceId: 8e7ba7ae-e1a4-4c81-bed5-9b62bf825db4
+  instanceId: 892bb6f2-219c-43cb-b0e1-327a14ff485a
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -21679,7 +21679,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: 8b26b298-7bf4-490e-b245-a039c0184303
-  instanceId: fbed73a8-dc49-4acd-b2fe-c93d1ad23d3d
+  instanceId: 723b5e19-7234-4557-ac9f-bae4861a62e2
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -43696,7 +43696,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: 8b26b298-7bf4-490e-b245-a039c0184303
-  instanceId: 2029ea1a-b26d-4538-b609-309ff228221c
+  instanceId: 5d91bf6c-1801-4032-b939-472c16a4d094
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -65432,7 +65432,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 5b0f97d733253ea44aa1bc256184d68f, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -85740,37 +85740,6 @@ Transform:
   - {fileID: 5675043129112885289}
   m_Father: {fileID: 6194074627918983972}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &3914575199561714561
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3081730474497557161}
-  m_Layer: 3
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3081730474497557161
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3914575199561714561}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.1809, y: 1.0518, z: 0.194}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2211979601284084047}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3939793949855672015
 GameObject:
   m_ObjectHideFlags: 0
@@ -101420,7 +101389,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4581979816525087652}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -123227,7 +123196,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6277969400311155810}
-  - {fileID: 3081730474497557161}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -249.57901, z: 0}
 --- !u!114 &6899579155815954613
@@ -129366,7 +129334,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7575950266628703396}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -130434,7 +130402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: e47682b9-c270-40b1-b16d-90b627a5ce1b
-  instanceId: d7256f14-bc5e-4442-98de-9e8cb9f4c356
+  instanceId: 45a55343-1ba1-4ab3-b930-cec140aba313
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -130845,7 +130813,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: 5817f7c0-f2a5-45f9-a5ca-64264e0166e8
-  instanceId: bf16a3fc-5303-485f-ab91-82292fc97441
+  instanceId: 14f27e93-87ec-4645-b751-c7f81a4a4757
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 

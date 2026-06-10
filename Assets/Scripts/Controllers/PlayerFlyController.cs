@@ -10,10 +10,10 @@ public class PlayerFlyController : MonoBehaviour
     [SerializeField] private float PlayerHeight = 1.4f;
     [SerializeField] private float OnGroundRotateAngle = 30.0f;
     [SerializeField] private float OnGroundRotateCoolDown = 0.5f;
-    [SerializeField] private Vector3 FlappingWingForce = new(0.0f, 0.3f, 0.3f);
+    [SerializeField] private Vector3 FlappingWingForce = new(0.0f, 0.6f, 0.6f);
     [SerializeField] private Vector3 TakeOffVelocity = new(0.0f, 10.0f, 3.0f);
     [SerializeField] private float FlappingWingThreshold = 0.5f;
-    [SerializeField] private float MaxFlappingAmount = 20.0f;
+    [SerializeField] private float MaxFlappingAmount = 30.0f;
     [SerializeField] private float FlyCoolDown = 20.0f;
     [SerializeField] private Vector3 FrontBarRPosition = new(0.0328f, 1.0518f, 0.194f);
     [SerializeField] private Vector3 FrontBarLPosition = new(-0.15f, 1.0518f, 0.194f);
@@ -69,7 +69,7 @@ public class PlayerFlyController : MonoBehaviour
     [SerializeField] private AudioSource RingReadyAudio;
     [SerializeField] private AudioSource WindAudio, ClothAudio, FlapAudio;
     [SerializeField] private float PlayClothSpeedThreshold = 5.0f;
-    private bool RingReadyPlayed = false, ClothPlayed = false, FlapPlayed = false;
+    private bool RingReadyPlayed = true, ClothPlayed = false, FlapPlayed = false;
 
 
     [Header("Debug variables(Don't modify)")]
@@ -184,7 +184,7 @@ public class PlayerFlyController : MonoBehaviour
             if (FlappingAmount > 0.001f)
             {
                 // ResetPlayerPose();
-                Velocity = transform.TransformDirection(TakeOffVelocity);
+                Velocity = transform.TransformDirection(TakeOffVelocity * FlappingAmount / MaxFlappingAmount);
             }
             else {
                 Velocity = Vector3.zero;
