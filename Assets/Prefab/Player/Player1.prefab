@@ -21534,7 +21534,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: 5817f7c0-f2a5-45f9-a5ca-64264e0166e8
-  instanceId: 892bb6f2-219c-43cb-b0e1-327a14ff485a
+  instanceId: fd7187a0-54e4-425f-8781-d4508b4694ae
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -21679,7 +21679,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: 8b26b298-7bf4-490e-b245-a039c0184303
-  instanceId: 723b5e19-7234-4557-ac9f-bae4861a62e2
+  instanceId: 58381f56-7c08-4cac-b448-288be31e1db6
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -32430,7 +32430,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1502174951228749968}
-  m_Mesh: {fileID: 7754641961422707359, guid: f01144f92385d164eb3e2870a0334506, type: 3}
+  m_Mesh: {fileID: 7754641961422707359, guid: cf3919b6f2d0e9844926c48507461296, type: 3}
 --- !u!23 &9197239961949085652
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -43696,7 +43696,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: 8b26b298-7bf4-490e-b245-a039c0184303
-  instanceId: 5d91bf6c-1801-4032-b939-472c16a4d094
+  instanceId: fe7b3233-5e47-45f4-b39d-27b6f868bb50
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -44232,7 +44232,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2252856731774863575}
-  m_Mesh: {fileID: 8223162886265018080, guid: f01144f92385d164eb3e2870a0334506, type: 3}
+  m_Mesh: {fileID: 8223162886265018080, guid: cf3919b6f2d0e9844926c48507461296, type: 3}
 --- !u!23 &2962151595914668908
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -130402,7 +130402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: e47682b9-c270-40b1-b16d-90b627a5ce1b
-  instanceId: 45a55343-1ba1-4ab3-b930-cec140aba313
+  instanceId: 4a595b7a-a935-4188-acdb-59b4dad0cbb3
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -130813,7 +130813,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: 5817f7c0-f2a5-45f9-a5ca-64264e0166e8
-  instanceId: 14f27e93-87ec-4645-b751-c7f81a4a4757
+  instanceId: d28c92ea-3cba-481f-968b-5ec9637fac1a
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
