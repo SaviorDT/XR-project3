@@ -13,6 +13,10 @@ public class CameraSequence : MonoBehaviour
         public float holdAtStart = 0f;
         public GameObject sceneGroup;
         public EnvironmentProfile environment;
+
+        [Header("這個鏡頭的故事文字(留空=不顯示)")]
+        [TextArea] public string storyText;
+        public float textHoldDuration = 3f;   // 文字停留多久
     }
 
     [Header("要移動的玩家(最外層 Player)")]
@@ -26,6 +30,9 @@ public class CameraSequence : MonoBehaviour
     public CanvasGroup fadeCanvasGroup;
     public float fadeDuration = 2f;
 
+    [Header("字幕系統")]
+    public EndingSubtitle subtitle;
+
     [Header("所有假景組(切換時除了當前鏡頭的,其餘都關)")]
     public GameObject[] allSceneGroups;
 
@@ -35,7 +42,7 @@ public class CameraSequence : MonoBehaviour
     [Header("全部播完後是否停在全黑")]
     public bool stayBlackAtEnd = true;
 
-    [Header("全部播完後是否恢復玩家控制(讓玩家能動)")]
+    [Header("全部播完後是否恢復玩家控制")]
     public bool restorePlayerAtEnd = false;
 
     [Header("每個鏡頭漸亮前的全黑停留(秒)")]
@@ -52,10 +59,7 @@ public class CameraSequence : MonoBehaviour
 
     IEnumerator RunShots()
     {
-        // 凍結玩家(停用飛行/重生 script + 鎖 Rigidbody)
         FreezePlayer(true);
-
-        // 開始時全黑
         if (fadeCanvasGroup != null) fadeCanvasGroup.alpha = 1f;
 
         foreach (Shot shot in shots)
@@ -84,7 +88,11 @@ public class CameraSequence : MonoBehaviour
             if (shot.holdAtStart > 0f)
                 yield return new WaitForSeconds(shot.holdAtStart);
 
-            // 6. 緩慢移動,途中到指定進度開始漸黑
+            // 6. 緩慢移動 + 並行顯示文字
+            // 啟動文字(並行,不等它)
+            if (subtitle != null && !string.IsNullOrEmpty(shot.storyText))
+                StartCoroutine(subtitle.ShowText(shot.storyText, shot.textHoldDuration));
+
             if (shot.endPoint != null && shot.startPoint != null)
             {
                 bool fadeStarted = false;
@@ -121,19 +129,17 @@ public class CameraSequence : MonoBehaviour
             }
         }
 
-        // 全部播完 —— 先強制全黑(蓋掉任何殘留 fade)
+        // 全部播完 — 先強制全黑
         if (fadeCanvasGroup != null) fadeCanvasGroup.alpha = 1f;
 
         if (restorePlayerAtEnd)
         {
-            // 要讓玩家落地能動:停一下 → 漸亮 → 恢復控制
             yield return new WaitForSeconds(0.5f);
             yield return StartCoroutine(Fade(1f, 0f, fadeDuration));
             FreezePlayer(false);
         }
         else
         {
-            // 停在全黑(接結束畫面/感謝名單)
             if (fadeCanvasGroup != null)
                 fadeCanvasGroup.alpha = stayBlackAtEnd ? 1f : 0f;
         }
