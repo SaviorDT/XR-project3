@@ -62,6 +62,11 @@ public class TutorialFlowController : MonoBehaviour
     public bool autoStart = true;
     public bool hideTextWhenFinished = true;
 
+    [Header("地形啟用設定")]
+    public bool disableTerrainBeforeRise = true;
+
+    private HashSet<RisingTerrain> initializedDisabledTerrains = new HashSet<RisingTerrain>();
+
     [Header("目標光柱")]
     public GameObject targetBeamPrefab;
     public float beamYOffset = 0f;
@@ -90,6 +95,11 @@ public class TutorialFlowController : MonoBehaviour
     {
         CollectCanvasGroups();
 
+        if (disableTerrainBeforeRise)
+        {
+            DisableTerrainsBeforeRise();
+        }
+
         if (autoStart)
         {
             StartTutorial();
@@ -108,6 +118,23 @@ public class TutorialFlowController : MonoBehaviour
         {
             ClearTargetBeam(step);
             NextStep();
+        }
+    }
+    private void DisableTerrainsBeforeRise()
+    {
+        foreach (TutorialStep step in steps)
+        {
+            foreach (RisingTerrain terrain in step.terrainsToRise)
+            {
+                if (terrain == null)
+                    continue;
+
+                if (initializedDisabledTerrains.Contains(terrain))
+                    continue;
+
+                initializedDisabledTerrains.Add(terrain);
+                terrain.gameObject.SetActive(false);
+            }
         }
     }
 
@@ -163,15 +190,36 @@ public class TutorialFlowController : MonoBehaviour
         {
             if (terrain != null)
             {
-                terrain.Rise();
+                terrain.gameObject.SetActive(true);
+                StartCoroutine(RiseTerrainNextFrame(terrain));
             }
         }
         foreach (RisingTerrain terrain in step.terrainsToHide)
         {
             if (terrain != null)
             {
-                terrain.Hide();
+                StartCoroutine(HideAndDisableTerrain(terrain));
             }
+        }
+    }
+    private IEnumerator RiseTerrainNextFrame(RisingTerrain terrain)
+    {
+        yield return null;
+
+        if (terrain != null)
+        {
+            terrain.Rise();
+        }
+    }
+    private IEnumerator HideAndDisableTerrain(RisingTerrain terrain)
+    {
+        terrain.Hide();
+
+        yield return new WaitForSeconds(terrain.moveDuration);
+
+        if (terrain != null)
+        {
+            terrain.gameObject.SetActive(false);
         }
     }
     private void SpawnTargetBeam(TutorialStep step)
