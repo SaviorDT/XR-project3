@@ -71,6 +71,8 @@ public class PlayerFlyController : MonoBehaviour
     [SerializeField] private float ClothVolumeMax = 0.8f, ClothVolumeMin = 0.3f;
     [SerializeField] private float PlayClothSpeedThreshold = 6.0f, ClothVolumeSpeedMax = 40.0f;
     private bool RingReadyPlayed = true, ClothPlayed = false, FlapPlayed = false;
+    [SerializeField] private AudioSource TriggerButtonSound;
+    private bool TriggerButtonPressedPrev = false;
 
 
     [Header("Debug variables(Don't modify)")]
@@ -174,6 +176,7 @@ public class PlayerFlyController : MonoBehaviour
         TryDetectFlapping();
         TryRotateOnGround();
         TryResetFrontBar();
+        PlayTriggerButtonSound();
         DebugInput();
     }
     
@@ -673,6 +676,32 @@ public class PlayerFlyController : MonoBehaviour
             FlappingAmount = 10.0f;
             NextFlyTime = Time.time + FlyCoolDown;
         }
+    }
+
+    private void PlayTriggerButtonSound()
+    {
+        bool triggerPressed = false;
+        if (RightHandDevice.isValid)
+        {
+            RightHandDevice.TryGetFeatureValue(CommonUsages.triggerButton, out triggerPressed);
+        }
+        if (!triggerPressed && LeftHandDevice.isValid)
+        {
+            LeftHandDevice.TryGetFeatureValue(CommonUsages.triggerButton, out triggerPressed);
+        }
+
+        if (!triggerPressed)
+        {
+            TriggerButtonPressedPrev = false;
+            return;
+        }
+
+        if (triggerPressed && !TriggerButtonPressedPrev)
+        {
+            TriggerButtonSound.Play();
+        }
+
+        TriggerButtonPressedPrev = triggerPressed;
     }
 
     public void ResetVelocity()
