@@ -16,22 +16,30 @@ public class EndingDirector : MonoBehaviour
     public float waitAfterEat = 2f;
     public float healingDuration = 3f;
     public float waitAfterHealing = 2f;
-    public float yesDuration = 2.5f;     // Yes 播多久(你設2.5=2次)
-    public float jumpDuration = 4f;      // Jump 播多久(你設4=4次)
-    public float restWaitDuration = 10f;   // Rest 凍住休息的時間(預留文字用,可調或設0)
+    public float yesDuration = 2.5f;
+    public float jumpDuration = 4f;
+    public float restWaitDuration = 10f;
 
     [Header("Trigger 名稱")]
-    public string idleTrigger = "ToIdle";   // 新增:Eat後填空的idle
+    public string idleTrigger = "ToIdle";
     public string yesTrigger = "ToYes";
     public string jumpTrigger = "ToJump";
-    public string restTrigger = "ToRest";   // 新增:Jump播完主動切Rest
+    public string restTrigger = "ToRest";
     public string blowTrigger = "ToBlow";
 
     [Header("Fade 漸黑")]
-    public CanvasGroup fadeCanvasGroup;   // 黑幕的 CanvasGroup
-    public float fadeDuration = 3f;       // 漸黑秒數(對齊程式組推玩家的時間)
+    public CanvasGroup fadeCanvasGroup;
+    public float fadeDuration = 3f;
+
     [Header("第4階段:五鏡頭序列")]
     public CameraSequence cameraSequence;
+
+    [Header("字幕系統(跟 CameraSequence 同一個)")]
+    public EndingSubtitle subtitle;
+
+    [Header("Rest 休息時顯示的文字")]
+    [TextArea] public string restStoryText = "";
+    public float restTextHoldDuration = 6f;   // 文字停留秒數(讓淡入+停+淡出 ≤ restWaitDuration)
 
     public void StartAfterEat()
     {
@@ -43,7 +51,7 @@ public class EndingDirector : MonoBehaviour
         // 等 Eat 動畫播完
         yield return new WaitForSeconds(eatDuration);
 
-        // ★新增:Eat完先切到idle loop填空(整個等待+特效期間龍不會僵住)
+        // Eat完先切到idle loop填空
         dragonAnimator.SetTrigger(idleTrigger);
 
         // Eat 完,靜待
@@ -65,15 +73,21 @@ public class EndingDirector : MonoBehaviour
         dragonAnimator.SetTrigger(jumpTrigger);
         yield return new WaitForSeconds(jumpDuration);
 
-        // ★新增:Jump播滿後,主動切到Rest(不靠Has Exit Time)
+        // Jump播滿後,主動切到Rest
         dragonAnimator.SetTrigger(restTrigger);
 
-        // ★新增:Rest 休息等待(預留文字/謝謝的時間,可設0)
+        // Rest 休息:並行顯示故事文字(不影響休息時長)
+        if (subtitle != null && !string.IsNullOrEmpty(restStoryText))
+            StartCoroutine(subtitle.ShowText(restStoryText, restTextHoldDuration));
+
+        // 休息等待(固定時長,文字並行跑)
         yield return new WaitForSeconds(restWaitDuration);
 
-        // ★新增:休息結束,吹氣
+        // 休息結束,吹氣 + 同步開始漸黑
         dragonAnimator.SetTrigger(blowTrigger);
         yield return StartCoroutine(FadeToBlack(fadeDuration));  // 等它確實全黑
+
+        // 全黑後接五鏡頭
         if (cameraSequence != null) cameraSequence.StartSequence();
     }
 
@@ -87,6 +101,6 @@ public class EndingDirector : MonoBehaviour
             if (fadeCanvasGroup != null) fadeCanvasGroup.alpha = alpha;
             yield return null;
         }
-        if (fadeCanvasGroup != null) fadeCanvasGroup.alpha = 1f; // 確保完全黑
+        if (fadeCanvasGroup != null) fadeCanvasGroup.alpha = 1f;
     }
 }
