@@ -99921,7 +99921,7 @@ MonoBehaviour:
     terrainsToRise: []
     terrainsToHide: []
   - instructionTextEN: 
-    instructionTextCN: "\u524D\u5F80"
+    instructionTextCN: "\u524D\u5F80\u5CFD\u8C37\u4E2D\u592E\u7684\u88DC\u5929\u67F1\u9802\u7AEF"
     taskType: 0
     targetPosition: {fileID: 531164031}
     reachDistance: 20
