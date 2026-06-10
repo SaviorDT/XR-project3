@@ -690,7 +690,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8769673022181201132}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 20
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -721,7 +721,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe351313ae60273459f5b786956d575f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeteorCProjectile
-  lifeTime: 30
+  lifeTime: 100
   turnSpeed: 2.5
   trackingDelay: 0.5
   minPredictTime: 1
@@ -741,7 +741,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileCollisionSetup
   autoSetupOnAwake: 1
   useGravity: 0
-  isKinematic: 1
+  isKinematic: 0
 --- !u!135 &483343479239767712
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -752,7 +752,7 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0

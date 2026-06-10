@@ -1225,14 +1225,14 @@ MonoBehaviour:
   meteorAPrefab: {fileID: 7867070306959318244, guid: 90d2a28f14820b2418382c8a954b0aff, type: 3}
   meteorBPrefab: {fileID: 4694852783428112360, guid: 710b8a04be541e6448e95948062fd091, type: 3}
   meteorCPrefab: {fileID: 6301926762326645737, guid: 675fbe18d6dddf64d89957da6fed7a9e, type: 3}
-  starPrefab: {fileID: 7479166976581264094, guid: 168783a41f6670a4aa95ba9b8da90026, type: 3}
+  starPrefab: {fileID: 3540496844595909058, guid: 2e765ef142e64254bb19c309059f4329, type: 3}
   spitPrefab: {fileID: 5203302900004167072, guid: 626fd0febaa5fb141a05ceeb52a9bd7c, type: 3}
   firePoint: {fileID: 4974509707198028967}
   player: {fileID: 0}
   meteorCountRange: {x: 20, y: 30}
   starCountRange: {x: 15, y: 20}
   spitCountRange: {x: 30, y: 40}
-  meteorASpeed: 120
+  meteorASpeed: 24
   meteorASpreadAngle: 70
   meteorBSpeedRange: {x: 80, y: 160}
   meteorBSpreadAngle: 80
