@@ -15604,7 +15604,7 @@ MonoBehaviour:
   DownToForwardRatio: 2
   DownToForwardLossRatio: 0
   VelocityToUpRatio: 0.8
-  VelocityToUpLossRatio: -2.2
+  VelocityToUpLossRatio: 0
   SteeringSpeed: 1.5
   WindResistance: {x: 0.8, y: 0.6, z: 0.8}
   FixPoseTarget: {fileID: 7292934019019607382}
@@ -21646,7 +21646,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: 8b26b298-7bf4-490e-b245-a039c0184303
-  instanceId: caa3fc2a-65d8-4138-8a05-e38501b224da
+  instanceId: 50fd68f0-396b-4a8e-83f3-70d694f27d29
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -32460,7 +32460,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: 5817f7c0-f2a5-45f9-a5ca-64264e0166e8
-  instanceId: 305a3165-8711-460f-875c-b4b399591dea
+  instanceId: 986d950f-4070-4fa1-acbd-48a9a5d7a586
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -49599,7 +49599,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: e47682b9-c270-40b1-b16d-90b627a5ce1b
-  instanceId: 6c38cff8-c3d3-484d-98ed-a5a23adb28bf
+  instanceId: 0f46bac4-18c0-4baf-a14e-ce9a0f4bdb46
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -82783,7 +82783,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: 5817f7c0-f2a5-45f9-a5ca-64264e0166e8
-  instanceId: d3cc1bac-c1e6-480d-8dc3-f863d8739539
+  instanceId: f3f41e9d-6a25-445c-be71-c0aa42cfc7a3
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -99615,7 +99615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: 8b26b298-7bf4-490e-b245-a039c0184303
-  instanceId: 99f889ae-154b-45f4-bf44-9221d0653132
+  instanceId: 7a6619e5-34a6-4089-a752-41af0a0da595
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
