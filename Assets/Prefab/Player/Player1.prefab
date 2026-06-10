@@ -123252,7 +123252,7 @@ MonoBehaviour:
   MaxFlappingAmount: 20
   FlyCoolDown: 20
   FrontBarRPosition: {x: 0.0328, y: 1.0518, z: 0.194}
-  FrontBarLPosition: {x: -0.15, y: 1.0518, z: 0.194}
+  FrontBarLPosition: {x: -0.1828, y: 1.0518, z: 0.194}
   FrontBarHeight: 0.16
   FrontBarLength: 0.15
   FrontBarAttachDistance: 0.06
