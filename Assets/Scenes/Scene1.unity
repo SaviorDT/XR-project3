@@ -99649,7 +99649,7 @@ MonoBehaviour:
   chinese: 1
   steps:
   - instructionTextEN: "FLIGHT: \u7FFC\u60F3\u5929\u958B"
-    instructionTextCN: "\n\u6309\u4E0B\u53F3 Trigger \u5DF2\u958B\u59CB\u3002"
+    instructionTextCN: "\n\u6309\u4E0B Trigger \u4F86\u958B\u59CB\u3002"
     taskType: 3
     targetPosition: {fileID: 0}
     reachDistance: 10
@@ -99660,7 +99660,20 @@ MonoBehaviour:
     - {fileID: 1269758864}
     terrainsToHide: []
     enableFlyOnThisStep: 0
-    disableFlyOnThisStep: 1
+    disableFlyOnThisStep: 0
+  - instructionTextEN: 
+    instructionTextCN: 
+    taskType: 4
+    targetPosition: {fileID: 0}
+    reachDistance: 10
+    faceTarget: {fileID: 0}
+    faceAngleThreshold: 90
+    waitTime: 1
+    terrainsToRise:
+    - {fileID: 1269758864}
+    terrainsToHide: []
+    enableFlyOnThisStep: 0
+    disableFlyOnThisStep: 0
   - instructionTextEN: "\u3010\u5947\u5999\u7684\u7926\u77F3\u3011"
     instructionTextCN: "\u4F3C\u4E4E\u662F\u5F9E\u4E0A\u9762\u6389\u4E0B\u4F86\u7684\u7926\u77F3\uFF0C\u900F\u8457\u7368\u7279\u7684\u8272\u5F69\u3002\n\n\u6309\u4E0BTrigger\u9375\u7E7C\u7E8C"
     taskType: 3
@@ -99682,6 +99695,19 @@ MonoBehaviour:
     faceAngleThreshold: 90
     waitTime: 2
     terrainsToRise: []
+    terrainsToHide: []
+    enableFlyOnThisStep: 0
+    disableFlyOnThisStep: 0
+  - instructionTextEN: 
+    instructionTextCN: 
+    taskType: 4
+    targetPosition: {fileID: 0}
+    reachDistance: 10
+    faceTarget: {fileID: 0}
+    faceAngleThreshold: 90
+    waitTime: 1
+    terrainsToRise:
+    - {fileID: 1269758864}
     terrainsToHide: []
     enableFlyOnThisStep: 0
     disableFlyOnThisStep: 0
@@ -99732,7 +99758,20 @@ MonoBehaviour:
     waitTime: 2
     terrainsToRise: []
     terrainsToHide: []
-    enableFlyOnThisStep: 1
+    enableFlyOnThisStep: 0
+    disableFlyOnThisStep: 0
+  - instructionTextEN: 
+    instructionTextCN: 
+    taskType: 4
+    targetPosition: {fileID: 0}
+    reachDistance: 10
+    faceTarget: {fileID: 0}
+    faceAngleThreshold: 90
+    waitTime: 1
+    terrainsToRise:
+    - {fileID: 1269758864}
+    terrainsToHide: []
+    enableFlyOnThisStep: 0
     disableFlyOnThisStep: 0
   - instructionTextEN: "\u3010\u6559\u5B78 - \u8F49\u5411\u3011"
     instructionTextCN: "\u5728\u5730\u9762\u4E0A\u53EF\u4EE5\u900F\u904E\u5DE6\u6416\u687F\u4F86\u6539\u8B8A\u6ED1\u7FD4\u7FFC\u7684\u671D\u5411\uFF0C\u4EE5\u5229\u632F\u7FC5\u9AD8\u98DB\u3002\n\u4E5F\u53EF\u4EE5\u6309\u4E0B
@@ -99746,7 +99785,21 @@ MonoBehaviour:
     terrainsToRise: []
     terrainsToHide: []
     enableFlyOnThisStep: 0
-    disableFlyOnThisStep: 1
+    disableFlyOnThisStep: 0
+  - instructionTextEN: "\u3010\u6559\u5B78 - \u8F49\u5411\u3011"
+    instructionTextCN: "\u53E6\u5916\uFF0C\u4EFB\u4F55\u6642\u5019\u6309\u4E0B A
+      \u90FD\u53EF\u4EE5\u56DE\u5230\u4E0A\u4E00\u500B\u7ACB\u8DB3\u9EDE\u3002\r\n\u5982\u679C\u4E0D\u5C0F\u5FC3\u88AB\u56F0\u4F4F\u4E86\u5C31\u6309\u4E0B
+      A \u5427\u3002"
+    taskType: 3
+    targetPosition: {fileID: 0}
+    reachDistance: 0
+    faceTarget: {fileID: 0}
+    faceAngleThreshold: 0
+    waitTime: 0
+    terrainsToRise: []
+    terrainsToHide: []
+    enableFlyOnThisStep: 0
+    disableFlyOnThisStep: 0
   - instructionTextEN: "\u3010\u6559\u5B78 - \u8F49\u5411\u3011"
     instructionTextCN: "\u8ACB\u8A66\u8457\u6416\u52D5\u5DE6\u6416\u687F\u4F86\u5C0B\u627E\u6700\u4F73\u7684\u8D77\u98DB\u89D2\u5EA6\u5427\u3002"
     taskType: 1
@@ -99757,6 +99810,19 @@ MonoBehaviour:
     waitTime: 2
     terrainsToRise:
     - {fileID: 1120908390}
+    terrainsToHide: []
+    enableFlyOnThisStep: 0
+    disableFlyOnThisStep: 0
+  - instructionTextEN: 
+    instructionTextCN: 
+    taskType: 4
+    targetPosition: {fileID: 0}
+    reachDistance: 10
+    faceTarget: {fileID: 0}
+    faceAngleThreshold: 90
+    waitTime: 1
+    terrainsToRise:
+    - {fileID: 1269758864}
     terrainsToHide: []
     enableFlyOnThisStep: 0
     disableFlyOnThisStep: 0
@@ -99807,7 +99873,20 @@ MonoBehaviour:
     terrainsToRise:
     - {fileID: 1445868723}
     terrainsToHide: []
-    enableFlyOnThisStep: 1
+    enableFlyOnThisStep: 0
+    disableFlyOnThisStep: 0
+  - instructionTextEN: 
+    instructionTextCN: 
+    taskType: 4
+    targetPosition: {fileID: 0}
+    reachDistance: 10
+    faceTarget: {fileID: 0}
+    faceAngleThreshold: 90
+    waitTime: 1
+    terrainsToRise:
+    - {fileID: 1269758864}
+    terrainsToHide: []
+    enableFlyOnThisStep: 0
     disableFlyOnThisStep: 0
   - instructionTextEN: "\u3010\u6559\u5B78 - \u4FEF\u885D\u8207\u722C\u5347\u3011"
     instructionTextCN: "\u82E5\u540C\u6642\u5411\u4E0B\u62C9\u52D5\u5169\u6839\u63A7\u5236\u687F\uFF0C\u53EF\u4EE5\u5411\u4E0B\u4FEF\u885D\u3002\n\u540C\u6642\u5411\u4E0A\u62C9\u52D5\u5247\u53EF\u4EE5\u5411\u4E0A\u722C\u5347\u3002"
