@@ -10,7 +10,7 @@ public class ProjectileLauncher : MonoBehaviour
         MeteorC_Star_Spit
     }
 
-    [Header("µo®g¼Ò¦¡")]
+    [Header("ï¿½oï¿½gï¿½Ò¦ï¿½")]
     public FireMode fireMode = FireMode.MeteorA_Star_Spit;
 
     [Header("Prefab")]
@@ -20,36 +20,36 @@ public class ProjectileLauncher : MonoBehaviour
     public StarProjectile starPrefab;
     public SpitProjectile spitPrefab;
 
-    [Header("µo®g¦ì¸m")]
+    [Header("ï¿½oï¿½gï¿½ï¿½m")]
     public Transform firePoint;
     public Transform player;
 
-    [Header("ÀH¾÷¼Æ¶q")]
+    [Header("ï¿½Hï¿½ï¿½ï¿½Æ¶q")]
     public Vector2Int meteorCountRange = new Vector2Int(20, 30);
     public Vector2Int starCountRange = new Vector2Int(15, 20);
     public Vector2Int spitCountRange = new Vector2Int(30, 40);
 
-    [Header("¹k¥ÛA")]
+    [Header("ï¿½kï¿½ï¿½A")]
     public float meteorASpeed = 120f;
     public float meteorASpreadAngle = 70f;
 
-    [Header("¹k¥ÛB")]
+    [Header("ï¿½kï¿½ï¿½B")]
     public Vector2 meteorBSpeedRange = new Vector2(80f, 160f);
     public float meteorBSpreadAngle = 80f;
 
-    [Header("¹k¥ÛC")]
+    [Header("ï¿½kï¿½ï¿½C")]
     public Vector2 meteorCSpeedRange = new Vector2(80f, 140f);
     public float meteorCSpreadAngle = 100f;
     public Vector2 meteorCLockDelayRange = new Vector2(1f, 4f);
     public float meteorCInterval = 0.25f;
 
-    [Header("¬P¬P")]
+    [Header("ï¿½Pï¿½P")]
     public Vector2 starSpeedRange = new Vector2(80f, 130f);
     public Vector2 starUpwardSpeedRange = new Vector2(30f, 70f);
     public float starSpreadAngle = 80f;
     public Vector2 starAngularSpeedRange = new Vector2(180f, 540f);
 
-    [Header("¤f¤ô")]
+    [Header("ï¿½fï¿½ï¿½")]
     public Vector2 spitSpeedRange = new Vector2(80f, 130f);
     public Vector2 spitUpwardSpeedRange = new Vector2(20f, 50f);
     public float spitSpreadAngle = 80f;
@@ -131,7 +131,7 @@ public class ProjectileLauncher : MonoBehaviour
 
     private IEnumerator FireMeteorCSequence()
     {
-        int count = Random.Range(meteorCountRange.x, meteorCountRange.y + 1);
+        int count = Random.Range(meteorCountRange.x/3, meteorCountRange.y/3 + 1);
 
         for (int i = 0; i < count; i++)
         {
@@ -206,8 +206,8 @@ public class ProjectileLauncher : MonoBehaviour
 
     private Vector3 GetRandomDirectionAroundForward(float angle)
     {
-        float yaw = Random.Range(-angle, angle);       // ¥ª¥k
-        float pitch = Random.Range(-angle, angle);     // ¤W¤U
+        float yaw = Random.Range(-angle, angle);       // ï¿½ï¿½ï¿½k
+        float pitch = Random.Range(-angle, angle);     // ï¿½Wï¿½U
 
         Quaternion yawRot = Quaternion.AngleAxis(yaw, transform.up);
         Quaternion pitchRot = Quaternion.AngleAxis(pitch, transform.right);
