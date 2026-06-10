@@ -10,6 +10,7 @@ public class TutorialFlowController : MonoBehaviour
         ReachPosition,
         FaceTarget,
         ReachAndFace,
+        WaitTrigger,
         WaitSeconds
     }
 
@@ -181,11 +182,26 @@ public class TutorialFlowController : MonoBehaviour
             case TaskType.WaitSeconds:
                 stepTimer += Time.deltaTime;
                 return stepTimer >= step.waitTime;
+
+            case TaskType.WaitTrigger:
+                return CheckTriggerPressed(step);
         }
 
         return false;
     }
 
+    private bool CheckTriggerPressed(TutorialStep step)
+    {
+        return OVRInput.GetDown(
+            OVRInput.Button.PrimaryIndexTrigger,
+            OVRInput.Controller.RTouch
+        )
+        ||
+        OVRInput.GetDown(
+            OVRInput.Button.PrimaryIndexTrigger,
+            OVRInput.Controller.LTouch
+        );
+    }
     private bool CheckReachPosition(TutorialStep step)
     {
         if (player == null || step.targetPosition == null) return false;

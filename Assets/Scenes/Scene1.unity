@@ -36813,6 +36813,69 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8828168786194282774, guid: b359470cfa1fa354790570adb1ff7f08, type: 3}
   m_PrefabInstance: {fileID: 206640503}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &206731542
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Override
+  m_Shader: {fileID: 4800000, guid: a3a3bc8785681554d9558e2ea68f100e, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Ints: []
+    m_Floats:
+    - _Banner: 1
+    - _DirectionalCat: 1
+    - _DirectionalFalloff: 2
+    - _DirectionalIntensity: 1
+    - _FogAxisMode: 1
+    - _FogCat: 1
+    - _FogColorDuo: 1
+    - _FogDistanceEnd: 200
+    - _FogDistanceFalloff: 2
+    - _FogDistanceStart: -200
+    - _FogHeightEnd: 200
+    - _FogHeightFalloff: 2
+    - _FogHeightStart: 0
+    - _FogIntensity: 1
+    - _FogLayersMode: 0
+    - _IsHeightFogPreset: 1
+    - _IsHeightFogShader: 1
+    - _NoiseCat: 1
+    - _NoiseDistanceEnd: 50
+    - _NoiseIntensity: 1
+    - _NoiseModeBlend: 1
+    - _NoiseScale: 30
+    - _SkyboxCat: 1
+    - _SkyboxFogBottom: 0
+    - _SkyboxFogFalloff: 1
+    - _SkyboxFogFill: 1
+    - _SkyboxFogHeight: 1
+    - _SkyboxFogIntensity: 1
+    - _SkyboxFogOffset: 0
+    m_Colors:
+    - _DirectionalColor: {r: 1, g: 0.7793103, b: 0.5, a: 1}
+    - _DirectionalDir: {r: 0, g: 0, b: 0, a: 0}
+    - _FogAxisOption: {r: 0, g: 0, b: 0, a: 0}
+    - _FogColorEnd: {r: 0.8862745, g: 1.443137, b: 2, a: 1}
+    - _FogColorStart: {r: 0.4411765, g: 0.722515, b: 1, a: 1}
+    - _NoiseSpeed: {r: 0.5, g: 0, b: 0.5, a: 0}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!4 &207240162 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2211979601284084047, guid: 23808df3ae0c1554db5d52dd8dc44256, type: 3}
@@ -79793,6 +79856,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1445868722}
     m_Modifications:
+    - target: {fileID: 5392609462913333411, guid: 8d71784b5f0efaf4aa8c217edc4fdf8e, type: 3}
+      propertyPath: windStrength
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 4260974011103557058, guid: 63241ca4b456f9a47aaabc8dbd669755, type: 3}
       propertyPath: m_LocalScale.x
       value: 10
@@ -79852,10 +79919,6 @@ PrefabInstance:
     - target: {fileID: 4431431471284168624, guid: 63241ca4b456f9a47aaabc8dbd669755, type: 3}
       propertyPath: m_Name
       value: WhiteWindEffectRoot 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5392609462913333411, guid: 8d71784b5f0efaf4aa8c217edc4fdf8e, type: 3}
-      propertyPath: windStrength
-      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -79953,6 +80016,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1445868722}
     m_Modifications:
+    - target: {fileID: 5392609462913333411, guid: 8d71784b5f0efaf4aa8c217edc4fdf8e, type: 3}
+      propertyPath: windStrength
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 4260974011103557058, guid: 63241ca4b456f9a47aaabc8dbd669755, type: 3}
       propertyPath: m_LocalScale.x
       value: 10
@@ -80012,10 +80079,6 @@ PrefabInstance:
     - target: {fileID: 4431431471284168624, guid: 63241ca4b456f9a47aaabc8dbd669755, type: 3}
       propertyPath: m_Name
       value: WhiteWindEffectRoot 1 (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5392609462913333411, guid: 8d71784b5f0efaf4aa8c217edc4fdf8e, type: 3}
-      propertyPath: windStrength
-      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -99687,24 +99750,53 @@ MonoBehaviour:
   chinese: 1
   steps:
   - instructionTextEN: 
-    instructionTextCN: 
+    instructionTextCN: "\u4F3C\u4E4E\u662F\u5F9E\u4E0A\u9762\u6389\u4E0B\u4F86\u7684\u7926\u77F3\uFF0C\u900F\u8457\u7368\u7279\u7684\u8272\u5F69\u3002\n\n\u6309\u4E0BTrigger\u9375\u7E7C\u7E8C"
     taskType: 3
-    targetPosition: {fileID: 0}
-    reachDistance: 0
+    targetPosition: {fileID: 1056030377}
+    reachDistance: 15
     faceTarget: {fileID: 0}
-    faceAngleThreshold: 0
-    waitTime: 1
-    terrainsToRise:
-    - {fileID: 837784024}
+    faceAngleThreshold: 90
+    waitTime: 2
+    terrainsToRise: []
     terrainsToHide: []
   - instructionTextEN: 
-    instructionTextCN: "\u96D9\u624B\u5206\u5225\u6309\u4E0B\u4E2D\u6307\u6309\u9375\u4EE5\u63E1\u4F4F\u62C9\u74B0\uFF0C\u518D\u540C\u6642\u5411\u4E0B\u62C9"
+    instructionTextCN: "\u53EF\u80FD\u5F97\u4E0A\u53BB\u770B\u770B\u4E86\u3002\n\n\u6309\u4E0BTrigger\u9375\u7E7C\u7E8C"
+    taskType: 3
+    targetPosition: {fileID: 1056030377}
+    reachDistance: 15
+    faceTarget: {fileID: 0}
+    faceAngleThreshold: 90
+    waitTime: 2
+    terrainsToRise: []
+    terrainsToHide: []
+  - instructionTextEN: 
+    instructionTextCN: "\u6ED1\u7FD4\u7FFC\u662F\u88DC\u5929\u5320\u53E4\u8001\u7684\u79FB\u52D5\u5DE5\u5177\uFF0C\u900F\u904E\u632F\u7FC5\u53EF\u4EE5\u66F4\u63A5\u8FD1\u5929\u7A7A\u3002\n\n\u6309\u4E0BTrigger\u9375\u7E7C\u7E8C"
+    taskType: 3
+    targetPosition: {fileID: 1056030377}
+    reachDistance: 15
+    faceTarget: {fileID: 0}
+    faceAngleThreshold: 90
+    waitTime: 2
+    terrainsToRise: []
+    terrainsToHide: []
+  - instructionTextEN: 
+    instructionTextCN: "\u4F7F\u7528\u6642\u6703\u6D88\u8017\u80FD\u91CF\uFF0C\u4E26\u5728\u98DB\u884C\u6642\u6162\u6162\u88DC\u5145\u3002\u7576\u88DC\u5145\u5B8C\u7562\u6642\uFF0C\u62C9\u74B0\u6703\u518D\u5EA6\u4EAE\u8D77\u3002\n\n\u6309\u4E0BTrigger\u9375\u7E7C\u7E8C"
+    taskType: 3
+    targetPosition: {fileID: 1056030377}
+    reachDistance: 15
+    faceTarget: {fileID: 0}
+    faceAngleThreshold: 90
+    waitTime: 2
+    terrainsToRise: []
+    terrainsToHide: []
+  - instructionTextEN: 
+    instructionTextCN: "\u8ACB\u8A66\u8457\u7528\u529B\u62C9\u52D5\u62C9\u74B0\u4F86\u62CD\u52D5\u7FC5\u8180\uFF0C\u540C\u6642\u62C9\u4E0B\u5169\u908A\u7684\u7FC5\u8180\u4F86\u632F\u7FC5\u8D77\u98DB\u5427\u3002\n\n\u6309\u4E0Btrigger\u9375\u7E7C\u7E8C"
     taskType: 3
     targetPosition: {fileID: 0}
     reachDistance: 5
     faceTarget: {fileID: 0}
     faceAngleThreshold: 0
-    waitTime: 3
+    waitTime: 2
     terrainsToRise:
     - {fileID: 79916587}
     terrainsToHide: []
@@ -99715,7 +99807,7 @@ MonoBehaviour:
     reachDistance: 20
     faceTarget: {fileID: 0}
     faceAngleThreshold: 0
-    waitTime: 0
+    waitTime: 2
     terrainsToRise: []
     terrainsToHide: []
   - instructionTextEN: 
@@ -99725,39 +99817,59 @@ MonoBehaviour:
     reachDistance: 0
     faceTarget: {fileID: 586604960}
     faceAngleThreshold: 45
-    waitTime: 0
+    waitTime: 2
     terrainsToRise:
     - {fileID: 1120908390}
     terrainsToHide: []
   - instructionTextEN: 
-    instructionTextCN: "\u671D\u8457\u5B83\u98DB\u53BB\u5427\uFF0C\u5728\u98DB\u884C\u904E\u7A0B\u4E2D\uFF0C\u82E5\u6709\u4F4D\u7F6E\u6F02\u79FB\u7684\u554F\u984C\uFF0C\u8ACB\u6309\u4E0BB\u9375\u4EE5\u91CD\u8A2D"
+    instructionTextCN: "\u88DC\u5929\u5320\u662F\u9580\u5371\u96AA\u7684\u8077\u696D\uFF0C\u9700\u8981\u6642\u5E38\u9583\u907F\u969C\u7919\u7269\u4F86\u9022\u51F6\u5316\u5409\u3002\n\n\u6309\u4E0BTrigger\u9375\u7E7C\u7E8C"
     taskType: 3
-    targetPosition: {fileID: 0}
-    reachDistance: 40
+    targetPosition: {fileID: 1056030377}
+    reachDistance: 15
     faceTarget: {fileID: 0}
     faceAngleThreshold: 90
-    waitTime: 5
+    waitTime: 2
     terrainsToRise: []
     terrainsToHide: []
   - instructionTextEN: 
-    instructionTextCN: "\u6CE8\u610F\u5411\u4E0B\u5439\u7684\u75BE\u98A8\uFF0C\u8ACB\u900F\u904E\u64CD\u4F5C\u524D\u65B9\u63E1\u628A\u4F7F\u6ED1\u7FD4\u7FFC\u50BE\u659C\u3002\u5DE6\u63E1\u628A\u5411\u4E0A\u53F3\u63E1\u628A\u5411\u4E0B\u70BA\u53F3\u8F49\uFF0C\u53CD\u4E4B\u70BA\u5DE6\u8F49"
+    instructionTextCN: "\u8ACB\u8A66\u8457\u4E0A\u4E0B\u62C9\u52D5\u524D\u65B9\u7684\u63A7\u5236\u687F\u4F86\u65CB\u8F49\u524D\u65B9\u7684\u8449\u7247\u5427\u3002\n\n\u6309\u4E0BTrigger\u9375\u7E7C\u7E8C"
+    taskType: 3
+    targetPosition: {fileID: 1056030377}
+    reachDistance: 15
+    faceTarget: {fileID: 0}
+    faceAngleThreshold: 90
+    waitTime: 2
+    terrainsToRise: []
+    terrainsToHide: []
+  - instructionTextEN: 
+    instructionTextCN: "\u60F3\u5DE6\u8F49\u6642\uFF0C\u5DE6\u624B\u5411\u4E0B\u800C\u53F3\u624B\u5411\u4E0A\u62C9\uFF1B\u53CD\u4E4B\u4EA6\u7136\u3002\n\n\u6309\u4E0BTrigger\u9375\u7E7C\u7E8C"
+    taskType: 3
+    targetPosition: {fileID: 1056030377}
+    reachDistance: 15
+    faceTarget: {fileID: 0}
+    faceAngleThreshold: 90
+    waitTime: 2
+    terrainsToRise: []
+    terrainsToHide: []
+  - instructionTextEN: 
+    instructionTextCN: "\u8ACB\u8A66\u8457\u7E5E\u904E\u963B\u64CB\u8DEF\u7DDA\u7684\u98A8\uFF0C\u62B5\u9054\u4E0B\u4E00\u6839\u77F3\u67F1\u5427\u3002"
     taskType: 0
     targetPosition: {fileID: 586604960}
     reachDistance: 20
     faceTarget: {fileID: 0}
     faceAngleThreshold: 90
-    waitTime: 0
+    waitTime: 2
     terrainsToRise:
     - {fileID: 1445868723}
     terrainsToHide: []
   - instructionTextEN: 
-    instructionTextCN: "\u5DE6\u524D\u65B9\u51FA\u73FE\u4E86\u65B0\u7684\u77F3\u67F1\uFF0C\u7136\u800C\u88AB\u98A8\u7246\u64CB\u4F4F\u4E86"
+    instructionTextCN: "\u5DE6\u524D\u65B9\u51FA\u73FE\u4E86\u65B0\u7684\u77F3\u67F1\uFF0C\u7136\u800C\u88AB\u98A8\u7246\u64CB\u4F4F\u4E86\n\n\u6309\u4E0Btrigger\u9375\u7E7C\u7E8C"
     taskType: 3
     targetPosition: {fileID: 0}
     reachDistance: 10
     faceTarget: {fileID: 0}
     faceAngleThreshold: 90
-    waitTime: 3
+    waitTime: 2
     terrainsToRise:
     - {fileID: 989558028}
     - {fileID: 1688726820}
@@ -99765,29 +99877,59 @@ MonoBehaviour:
     - {fileID: 79916587}
     - {fileID: 1445868723}
   - instructionTextEN: 
-    instructionTextCN: "\u5C07\u5DE6\u53F3\u63E1\u628A\u4E0B\u58D3\u9032\u884C\u4FEF\u885D\uFF0C\u518D\u5C07\u5DE6\u53F3\u63E1\u628A\u4E0A\u62C9\u3001\u62C9\u52D5\u62C9\u74B0\u4EE5\u722C\u5347\uFF0C\u907F\u958B\u969C\u7919"
-    taskType: 0
-    targetPosition: {fileID: 1163265620}
-    reachDistance: 20
-    faceTarget: {fileID: 0}
-    faceAngleThreshold: 90
-    waitTime: 3
-    terrainsToRise: []
-    terrainsToHide: []
-  - instructionTextEN: 
-    instructionTextCN: "\u505A\u5F97\u597D\uFF0C\u4F60\u662F\u4E00\u540D\u5408\u683C\u7684\u88DC\u5929\u4EBA\u4E86"
+    instructionTextCN: "\u82E5\u540C\u6642\u5411\u4E0B\u62C9\u52D5\u5169\u6839\u63A7\u5236\u687F\uFF0C\u53EF\u4EE5\u5411\u4E0B\u4FEF\u885D\u3002\n\n\u6309\u4E0Btrigger\u9375\u7E7C\u7E8C"
     taskType: 3
     targetPosition: {fileID: 0}
     reachDistance: 10
     faceTarget: {fileID: 0}
     faceAngleThreshold: 90
-    waitTime: 3
+    waitTime: 2
+    terrainsToRise: []
+    terrainsToHide: []
+  - instructionTextEN: 
+    instructionTextCN: "\u540C\u6642\u5411\u4E0A\u62C9\u52D5\u5247\u53EF\u4EE5\u5411\u4E0A\u722C\u5347\u3002\n\n\u6309\u4E0Btrigger\u9375\u7E7C\u7E8C"
+    taskType: 3
+    targetPosition: {fileID: 0}
+    reachDistance: 10
+    faceTarget: {fileID: 0}
+    faceAngleThreshold: 90
+    waitTime: 2
+    terrainsToRise: []
+    terrainsToHide: []
+  - instructionTextEN: 
+    instructionTextCN: "\u9700\u8981\u6CE8\u610F\u7684\u662F\uFF0C\u4FEF\u885D\u6642\u901F\u5EA6\u6703\u6F38\u6F38\u52A0\u5FEB\uFF0C\u722C\u5347\u6642\u5247\u6703\u964D\u4F4E\u3002\n\n\u6309\u4E0Btrigger\u9375\u7E7C\u7E8C"
+    taskType: 3
+    targetPosition: {fileID: 0}
+    reachDistance: 10
+    faceTarget: {fileID: 0}
+    faceAngleThreshold: 90
+    waitTime: 2
+    terrainsToRise: []
+    terrainsToHide: []
+  - instructionTextEN: 
+    instructionTextCN: "\u8ACB\u8A66\u8457\u5148\u4FEF\u885D\u518D\u722C\u5347\uFF0C\u7E5E\u904E\u524D\u65B9\u7684\u98A8\u7246\u5427\u3002"
+    taskType: 0
+    targetPosition: {fileID: 1163265620}
+    reachDistance: 20
+    faceTarget: {fileID: 0}
+    faceAngleThreshold: 90
+    waitTime: 2
+    terrainsToRise: []
+    terrainsToHide: []
+  - instructionTextEN: 
+    instructionTextCN: "\u8ACB\u6D3B\u7528\u9019\u67B6\u6ED1\u7FD4\u7FFC\uFF0C\u8EB2\u907F\u5404\u7A2E\u969C\u7919\u7684\u540C\u6642\uFF0C\u5F80\u5CFD\u8C37\u4E2D\u592E\u7684\u767D\u8272\u88DC\u5929\u67F1\u524D\u9032\u5427\u3002\n\n\u6309\u4E0Btrigger\u9375\u7E7C\u7E8C"
+    taskType: 3
+    targetPosition: {fileID: 0}
+    reachDistance: 10
+    faceTarget: {fileID: 0}
+    faceAngleThreshold: 90
+    waitTime: 2
     terrainsToRise: []
     terrainsToHide:
     - {fileID: 1120908390}
     - {fileID: 1688726820}
   - instructionTextEN: 
-    instructionTextCN: "\u8E8D\u5165\u98A8\u4E2D\uFF0C\u51FA\u767C\u88DC\u5929\u5427"
+    instructionTextCN: "\u9047\u5230\u56F0\u96E3\u6642\uFF0C\u98A8\u5834\u5F80\u5F80\u53EF\u4EE5\u52A9\u4F60\u4E00\u81C2\u4E4B\u529B\u3002\n\n\u6309\u4E0Btrigger\u9375\u7E7C\u7E8C"
     taskType: 3
     targetPosition: {fileID: 0}
     reachDistance: 10
@@ -99798,7 +99940,27 @@ MonoBehaviour:
     - {fileID: 1269758864}
     terrainsToHide: []
   - instructionTextEN: 
-    instructionTextCN: "\u76EE\u6A19\u662F\u524D\u5F80\u5834\u5730\u4E2D\u592E\u7684\u767D\u8272\u67F1\u5B50\u9802\u7AEF"
+    instructionTextCN: "\u77D7\u7ACB\u5728\u5CFD\u8C37\u4E2D\u592E\u7684\u5DE8\u5927\u88DC\u5929\u67F1\uFF0C\u662F\u88DC\u5929\u5320\u901A\u5F80\u4E0A\u9762\u7684\u552F\u4E00\u901A\u9053\u3002\n\n\u6309\u4E0Btrigger\u9375\u7E7C\u7E8C"
+    taskType: 3
+    targetPosition: {fileID: 0}
+    reachDistance: 10
+    faceTarget: {fileID: 0}
+    faceAngleThreshold: 90
+    waitTime: 2
+    terrainsToRise: []
+    terrainsToHide: []
+  - instructionTextEN: 
+    instructionTextCN: "\u4E0D\u77E5\u9053\u662F\u591A\u4E45\u4EE5\u524D\uFF0C\u53C8\u662F\u4EC0\u9EBC\u5B58\u5728\u84CB\u51FA\u4E86\u5982\u6B64\u5DE8\u5927\u7684\u9020\u7269\u5462\uFF1F\n\n\u6309\u4E0Btrigger\u9375\u7E7C\u7E8C"
+    taskType: 3
+    targetPosition: {fileID: 0}
+    reachDistance: 10
+    faceTarget: {fileID: 0}
+    faceAngleThreshold: 90
+    waitTime: 2
+    terrainsToRise: []
+    terrainsToHide: []
+  - instructionTextEN: 
+    instructionTextCN: "\u524D\u5F80"
     taskType: 0
     targetPosition: {fileID: 531164031}
     reachDistance: 20
@@ -99808,15 +99970,25 @@ MonoBehaviour:
     terrainsToRise: []
     terrainsToHide: []
   - instructionTextEN: 
-    instructionTextCN: "\u4E58\u8457\u98A8\uFF0C\u524D\u5F80\u8DDD\u96E2\u5929\u7A7A\u66F4\u8FD1\u7684\u5730\u65B9"
+    instructionTextCN: "\u505A\u5F97\u597D\uFF01"
+    taskType: 4
+    targetPosition: {fileID: 1056030377}
+    reachDistance: 15
+    faceTarget: {fileID: 0}
+    faceAngleThreshold: 90
+    waitTime: 3
+    terrainsToRise:
+    - {fileID: 1921008318}
+    terrainsToHide: []
+  - instructionTextEN: 
+    instructionTextCN: "\u73FE\u5728\u4E58\u8457\u98A8\uFF0C\u524D\u5F80\u8DDD\u96E2\u5929\u7A7A\u66F4\u8FD1\u7684\u5730\u65B9"
     taskType: 0
     targetPosition: {fileID: 1056030377}
     reachDistance: 15
     faceTarget: {fileID: 0}
     faceAngleThreshold: 90
     waitTime: 2
-    terrainsToRise:
-    - {fileID: 1921008318}
+    terrainsToRise: []
     terrainsToHide: []
   autoStart: 1
   hideTextWhenFinished: 1
@@ -122157,6 +122329,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1688726821}
     m_Modifications:
+    - target: {fileID: 5392609462913333411, guid: 8d71784b5f0efaf4aa8c217edc4fdf8e, type: 3}
+      propertyPath: windStrength
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 4260974011103557058, guid: 63241ca4b456f9a47aaabc8dbd669755, type: 3}
       propertyPath: m_LocalScale.x
       value: 10
@@ -122216,10 +122392,6 @@ PrefabInstance:
     - target: {fileID: 4431431471284168624, guid: 63241ca4b456f9a47aaabc8dbd669755, type: 3}
       propertyPath: m_Name
       value: WhiteWindEffectRoot 1 (5)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5392609462913333411, guid: 8d71784b5f0efaf4aa8c217edc4fdf8e, type: 3}
-      propertyPath: windStrength
-      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -128838,6 +129010,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1445868722}
     m_Modifications:
+    - target: {fileID: 5392609462913333411, guid: 8d71784b5f0efaf4aa8c217edc4fdf8e, type: 3}
+      propertyPath: windStrength
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 4260974011103557058, guid: 63241ca4b456f9a47aaabc8dbd669755, type: 3}
       propertyPath: m_LocalScale.x
       value: 10
@@ -128897,10 +129073,6 @@ PrefabInstance:
     - target: {fileID: 4431431471284168624, guid: 63241ca4b456f9a47aaabc8dbd669755, type: 3}
       propertyPath: m_Name
       value: WhiteWindEffectRoot 1 (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5392609462913333411, guid: 8d71784b5f0efaf4aa8c217edc4fdf8e, type: 3}
-      propertyPath: windStrength
-      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -132637,6 +132809,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1445868722}
     m_Modifications:
+    - target: {fileID: 5392609462913333411, guid: 8d71784b5f0efaf4aa8c217edc4fdf8e, type: 3}
+      propertyPath: windStrength
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 4260974011103557058, guid: 63241ca4b456f9a47aaabc8dbd669755, type: 3}
       propertyPath: m_LocalScale.x
       value: 10
@@ -132696,10 +132872,6 @@ PrefabInstance:
     - target: {fileID: 4431431471284168624, guid: 63241ca4b456f9a47aaabc8dbd669755, type: 3}
       propertyPath: m_Name
       value: WhiteWindEffectRoot 1 (5)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5392609462913333411, guid: 8d71784b5f0efaf4aa8c217edc4fdf8e, type: 3}
-      propertyPath: windStrength
-      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -161165,6 +161337,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1688726821}
     m_Modifications:
+    - target: {fileID: 5392609462913333411, guid: 8d71784b5f0efaf4aa8c217edc4fdf8e, type: 3}
+      propertyPath: windStrength
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 4260974011103557058, guid: 63241ca4b456f9a47aaabc8dbd669755, type: 3}
       propertyPath: m_LocalScale.x
       value: 10
@@ -161224,10 +161400,6 @@ PrefabInstance:
     - target: {fileID: 4431431471284168624, guid: 63241ca4b456f9a47aaabc8dbd669755, type: 3}
       propertyPath: m_Name
       value: WhiteWindEffectRoot 1 (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5392609462913333411, guid: 8d71784b5f0efaf4aa8c217edc4fdf8e, type: 3}
-      propertyPath: windStrength
-      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -231337,6 +231509,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5392609462913333411, guid: 8d71784b5f0efaf4aa8c217edc4fdf8e, type: 3}
+      propertyPath: windStrength
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4260974011103557058, guid: 63241ca4b456f9a47aaabc8dbd669755, type: 3}
       propertyPath: m_LocalScale.x
       value: 20
@@ -231396,10 +231572,6 @@ PrefabInstance:
     - target: {fileID: 4431431471284168624, guid: 63241ca4b456f9a47aaabc8dbd669755, type: 3}
       propertyPath: m_Name
       value: WhiteWindEffectRoot 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5392609462913333411, guid: 8d71784b5f0efaf4aa8c217edc4fdf8e, type: 3}
-      propertyPath: windStrength
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -254340,6 +254512,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1445868722}
     m_Modifications:
+    - target: {fileID: 5392609462913333411, guid: 8d71784b5f0efaf4aa8c217edc4fdf8e, type: 3}
+      propertyPath: windStrength
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 4260974011103557058, guid: 63241ca4b456f9a47aaabc8dbd669755, type: 3}
       propertyPath: m_LocalScale.x
       value: 10
@@ -254399,10 +254575,6 @@ PrefabInstance:
     - target: {fileID: 4431431471284168624, guid: 63241ca4b456f9a47aaabc8dbd669755, type: 3}
       propertyPath: m_Name
       value: WhiteWindEffectRoot 1 (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5392609462913333411, guid: 8d71784b5f0efaf4aa8c217edc4fdf8e, type: 3}
-      propertyPath: windStrength
-      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -275677,6 +275849,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1688726821}
     m_Modifications:
+    - target: {fileID: 5392609462913333411, guid: 8d71784b5f0efaf4aa8c217edc4fdf8e, type: 3}
+      propertyPath: windStrength
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 4260974011103557058, guid: 63241ca4b456f9a47aaabc8dbd669755, type: 3}
       propertyPath: m_LocalScale.x
       value: 10
@@ -275736,10 +275912,6 @@ PrefabInstance:
     - target: {fileID: 4431431471284168624, guid: 63241ca4b456f9a47aaabc8dbd669755, type: 3}
       propertyPath: m_Name
       value: WhiteWindEffectRoot 1 (4)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5392609462913333411, guid: 8d71784b5f0efaf4aa8c217edc4fdf8e, type: 3}
-      propertyPath: windStrength
-      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -303820,6 +303992,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1688726821}
     m_Modifications:
+    - target: {fileID: 5392609462913333411, guid: 8d71784b5f0efaf4aa8c217edc4fdf8e, type: 3}
+      propertyPath: windStrength
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 4260974011103557058, guid: 63241ca4b456f9a47aaabc8dbd669755, type: 3}
       propertyPath: m_LocalScale.x
       value: 10
@@ -303879,10 +304055,6 @@ PrefabInstance:
     - target: {fileID: 4431431471284168624, guid: 63241ca4b456f9a47aaabc8dbd669755, type: 3}
       propertyPath: m_Name
       value: WhiteWindEffectRoot 1 (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5392609462913333411, guid: 8d71784b5f0efaf4aa8c217edc4fdf8e, type: 3}
-      propertyPath: windStrength
-      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -322584,9 +322756,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CylindricalCanvasSurface
   sourceTexture: {fileID: 8400000, guid: cd4d5d6890e24c7429d448c5e00ae8a9, type: 2}
-  radius: 0.4
+  radius: 1.2
   totalAngle: 140
-  verticalSize: 0.5
+  verticalSize: 1
   xSegments: 96
   ySegments: 1
   shader: {fileID: 10750, guid: 0000000000000000f000000000000000, type: 0}
@@ -322660,7 +322832,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FollowTransformCanvas
   target: {fileID: 207240162}
-  distance: 1
+  distance: 0
   heightOffset: 1.4
   localOffset: {x: 0, y: 0, z: 0}
   followYawOnly: 1
@@ -333147,6 +333319,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1445868722}
     m_Modifications:
+    - target: {fileID: 5392609462913333411, guid: 8d71784b5f0efaf4aa8c217edc4fdf8e, type: 3}
+      propertyPath: windStrength
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 4260974011103557058, guid: 63241ca4b456f9a47aaabc8dbd669755, type: 3}
       propertyPath: m_LocalScale.x
       value: 10
@@ -333206,10 +333382,6 @@ PrefabInstance:
     - target: {fileID: 4431431471284168624, guid: 63241ca4b456f9a47aaabc8dbd669755, type: 3}
       propertyPath: m_Name
       value: WhiteWindEffectRoot 1 (4)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5392609462913333411, guid: 8d71784b5f0efaf4aa8c217edc4fdf8e, type: 3}
-      propertyPath: windStrength
-      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -335293,7 +335465,7 @@ MonoBehaviour:
   manualPositionAndScale: 0
   renderPriority: 1
   styledSpace0: 0
-  overrideMaterial: {fileID: 1488109612}
+  overrideMaterial: {fileID: 206731542}
   overrideCamToVolumeDistance: 1
   overrideVolumeDistanceFade: 0
   version: 0
@@ -335330,7 +335502,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 341421177}
+  - {fileID: 1986993687}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -336182,6 +336354,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1688726821}
     m_Modifications:
+    - target: {fileID: 5392609462913333411, guid: 8d71784b5f0efaf4aa8c217edc4fdf8e, type: 3}
+      propertyPath: windStrength
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 4260974011103557058, guid: 63241ca4b456f9a47aaabc8dbd669755, type: 3}
       propertyPath: m_LocalScale.x
       value: 10
@@ -336241,10 +336417,6 @@ PrefabInstance:
     - target: {fileID: 4431431471284168624, guid: 63241ca4b456f9a47aaabc8dbd669755, type: 3}
       propertyPath: m_Name
       value: WhiteWindEffectRoot 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5392609462913333411, guid: 8d71784b5f0efaf4aa8c217edc4fdf8e, type: 3}
-      propertyPath: windStrength
-      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -356789,6 +356961,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5392609462913333411, guid: 8d71784b5f0efaf4aa8c217edc4fdf8e, type: 3}
+      propertyPath: windStrength
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4260974011103557058, guid: 63241ca4b456f9a47aaabc8dbd669755, type: 3}
       propertyPath: m_LocalScale.x
       value: 20
@@ -356848,10 +357024,6 @@ PrefabInstance:
     - target: {fileID: 4431431471284168624, guid: 63241ca4b456f9a47aaabc8dbd669755, type: 3}
       propertyPath: m_Name
       value: WhiteWindEffectRoot 1 (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5392609462913333411, guid: 8d71784b5f0efaf4aa8c217edc4fdf8e, type: 3}
-      propertyPath: windStrength
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -368737,6 +368909,45 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1986505101}
   m_Mesh: {fileID: -5495902117074765545, guid: bc9282a96680e9548aa8189e5e1dc3bb, type: 3}
+--- !u!21 &1986993687
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Height Fog Global
+  m_Shader: {fileID: 4800000, guid: 3a7ef1b66bafb7a448a880ef76d2e6e6, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 3001
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Ints: []
+    m_Floats:
+    - _AdvancedCat: 1
+    - _AlphaCutoff: 0.5
+    - _Banner: 1
+    - _DirectionalCat: 1
+    - _FogAxisMode: 1
+    - _FogCat: 1
+    - _HeightFogGlobal: 1
+    - _IsHeightFogShader: 1
+    - _NoiseCat: 1
+    - _SkyboxCat: 1
+    m_Colors:
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!1001 &1987006811
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -389406,6 +389617,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1688726821}
     m_Modifications:
+    - target: {fileID: 5392609462913333411, guid: 8d71784b5f0efaf4aa8c217edc4fdf8e, type: 3}
+      propertyPath: windStrength
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 4260974011103557058, guid: 63241ca4b456f9a47aaabc8dbd669755, type: 3}
       propertyPath: m_LocalScale.x
       value: 10
@@ -389465,10 +389680,6 @@ PrefabInstance:
     - target: {fileID: 4431431471284168624, guid: 63241ca4b456f9a47aaabc8dbd669755, type: 3}
       propertyPath: m_Name
       value: WhiteWindEffectRoot 1 (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5392609462913333411, guid: 8d71784b5f0efaf4aa8c217edc4fdf8e, type: 3}
-      propertyPath: windStrength
-      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
