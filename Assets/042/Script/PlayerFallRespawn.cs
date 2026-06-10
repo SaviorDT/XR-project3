@@ -63,6 +63,12 @@ public class PlayerFallRespawn : MonoBehaviour
     {
         UpdateLastGroundPosition();
 
+        if (OVRInput.GetDown(OVRInput.RawButton.A))
+        {
+            RespawnToLastGround();
+            return;
+        }
+
         if (!IsInsideSafeArea(transform.position))
         {
             RespawnToLastGround();
