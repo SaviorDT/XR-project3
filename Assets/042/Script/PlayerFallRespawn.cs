@@ -9,18 +9,18 @@ public class PlayerFallRespawn : MonoBehaviour
         Sphere
     }
 
-    [Header("¦a­±§P©w")]
+    [Header("ï¿½aï¿½ï¿½ï¿½Pï¿½w")]
     public LayerMask groundLayer;
     public float groundCheckDistance = 1.2f;
     public float groundCheckRadius = 0.3f;
 
-    [Header("¥ß¨¬ÂI©Y«×­­¨î")]
+    [Header("ï¿½ß¨ï¿½ï¿½Iï¿½Yï¿½×­ï¿½ï¿½ï¿½")]
     public float maxGroundSlopeAngle = 5f;
 
-    [Header("¦w¥þ½d³ò¼Ò¦¡")]
+    [Header("ï¿½wï¿½ï¿½ï¿½dï¿½ï¿½Ò¦ï¿½")]
     public SafeAreaMode safeAreaMode = SafeAreaMode.XYZBox;
 
-    [Header("XYZ ¥ß¤èÅé½d³ò")]
+    [Header("XYZ ï¿½ß¤ï¿½ï¿½ï¿½dï¿½ï¿½")]
     public float minX = -10f;
     public float maxX = 10f;
     public float minY = -2f;
@@ -28,27 +28,27 @@ public class PlayerFallRespawn : MonoBehaviour
     public float minZ = -10f;
     public float maxZ = 10f;
 
-    [Header("Circle + Y ½d³ò")]
+    [Header("Circle + Y ï¿½dï¿½ï¿½")]
     public Vector2 circleCenterXZ = Vector2.zero;
     public float circleRadius = 10f;
     public float circleMinY = -2f;
     public float circleMaxY = 5f;
 
-    [Header("Sphere ½d³ò")]
+    [Header("Sphere ï¿½dï¿½ï¿½")]
     public Vector3 sphereCenter = Vector3.zero;
     public float sphereRadius = 10f;
 
-    [Header("Àð­± / »ÙÃªÀË¬d")]
+    [Header("ï¿½ï¿½ / ï¿½ï¿½Ãªï¿½Ë¬d")]
     public LayerMask wallLayer;
     public float wallCheckRadius = 0.35f;
     public float wallCheckDistance = 0.6f;
     public float wallCheckHeight = 0.8f;
 
-    [Header("­«¥Í³]©w")]
+    [Header("ï¿½ï¿½ï¿½Í³]ï¿½w")]
     public float respawnYOffset = 1.5f;
     public bool resetVelocity = true;
 
-    [Header("¥ß¨¬ÂIªÅ¶¡ÀË¬d")]
+    [Header("ï¿½ß¨ï¿½ï¿½Iï¿½Å¶ï¿½ï¿½Ë¬d")]
     public Collider safeStandCollider;
     public LayerMask safeStandBlockLayer;
     public float safeStandCheckYOffset = 0f;
@@ -214,18 +214,22 @@ public class PlayerFallRespawn : MonoBehaviour
         if (characterController != null)
         {
             characterController.enabled = false;
-            transform.position = respawnPosition;
+            // transform.position = respawnPosition;
+            rb.MovePosition(respawnPosition);
             characterController.enabled = true;
         }
         else
         {
-            transform.position = respawnPosition;
+            // transform.position = respawnPosition;
+            rb.MovePosition(respawnPosition);
         }
 
         if (resetVelocity && rb != null)
         {
 #if UNITY_6000_0_OR_NEWER
+            rb.interpolation = RigidbodyInterpolation.None;
             rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
 #else
             rb.velocity = Vector3.zero;
 #endif

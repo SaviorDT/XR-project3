@@ -102,6 +102,7 @@ public class PlayerFlyController : MonoBehaviour
     private float FlappingAmountBuffer = 0.0f;
     private float RightControllerLastY = 0.0f, LeftControllerLastY = 0.0f;
     private bool RightBPressedPrev = false;
+    private bool ShouldUpdateInterpolate = false;
     
     void Start()
     {
@@ -112,7 +113,7 @@ public class PlayerFlyController : MonoBehaviour
         }
         if (PlayerRigidbody != null)
         {
-            // PlayerRigidbody.interpolation = RigidbodyInterpolation.Interpolate;
+            PlayerRigidbody.interpolation = RigidbodyInterpolation.Interpolate;
         }
     }
 
@@ -150,7 +151,7 @@ public class PlayerFlyController : MonoBehaviour
 
         if (IsGrounded())
         {
-            NextFlyTime = 0.0f;
+            NextFlyTime -= 1.0f;
         }
 
         if (Velocity.magnitude > PlayClothSpeedThreshold && !InUniverse)
@@ -169,6 +170,17 @@ public class PlayerFlyController : MonoBehaviour
                 ClothAudio.Stop();
                 ClothPlayed = false;
             }
+        }
+
+        if (PlayerRigidbody.interpolation == RigidbodyInterpolation.None)
+        {
+            ShouldUpdateInterpolate = true;
+        }
+
+        if (ShouldUpdateInterpolate)
+        {
+            PlayerRigidbody.interpolation = RigidbodyInterpolation.Interpolate;
+            ShouldUpdateInterpolate = false;
         }
 
         
@@ -663,8 +675,8 @@ public class PlayerFlyController : MonoBehaviour
         if (HeadDevice.isValid && HeadDevice.TryGetFeatureValue(CommonUsages.devicePosition, out Vector3 devicePos))
         {
             devicePos -= CenterPosition;
-            PlayerControllerYaw = devicePos.x * 90.0f;
-            PlayerControllerPitch = devicePos.z * 90.0f;
+            PlayerControllerYaw = Mathf.Clamp(devicePos.x * 90.0f, -15.0f, 15.0f);
+            PlayerControllerPitch = Mathf.Clamp(devicePos.z * 90.0f, -80.0f, 80.0f);
         }
 
         if (!RightHandDevice.isValid)
