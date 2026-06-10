@@ -145,7 +145,7 @@ public class ProjectileLauncher : MonoBehaviour
                 Quaternion.LookRotation(startDir)
             );
 
-            meteor.Init(startDir, speed, player, delay);
+            meteor.Init(startDir, speed, player, delay, transform.forward);
 
             yield return new WaitForSeconds(meteorCInterval);
         }

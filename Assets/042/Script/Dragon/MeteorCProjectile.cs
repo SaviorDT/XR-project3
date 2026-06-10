@@ -22,8 +22,13 @@ public class MeteorCProjectile : MonoBehaviour
     private Vector3 lastPlayerPosition;
     private Vector3 playerVelocity;
     private bool hasLastPlayerPosition = false;
-
-    public void Init(Vector3 startDirection, float moveSpeed, Transform playerTarget, float delay)
+    private Vector3 launcherForward;
+    public void Init(
+    Vector3 startDirection,
+    float moveSpeed,
+    Transform playerTarget,
+    float delay,
+    Vector3 launcherForwardDirection)
     {
         rb = GetComponent<Rigidbody>();
 
@@ -31,6 +36,8 @@ public class MeteorCProjectile : MonoBehaviour
         speed = moveSpeed;
         player = playerTarget;
         trackingDelay = delay;
+
+        launcherForward = launcherForwardDirection.normalized;
 
         timer = 0f;
 
@@ -66,7 +73,9 @@ public class MeteorCProjectile : MonoBehaviour
 
             if (toPredictedPosition.sqrMagnitude > 0.01f)
             {
-                Vector3 targetDirection = toPredictedPosition.normalized;
+                Vector3 targetDirection = ClampToForward90(
+    toPredictedPosition.normalized
+);
 
                 currentDirection = Vector3.Slerp(
                     currentDirection,
@@ -83,7 +92,31 @@ public class MeteorCProjectile : MonoBehaviour
             rb.MoveRotation(Quaternion.LookRotation(currentDirection));
         }
     }
+    private Vector3 ClampToForward90(Vector3 desiredDirection)
+    {
+        float angle = Vector3.Angle(
+            launcherForward,
+            desiredDirection
+        );
 
+        if (angle <= 90f)
+            return desiredDirection;
+
+        float sign = Mathf.Sign(
+            Vector3.Dot(
+                Vector3.Cross(launcherForward, desiredDirection),
+                Vector3.up
+            )
+        );
+
+        Quaternion limitRotation =
+            Quaternion.AngleAxis(
+                90f * sign,
+                Vector3.up
+            );
+
+        return (limitRotation * launcherForward).normalized;
+    }
     private void UpdatePlayerVelocity()
     {
         if (player == null)
