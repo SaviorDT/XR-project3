@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9022458825263019016}
   - component: {fileID: 8524997958436310066}
   m_Layer: 0
-  m_Name: SpiralComet
+  m_Name: WhiteSpiralComet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,7 +59,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a7bcfed89b581a54b9c2e33533fb5423, type: 2}
+  - {fileID: 2100000, guid: 9f48a238db72b874b893516d69ba4178, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -173,3 +173,5 @@ MonoBehaviour:
   trailTime: 1.5
   trailStartWidth: 0.15
   trailEndWidth: 0.02
+  fadeDuration: 0.6
+  fadeForwardSpeedRatio: 0.3
