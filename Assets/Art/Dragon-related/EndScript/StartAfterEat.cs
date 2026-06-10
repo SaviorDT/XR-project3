@@ -30,6 +30,8 @@ public class EndingDirector : MonoBehaviour
     [Header("Fade 漸黑")]
     public CanvasGroup fadeCanvasGroup;   // 黑幕的 CanvasGroup
     public float fadeDuration = 3f;       // 漸黑秒數(對齊程式組推玩家的時間)
+    [Header("第4階段:五鏡頭序列")]
+    public CameraSequence cameraSequence;
 
     public void StartAfterEat()
     {
@@ -71,12 +73,8 @@ public class EndingDirector : MonoBehaviour
 
         // ★新增:休息結束,吹氣
         dragonAnimator.SetTrigger(blowTrigger);
-        StartCoroutine(FadeToBlack(fadeDuration));
-
-        // 等漸黑完成(全黑)
-        yield return new WaitForSeconds(fadeDuration);
-
-        // ★全黑了 —— 第3階段結束,接下來進第4階段(5鏡頭回程)
+        yield return StartCoroutine(FadeToBlack(fadeDuration));  // 等它確實全黑
+        if (cameraSequence != null) cameraSequence.StartSequence();
     }
 
     IEnumerator FadeToBlack(float duration)
