@@ -48,6 +48,11 @@ public class PlayerFallRespawn : MonoBehaviour
     public float respawnYOffset = 1.5f;
     public bool resetVelocity = true;
 
+    [Header("立足點空間檢查")]
+    public Collider safeStandCollider;
+    public LayerMask safeStandBlockLayer;
+    public float safeStandCheckYOffset = 0f;
+
     private Vector3 lastGroundPosition;
     private Rigidbody rb;
     private CharacterController characterController;
@@ -92,6 +97,9 @@ public class PlayerFallRespawn : MonoBehaviour
             return;
 
         if (IsNearWall(candidate))
+            return;
+
+        if (!IsSafeStandColliderClear(candidate))
             return;
 
         lastGroundPosition = candidate;
@@ -156,7 +164,49 @@ public class PlayerFallRespawn : MonoBehaviour
 
         return false;
     }
+    private bool IsSafeStandColliderClear(Vector3 candidatePosition)
+    {
+        if (safeStandCollider == null)
+            return true;
 
+        Vector3 originalPosition = transform.position;
+        Quaternion originalRotation = transform.rotation;
+
+        transform.position = candidatePosition + Vector3.up * safeStandCheckYOffset;
+
+        Physics.SyncTransforms();
+
+        Bounds bounds = safeStandCollider.bounds;
+
+        Collider[] hits = Physics.OverlapBox(
+            bounds.center,
+            bounds.extents,
+            safeStandCollider.transform.rotation,
+            safeStandBlockLayer,
+            QueryTriggerInteraction.Ignore
+        );
+
+        transform.position = originalPosition;
+        transform.rotation = originalRotation;
+
+        Physics.SyncTransforms();
+
+        foreach (Collider hit in hits)
+        {
+            if (hit == null)
+                continue;
+
+            if (hit == safeStandCollider)
+                continue;
+
+            if (hit.transform.IsChildOf(transform))
+                continue;
+
+            return false;
+        }
+
+        return true;
+    }
     private void RespawnToLastGround()
     {
         Vector3 respawnPosition = lastGroundPosition + Vector3.up * respawnYOffset;
