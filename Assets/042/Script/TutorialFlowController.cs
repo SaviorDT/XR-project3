@@ -41,11 +41,14 @@ public class TutorialFlowController : MonoBehaviour
         [Header("本階段要隱藏的地形")]
         public List<RisingTerrain> terrainsToHide;
 
-
+        [Header("飛行控制")]
+        public bool enableFlyOnThisStep = false;
+        public bool disableFlyOnThisStep = false;
     }
 
     [Header("玩家")]
     public Transform player;
+    public PlayerFlyController playerFlyController;
 
     [Header("角色朝向來源")]
     public Transform characterForwardRoot;
@@ -157,6 +160,8 @@ public class TutorialFlowController : MonoBehaviour
         }
 
         TutorialStep step = steps[currentStepIndex];
+
+        ApplyFlySetting(step);
         SpawnTargetBeam(step);
         if (chinese)
         {
@@ -447,6 +452,21 @@ public class TutorialFlowController : MonoBehaviour
             {
                 group.alpha = to;
             }
+        }
+    }
+    private void ApplyFlySetting(TutorialStep step)
+    {
+        if (playerFlyController == null)
+            return;
+
+        if (step.enableFlyOnThisStep)
+        {
+            playerFlyController.EnableFly();
+        }
+
+        if (step.disableFlyOnThisStep)
+        {
+            playerFlyController.DisableFly();
         }
     }
 }

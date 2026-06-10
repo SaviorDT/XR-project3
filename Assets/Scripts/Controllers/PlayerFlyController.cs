@@ -679,4 +679,12 @@ public class PlayerFlyController : MonoBehaviour
     {
         Velocity = Vector3.zero;
     }
+    public void EnableFly()
+    {
+        NextFlyTime = 0;
+    }
+    public void DisableFly()
+    {
+        NextFlyTime = Time.time + 999999;
+    }
 }
