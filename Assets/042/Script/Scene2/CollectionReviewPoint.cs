@@ -1,7 +1,7 @@
 using System.Text;
 using TMPro;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class CollectionReviewPoint : MonoBehaviour
 {
     [Header("語言設定")]
@@ -14,11 +14,35 @@ public class CollectionReviewPoint : MonoBehaviour
     [Header("設定")]
     public bool showOnlyOnce = true;
 
+    [Header("切換場景")]
+    public string nextSceneName;
+
+    private bool waitingForTrigger = false;
+
     private bool alreadyShown = false;
 
     private void Start()
     {
         AutoFindUIText();
+    }
+    private void Update()
+    {
+        if (!waitingForTrigger)
+            return;
+
+        bool triggerPressed =
+            OVRInput.GetDown(
+                OVRInput.Button.PrimaryIndexTrigger,
+                OVRInput.Controller.RTouch)
+            ||
+            OVRInput.GetDown(
+                OVRInput.Button.PrimaryIndexTrigger,
+                OVRInput.Controller.LTouch);
+
+        if (triggerPressed)
+        {
+            SceneManager.LoadScene(nextSceneName);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -124,5 +148,7 @@ public class CollectionReviewPoint : MonoBehaviour
 
         targetText.text = sb.ToString();
         targetText.gameObject.SetActive(true);
+
+        waitingForTrigger = true;
     }
 }
