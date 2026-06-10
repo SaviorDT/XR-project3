@@ -12,9 +12,6 @@ public class CollectibleItem : MonoBehaviour
     public PlayerFlyController playerFlyController;
     public LayerMask groundLayer;
 
-    [Header("語言設定")]
-    public bool chinese = true;
-
     [Header("距離設定")]
     public float beaconShowDistance = 8f;
     public float pickupDistance = 2f;
@@ -27,9 +24,9 @@ public class CollectibleItem : MonoBehaviour
     public GameObject beaconPrefab;
     public float fadeDuration = 0.5f;
 
-    [Header("UI")]
-    public TMP_Text messageTextEN;
-    public TMP_Text messageTextCN;
+    [Header("UI，自動抓 HUD_SourceCanvas 下的 Title / Text 中文")]
+    public TMP_Text titleText;
+    public TMP_Text descriptionText;
     public float messageDuration = 3f;
 
     public bool isGrounded;
@@ -54,7 +51,10 @@ public class CollectibleItem : MonoBehaviour
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
 
         if (playerObj != null)
+        {
             player = playerObj.transform;
+            playerFlyController = playerObj.GetComponent<PlayerFlyController>();
+        }
     }
 
     private void AutoFindUIText()
@@ -67,20 +67,20 @@ public class CollectibleItem : MonoBehaviour
             return;
         }
 
-        Transform textEN = canvasObj.transform.Find("Text");
+        Transform title = canvasObj.transform.Find("Title");
         Transform textCN = canvasObj.transform.Find("Text 中文");
 
-        if (textEN != null)
-            messageTextEN = textEN.GetComponent<TMP_Text>();
+        if (title != null)
+            titleText = title.GetComponent<TMP_Text>();
 
         if (textCN != null)
-            messageTextCN = textCN.GetComponent<TMP_Text>();
+            descriptionText = textCN.GetComponent<TMP_Text>();
 
-        if (messageTextEN == null)
-            Debug.LogWarning("找不到英文 Text 或 TMP_Text");
+        if (titleText == null)
+            Debug.LogWarning("找不到 Title 或 TMP_Text");
 
-        if (messageTextCN == null)
-            Debug.LogWarning("找不到中文 Text 或 TMP_Text");
+        if (descriptionText == null)
+            Debug.LogWarning("找不到 Text 中文 或 TMP_Text");
     }
 
     private void Update()
@@ -93,17 +93,6 @@ public class CollectibleItem : MonoBehaviour
         UpdateBeacon(distance);
         CheckPickup(distance);
         isGrounded = IsPlayerGrounded();
-    }
-
-    private void FindPlayerIfNeeded()
-    {
-        if (player != null)
-            return;
-
-        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-
-        if (playerObj != null)
-            player = playerObj.transform;
     }
 
     private void CreateBeacon()
@@ -156,6 +145,9 @@ public class CollectibleItem : MonoBehaviour
 
     private bool IsPlayerGrounded()
     {
+        if (playerFlyController == null)
+            return false;
+
         return playerFlyController.IsGrounded();
     }
 
@@ -170,47 +162,42 @@ public class CollectibleItem : MonoBehaviour
             player.GetComponent<PlayerCollectionRecorder>();
 
         if (recorder != null)
-        {
             recorder.AddItem(itemData);
-        }
 
         ShowPickupMessage();
 
         if (beaconInstance != null)
-        {
             Destroy(beaconInstance);
-        }
 
         gameObject.SetActive(false);
     }
 
     private void ShowPickupMessage()
     {
-        TMP_Text targetText = chinese ? messageTextCN : messageTextEN;
-
-        if (targetText == null || itemData == null)
+        if (titleText == null || descriptionText == null || itemData == null)
             return;
 
-        string message = chinese
-            ? $"獲得：{itemData.itemNameCN}"
-            : $"Collected: {itemData.itemNameEN}";
+        titleText.text = itemData.itemNameCN;
+        descriptionText.text = itemData.descriptionCN;
+
+        titleText.gameObject.SetActive(true);
+        descriptionText.gameObject.SetActive(true);
 
         if (messageCoroutine != null)
             StopCoroutine(messageCoroutine);
 
-        messageCoroutine = StartCoroutine(
-            ShowMessageRoutine(targetText, message)
-        );
+        messageCoroutine = StartCoroutine(HideMessageRoutine());
     }
 
-    private IEnumerator ShowMessageRoutine(TMP_Text targetText, string message)
+    private IEnumerator HideMessageRoutine()
     {
-        targetText.text = message;
-        targetText.gameObject.SetActive(true);
-
         yield return new WaitForSeconds(messageDuration);
 
-        targetText.gameObject.SetActive(false);
+        if (titleText != null)
+            titleText.gameObject.SetActive(false);
+
+        if (descriptionText != null)
+            descriptionText.gameObject.SetActive(false);
     }
 
     private IEnumerator FadeBeacon(float targetAlpha)
