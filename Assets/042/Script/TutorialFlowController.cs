@@ -62,6 +62,13 @@ public class TutorialFlowController : MonoBehaviour
     public bool autoStart = true;
     public bool hideTextWhenFinished = true;
 
+    [Header("目標光柱")]
+    public GameObject targetBeamPrefab;
+    public float beamYOffset = 0f;
+    public Vector3 beamScale = new Vector3(2f, 2f, 2f);
+
+    private Dictionary<Transform, GameObject> targetBeams = new Dictionary<Transform, GameObject>();
+
     [Header("文字淡入淡出設定")]
     public Transform curvedUIRoot;
     public float fadeOutDuration = 0.25f;
@@ -99,6 +106,7 @@ public class TutorialFlowController : MonoBehaviour
 
         if (IsStepCompleted(step))
         {
+            ClearTargetBeam(step);
             NextStep();
         }
     }
@@ -122,6 +130,7 @@ public class TutorialFlowController : MonoBehaviour
         }
 
         TutorialStep step = steps[currentStepIndex];
+        SpawnTargetBeam(step);
         if (chinese)
         {
             if (tutorialTextCN != null)
@@ -165,7 +174,65 @@ public class TutorialFlowController : MonoBehaviour
             }
         }
     }
+    private void SpawnTargetBeam(TutorialStep step)
+    {
+        if (targetBeamPrefab == null)
+            return;
 
+        Transform target = null;
+
+        if (step.taskType == TaskType.ReachPosition || step.taskType == TaskType.ReachAndFace)
+        {
+            target = step.targetPosition;
+        }
+        else if (step.taskType == TaskType.FaceTarget)
+        {
+            target = step.faceTarget;
+        }
+
+        if (target == null)
+            return;
+
+        if (targetBeams.ContainsKey(target))
+            return;
+
+        Vector3 spawnPosition = target.position + Vector3.up * beamYOffset;
+
+        GameObject beam = Instantiate(
+            targetBeamPrefab,
+            spawnPosition,
+            Quaternion.identity
+        );
+
+        beam.transform.localScale = beamScale;
+
+        targetBeams.Add(target, beam);
+    }
+
+    private void ClearTargetBeam(TutorialStep step)
+    {
+        Transform target = null;
+
+        if (step.taskType == TaskType.ReachPosition || step.taskType == TaskType.ReachAndFace)
+        {
+            target = step.targetPosition;
+        }
+        else if (step.taskType == TaskType.FaceTarget)
+        {
+            target = step.faceTarget;
+        }
+
+        if (target == null)
+            return;
+
+        if (targetBeams.TryGetValue(target, out GameObject beam))
+        {
+            if (beam != null)
+                Destroy(beam);
+
+            targetBeams.Remove(target);
+        }
+    }
     private bool IsStepCompleted(TutorialStep step)
     {
         switch (step.taskType)
