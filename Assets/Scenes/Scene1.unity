@@ -99876,6 +99876,18 @@ MonoBehaviour:
     terrainsToHide: []
     enableFlyOnThisStep: 1
     disableFlyOnThisStep: 0
+  - instructionTextEN: 
+    instructionTextCN: 
+    taskType: 4
+    targetPosition: {fileID: 0}
+    reachDistance: 10
+    faceTarget: {fileID: 0}
+    faceAngleThreshold: 90
+    waitTime: 0.1
+    terrainsToRise: []
+    terrainsToHide: []
+    enableFlyOnThisStep: 0
+    disableFlyOnThisStep: 0
   autoStart: 1
   hideTextWhenFinished: 1
   disableTerrainBeforeRise: 1
