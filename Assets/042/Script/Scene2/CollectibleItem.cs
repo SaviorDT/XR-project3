@@ -9,6 +9,7 @@ public class CollectibleItem : MonoBehaviour
 
     [Header("玩家")]
     public Transform player;
+    public PlayerFlyController playerFlyController;
     public LayerMask groundLayer;
 
     [Header("語言設定")]
@@ -30,6 +31,8 @@ public class CollectibleItem : MonoBehaviour
     public TMP_Text messageTextEN;
     public TMP_Text messageTextCN;
     public float messageDuration = 3f;
+
+    public bool isGrounded;
 
     private GameObject beaconInstance;
     private Renderer[] beaconRenderers;
@@ -89,6 +92,7 @@ public class CollectibleItem : MonoBehaviour
 
         UpdateBeacon(distance);
         CheckPickup(distance);
+        isGrounded = IsPlayerGrounded();
     }
 
     private void FindPlayerIfNeeded()
@@ -152,16 +156,7 @@ public class CollectibleItem : MonoBehaviour
 
     private bool IsPlayerGrounded()
     {
-        Vector3 origin = player.position + Vector3.up * 0.2f;
-
-        return Physics.SphereCast(
-            origin,
-            groundCheckRadius,
-            Vector3.down,
-            out _,
-            groundCheckDistance,
-            groundLayer
-        );
+        return playerFlyController.IsGrounded();
     }
 
     private void PickUp()

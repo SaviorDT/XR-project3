@@ -322,7 +322,7 @@ public class PlayerFlyController : MonoBehaviour
         }
     }
 
-    private bool IsGrounded() {
+    public bool IsGrounded() {
         if (PlayerCollider == null)
         {
             return false;
