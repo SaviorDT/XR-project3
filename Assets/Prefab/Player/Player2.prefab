@@ -4942,7 +4942,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 198048510419209039}
-  m_Mesh: {fileID: 6472033283870424552, guid: f01144f92385d164eb3e2870a0334506, type: 3}
+  m_Mesh: {fileID: 6472033283870424552, guid: cf3919b6f2d0e9844926c48507461296, type: 3}
 --- !u!23 &6181056371821613809
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5035,7 +5035,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 286474013977911140}
-  m_Mesh: {fileID: -2576229488831876082, guid: f01144f92385d164eb3e2870a0334506, type: 3}
+  m_Mesh: {fileID: -2576229488831876082, guid: cf3919b6f2d0e9844926c48507461296, type: 3}
 --- !u!23 &9131177501548928051
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10342,7 +10342,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 467300814220741385}
-  m_Mesh: {fileID: 6995655510436753321, guid: f01144f92385d164eb3e2870a0334506, type: 3}
+  m_Mesh: {fileID: 6995655510436753321, guid: cf3919b6f2d0e9844926c48507461296, type: 3}
 --- !u!23 &4239019484205514103
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10520,7 +10520,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 603125144683592151}
-  m_Mesh: {fileID: -4021319378949276034, guid: f01144f92385d164eb3e2870a0334506, type: 3}
+  m_Mesh: {fileID: -4021319378949276034, guid: cf3919b6f2d0e9844926c48507461296, type: 3}
 --- !u!23 &216351684305522922
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -22054,7 +22054,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: 5817f7c0-f2a5-45f9-a5ca-64264e0166e8
-  instanceId: 580bb136-1dc6-45d7-975b-25d494ecec6b
+  instanceId: cc9cbe5f-87cf-4305-a052-20b1dcc0abcd
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -58422,7 +58422,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3161386788224133060}
-  m_Mesh: {fileID: -1662793124668473264, guid: f01144f92385d164eb3e2870a0334506, type: 3}
+  m_Mesh: {fileID: -1662793124668473264, guid: cf3919b6f2d0e9844926c48507461296, type: 3}
 --- !u!23 &3532538090678521826
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -68815,7 +68815,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3574149768588769978}
-  m_Mesh: {fileID: -6978759889471353759, guid: f01144f92385d164eb3e2870a0334506, type: 3}
+  m_Mesh: {fileID: -6978759889471353759, guid: cf3919b6f2d0e9844926c48507461296, type: 3}
 --- !u!23 &8975862339751823577
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -73961,7 +73961,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3814738289934786056}
-  m_Mesh: {fileID: -2726350769335571821, guid: f01144f92385d164eb3e2870a0334506, type: 3}
+  m_Mesh: {fileID: -2726350769335571821, guid: cf3919b6f2d0e9844926c48507461296, type: 3}
 --- !u!23 &8471037203229130852
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -74585,7 +74585,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4122058971752675384}
-  m_Mesh: {fileID: -2305266590065991215, guid: f01144f92385d164eb3e2870a0334506, type: 3}
+  m_Mesh: {fileID: 7466769396364339709, guid: cf3919b6f2d0e9844926c48507461296, type: 3}
 --- !u!23 &6810303627039071965
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -80391,7 +80391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: 8b26b298-7bf4-490e-b245-a039c0184303
-  instanceId: 90a62b7c-8252-4063-8367-39010fbc5789
+  instanceId: e42bf2b0-ad7a-46cc-96eb-004d37e73ca9
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -81085,7 +81085,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4860743028312845973}
-  m_Mesh: {fileID: 3076014651441113415, guid: f01144f92385d164eb3e2870a0334506, type: 3}
+  m_Mesh: {fileID: 3076014651441113415, guid: cf3919b6f2d0e9844926c48507461296, type: 3}
 --- !u!23 &7233710606407367108
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -101714,7 +101714,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5865097714630135183}
-  m_Mesh: {fileID: -2305266590065991215, guid: f01144f92385d164eb3e2870a0334506, type: 3}
+  m_Mesh: {fileID: -2305266590065991215, guid: cf3919b6f2d0e9844926c48507461296, type: 3}
 --- !u!23 &5366799501595201063
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -107311,7 +107311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: 8b26b298-7bf4-490e-b245-a039c0184303
-  instanceId: babc5a9f-d89b-4730-a194-cefeea322115
+  instanceId: fc5c024b-8da8-45bc-9716-7aa6033e4a7d
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -107497,7 +107497,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6261412491465071179}
-  m_Mesh: {fileID: 546404529894870380, guid: f01144f92385d164eb3e2870a0334506, type: 3}
+  m_Mesh: {fileID: 546404529894870380, guid: cf3919b6f2d0e9844926c48507461296, type: 3}
 --- !u!23 &4435607676775065085
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -113345,7 +113345,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7176952029593224936}
-  m_Mesh: {fileID: 3655483744140236750, guid: f01144f92385d164eb3e2870a0334506, type: 3}
+  m_Mesh: {fileID: 3655483744140236750, guid: cf3919b6f2d0e9844926c48507461296, type: 3}
 --- !u!23 &8011024989724724215
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -114454,7 +114454,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: e47682b9-c270-40b1-b16d-90b627a5ce1b
-  instanceId: 63069539-2543-4301-a29d-47ac9ae5fd6d
+  instanceId: df152153-0129-4c35-9163-fe875a47338b
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -131168,7 +131168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: 5817f7c0-f2a5-45f9-a5ca-64264e0166e8
-  instanceId: c241cf67-fe97-437a-a26c-f9274ccf4d70
+  instanceId: b4c52e40-e0ad-49a1-b443-65ccc3133e29
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
