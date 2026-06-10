@@ -11828,11 +11828,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5593466215853929122, guid: d6221660abff6134ba42e1c091b7215c, type: 3}
       propertyPath: meteorCSpeedRange.x
-      value: 16
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5593466215853929122, guid: d6221660abff6134ba42e1c091b7215c, type: 3}
       propertyPath: meteorCSpeedRange.y
-      value: 28
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5593466215853929122, guid: d6221660abff6134ba42e1c091b7215c, type: 3}
       propertyPath: starUpwardSpeedRange.x

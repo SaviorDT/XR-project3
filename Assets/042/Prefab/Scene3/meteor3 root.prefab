@@ -721,9 +721,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe351313ae60273459f5b786956d575f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeteorCProjectile
-  lifeTime: 10
+  lifeTime: 30
   turnSpeed: 2.5
-  aimTurnDuration: 1.5
+  trackingDelay: 0.5
+  minPredictTime: 1
+  maxPredictTime: 3
+  predictDistanceFactor: 0.15
 --- !u!114 &4276654778447209723
 MonoBehaviour:
   m_ObjectHideFlags: 0

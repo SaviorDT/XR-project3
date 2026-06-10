@@ -13,12 +13,26 @@ public class MeteorBProjectile : MonoBehaviour
     private float speed;
     private float timer;
 
-    public void Init(Vector3 startDirection, Vector3 launcherForward, float moveSpeed)
+    public void Init(
+    Vector3 startDirection,
+    Transform launcher,
+    Transform player,
+    float moveSpeed)
     {
         rb = GetComponent<Rigidbody>();
 
         currentDirection = startDirection.normalized;
-        targetDirection = launcherForward.normalized;
+
+        if (launcher != null && player != null)
+        {
+            targetDirection =
+                (player.position - launcher.position).normalized;
+        }
+        else
+        {
+            targetDirection = currentDirection;
+        }
+
         speed = moveSpeed;
         timer = 0f;
 

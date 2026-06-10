@@ -75,7 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 997088e2221791548b6035b1501cf7d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeteorAProjectile
-  lifeTime: 8
+  lifeTime: 20
 --- !u!135 &7284341242196244280
 SphereCollider:
   m_ObjectHideFlags: 0
