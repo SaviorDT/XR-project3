@@ -2473,6 +2473,69 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfc430fe0becefc49a33e325b0d91d4c, type: 3}
+--- !u!21 &19708111
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Override
+  m_Shader: {fileID: 4800000, guid: a3a3bc8785681554d9558e2ea68f100e, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Ints: []
+    m_Floats:
+    - _Banner: 1
+    - _DirectionalCat: 1
+    - _DirectionalFalloff: 2
+    - _DirectionalIntensity: 1
+    - _FogAxisMode: 1
+    - _FogCat: 1
+    - _FogColorDuo: 1
+    - _FogDistanceEnd: 200
+    - _FogDistanceFalloff: 2
+    - _FogDistanceStart: -200
+    - _FogHeightEnd: 200
+    - _FogHeightFalloff: 2
+    - _FogHeightStart: 0
+    - _FogIntensity: 1
+    - _FogLayersMode: 0
+    - _IsHeightFogPreset: 1
+    - _IsHeightFogShader: 1
+    - _NoiseCat: 1
+    - _NoiseDistanceEnd: 50
+    - _NoiseIntensity: 1
+    - _NoiseModeBlend: 1
+    - _NoiseScale: 30
+    - _SkyboxCat: 1
+    - _SkyboxFogBottom: 0
+    - _SkyboxFogFalloff: 1
+    - _SkyboxFogFill: 1
+    - _SkyboxFogHeight: 1
+    - _SkyboxFogIntensity: 1
+    - _SkyboxFogOffset: 0
+    m_Colors:
+    - _DirectionalColor: {r: 1, g: 0.7793103, b: 0.5, a: 1}
+    - _DirectionalDir: {r: 0, g: 0, b: 0, a: 0}
+    - _FogAxisOption: {r: 0, g: 0, b: 0, a: 0}
+    - _FogColorEnd: {r: 0.8862745, g: 1.443137, b: 2, a: 1}
+    - _FogColorStart: {r: 0.4411765, g: 0.722515, b: 1, a: 1}
+    - _NoiseSpeed: {r: 0.5, g: 0, b: 0.5, a: 0}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!1 &20463468
 GameObject:
   m_ObjectHideFlags: 0
@@ -68587,45 +68650,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 538871630}
   m_Mesh: {fileID: 4300000, guid: a4716bb762b0509478cd5c94a68c23c1, type: 2}
---- !u!21 &538894760
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Height Fog Global
-  m_Shader: {fileID: 4800000, guid: 3a7ef1b66bafb7a448a880ef76d2e6e6, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3001
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs: []
-    m_Ints: []
-    m_Floats:
-    - _AdvancedCat: 1
-    - _AlphaCutoff: 0.5
-    - _Banner: 1
-    - _DirectionalCat: 1
-    - _FogAxisMode: 1
-    - _FogCat: 1
-    - _HeightFogGlobal: 1
-    - _IsHeightFogShader: 1
-    - _NoiseCat: 1
-    - _SkyboxCat: 1
-    m_Colors:
-    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-  m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!1 &539230967
 GameObject:
   m_ObjectHideFlags: 0
@@ -89902,7 +89926,7 @@ MonoBehaviour:
   manualPositionAndScale: 0
   renderPriority: 1
   styledSpace0: 0
-  overrideMaterial: {fileID: 1745859389}
+  overrideMaterial: {fileID: 19708111}
   overrideCamToVolumeDistance: 1
   overrideVolumeDistanceFade: 0
   version: 0
@@ -89939,7 +89963,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 538894760}
+  - {fileID: 798213136}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -89972,7 +89996,7 @@ Transform:
   m_GameObject: {fileID: 724396277}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.824, y: 40.811, z: -5.948}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 29999, y: 29999, z: 29999}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -98878,6 +98902,45 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 497020, guid: 790e5b39a1e1c4840a5304ca7518bda9, type: 3}
   m_PrefabInstance: {fileID: 533259724}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &798213136
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Height Fog Global
+  m_Shader: {fileID: 4800000, guid: 3a7ef1b66bafb7a448a880ef76d2e6e6, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Ints: []
+    m_Floats:
+    - _AdvancedCat: 1
+    - _AlphaCutoff: 0.5
+    - _Banner: 1
+    - _DirectionalCat: 1
+    - _FogAxisMode: 1
+    - _FogCat: 1
+    - _HeightFogGlobal: 1
+    - _IsHeightFogShader: 1
+    - _NoiseCat: 1
+    - _SkyboxCat: 1
+    m_Colors:
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!1 &798307483
 GameObject:
   m_ObjectHideFlags: 0
@@ -214115,69 +214178,6 @@ Transform:
   - {fileID: 46773877}
   m_Father: {fileID: 1815032386}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
---- !u!21 &1745859389
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Override
-  m_Shader: {fileID: 4800000, guid: a3a3bc8785681554d9558e2ea68f100e, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs: []
-    m_Ints: []
-    m_Floats:
-    - _Banner: 1
-    - _DirectionalCat: 1
-    - _DirectionalFalloff: 2
-    - _DirectionalIntensity: 1
-    - _FogAxisMode: 1
-    - _FogCat: 1
-    - _FogColorDuo: 1
-    - _FogDistanceEnd: 200
-    - _FogDistanceFalloff: 2
-    - _FogDistanceStart: -200
-    - _FogHeightEnd: 200
-    - _FogHeightFalloff: 2
-    - _FogHeightStart: 0
-    - _FogIntensity: 1
-    - _FogLayersMode: 0
-    - _IsHeightFogPreset: 1
-    - _IsHeightFogShader: 1
-    - _NoiseCat: 1
-    - _NoiseDistanceEnd: 50
-    - _NoiseIntensity: 1
-    - _NoiseModeBlend: 1
-    - _NoiseScale: 30
-    - _SkyboxCat: 1
-    - _SkyboxFogBottom: 0
-    - _SkyboxFogFalloff: 1
-    - _SkyboxFogFill: 1
-    - _SkyboxFogHeight: 1
-    - _SkyboxFogIntensity: 1
-    - _SkyboxFogOffset: 0
-    m_Colors:
-    - _DirectionalColor: {r: 1, g: 0.7793103, b: 0.5, a: 1}
-    - _DirectionalDir: {r: 0, g: 0, b: 0, a: 0}
-    - _FogAxisOption: {r: 0, g: 0, b: 0, a: 0}
-    - _FogColorEnd: {r: 0.8862745, g: 1.443137, b: 2, a: 1}
-    - _FogColorStart: {r: 0.4411765, g: 0.722515, b: 1, a: 1}
-    - _NoiseSpeed: {r: 0.5, g: 0, b: 0.5, a: 0}
-  m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!1 &1746017468
 GameObject:
   m_ObjectHideFlags: 0
@@ -245615,6 +245615,11 @@ Transform:
   - {fileID: 2130640681}
   m_Father: {fileID: 736937494}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2011102303 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1653894239229446196, guid: e48e2264bb7a0d245b0067b77e5e9c6f, type: 3}
+  m_PrefabInstance: {fileID: 863807530375916553}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2011772807
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -251187,11 +251192,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4500778332751149535, guid: fabe1bc19e8a23d47896366975f1a28b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 300.3
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 4500778332751149535, guid: fabe1bc19e8a23d47896366975f1a28b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 300.5
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 4500778332751149535, guid: fabe1bc19e8a23d47896366975f1a28b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -251242,7 +251247,7 @@ PrefabInstance:
       addedObject: {fileID: 2052838639}
     - targetCorrespondingSourceObject: {fileID: 7948043289041982859, guid: fabe1bc19e8a23d47896366975f1a28b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2052838640}
+      addedObject: {fileID: 2052838644}
   m_SourcePrefab: {fileID: 100100000, guid: fabe1bc19e8a23d47896366975f1a28b, type: 3}
 --- !u!1 &2052838638 stripped
 GameObject:
@@ -251266,7 +251271,7 @@ MonoBehaviour:
   reviewTextCN: {fileID: 2063240810}
   showOnlyOnce: 1
   nextSceneName: Scene3
---- !u!65 &2052838640
+--- !u!65 &2052838644
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -251285,7 +251290,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.0019696283, y: 0.03168393, z: 0.060863834}
+  m_Size: {x: 1, y: 0.013, z: 0.025}
   m_Center: {x: -0.000117654345, y: -4.2954848e-11, z: -0.0008971442}
 --- !u!1 &2053572156
 GameObject:
@@ -264024,25 +264029,20 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1653894239229446196, guid: e48e2264bb7a0d245b0067b77e5e9c6f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 863807530375916556}
+      addedObject: {fileID: 863807530375916560}
   m_SourcePrefab: {fileID: 100100000, guid: e48e2264bb7a0d245b0067b77e5e9c6f, type: 3}
 --- !u!4 &863807530375916554 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3181012919684654732, guid: e48e2264bb7a0d245b0067b77e5e9c6f, type: 3}
   m_PrefabInstance: {fileID: 863807530375916553}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &863807530375916555 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1653894239229446196, guid: e48e2264bb7a0d245b0067b77e5e9c6f, type: 3}
-  m_PrefabInstance: {fileID: 863807530375916553}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &863807530375916556
+--- !u!114 &863807530375916560
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 863807530375916555}
+  m_GameObject: {fileID: 2011102303}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4698678b90d64864aa718bc48b053b62, type: 3}
