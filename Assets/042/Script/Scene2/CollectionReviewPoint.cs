@@ -4,17 +4,17 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class CollectionReviewPoint : MonoBehaviour
 {
-    [Header("»y¨¥³]©w")]
+    [Header("ï¿½yï¿½ï¿½ï¿½]ï¿½w")]
     public bool chinese = true;
 
-    [Header("UI¡A¦Û°Ê§ì HUD_SourceCanvas ¤Uªº Text / Text ¤¤¤å")]
+    [Header("UIï¿½Aï¿½Û°Ê§ï¿½ HUD_SourceCanvas ï¿½Uï¿½ï¿½ Text / Text ï¿½ï¿½ï¿½ï¿½")]
     public TMP_Text reviewTextEN;
     public TMP_Text reviewTextCN;
 
-    [Header("³]©w")]
+    [Header("ï¿½]ï¿½w")]
     public bool showOnlyOnce = true;
 
-    [Header("¤Á´«³õ´º")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
     public string nextSceneName;
 
     private bool waitingForTrigger = false;
@@ -56,6 +56,8 @@ public class CollectionReviewPoint : MonoBehaviour
         PlayerCollectionRecorder recorder =
             other.GetComponent<PlayerCollectionRecorder>();
 
+        other.GetComponent<Rigidbody>().isKinematic = true;
+
         if (recorder == null)
             return;
 
@@ -69,12 +71,12 @@ public class CollectionReviewPoint : MonoBehaviour
 
         if (canvasObj == null)
         {
-            Debug.LogWarning("§ä¤£¨ì HUD_SourceCanvas");
+            Debug.LogWarning("ï¿½ä¤£ï¿½ï¿½ HUD_SourceCanvas");
             return;
         }
 
         Transform textEN = FindChildRecursive(canvasObj.transform, "Text");
-        Transform textCN = FindChildRecursive(canvasObj.transform, "Text ¤¤¤å");
+        Transform textCN = FindChildRecursive(canvasObj.transform, "Text ï¿½ï¿½ï¿½ï¿½");
 
         if (textEN != null)
             reviewTextEN = textEN.GetComponent<TMP_Text>();
@@ -109,18 +111,18 @@ public class CollectionReviewPoint : MonoBehaviour
 
         if (chinese)
         {
-            sb.AppendLine("¥»³õ´º¦¬¶°¦^ÅU");
+            sb.AppendLine("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½^ï¿½U");
             sb.AppendLine();
 
             if (recorder.GetCollectedItems().Count == 0)
             {
-                sb.AppendLine("©|¥¼¦¬¶°¥ô¦óª«¥ó¡C");
+                sb.AppendLine("ï¿½|ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½óª«¥ï¿½C");
             }
             else
             {
                 foreach (CollectedItemData item in recorder.GetCollectedItems())
                 {
-                    sb.AppendLine($"¡½ {item.itemNameCN}");
+                    sb.AppendLine($"ï¿½ï¿½ {item.itemNameCN}");
                     sb.AppendLine(item.descriptionCN);
                     sb.AppendLine();
                 }
@@ -139,7 +141,7 @@ public class CollectionReviewPoint : MonoBehaviour
             {
                 foreach (CollectedItemData item in recorder.GetCollectedItems())
                 {
-                    sb.AppendLine($"¡½ {item.itemNameEN}");
+                    sb.AppendLine($"ï¿½ï¿½ {item.itemNameEN}");
                     sb.AppendLine(item.descriptionEN);
                     sb.AppendLine();
                 }
