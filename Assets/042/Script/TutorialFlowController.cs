@@ -24,59 +24,62 @@ public class TutorialFlowController : MonoBehaviour
 
         public TaskType taskType;
 
-        [Header("¦ì¸m¥ô°È")]
+        [Header("æ­¥é©ŸéŸ³æ•ˆ")]
+        public AudioSource stepAudio;
+
+        [Header("ç›®æ¨™ä½ç½®")]
         public Transform targetPosition;
         public float reachDistance = 2f;
 
-        [Header("­±¦V¥ô°È")]
+        [Header("æœå‘è¨­å®š")]
         public Transform faceTarget;
         public float faceAngleThreshold = 15f;
 
-        [Header("µ¥«İ¥ô°È")]
+        [Header("ç­‰å¾…è¨­å®š")]
         public float waitTime = 2f;
 
-        [Header("¥»¶¥¬q­n¤É°_ªº¦a§Î")]
+        [Header("é¡¯ç¤ºåœ°å½¢")]
         public List<RisingTerrain> terrainsToRise;
 
-        [Header("¥»¶¥¬q­nÁôÂÃªº¦a§Î")]
+        [Header("éš±è—åœ°å½¢")]
         public List<RisingTerrain> terrainsToHide;
 
-        [Header("­¸¦æ±±¨î")]
+        [Header("å…è¨±é£›è¡Œ")]
         public bool enableFlyOnThisStep = false;
         public bool disableFlyOnThisStep = false;
     }
 
-    [Header("ª±®a")]
+    [Header("Player")]
     public Transform player;
     public PlayerFlyController playerFlyController;
 
-    [Header("¨¤¦â´Â¦V¨Ó·½")]
+    [Header("æœå‘")]
     public Transform characterForwardRoot;
 
     [Header("UI")]
     public TMP_Text tutorialTextEN;
     public TMP_Text tutorialTextCN;
 
-    [Header("±Ğ¾Ç¨BÆJ")]
+    [Header("ï¿½Ğ¾Ç¨Bï¿½J")]
     public List<TutorialStep> steps = new List<TutorialStep>();
 
-    [Header("³]©w")]
+    [Header("ï¿½]ï¿½w")]
     public bool autoStart = true;
     public bool hideTextWhenFinished = true;
 
-    [Header("¦a§Î±Ò¥Î³]©w")]
+    [Header("ï¿½aï¿½Î±Ò¥Î³]ï¿½w")]
     public bool disableTerrainBeforeRise = true;
 
     private HashSet<RisingTerrain> initializedDisabledTerrains = new HashSet<RisingTerrain>();
 
-    [Header("¥Ø¼Ğ¥ú¬W")]
+    [Header("ï¿½Ø¼Ğ¥ï¿½ï¿½W")]
     public GameObject targetBeamPrefab;
     public float beamYOffset = 0f;
     public Vector3 beamScale = new Vector3(2f, 2f, 2f);
 
     private Dictionary<Transform, GameObject> targetBeams = new Dictionary<Transform, GameObject>();
 
-    [Header("¤å¦r²H¤J²H¥X³]©w")]
+    [Header("ï¿½ï¿½rï¿½Hï¿½Jï¿½Hï¿½Xï¿½]ï¿½w")]
     public Transform curvedUIRoot;
     public float fadeOutDuration = 0.25f;
     public float fadeInDuration = 0.35f;
@@ -89,7 +92,7 @@ public class TutorialFlowController : MonoBehaviour
     private float stepTimer = 0f;
     private bool tutorialFinished = false;
 
-    [Header("§¹¦¨«á¤Á´«³õ´º")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
     public bool loadSceneWhenFinished = true;
     public string nextSceneName;
     public float loadSceneDelay = 1f;
@@ -159,6 +162,11 @@ public class TutorialFlowController : MonoBehaviour
         }
 
         TutorialStep step = steps[currentStepIndex];
+
+        if (step.stepAudio != null)
+        {
+            step.stepAudio.Play();
+        }
 
         ApplyFlySetting(step);
         SpawnTargetBeam(step);
