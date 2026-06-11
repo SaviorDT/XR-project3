@@ -1,6 +1,8 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using static OVRPlugin;
+using static TutorialFlowController;
 
 public class CollectibleItem : MonoBehaviour
 {
@@ -28,6 +30,9 @@ public class CollectibleItem : MonoBehaviour
     public TMP_Text titleText;
     public TMP_Text descriptionText;
     public float messageDuration = 3f;
+
+    [Header("­µ®Ä")]
+    public AudioSource audioSource;
 
     public bool isGrounded;
 
@@ -156,6 +161,11 @@ public class CollectibleItem : MonoBehaviour
         if (collected)
             return;
 
+        if (audioSource != null)
+        {
+            audioSource.Play();
+        }
+
         collected = true;
 
         PlayerCollectionRecorder recorder =
@@ -187,6 +197,19 @@ public class CollectibleItem : MonoBehaviour
             StopCoroutine(messageCoroutine);
 
         messageCoroutine = StartCoroutine(HideMessageRoutine());
+    }
+
+    private bool CheckTriggerPressed()
+    {
+        return OVRInput.GetDown(
+            OVRInput.Button.PrimaryIndexTrigger,
+            OVRInput.Controller.RTouch
+        )
+        ||
+        OVRInput.GetDown(
+            OVRInput.Button.PrimaryIndexTrigger,
+            OVRInput.Controller.LTouch
+        );
     }
 
     private IEnumerator HideMessageRoutine()
