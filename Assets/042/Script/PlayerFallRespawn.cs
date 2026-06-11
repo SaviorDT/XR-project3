@@ -172,9 +172,13 @@ public class PlayerFallRespawn : MonoBehaviour
         Vector3 originalPosition = transform.position;
         Quaternion originalRotation = transform.rotation;
 
-        transform.position = candidatePosition + Vector3.up * safeStandCheckYOffset;
+        if (safeStandCheckYOffset > 0.01f)
+        {
+            transform.position = candidatePosition + Vector3.up * safeStandCheckYOffset;
 
-        Physics.SyncTransforms();
+            Physics.SyncTransforms();
+        }
+
 
         Bounds bounds = safeStandCollider.bounds;
 
@@ -186,10 +190,13 @@ public class PlayerFallRespawn : MonoBehaviour
             QueryTriggerInteraction.Ignore
         );
 
-        transform.position = originalPosition;
-        transform.rotation = originalRotation;
+        if (safeStandCheckYOffset > 0.01f)
+        {
+            transform.position = originalPosition;
+            transform.rotation = originalRotation;
 
-        Physics.SyncTransforms();
+            Physics.SyncTransforms();
+        }
 
         foreach (Collider hit in hits)
         {
@@ -204,6 +211,8 @@ public class PlayerFallRespawn : MonoBehaviour
 
             return false;
         }
+
+        Debug.Log($"Player position: {transform.position}, rotation: {transform.rotation}, safe stand check position: {candidatePosition + Vector3.up * safeStandCheckYOffset}, hits: {hits.Length}");
 
         return true;
     }

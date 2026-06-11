@@ -15533,6 +15533,7 @@ GameObject:
   - component: {fileID: 8089137599362790226}
   - component: {fileID: 5664155195918514512}
   - component: {fileID: 7374800651608046948}
+  - component: {fileID: 3262910316781010895}
   m_Layer: 3
   m_Name: Player3
   m_TagString: Player
@@ -15736,11 +15737,32 @@ MonoBehaviour:
   wallCheckHeight: 0.8
   respawnYOffset: 1
   resetVelocity: 1
-  safeStandCollider: {fileID: 0}
+  safeStandCollider: {fileID: 3262910316781010895}
   safeStandBlockLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1073742327
   safeStandCheckYOffset: 0
+--- !u!65 &3262910316781010895
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483502388766937093}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!1 &499669304766760368
 GameObject:
   m_ObjectHideFlags: 0
