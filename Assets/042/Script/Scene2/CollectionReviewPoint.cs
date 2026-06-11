@@ -30,7 +30,7 @@ public class CollectionReviewPoint : MonoBehaviour
         if (!waitingForTrigger)
             return;
 
-        bool triggerPressed =
+        /*bool triggerPressed =
             OVRInput.GetDown(
                 OVRInput.Button.PrimaryIndexTrigger,
                 OVRInput.Controller.RTouch)
@@ -40,9 +40,9 @@ public class CollectionReviewPoint : MonoBehaviour
                 OVRInput.Controller.LTouch);
 
         if (triggerPressed)
-        {
+        {*/
             SceneManager.LoadScene(nextSceneName);
-        }
+        //}
     }
 
     private void OnTriggerEnter(Collider other)
@@ -53,7 +53,7 @@ public class CollectionReviewPoint : MonoBehaviour
         if (!other.CompareTag("Player"))
             return;
 
-        PlayerCollectionRecorder recorder =
+        /*PlayerCollectionRecorder recorder =
             other.GetComponent<PlayerCollectionRecorder>();
 
         other.GetComponent<Rigidbody>().isKinematic = true;
@@ -61,8 +61,9 @@ public class CollectionReviewPoint : MonoBehaviour
         if (recorder == null)
             return;
 
-        ShowReview(recorder);
+        ShowReview(recorder);*/
         alreadyShown = true;
+        waitingForTrigger = true;
     }
 
     private void AutoFindUIText()
