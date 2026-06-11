@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3464680333040194317}
   - component: {fileID: 4512635516203647059}
   - component: {fileID: 5228485707351727851}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Magic circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5128,7 +5128,7 @@ GameObject:
   - component: {fileID: 6286153771160576805}
   - component: {fileID: 4380900106320348396}
   - component: {fileID: 4144036033709544911}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11224,7 +11224,7 @@ GameObject:
   - component: {fileID: 9011691500127514448}
   - component: {fileID: 3302297198318935119}
   - component: {fileID: 4229280705439854349}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Magic circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16154,7 +16154,7 @@ GameObject:
   - component: {fileID: 5070219120174539269}
   - component: {fileID: 7608584011995145804}
   - component: {fileID: 6924153127691647768}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21283,7 +21283,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7593429139213999177}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ring effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21630,6 +21630,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   DebugMode: 0
   InUniverse: 0
+  FlyEnabled: 1
   PlayerHeight: 1.4
   OnGroundRotateAngle: 30
   OnGroundRotateCoolDown: 0.5
@@ -22218,7 +22219,7 @@ GameObject:
   - component: {fileID: 9201430525321028419}
   - component: {fileID: 2913707639838609556}
   - component: {fileID: 6652857691487447584}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CircleSparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27903,7 +27904,7 @@ GameObject:
   - component: {fileID: 8998905910915523956}
   - component: {fileID: 2782819608795194395}
   - component: {fileID: 6411270249973470716}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CircleSparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32807,7 +32808,7 @@ GameObject:
   - component: {fileID: 697245315855523817}
   - component: {fileID: 6345037456798765578}
   - component: {fileID: 8224380803502712766}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38144,7 +38145,7 @@ GameObject:
   - component: {fileID: 1445768671029950223}
   - component: {fileID: 5336781210524576732}
   - component: {fileID: 6844121171469025198}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sides
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43366,7 +43367,7 @@ GameObject:
   - component: {fileID: 5847444239014090008}
   - component: {fileID: 4003315900623090690}
   - component: {fileID: 528804782357891778}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48481,7 +48482,7 @@ GameObject:
   - component: {fileID: 6933976332873386034}
   - component: {fileID: 7123477183309221614}
   - component: {fileID: 1676424604372673097}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DarkSparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53611,7 +53612,7 @@ GameObject:
   - component: {fileID: 5110377265325319797}
   - component: {fileID: 1336980409014711423}
   - component: {fileID: 3864896923572442761}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sides
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58657,7 +58658,7 @@ GameObject:
   - component: {fileID: 3867081476323103663}
   - component: {fileID: 4432089377963726416}
   - component: {fileID: 8797136796197107592}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63502,7 +63503,7 @@ GameObject:
   - component: {fileID: 5035589305115754714}
   - component: {fileID: 1000454400490327306}
   - component: {fileID: 6199900872336923253}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DarkSparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68999,7 +69000,7 @@ GameObject:
   - component: {fileID: 2359677682998392199}
   - component: {fileID: 7050112430019748877}
   - component: {fileID: 3680460015161876490}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sides
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75166,7 +75167,7 @@ GameObject:
   - component: {fileID: 8373351414831956333}
   - component: {fileID: 8007443755349165523}
   - component: {fileID: 4653608312174004428}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81289,7 +81290,7 @@ GameObject:
   - component: {fileID: 3310047756823575768}
   - component: {fileID: 7810770452904741069}
   - component: {fileID: 3137111006941893251}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86134,7 +86135,7 @@ GameObject:
   - component: {fileID: 8266048003155625718}
   - component: {fileID: 1999381788464247493}
   - component: {fileID: 8254652742392778494}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DarkSparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91570,7 +91571,7 @@ GameObject:
   - component: {fileID: 3592302090492275944}
   - component: {fileID: 4965229098297657182}
   - component: {fileID: 4184486394846817202}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Magic circle (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96969,7 +96970,7 @@ GameObject:
   - component: {fileID: 7287917154597699596}
   - component: {fileID: 7044117598772586029}
   - component: {fileID: 334225456486862128}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Magic circle (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102058,7 +102059,7 @@ GameObject:
   - component: {fileID: 4823179304731868857}
   - component: {fileID: 6067782272053311980}
   - component: {fileID: 5616200001551504404}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CircleSparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107958,7 +107959,7 @@ GameObject:
   - component: {fileID: 6463366202898366189}
   - component: {fileID: 7951325549268111787}
   - component: {fileID: 4868300199168151926}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DarkSparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115576,7 +115577,7 @@ GameObject:
   - component: {fileID: 1591703724489352170}
   - component: {fileID: 3538183049477880010}
   - component: {fileID: 7361423944124216015}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sides
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120479,7 +120480,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6777417556493227783}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ring effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120765,7 +120766,7 @@ GameObject:
   - component: {fileID: 2916941895290765674}
   - component: {fileID: 2016637383711163250}
   - component: {fileID: 6922627201296160826}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126436,7 +126437,7 @@ GameObject:
   - component: {fileID: 7569486254819078656}
   - component: {fileID: 8505347315361236456}
   - component: {fileID: 7481744204249968958}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CircleSparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}

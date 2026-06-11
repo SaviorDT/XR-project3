@@ -73,7 +73,7 @@ MonoBehaviour:
     itemNameEN: 
     itemNameCN: "\u3010\u5674\u568F\u8072\u3011"
     descriptionEN: 
-    descriptionCN: "\u9060\u8655\u50B3\u4F86\u4E86\u96B1\u96B1\u7D04\u7D04\u7684\u5674\u568F\u8072\uFF0C\u807D\u8D77\u4F86\u9019\u96BB\u751F\u7269\u61C9\u8A72\u5341\u5206\u5DE8\u5927\u3002\r\n\u6700\u8FD1\u5929\u7A7A\u7684\u7570\u5E38\u6D3B\u52D5\u6703\u8207\u9019\u6709\u95DC\u55CE\uFF1F"
+    descriptionCN: "\u9060\u8655\u50B3\u4F86\u4E86\u96B1\u96B1\u7D04\u7D04\u7684\u5674\u568F\u8072\uFF0C\u807D\u8D77\u4F86\u9019\u96BB\u751F\u7269\u61C9\u8A72\u5341\u5206\u5DE8\u5927\u3002\n\n\u6700\u8FD1\u5929\u7A7A\u7684\u7570\u5E38\u6D3B\u52D5\u6703\u8207\u9019\u6709\u95DC\u55CE\uFF1F"
   player: {fileID: 0}
   playerFlyController: {fileID: 0}
   groundLayer:
@@ -88,6 +88,7 @@ MonoBehaviour:
   titleText: {fileID: 0}
   descriptionText: {fileID: 0}
   messageDuration: 3
+  audioSource: {fileID: 0}
   isGrounded: 1
 --- !u!33 &1681410884722873488
 MeshFilter:

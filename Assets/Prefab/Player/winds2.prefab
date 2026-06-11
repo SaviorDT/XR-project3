@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4207104770435257546}
   - component: {fileID: 7986698291369798645}
   - component: {fileID: 8504716922899893173}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -186,7 +186,7 @@ GameObject:
   - component: {fileID: 2431023968504371985}
   - component: {fileID: 454918410885579917}
   - component: {fileID: 3331904334103444179}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -361,7 +361,7 @@ GameObject:
   - component: {fileID: 8875414928427053168}
   - component: {fileID: 2839095697332376875}
   - component: {fileID: 4552652921228928592}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -536,7 +536,7 @@ GameObject:
   - component: {fileID: 8977215538551059353}
   - component: {fileID: 3117030439119159539}
   - component: {fileID: 4200431329901620705}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -711,7 +711,7 @@ GameObject:
   - component: {fileID: 1777511699608405715}
   - component: {fileID: 5262767139214407821}
   - component: {fileID: 2591611916665765885}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -886,7 +886,7 @@ GameObject:
   - component: {fileID: 3234199244984966571}
   - component: {fileID: 1169217893555168017}
   - component: {fileID: 560093393216736175}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1062,7 +1062,7 @@ GameObject:
   - component: {fileID: 3291546645381998601}
   - component: {fileID: 6798053764162148634}
   - component: {fileID: 4821817219140910658}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WindParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5966,7 +5966,7 @@ GameObject:
   - component: {fileID: 4966619282963043437}
   - component: {fileID: 4502427587958217382}
   - component: {fileID: 7794509633574004130}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6141,7 +6141,7 @@ GameObject:
   - component: {fileID: 6966857556894747586}
   - component: {fileID: 1871470764387331893}
   - component: {fileID: 4386608217071053739}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6316,7 +6316,7 @@ GameObject:
   - component: {fileID: 2646107955918516703}
   - component: {fileID: 56199666252894616}
   - component: {fileID: 1534605766076997103}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6491,7 +6491,7 @@ GameObject:
   - component: {fileID: 837863687858359536}
   - component: {fileID: 8220258191860780836}
   - component: {fileID: 4751695984506791440}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6666,7 +6666,7 @@ GameObject:
   - component: {fileID: 6108651316784035458}
   - component: {fileID: 7617581655585474087}
   - component: {fileID: 1316331963999645278}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6841,7 +6841,7 @@ GameObject:
   - component: {fileID: 840304410599496587}
   - component: {fileID: 7603315309534330249}
   - component: {fileID: 3251148677546247700}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7018,7 +7018,7 @@ GameObject:
   - component: {fileID: 8748529932529124704}
   - component: {fileID: 6468565537877509016}
   - component: {fileID: 176042300437317345}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: wind100
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7129,7 +7129,7 @@ GameObject:
   - component: {fileID: 2650735371466223296}
   - component: {fileID: 4577054095509556077}
   - component: {fileID: 8525827316128795233}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7305,7 +7305,7 @@ GameObject:
   - component: {fileID: 3701612333808822362}
   - component: {fileID: 8104869490242591621}
   - component: {fileID: 7057795265010599162}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WindParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12209,7 +12209,7 @@ GameObject:
   - component: {fileID: 3947221264713523663}
   - component: {fileID: 1678920910733147311}
   - component: {fileID: 5058867271613609387}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12384,7 +12384,7 @@ GameObject:
   - component: {fileID: 9003920172946251967}
   - component: {fileID: 8616047436786537842}
   - component: {fileID: 3167283569360078073}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12559,7 +12559,7 @@ GameObject:
   - component: {fileID: 700502249478747882}
   - component: {fileID: 7576021603503005749}
   - component: {fileID: 826322332266866154}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12736,7 +12736,7 @@ GameObject:
   - component: {fileID: 2406616992572938811}
   - component: {fileID: 5715046999978817769}
   - component: {fileID: 1529632051755312097}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: wind030
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12848,7 +12848,7 @@ GameObject:
   - component: {fileID: 1672892701613708649}
   - component: {fileID: 6192000798682336830}
   - component: {fileID: 6595276263918308053}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WindParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17753,7 +17753,7 @@ GameObject:
   - component: {fileID: 1937512372761771026}
   - component: {fileID: 766376744308657848}
   - component: {fileID: 2965721635897796102}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WindParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22657,7 +22657,7 @@ GameObject:
   - component: {fileID: 5336578412047657862}
   - component: {fileID: 8975507671244333464}
   - component: {fileID: 530936293198744200}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22832,7 +22832,7 @@ GameObject:
   - component: {fileID: 3825811295953769710}
   - component: {fileID: 1141129263068945626}
   - component: {fileID: 2734482204282212967}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23008,7 +23008,7 @@ GameObject:
   - component: {fileID: 2372492674864579310}
   - component: {fileID: 8791849537772447086}
   - component: {fileID: 1152276300305159251}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WindParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27912,7 +27912,7 @@ GameObject:
   - component: {fileID: 296150651946057018}
   - component: {fileID: 9030832284925270710}
   - component: {fileID: 4934601952801626252}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28088,7 +28088,7 @@ GameObject:
   - component: {fileID: 4901694562175701912}
   - component: {fileID: 2015979815617846315}
   - component: {fileID: 7402607792636340557}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WindParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32994,7 +32994,7 @@ GameObject:
   - component: {fileID: 5622769379619394163}
   - component: {fileID: 6001215469615215356}
   - component: {fileID: 8092823845627495384}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: wind001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33108,7 +33108,7 @@ GameObject:
   - component: {fileID: 1763954865576312645}
   - component: {fileID: 4400964131716228293}
   - component: {fileID: 3604725618505304715}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WindParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38012,7 +38012,7 @@ GameObject:
   - component: {fileID: 4977840480682087139}
   - component: {fileID: 7483095797483364213}
   - component: {fileID: 7961794418569405553}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38188,7 +38188,7 @@ GameObject:
   - component: {fileID: 5137709937800491891}
   - component: {fileID: 1564094963131088663}
   - component: {fileID: 2447068249724913917}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WindParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43092,7 +43092,7 @@ GameObject:
   - component: {fileID: 5871527601681590963}
   - component: {fileID: 8086231768174576837}
   - component: {fileID: 6785737032391707364}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43269,7 +43269,7 @@ GameObject:
   - component: {fileID: 4223229315208115261}
   - component: {fileID: 7057035727180383769}
   - component: {fileID: 4668183978734384032}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: wind021
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43383,7 +43383,7 @@ GameObject:
   - component: {fileID: 3635455719315129539}
   - component: {fileID: 4761571648777082597}
   - component: {fileID: 7416410906565207214}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: wind081
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43495,7 +43495,7 @@ GameObject:
   - component: {fileID: 1426857557498722982}
   - component: {fileID: 5041842586433622900}
   - component: {fileID: 7159695375817211909}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43670,7 +43670,7 @@ GameObject:
   - component: {fileID: 2103970582025460835}
   - component: {fileID: 4929370945380919769}
   - component: {fileID: 1064790691910237185}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43845,7 +43845,7 @@ GameObject:
   - component: {fileID: 4638511244835215080}
   - component: {fileID: 1890354417479449918}
   - component: {fileID: 8934486402080017418}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44020,7 +44020,7 @@ GameObject:
   - component: {fileID: 5662205152242460330}
   - component: {fileID: 8103396186767688982}
   - component: {fileID: 2124716406048968291}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44196,7 +44196,7 @@ GameObject:
   - component: {fileID: 2038120487687195867}
   - component: {fileID: 635918064871330239}
   - component: {fileID: 10370257237765946}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WindParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49102,7 +49102,7 @@ GameObject:
   - component: {fileID: 3590212836046016093}
   - component: {fileID: 5373758800699543697}
   - component: {fileID: 5646357803331480561}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: wind040
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49213,7 +49213,7 @@ GameObject:
   - component: {fileID: 1281653550948954664}
   - component: {fileID: 9109763381989004492}
   - component: {fileID: 1732333392771539537}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49388,7 +49388,7 @@ GameObject:
   - component: {fileID: 4449605186476851858}
   - component: {fileID: 5701845429576461216}
   - component: {fileID: 6775895582511512736}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49563,7 +49563,7 @@ GameObject:
   - component: {fileID: 439373818405803081}
   - component: {fileID: 4791259736796040626}
   - component: {fileID: 3441983671328994628}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49738,7 +49738,7 @@ GameObject:
   - component: {fileID: 2671653743676281066}
   - component: {fileID: 6415851632368484589}
   - component: {fileID: 2283921092593295550}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49913,7 +49913,7 @@ GameObject:
   - component: {fileID: 5852598448821980145}
   - component: {fileID: 2102507256096545105}
   - component: {fileID: 3181669577068650281}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50088,7 +50088,7 @@ GameObject:
   - component: {fileID: 7444755151911927298}
   - component: {fileID: 1843247399365501116}
   - component: {fileID: 523520464041500114}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50263,7 +50263,7 @@ GameObject:
   - component: {fileID: 7621665483701182791}
   - component: {fileID: 8261766267188684314}
   - component: {fileID: 8094567496564162132}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50438,7 +50438,7 @@ GameObject:
   - component: {fileID: 7285657405188581649}
   - component: {fileID: 756844478937273448}
   - component: {fileID: 1599902312379510875}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50615,7 +50615,7 @@ GameObject:
   - component: {fileID: 6391113015271328991}
   - component: {fileID: 5496240655920865192}
   - component: {fileID: 5658004790588920090}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: wind053
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50727,7 +50727,7 @@ GameObject:
   - component: {fileID: 7796818611040652860}
   - component: {fileID: 5791114536005400585}
   - component: {fileID: 1628996698789670236}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50902,7 +50902,7 @@ GameObject:
   - component: {fileID: 767304135883407100}
   - component: {fileID: 7534876532115823909}
   - component: {fileID: 7616750335238115975}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51075,7 +51075,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 62607488670289624}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: winds2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51139,7 +51139,7 @@ GameObject:
   - component: {fileID: 750743598281156483}
   - component: {fileID: 9152266131248676094}
   - component: {fileID: 7618066668426720142}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51314,7 +51314,7 @@ GameObject:
   - component: {fileID: 8362420868217823594}
   - component: {fileID: 7402591436264342524}
   - component: {fileID: 5853093987306537476}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51491,7 +51491,7 @@ GameObject:
   - component: {fileID: 1005505608166492420}
   - component: {fileID: 6222930336936672285}
   - component: {fileID: 7815731165788786678}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: wind071
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51603,7 +51603,7 @@ GameObject:
   - component: {fileID: 272021815157349694}
   - component: {fileID: 1062187060025159648}
   - component: {fileID: 7887275632767139419}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51778,7 +51778,7 @@ GameObject:
   - component: {fileID: 3126704883877045063}
   - component: {fileID: 615376966426633996}
   - component: {fileID: 2841897988105821915}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51953,7 +51953,7 @@ GameObject:
   - component: {fileID: 7716251819984934033}
   - component: {fileID: 1614006843805869591}
   - component: {fileID: 638281322146554285}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52128,7 +52128,7 @@ GameObject:
   - component: {fileID: 7799316893235926354}
   - component: {fileID: 3197845435213998462}
   - component: {fileID: 8491180950583335611}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52304,7 +52304,7 @@ GameObject:
   - component: {fileID: 4417603714994931188}
   - component: {fileID: 3781185587051088740}
   - component: {fileID: 5537253892318919897}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WindParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57210,7 +57210,7 @@ GameObject:
   - component: {fileID: 4619124606119190049}
   - component: {fileID: 4596159329434125439}
   - component: {fileID: 1290001818515928282}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: wind010
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57323,7 +57323,7 @@ GameObject:
   - component: {fileID: 4213531755023903346}
   - component: {fileID: 3112559435086091944}
   - component: {fileID: 6905835437780078991}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: wind000
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57435,7 +57435,7 @@ GameObject:
   - component: {fileID: 6655285187520304758}
   - component: {fileID: 6282314374390548813}
   - component: {fileID: 5951356234536085620}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57610,7 +57610,7 @@ GameObject:
   - component: {fileID: 5509712648815495973}
   - component: {fileID: 1687200378212274991}
   - component: {fileID: 8594426650356228782}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57787,7 +57787,7 @@ GameObject:
   - component: {fileID: 1564561484377387298}
   - component: {fileID: 167677506104483076}
   - component: {fileID: 773780865267564172}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: wind034
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57899,7 +57899,7 @@ GameObject:
   - component: {fileID: 5342578124876690255}
   - component: {fileID: 2880142817244560266}
   - component: {fileID: 1997746811268805200}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58075,7 +58075,7 @@ GameObject:
   - component: {fileID: 1203492285705875036}
   - component: {fileID: 6262366501754732038}
   - component: {fileID: 7752382024934024256}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WindParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62981,7 +62981,7 @@ GameObject:
   - component: {fileID: 2841014697572871763}
   - component: {fileID: 264539225603527017}
   - component: {fileID: 7358749979538407096}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: wind092
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63093,7 +63093,7 @@ GameObject:
   - component: {fileID: 8234782636965634247}
   - component: {fileID: 2133395890103569064}
   - component: {fileID: 1077670250624928867}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WindParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67997,7 +67997,7 @@ GameObject:
   - component: {fileID: 7895413548775105101}
   - component: {fileID: 2666167940204456623}
   - component: {fileID: 7467875815088993871}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68172,7 +68172,7 @@ GameObject:
   - component: {fileID: 4928384290184788435}
   - component: {fileID: 1494433600202697825}
   - component: {fileID: 7344808159122433940}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68348,7 +68348,7 @@ GameObject:
   - component: {fileID: 5634673923565179941}
   - component: {fileID: 523334830173177231}
   - component: {fileID: 463921581616705967}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WindParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73253,7 +73253,7 @@ GameObject:
   - component: {fileID: 1946293151560090437}
   - component: {fileID: 3535248348771291865}
   - component: {fileID: 773385314798140961}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WindParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78159,7 +78159,7 @@ GameObject:
   - component: {fileID: 9121141750334954223}
   - component: {fileID: 233891960764693140}
   - component: {fileID: 2093619827811028232}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: wind090
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78272,7 +78272,7 @@ GameObject:
   - component: {fileID: 7657329879751016678}
   - component: {fileID: 2378956880256561738}
   - component: {fileID: 8053044881591290057}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WindParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83177,7 +83177,7 @@ GameObject:
   - component: {fileID: 2857418746199392942}
   - component: {fileID: 7252591740768904140}
   - component: {fileID: 3635328389758592954}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WindParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88082,7 +88082,7 @@ GameObject:
   - component: {fileID: 2808582949259351455}
   - component: {fileID: 3438696330825692203}
   - component: {fileID: 9186175705577539135}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WindParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92987,7 +92987,7 @@ GameObject:
   - component: {fileID: 476375514579727101}
   - component: {fileID: 3883232682430778789}
   - component: {fileID: 966235211062409860}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WindParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97892,7 +97892,7 @@ GameObject:
   - component: {fileID: 2965002785680197410}
   - component: {fileID: 4247263823898404918}
   - component: {fileID: 7315241530290095340}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WindParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102796,7 +102796,7 @@ GameObject:
   - component: {fileID: 6910528882056578797}
   - component: {fileID: 8448541821424879213}
   - component: {fileID: 6810907266558863617}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102973,7 +102973,7 @@ GameObject:
   - component: {fileID: 6046513536158974599}
   - component: {fileID: 6388903394456208811}
   - component: {fileID: 968140115406299550}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: wind031
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103084,7 +103084,7 @@ GameObject:
   - component: {fileID: 5486305454317207538}
   - component: {fileID: 1075533572534580277}
   - component: {fileID: 2321203066374347000}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103259,7 +103259,7 @@ GameObject:
   - component: {fileID: 5487746196857099142}
   - component: {fileID: 7902086851033773966}
   - component: {fileID: 3684213608494298624}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103434,7 +103434,7 @@ GameObject:
   - component: {fileID: 4322423076722576015}
   - component: {fileID: 343827323636177598}
   - component: {fileID: 5254099037915148508}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103609,7 +103609,7 @@ GameObject:
   - component: {fileID: 6395327869441361984}
   - component: {fileID: 5693842348489344606}
   - component: {fileID: 211738810618544133}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103784,7 +103784,7 @@ GameObject:
   - component: {fileID: 488213656057714848}
   - component: {fileID: 8979424972059937796}
   - component: {fileID: 6325631409455087489}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103959,7 +103959,7 @@ GameObject:
   - component: {fileID: 5460152922905385203}
   - component: {fileID: 1058771882606423963}
   - component: {fileID: 1239389048329429648}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104134,7 +104134,7 @@ GameObject:
   - component: {fileID: 1752762642777795699}
   - component: {fileID: 327674442595335710}
   - component: {fileID: 6921755498425204853}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104311,7 +104311,7 @@ GameObject:
   - component: {fileID: 1685394474256948866}
   - component: {fileID: 3529314569272322253}
   - component: {fileID: 6356165321439768292}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: wind052
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104424,7 +104424,7 @@ GameObject:
   - component: {fileID: 8937868012406541789}
   - component: {fileID: 6560137562963054926}
   - component: {fileID: 1141693739544336171}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WindParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109330,7 +109330,7 @@ GameObject:
   - component: {fileID: 6216319775482531523}
   - component: {fileID: 5890337085322197115}
   - component: {fileID: 1849769288685281278}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: wind041
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109442,7 +109442,7 @@ GameObject:
   - component: {fileID: 1316932692628366361}
   - component: {fileID: 3245225131011036452}
   - component: {fileID: 2958503730780178659}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109619,7 +109619,7 @@ GameObject:
   - component: {fileID: 8389981023151464217}
   - component: {fileID: 5062929333246259305}
   - component: {fileID: 7130592090481223210}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: wind042
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109733,7 +109733,7 @@ GameObject:
   - component: {fileID: 3296672125560729154}
   - component: {fileID: 5801829067113821136}
   - component: {fileID: 4339427826811637733}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: wind003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109845,7 +109845,7 @@ GameObject:
   - component: {fileID: 720065442295432573}
   - component: {fileID: 3796842129224760250}
   - component: {fileID: 3771463510815011790}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110022,7 +110022,7 @@ GameObject:
   - component: {fileID: 1207231974824807333}
   - component: {fileID: 1459188150832381674}
   - component: {fileID: 5268567791869967579}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: wind032
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110133,7 +110133,7 @@ GameObject:
   - component: {fileID: 143832118760163648}
   - component: {fileID: 602801918401519976}
   - component: {fileID: 6792449125927601468}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110308,7 +110308,7 @@ GameObject:
   - component: {fileID: 6408290966521578105}
   - component: {fileID: 3302940182058912965}
   - component: {fileID: 2857961631646454960}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110483,7 +110483,7 @@ GameObject:
   - component: {fileID: 4121905491007480348}
   - component: {fileID: 8116790042249805365}
   - component: {fileID: 6248420423513258701}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110660,7 +110660,7 @@ GameObject:
   - component: {fileID: 3545373884969653772}
   - component: {fileID: 8428087479234650278}
   - component: {fileID: 2538902337904884772}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: wind020
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110772,7 +110772,7 @@ GameObject:
   - component: {fileID: 124993813592516406}
   - component: {fileID: 3928368886580271588}
   - component: {fileID: 4504943890957054568}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110949,7 +110949,7 @@ GameObject:
   - component: {fileID: 2200221612954695710}
   - component: {fileID: 5358730479822240720}
   - component: {fileID: 1153929605014668042}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: wind070
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111061,7 +111061,7 @@ GameObject:
   - component: {fileID: 5665958185878383814}
   - component: {fileID: 2123924851793293285}
   - component: {fileID: 1339800068150049496}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WindParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115965,7 +115965,7 @@ GameObject:
   - component: {fileID: 7206661274095828067}
   - component: {fileID: 5943908758750144148}
   - component: {fileID: 7205138951563352843}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116141,7 +116141,7 @@ GameObject:
   - component: {fileID: 2556568230691938836}
   - component: {fileID: 3952524241064320776}
   - component: {fileID: 8054685473955451821}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WindParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121047,7 +121047,7 @@ GameObject:
   - component: {fileID: 7763565525278213228}
   - component: {fileID: 1104563998031061128}
   - component: {fileID: 1776048817084130209}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: wind061
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121160,7 +121160,7 @@ GameObject:
   - component: {fileID: 6553003246534279276}
   - component: {fileID: 8265513142347780998}
   - component: {fileID: 5932937162566572012}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WindParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126066,7 +126066,7 @@ GameObject:
   - component: {fileID: 4211665794376649230}
   - component: {fileID: 3033095650897323920}
   - component: {fileID: 425486836896379662}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: wind002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126180,7 +126180,7 @@ GameObject:
   - component: {fileID: 7990506929136682919}
   - component: {fileID: 1941969464202837089}
   - component: {fileID: 4591499376781451380}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: wind080
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126292,7 +126292,7 @@ GameObject:
   - component: {fileID: 7034951817461829452}
   - component: {fileID: 6259254178199882904}
   - component: {fileID: 8244163074954485965}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WindParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131197,7 +131197,7 @@ GameObject:
   - component: {fileID: 8486547234411918854}
   - component: {fileID: 5102024973669949884}
   - component: {fileID: 5289669556863218498}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WindParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136101,7 +136101,7 @@ GameObject:
   - component: {fileID: 7323905047189047102}
   - component: {fileID: 7450084705429601758}
   - component: {fileID: 5012211382511702282}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136276,7 +136276,7 @@ GameObject:
   - component: {fileID: 6379647762980156229}
   - component: {fileID: 3592384570871563878}
   - component: {fileID: 8287628696991600989}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136451,7 +136451,7 @@ GameObject:
   - component: {fileID: 6906531985059349957}
   - component: {fileID: 4429796268423322611}
   - component: {fileID: 8541262567568302644}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136627,7 +136627,7 @@ GameObject:
   - component: {fileID: 2444095150803023443}
   - component: {fileID: 6861799305124663724}
   - component: {fileID: 3293660850324695068}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WindParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141532,7 +141532,7 @@ GameObject:
   - component: {fileID: 4649159131620817189}
   - component: {fileID: 5897442075097346293}
   - component: {fileID: 2954036684306452509}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WindParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146436,7 +146436,7 @@ GameObject:
   - component: {fileID: 1691220768947608954}
   - component: {fileID: 4277184933950395640}
   - component: {fileID: 7388933884586921182}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146612,7 +146612,7 @@ GameObject:
   - component: {fileID: 8392964101086966963}
   - component: {fileID: 4235848709815422920}
   - component: {fileID: 4393404056430689270}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WindParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151516,7 +151516,7 @@ GameObject:
   - component: {fileID: 1073631688199277388}
   - component: {fileID: 6525102109006918579}
   - component: {fileID: 5632348712573210418}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151691,7 +151691,7 @@ GameObject:
   - component: {fileID: 1960301605775695150}
   - component: {fileID: 1865353053059293681}
   - component: {fileID: 4924992507431430431}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151868,7 +151868,7 @@ GameObject:
   - component: {fileID: 3359217244009163715}
   - component: {fileID: 7327513141107533163}
   - component: {fileID: 6541645494350067970}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: wind072
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151979,7 +151979,7 @@ GameObject:
   - component: {fileID: 1350686834672728276}
   - component: {fileID: 8819236184928621521}
   - component: {fileID: 2197128763704950715}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152155,7 +152155,7 @@ GameObject:
   - component: {fileID: 2749097807505238011}
   - component: {fileID: 8351735003180939712}
   - component: {fileID: 8823190087826816105}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WindParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157061,7 +157061,7 @@ GameObject:
   - component: {fileID: 1625837753149289579}
   - component: {fileID: 4601897927575209951}
   - component: {fileID: 1633438359347842970}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: wind091
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157173,7 +157173,7 @@ GameObject:
   - component: {fileID: 4072726024456630394}
   - component: {fileID: 3889626245097659241}
   - component: {fileID: 3014207794209493348}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157350,7 +157350,7 @@ GameObject:
   - component: {fileID: 1252691526205592088}
   - component: {fileID: 3847512488420496090}
   - component: {fileID: 2840665488051577938}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: wind033
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157461,7 +157461,7 @@ GameObject:
   - component: {fileID: 1346378806392358532}
   - component: {fileID: 1189244818137075079}
   - component: {fileID: 1201443562704458681}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157638,7 +157638,7 @@ GameObject:
   - component: {fileID: 5582999329517730725}
   - component: {fileID: 5218837096160116361}
   - component: {fileID: 2468699761226332772}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: wind051
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157748,7 +157748,7 @@ GameObject:
   - component: {fileID: 6760831267570499747}
   - component: {fileID: 5255483163523542634}
   - component: {fileID: 7721629585255078188}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157924,7 +157924,7 @@ GameObject:
   - component: {fileID: 5028649385380667767}
   - component: {fileID: 4416266896468074153}
   - component: {fileID: 198800946523050782}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WindParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162829,7 +162829,7 @@ GameObject:
   - component: {fileID: 1984296384772495500}
   - component: {fileID: 9087399174315170152}
   - component: {fileID: 3710006223095830875}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WindParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -167733,7 +167733,7 @@ GameObject:
   - component: {fileID: 7292779512229244632}
   - component: {fileID: 840674491390350833}
   - component: {fileID: 2573261776224106547}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -167908,7 +167908,7 @@ GameObject:
   - component: {fileID: 298490151239135288}
   - component: {fileID: 4272244253293800747}
   - component: {fileID: 8132824959386380645}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168083,7 +168083,7 @@ GameObject:
   - component: {fileID: 1104127128985334684}
   - component: {fileID: 1939988560785823713}
   - component: {fileID: 6022218201600669809}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168258,7 +168258,7 @@ GameObject:
   - component: {fileID: 3459937410783088114}
   - component: {fileID: 4257894806791124665}
   - component: {fileID: 7494960536212591114}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168433,7 +168433,7 @@ GameObject:
   - component: {fileID: 6965547596719303066}
   - component: {fileID: 3378696714850622613}
   - component: {fileID: 6928965260775133143}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168608,7 +168608,7 @@ GameObject:
   - component: {fileID: 7568172455649582579}
   - component: {fileID: 3134034469415567771}
   - component: {fileID: 7704738930370658199}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168785,7 +168785,7 @@ GameObject:
   - component: {fileID: 8523218129717312768}
   - component: {fileID: 5585155799130963967}
   - component: {fileID: 3206172454674998382}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: wind060
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168896,7 +168896,7 @@ GameObject:
   - component: {fileID: 2604981675676091228}
   - component: {fileID: 3719585778001187344}
   - component: {fileID: 4857035106502907169}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169073,7 +169073,7 @@ GameObject:
   - component: {fileID: 961741897105720681}
   - component: {fileID: 6660530101587065872}
   - component: {fileID: 7723148547137540398}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: wind050
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169187,7 +169187,7 @@ GameObject:
   - component: {fileID: 2605244530481098173}
   - component: {fileID: 2223219451482869680}
   - component: {fileID: 5070704860607215943}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: wind011
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169298,7 +169298,7 @@ GameObject:
   - component: {fileID: 6811503129579829535}
   - component: {fileID: 7048675338679641605}
   - component: {fileID: 7493192906866700062}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpiralComet(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
