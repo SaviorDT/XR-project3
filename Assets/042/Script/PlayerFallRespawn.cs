@@ -212,8 +212,6 @@ public class PlayerFallRespawn : MonoBehaviour
             return false;
         }
 
-        Debug.Log($"Player position: {transform.position}, rotation: {transform.rotation}, safe stand check position: {candidatePosition + Vector3.up * safeStandCheckYOffset}, hits: {hits.Length}");
-
         return true;
     }
     private void RespawnToLastGround()
