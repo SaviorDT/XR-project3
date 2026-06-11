@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3858629479001001738}
   - component: {fileID: 5139328805312610477}
   - component: {fileID: 7030701473651301978}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Buff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4850,7 +4850,7 @@ GameObject:
   - component: {fileID: 5099815939451927021}
   - component: {fileID: 2429803035443166057}
   - component: {fileID: 5047515338906275336}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9695,7 +9695,7 @@ GameObject:
   - component: {fileID: 6501093228091895563}
   - component: {fileID: 1713324757425837570}
   - component: {fileID: 1240605874275865698}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Flares
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14540,7 +14540,7 @@ GameObject:
   - component: {fileID: 5201633898931553595}
   - component: {fileID: 4807278232195065006}
   - component: {fileID: 3548610222195585779}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Trails
   m_TagString: Untagged
   m_Icon: {fileID: 0}
