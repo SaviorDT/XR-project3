@@ -29,7 +29,7 @@ public class CollectibleItem : MonoBehaviour
     [Header("UI，自動抓 HUD_SourceCanvas 下的 Title / Text 中文")]
     public TMP_Text titleText;
     public TMP_Text descriptionText;
-    public float messageDuration = 3f;
+    // public float messageDuration = 3f; // 不需要倒數計時了，可依需求刪除此行
 
     [Header("音效")]
     public AudioSource audioSource;
@@ -179,7 +179,21 @@ public class CollectibleItem : MonoBehaviour
         if (beaconInstance != null)
             Destroy(beaconInstance);
 
-        gameObject.SetActive(false);
+        // 隱藏外觀與碰撞體，讓物件看起來已被收集，但保持 GameObject 啟動以維持音效和 UI 協程
+        HideItemVisuals();
+
+        // 原本的 gameObject.SetActive(false); 移到協程最後面了
+    }
+
+    private void HideItemVisuals()
+    {
+        // 關閉所有渲染器 (不顯示模型)
+        foreach (Renderer r in GetComponentsInChildren<Renderer>())
+            r.enabled = false;
+
+        // 關閉所有碰撞體 (避免再度觸發任何物理判定)
+        foreach (Collider c in GetComponentsInChildren<Collider>())
+            c.enabled = false;
     }
 
     private void ShowPickupMessage()
@@ -214,13 +228,20 @@ public class CollectibleItem : MonoBehaviour
 
     private IEnumerator HideMessageRoutine()
     {
-        yield return new WaitForSeconds(messageDuration);
+        // 先等待一幀，避免玩家可能剛好在按著 Trigger 的瞬間觸發收集，導致 UI 閃退
+        yield return null;
+
+        // 等待直到玩家按下 VR 控制器的 Trigger
+        yield return new WaitUntil(() => CheckTriggerPressed());
 
         if (titleText != null)
             titleText.gameObject.SetActive(false);
 
         if (descriptionText != null)
             descriptionText.gameObject.SetActive(false);
+
+        // UI 關閉且一切處理完畢後，才徹底關閉這個物件
+        gameObject.SetActive(false);
     }
 
     private IEnumerator FadeBeacon(float targetAlpha)
