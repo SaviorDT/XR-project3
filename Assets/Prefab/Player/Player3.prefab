@@ -15571,6 +15571,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   DebugMode: 0
   InUniverse: 1
+  FlyEnabled: 1
   PlayerHeight: 1.4
   OnGroundRotateAngle: 30
   OnGroundRotateCoolDown: 0.5
@@ -15735,7 +15736,7 @@ MonoBehaviour:
   wallCheckRadius: 0.35
   wallCheckDistance: 0.6
   wallCheckHeight: 0.8
-  respawnYOffset: 1
+  respawnYOffset: 0.5
   resetVelocity: 1
   safeStandCollider: {fileID: 3262910316781010895}
   safeStandBlockLayer:

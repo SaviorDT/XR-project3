@@ -21609,7 +21609,7 @@ MonoBehaviour:
   wallCheckRadius: 0.35
   wallCheckDistance: 0.6
   wallCheckHeight: 0.8
-  respawnYOffset: 1
+  respawnYOffset: 0.5
   resetVelocity: 1
   safeStandCollider: {fileID: 3849424125934196396}
   safeStandBlockLayer:

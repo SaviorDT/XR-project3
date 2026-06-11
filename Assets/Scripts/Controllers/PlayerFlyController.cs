@@ -152,7 +152,7 @@ public class PlayerFlyController : MonoBehaviour
 
         if (IsGrounded())
         {
-            NextFlyTime -= 1.0f;
+            NextFlyTime = 0.0f;
         }
 
         if (Velocity.magnitude > PlayClothSpeedThreshold && !InUniverse)
