@@ -7,6 +7,7 @@ public class PlayerFlyController : MonoBehaviour
 {
     [SerializeField] private bool DebugMode = false;
     [SerializeField] private bool InUniverse = false;
+    [SerializeField] private bool FlyEnabled = true;
     [Header("Player Control Settings")]
     [SerializeField] private float PlayerHeight = 1.4f;
     [SerializeField] private float OnGroundRotateAngle = 30.0f;
@@ -360,7 +361,7 @@ public class PlayerFlyController : MonoBehaviour
     }
 
     private void TryDetectFlapping() {
-        if (Time.time < NextFlyTime)
+        if (Time.time < NextFlyTime || !FlyEnabled)
         {
             IsFlapping = false;
             FlapPlayed = false;
@@ -723,10 +724,10 @@ public class PlayerFlyController : MonoBehaviour
     }
     public void EnableFly()
     {
-        NextFlyTime = 0;
+        FlyEnabled = true;
     }
     public void DisableFly()
     {
-        NextFlyTime = Time.time + 999999;
+        FlyEnabled = false;
     }
 }
