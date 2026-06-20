@@ -54,14 +54,17 @@ public class PlayerFallRespawn : MonoBehaviour
     public float safeStandCheckYOffset = 0f;
 
     private Vector3 lastGroundPosition;
+    private Quaternion lastGroundRotation;
     private Rigidbody rb;
     private CharacterController characterController;
-
+    public PlayerFlyController flyController;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         characterController = GetComponent<CharacterController>();
+        flyController = GetComponent<PlayerFlyController>();
         lastGroundPosition = transform.position;
+        lastGroundRotation = transform.rotation;
     }
 
     void Update()
@@ -91,7 +94,7 @@ public class PlayerFallRespawn : MonoBehaviour
             return;
 
         Vector3 candidate = transform.position;
-        candidate.y = hit.point.y;
+        // candidate.y = hit.point.y;
 
         if (!IsInsideSafeArea(candidate))
             return;
@@ -103,20 +106,26 @@ public class PlayerFallRespawn : MonoBehaviour
             return;
 
         lastGroundPosition = candidate;
+        lastGroundRotation = transform.rotation;
     }
 
     private bool IsOnGround(out RaycastHit hit)
     {
-        Vector3 origin = transform.position + Vector3.up * 0.2f;
+        // Vector3 origin = transform.position + Vector3.up * 0.2f;
 
-        return Physics.SphereCast(
-            origin,
-            groundCheckRadius,
-            Vector3.down,
-            out hit,
-            groundCheckDistance,
-            groundLayer
-        );
+        // return Physics.SphereCast(
+        //     origin,
+        //     groundCheckRadius,
+        //     Vector3.down,
+        //     out hit,
+        //     groundCheckDistance,
+        //     groundLayer
+        // );
+        hit = new()
+        {
+            normal = transform.up
+        };
+        return flyController.IsGrounded();
     }
 
     private bool IsInsideSafeArea(Vector3 pos)
@@ -221,26 +230,12 @@ public class PlayerFallRespawn : MonoBehaviour
         if (characterController != null)
         {
             characterController.enabled = false;
-            // transform.position = respawnPosition;
-            rb.MovePosition(respawnPosition);
+            flyController.SetTransform(respawnPosition, lastGroundRotation, resetVelocity);
             characterController.enabled = true;
         }
         else
         {
-            // transform.position = respawnPosition;
-            rb.MovePosition(respawnPosition);
-        }
-
-        if (resetVelocity && rb != null)
-        {
-#if UNITY_6000_0_OR_NEWER
-            rb.interpolation = RigidbodyInterpolation.None;
-            rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-#else
-            rb.velocity = Vector3.zero;
-#endif
-            rb.angularVelocity = Vector3.zero;
+            flyController.SetTransform(respawnPosition, lastGroundRotation, resetVelocity);
         }
     }
     private void OnDrawGizmosSelected()

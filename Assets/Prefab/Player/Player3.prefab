@@ -15736,13 +15736,14 @@ MonoBehaviour:
   wallCheckRadius: 0.35
   wallCheckDistance: 0.6
   wallCheckHeight: 0.8
-  respawnYOffset: 0.5
+  respawnYOffset: 0
   resetVelocity: 1
   safeStandCollider: {fileID: 3262910316781010895}
   safeStandBlockLayer:
     serializedVersion: 2
     m_Bits: 1073742327
   safeStandCheckYOffset: 0
+  flyController: {fileID: 0}
 --- !u!65 &3262910316781010895
 BoxCollider:
   m_ObjectHideFlags: 0

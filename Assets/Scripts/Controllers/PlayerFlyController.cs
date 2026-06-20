@@ -103,7 +103,7 @@ public class PlayerFlyController : MonoBehaviour
     private float FlappingAmountBuffer = 0.0f;
     private float RightControllerLastY = 0.0f, LeftControllerLastY = 0.0f;
     private bool RightBPressedPrev = false;
-    private bool ShouldUpdateInterpolate = false;
+    private int PauseFixedFrameCount = 0;
     
     void Start()
     {
@@ -173,18 +173,6 @@ public class PlayerFlyController : MonoBehaviour
             }
         }
 
-        if (PlayerRigidbody.interpolation == RigidbodyInterpolation.None)
-        {
-            ShouldUpdateInterpolate = true;
-        }
-
-        if (ShouldUpdateInterpolate)
-        {
-            PlayerRigidbody.interpolation = RigidbodyInterpolation.Interpolate;
-            ShouldUpdateInterpolate = false;
-        }
-
-        
         TryAttachBar();
         TryDetectPlayerInput();
         TryDetectFlapping();
@@ -196,8 +184,15 @@ public class PlayerFlyController : MonoBehaviour
     
     void FixedUpdate()
     {
+        if (PauseFixedFrameCount > 0)
+        {
+            PauseFixedFrameCount--;
+            return;
+        }
+        PlayerRigidbody.interpolation = RigidbodyInterpolation.Interpolate;
+        PlayerRigidbody.isKinematic = false;
+
         // 著地時不飛行
-        // float flappingSpeed = GetFlappingWingSpeed();
         if (IsGrounded())
         {
             // 起飛
@@ -717,11 +712,6 @@ public class PlayerFlyController : MonoBehaviour
 
         TriggerButtonPressedPrev = triggerPressed;
     }
-
-    public void ResetVelocity()
-    {
-        Velocity = Vector3.zero;
-    }
     public void EnableFly()
     {
         FlyEnabled = true;
@@ -729,5 +719,22 @@ public class PlayerFlyController : MonoBehaviour
     public void DisableFly()
     {
         FlyEnabled = false;
+    }
+    public void SetTransform(Vector3 position, Quaternion rotation, bool resetVelocity = false)
+    {
+        if (DebugMode)
+        {
+            return;
+        }
+        PlayerRigidbody.interpolation = RigidbodyInterpolation.None;
+        PauseFixedFrameCount = 2;
+
+        if (resetVelocity)
+        {
+            PlayerRigidbody.isKinematic = true;
+            Velocity = Vector3.zero;
+        }
+        PlayerRigidbody.position = position;
+        PlayerRigidbody.rotation = rotation;
     }
 }
