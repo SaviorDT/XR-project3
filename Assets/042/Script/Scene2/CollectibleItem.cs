@@ -103,8 +103,7 @@ public class CollectibleItem : MonoBehaviour
 
         if (canPickup)
             ShowPickupHint();
-        else
-            HidePickupHint();
+        
 
         CheckPickup(distance);
     }

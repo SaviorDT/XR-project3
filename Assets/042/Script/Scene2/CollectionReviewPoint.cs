@@ -124,7 +124,7 @@ public class CollectionReviewPoint : MonoBehaviour
                 foreach (CollectedItemData item in recorder.GetCollectedItems())
                 {
                     sb.AppendLine($"�� {item.itemNameCN}");
-                    sb.AppendLine(item.descriptionCN);
+                    //sb.AppendLine(item.descriptionCN);
                     sb.AppendLine();
                 }
             }
