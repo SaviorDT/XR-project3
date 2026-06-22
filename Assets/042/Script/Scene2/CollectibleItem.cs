@@ -96,8 +96,17 @@ public class CollectibleItem : MonoBehaviour
         float distance = Vector3.Distance(player.position, transform.position);
 
         UpdateBeacon(distance);
-        CheckPickup(distance);
+
         isGrounded = IsPlayerGrounded();
+
+        bool canPickup = distance <= pickupDistance && isGrounded;
+
+        if (canPickup)
+            ShowPickupHint();
+        else
+            HidePickupHint();
+
+        CheckPickup(distance);
     }
 
     private void CreateBeacon()
@@ -145,9 +154,30 @@ public class CollectibleItem : MonoBehaviour
         if (!IsPlayerGrounded())
             return;
 
+        if (!CheckTriggerPressed())
+            return;
+
         PickUp();
     }
+    private void ShowPickupHint()
+    {
+        if (titleText == null || descriptionText == null)
+            return;
 
+        titleText.text = "???";
+        descriptionText.text = "«ö Trigger ¦¬¶°";
+
+        titleText.gameObject.SetActive(true);
+        descriptionText.gameObject.SetActive(true);
+    }
+    private void HidePickupHint()
+    {
+        if (titleText != null)
+            titleText.gameObject.SetActive(false);
+
+        if (descriptionText != null)
+            descriptionText.gameObject.SetActive(false);
+    }
     private bool IsPlayerGrounded()
     {
         if (playerFlyController == null)
