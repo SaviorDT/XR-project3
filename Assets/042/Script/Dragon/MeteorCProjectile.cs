@@ -7,7 +7,7 @@ public class MeteorCProjectile : MonoBehaviour
     public float turnSpeed = 2.5f;
     public float trackingDelay = 0.5f;
 
-    [Header("¹w´ú³]©w")]
+    [Header("ï¿½wï¿½ï¿½ï¿½]ï¿½w")]
     public float minPredictTime = 1f;
     public float maxPredictTime = 3f;
     public float predictDistanceFactor = 0.15f;
@@ -85,7 +85,8 @@ public class MeteorCProjectile : MonoBehaviour
             }
         }
 
-        rb.MovePosition(rb.position + currentDirection * speed * Time.fixedDeltaTime);
+        // rb.MovePosition(rb.position + currentDirection * speed * Time.fixedDeltaTime);
+        rb.linearVelocity = currentDirection * speed;
 
         if (currentDirection != Vector3.zero)
         {

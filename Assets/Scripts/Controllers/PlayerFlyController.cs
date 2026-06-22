@@ -325,6 +325,67 @@ public class PlayerFlyController : MonoBehaviour
         PlayerRigidbody.linearVelocity = Velocity;
     }
 
+    // 隕石（trigger 版本）
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!InUniverse || !other.gameObject.CompareTag("Meteor"))
+        {
+            return;
+        }
+
+        if (PlayerRigidbody == null)
+            return;
+
+        // Compute an approximate contact normal using the closest point on the meteor's collider
+        Vector3 closest = other.ClosestPoint(PlayerRigidbody.position);
+        Vector3 normal = PlayerRigidbody.position - closest;
+        if (normal.sqrMagnitude < 1e-6f)
+        {
+            // fallback normal if points coincide
+            normal = Vector3.up;
+        }
+        normal.Normalize();
+
+        // meteor velocity (if it has a Rigidbody)
+        Vector3 meteorVelocity = Vector3.zero;
+        Rigidbody meteorRb = other.attachedRigidbody;
+        if (meteorRb != null)
+        {
+            meteorVelocity = meteorRb.linearVelocity;
+        }
+
+        Vector3 v = PlayerRigidbody.linearVelocity;
+        Vector3 u = meteorVelocity;
+
+        float e = 1.0f; // perfectly elastic
+        Vector3 relative = v - u;
+        float vn = Vector3.Dot(relative, normal);
+
+        // If objects are separating, no impulse needed
+        if (vn >= 0f)
+            return;
+
+        Vector3 vPrime = v - (1f + e) * vn * normal;
+
+        Velocity = vPrime;
+
+        // Remove meteor components: collider and optional projectile scripts.
+        GameObject meteor = other.gameObject;
+        if (meteor != null)
+        {
+            if (meteor.TryGetComponent<Collider>(out var meteorCol))
+            {
+                Destroy(meteorCol);
+            }
+
+            if (meteor.TryGetComponent<MeteorAProjectile>(out var meteorA)) Destroy(meteorA);
+
+            if (meteor.TryGetComponent<MeteorBProjectile>(out var meteorB)) Destroy(meteorB);
+
+            if (meteor.TryGetComponent<MeteorCProjectile>(out var meteorC)) Destroy(meteorC);
+        }
+    }
+
     public void SetWindVelocity(Vector3 velocity)
     {
         WindVelocity += velocity;

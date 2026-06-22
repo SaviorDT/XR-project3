@@ -29,6 +29,7 @@ public class MeteorAProjectile : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
+        // rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
+        rb.linearVelocity = velocity;
     }
 }
