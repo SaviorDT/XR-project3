@@ -2,46 +2,54 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 public class CollectionReviewPoint : MonoBehaviour
 {
-    [Header("�y���]�w")]
+    [Header("語言設定")]
     public bool chinese = true;
 
-    [Header("UI�A�۰ʧ� HUD_SourceCanvas �U�� Text / Text ����")]
+    [Header("UI，自動抓 HUD_SourceCanvas 下的 Text / Text 中文")]
     public TMP_Text reviewTextEN;
     public TMP_Text reviewTextCN;
 
-    [Header("�]�w")]
-    public bool showOnlyOnce = true;
+    [Header("設定")]
+    public bool showOnlyOnce = false;
+    public int requiredItemCount = 4;
 
-    [Header("��������")]
+    [Header("場景切換")]
     public string nextSceneName;
 
     private bool waitingForTrigger = false;
-
+    private bool canChangeScene = false;
     private bool alreadyShown = false;
+
+    private Rigidbody currentPlayerRb;
 
     private void Start()
     {
         AutoFindUIText();
     }
+
     private void Update()
     {
         if (!waitingForTrigger)
             return;
 
-        bool triggerPressed =
-            OVRInput.GetDown(
-                OVRInput.Button.PrimaryIndexTrigger,
-                OVRInput.Controller.RTouch)
-            ||
-            OVRInput.GetDown(
-                OVRInput.Button.PrimaryIndexTrigger,
-                OVRInput.Controller.LTouch);
+        if (!CheckTriggerPressed())
+            return;
 
-        if (triggerPressed)
+        waitingForTrigger = false;
+
+        if (canChangeScene)
         {
             SceneManager.LoadScene(nextSceneName);
+        }
+        else
+        {
+            HideReviewText();
+
+            if (currentPlayerRb != null)
+                currentPlayerRb.isKinematic = false;
         }
     }
 
@@ -56,14 +64,29 @@ public class CollectionReviewPoint : MonoBehaviour
         PlayerCollectionRecorder recorder =
             other.GetComponent<PlayerCollectionRecorder>();
 
-        other.GetComponent<Rigidbody>().isKinematic = true;
-
         if (recorder == null)
             return;
 
+        currentPlayerRb = other.GetComponent<Rigidbody>();
+
+        if (currentPlayerRb != null)
+            currentPlayerRb.isKinematic = true;
+
         ShowReview(recorder);
+
         alreadyShown = true;
         waitingForTrigger = true;
+    }
+
+    private bool CheckTriggerPressed()
+    {
+        return OVRInput.GetDown(
+            OVRInput.Button.PrimaryIndexTrigger,
+            OVRInput.Controller.RTouch)
+            ||
+            OVRInput.GetDown(
+            OVRInput.Button.PrimaryIndexTrigger,
+            OVRInput.Controller.LTouch);
     }
 
     private void AutoFindUIText()
@@ -72,12 +95,12 @@ public class CollectionReviewPoint : MonoBehaviour
 
         if (canvasObj == null)
         {
-            Debug.LogWarning("�䤣�� HUD_SourceCanvas");
+            Debug.LogWarning("找不到 HUD_SourceCanvas");
             return;
         }
 
         Transform textEN = FindChildRecursive(canvasObj.transform, "Text");
-        Transform textCN = FindChildRecursive(canvasObj.transform, "Text ����");
+        Transform textCN = FindChildRecursive(canvasObj.transform, "Text 中文");
 
         if (textEN != null)
             reviewTextEN = textEN.GetComponent<TMP_Text>();
@@ -94,6 +117,7 @@ public class CollectionReviewPoint : MonoBehaviour
                 return child;
 
             Transform result = FindChildRecursive(child, childName);
+
             if (result != null)
                 return result;
         }
@@ -108,33 +132,46 @@ public class CollectionReviewPoint : MonoBehaviour
         if (targetText == null)
             return;
 
+        int collectedCount = recorder.GetCollectedItems().Count;
+
+        canChangeScene = collectedCount >= requiredItemCount;
+
         StringBuilder sb = new StringBuilder();
 
         if (chinese)
         {
-            sb.AppendLine("�����������^�U");
+            sb.AppendLine("收集物品回顧");
+            sb.AppendLine();
+            sb.AppendLine($"目前收集：{collectedCount} / {requiredItemCount}");
             sb.AppendLine();
 
-            if (recorder.GetCollectedItems().Count == 0)
+            if (collectedCount == 0)
             {
-                sb.AppendLine("�|���������󪫥�C");
+                sb.AppendLine("你尚未收集任何物品。");
             }
             else
             {
                 foreach (CollectedItemData item in recorder.GetCollectedItems())
                 {
-                    sb.AppendLine($"�� {item.itemNameCN}");
-                    //sb.AppendLine(item.descriptionCN);
-                    sb.AppendLine();
+                    sb.AppendLine($"• {item.itemNameCN}");
                 }
             }
+
+            sb.AppendLine();
+
+            if (canChangeScene)
+                sb.AppendLine("已收集完成，按 Trigger 繼續。");
+            else
+                sb.AppendLine("尚未收集完成，按 Trigger 返回並繼續尋找。");
         }
         else
         {
             sb.AppendLine("Collection Review");
             sb.AppendLine();
+            sb.AppendLine($"Collected: {collectedCount} / {requiredItemCount}");
+            sb.AppendLine();
 
-            if (recorder.GetCollectedItems().Count == 0)
+            if (collectedCount == 0)
             {
                 sb.AppendLine("No items collected.");
             }
@@ -142,16 +179,34 @@ public class CollectionReviewPoint : MonoBehaviour
             {
                 foreach (CollectedItemData item in recorder.GetCollectedItems())
                 {
-                    sb.AppendLine($"�� {item.itemNameEN}");
-                    sb.AppendLine(item.descriptionEN);
-                    sb.AppendLine();
+                    sb.AppendLine($"• {item.itemNameEN}");
                 }
             }
+
+            sb.AppendLine();
+
+            if (canChangeScene)
+                sb.AppendLine("Collection complete. Press Trigger to continue.");
+            else
+                sb.AppendLine("Collection incomplete. Press Trigger to return.");
         }
 
         targetText.text = sb.ToString();
         targetText.gameObject.SetActive(true);
+    }
 
-        waitingForTrigger = true;
+    private void HideReviewText()
+    {
+        if (reviewTextEN != null)
+        {
+            reviewTextEN.text = "";
+            reviewTextEN.gameObject.SetActive(false);
+        }
+
+        if (reviewTextCN != null)
+        {
+            reviewTextCN.text = "";
+            reviewTextCN.gameObject.SetActive(false);
+        }
     }
 }
