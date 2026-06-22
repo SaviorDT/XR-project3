@@ -11953,15 +11953,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5593466215853929122, guid: d6221660abff6134ba42e1c091b7215c, type: 3}
       propertyPath: meteorASpreadAngle
-      value: 30
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5593466215853929122, guid: d6221660abff6134ba42e1c091b7215c, type: 3}
       propertyPath: meteorBSpreadAngle
-      value: 80
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5593466215853929122, guid: d6221660abff6134ba42e1c091b7215c, type: 3}
       propertyPath: meteorCSpreadAngle
-      value: 70
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 5593466215853929122, guid: d6221660abff6134ba42e1c091b7215c, type: 3}
       propertyPath: meteorBSpeedRange.x
@@ -11973,11 +11973,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5593466215853929122, guid: d6221660abff6134ba42e1c091b7215c, type: 3}
       propertyPath: meteorCSpeedRange.x
-      value: 5
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5593466215853929122, guid: d6221660abff6134ba42e1c091b7215c, type: 3}
       propertyPath: meteorCSpeedRange.y
-      value: 8
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5593466215853929122, guid: d6221660abff6134ba42e1c091b7215c, type: 3}
       propertyPath: starUpwardSpeedRange.x
@@ -26752,6 +26752,30 @@ PrefabInstance:
     - target: {fileID: 947999552208053862, guid: 3f48c9c6e9cc35a42b32871fc5745ae0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1963853007627002111, guid: 3f48c9c6e9cc35a42b32871fc5745ae0, type: 3}
+      propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5151878787672086308, guid: 3f48c9c6e9cc35a42b32871fc5745ae0, type: 3}
+      propertyPath: Gravity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5151878787672086308, guid: 3f48c9c6e9cc35a42b32871fc5745ae0, type: 3}
+      propertyPath: StallSpeed
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5151878787672086308, guid: 3f48c9c6e9cc35a42b32871fc5745ae0, type: 3}
+      propertyPath: SteeringSpeed
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 5151878787672086308, guid: 3f48c9c6e9cc35a42b32871fc5745ae0, type: 3}
+      propertyPath: DownToForwardRatio
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5151878787672086308, guid: 3f48c9c6e9cc35a42b32871fc5745ae0, type: 3}
+      propertyPath: VelocitySteeringRatio
+      value: 0.01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

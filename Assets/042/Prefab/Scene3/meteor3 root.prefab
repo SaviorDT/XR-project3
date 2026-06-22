@@ -723,7 +723,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MeteorCProjectile
   lifeTime: 100
   turnSpeed: 2.5
-  trackingDelay: 0.5
+  trackingDelay: 10
+  InitSpeed: 30
   minPredictTime: 1
   maxPredictTime: 3
   predictDistanceFactor: 0.15

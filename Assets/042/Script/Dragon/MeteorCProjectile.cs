@@ -6,6 +6,7 @@ public class MeteorCProjectile : MonoBehaviour
     public float lifeTime = 10f;
     public float turnSpeed = 2.5f;
     public float trackingDelay = 0.5f;
+    public float InitSpeed = 30f;
 
     [Header("�w���]�w")]
     public float minPredictTime = 1f;
@@ -17,10 +18,12 @@ public class MeteorCProjectile : MonoBehaviour
 
     private Vector3 currentDirection;
     private float speed;
+    private float moveSpeed;
     private float timer;
 
     private Vector3 lastPlayerPosition;
     private Vector3 playerVelocity;
+    private Vector3 predictedPosition;
     private bool hasLastPlayerPosition = false;
     private Vector3 launcherForward;
     public void Init(
@@ -33,11 +36,13 @@ public class MeteorCProjectile : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         currentDirection = startDirection.normalized;
-        speed = moveSpeed;
+        speed = InitSpeed;
+        this.moveSpeed = moveSpeed;
         player = playerTarget;
         trackingDelay = delay;
 
         launcherForward = launcherForwardDirection.normalized;
+        predictedPosition = transform.position + launcherForward * 1000f;
 
         timer = 0f;
 
@@ -68,21 +73,22 @@ public class MeteorCProjectile : MonoBehaviour
 
         if (timer >= trackingDelay && player != null)
         {
-            Vector3 predictedPosition = GetPredictedPlayerPosition();
-            Vector3 toPredictedPosition = predictedPosition - transform.position;
+            speed = moveSpeed;
+            predictedPosition = GetPredictedPlayerPosition();
 
-            if (toPredictedPosition.sqrMagnitude > 0.01f)
-            {
-                Vector3 targetDirection = ClampToForward90(
-    toPredictedPosition.normalized
-);
+            timer = 0;
+        }
+        Vector3 toPredictedPosition = predictedPosition - transform.position;
 
-                currentDirection = Vector3.Slerp(
-                    currentDirection,
-                    targetDirection,
-                    turnSpeed * Time.fixedDeltaTime
-                ).normalized;
-            }
+        if (toPredictedPosition.sqrMagnitude > 0.01f)
+        {
+            Vector3 targetDirection = ClampToForward90(toPredictedPosition.normalized);
+
+            currentDirection = Vector3.Slerp(
+                currentDirection,
+                targetDirection,
+                turnSpeed * Time.fixedDeltaTime
+            ).normalized;
         }
 
         // rb.MovePosition(rb.position + currentDirection * speed * Time.fixedDeltaTime);
@@ -139,14 +145,70 @@ public class MeteorCProjectile : MonoBehaviour
 
     private Vector3 GetPredictedPlayerPosition()
     {
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        if (player == null)
+            return transform.position + currentDirection * 100f;
 
-        float predictTime = Mathf.Clamp(
-            distanceToPlayer * predictDistanceFactor,
-            minPredictTime,
-            maxPredictTime
-        );
+        // If the player is behind the projectile relative to currentDirection, return a point far ahead on currentDirection
+        float dot = Vector3.Dot(player.position - transform.position, currentDirection);
+        if (dot < 0f)
+        {
+            return transform.position + currentDirection * 100f;
+        }
 
-        return player.position + playerVelocity * predictTime;
+        float v = playerVelocity.magnitude;
+        float s = speed;
+
+        // Fallback to original simple prediction when velocities are negligible
+        if (v <= Mathf.Epsilon || s <= Mathf.Epsilon)
+        {
+            return player.position;
+        }
+
+        Vector3 dir = playerVelocity.normalized;
+        Vector3 A = player.position - transform.position;
+        float alpha = Vector3.Dot(A, dir);
+        float A2 = A.sqrMagnitude;
+        float k = v * v / (s * s);
+
+        // dp / | predictedPosition - player.position | = sqrt(k)
+        // Solve (1-k) dp^2 - 2k*alpha dp - k*A2 = 0 for dp (distance from player along playerVelocity direction)
+        float a = 1f - k;
+        float b = -2f * k * alpha;
+        float c = -k * A2;
+
+        float dp = -1f;
+
+        if (Mathf.Abs(a) < 1e-6f)
+        {
+            if (Mathf.Abs(b) > 1e-6f)
+                dp = -c / b;
+        }
+        else
+        {
+            float disc = b * b - 4f * a * c;
+            if (disc >= 0f)
+            {
+                float sqrtD = Mathf.Sqrt(disc);
+                float dp1 = (-b + sqrtD) / (2f * a);
+                float dp2 = (-b - sqrtD) / (2f * a);
+                dp = float.MaxValue;
+                if (dp1 >= 0f) dp = Mathf.Min(dp, dp1);
+                if (dp2 >= 0f) dp = Mathf.Min(dp, dp2);
+                if (dp == float.MaxValue) dp = -1f;
+            }
+        }
+
+        if (dp < 0f)
+        {
+            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+            float predictTime = Mathf.Clamp(
+                distanceToPlayer * predictDistanceFactor,
+                minPredictTime,
+                maxPredictTime
+            );
+            return transform.position + currentDirection * 100f;
+        }
+
+        return player.position + dir * dp;
     }
 }

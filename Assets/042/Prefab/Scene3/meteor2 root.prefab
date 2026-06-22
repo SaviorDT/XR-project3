@@ -658,7 +658,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeteorBProjectile
   lifeTime: 100
-  turnSpeed: 3
+  turnSpeed: 1
   turnDuration: 12
 --- !u!135 &6813301171164080367
 SphereCollider:
