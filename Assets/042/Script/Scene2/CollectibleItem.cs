@@ -9,6 +9,9 @@ public class CollectibleItem : MonoBehaviour
     [Header("物件資料")]
     public CollectedItemData itemData;
 
+    [Header("劇情物件")]
+    public bool isStoryOnly = false;
+
     [Header("玩家")]
     public Transform player;
     public PlayerFlyController playerFlyController;
@@ -99,11 +102,13 @@ public class CollectibleItem : MonoBehaviour
 
         isGrounded = IsPlayerGrounded();
 
-        bool canPickup = distance <= pickupDistance && isGrounded;
+        bool canInteract = distance <= pickupDistance && isGrounded;
 
-        if (canPickup)
-            ShowPickupHint();
-        
+        if (canInteract)
+        {
+            if (!isStoryOnly)
+                ShowPickupHint();
+        }
 
         CheckPickup(distance);
     }
@@ -153,6 +158,14 @@ public class CollectibleItem : MonoBehaviour
         if (!IsPlayerGrounded())
             return;
 
+        // 劇情物件直接觸發
+        if (isStoryOnly)
+        {
+            PickUp();
+            return;
+        }
+
+        // 道具需要 Trigger
         if (!CheckTriggerPressed())
             return;
 
@@ -197,11 +210,14 @@ public class CollectibleItem : MonoBehaviour
 
         collected = true;
 
-        PlayerCollectionRecorder recorder =
-            player.GetComponent<PlayerCollectionRecorder>();
+        if (!isStoryOnly)
+        {
+            PlayerCollectionRecorder recorder =
+                player.GetComponent<PlayerCollectionRecorder>();
 
-        if (recorder != null)
-            recorder.AddItem(itemData);
+            if (recorder != null)
+                recorder.AddItem(itemData);
+        }
 
         ShowPickupMessage();
 
@@ -227,11 +243,14 @@ public class CollectibleItem : MonoBehaviour
 
     private void ShowPickupMessage()
     {
-        if (titleText == null || descriptionText == null || itemData == null)
+        if (titleText == null || descriptionText == null)
             return;
 
-        titleText.text = itemData.itemNameCN;
-        descriptionText.text = itemData.descriptionCN;
+        if (itemData != null)
+        {
+            titleText.text = itemData.itemNameCN;
+            descriptionText.text = itemData.descriptionCN;
+        }
 
         titleText.gameObject.SetActive(true);
         descriptionText.gameObject.SetActive(true);
