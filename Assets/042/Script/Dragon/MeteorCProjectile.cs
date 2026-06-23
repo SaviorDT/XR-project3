@@ -36,7 +36,7 @@ public class MeteorCProjectile : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         currentDirection = startDirection.normalized;
-        speed = InitSpeed;
+        speed = Mathf.Max(InitSpeed * (transform.position - playerTarget.position).magnitude / 500f, moveSpeed);
         this.moveSpeed = moveSpeed;
         player = playerTarget;
         trackingDelay = delay;
@@ -146,13 +146,13 @@ public class MeteorCProjectile : MonoBehaviour
     private Vector3 GetPredictedPlayerPosition()
     {
         if (player == null)
-            return transform.position + currentDirection * 100f;
+            return transform.position + rb.linearVelocity * 100f;
 
         // If the player is behind the projectile relative to currentDirection, return a point far ahead on currentDirection
         float dot = Vector3.Dot(player.position - transform.position, currentDirection);
         if (dot < 0f)
         {
-            return transform.position + currentDirection * 100f;
+            return transform.position + rb.linearVelocity * 100f;
         }
 
         float v = playerVelocity.magnitude;
@@ -200,13 +200,7 @@ public class MeteorCProjectile : MonoBehaviour
 
         if (dp < 0f)
         {
-            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-            float predictTime = Mathf.Clamp(
-                distanceToPlayer * predictDistanceFactor,
-                minPredictTime,
-                maxPredictTime
-            );
-            return transform.position + currentDirection * 100f;
+            return transform.position + rb.linearVelocity * 100f;
         }
 
         return player.position + dir * dp;
