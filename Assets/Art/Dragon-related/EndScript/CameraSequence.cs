@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class CameraSequence : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class CameraSequence : MonoBehaviour
 
         [Header("這個鏡頭的故事文字(留空=不顯示)")]
         [TextArea] public string storyText;
-        public float textHoldDuration = 3f;   // 文字停留多久
+        public float textHoldDuration = 3f;
     }
 
     [Header("要移動的玩家(最外層 Player)")]
@@ -51,6 +52,11 @@ public class CameraSequence : MonoBehaviour
     [Header("移動到幾%時開始漸黑(0~1)")]
     public float fadeOutStartProgress = 0.7f;
 
+    [Header("結局後回 Scene1")]
+    public bool returnToSceneAfterEnd = false;
+    public string returnSceneName = "Scene1";
+    public float returnDelay = 2f;
+
     public void StartSequence()
     {
         StopAllCoroutines();
@@ -81,7 +87,7 @@ public class CameraSequence : MonoBehaviour
             if (holdBlackBeforeFadeIn > 0f)
                 yield return new WaitForSeconds(holdBlackBeforeFadeIn);
 
-            // 4. 漸亮
+            // 4. 漸亮(啟動但不等它,讓移動同時開始)
             StartCoroutine(Fade(1f, 0f, fadeDuration));
 
             // 5. 起點停留
@@ -89,7 +95,6 @@ public class CameraSequence : MonoBehaviour
                 yield return new WaitForSeconds(shot.holdAtStart);
 
             // 6. 緩慢移動 + 並行顯示文字
-            // 啟動文字(並行,不等它)
             if (subtitle != null && !string.IsNullOrEmpty(shot.storyText))
                 StartCoroutine(subtitle.ShowText(shot.storyText, shot.textHoldDuration));
 
@@ -141,6 +146,13 @@ public class CameraSequence : MonoBehaviour
         else
         {
             SetMeshAlpha(stayBlackAtEnd ? 1f : 0f);
+
+            // 全黑後回 Scene1
+            if (returnToSceneAfterEnd)
+            {
+                yield return new WaitForSeconds(returnDelay);
+                SceneManager.LoadScene(returnSceneName);
+            }
         }
     }
 
@@ -183,7 +195,7 @@ public class CameraSequence : MonoBehaviour
     {
         if (fadeMesh == null) yield break;
 
-        Material mat = fadeMesh.material; // 取得材質實例
+        Material mat = fadeMesh.material;
         Color startColor = mat.color;
 
         float t = 0f;
