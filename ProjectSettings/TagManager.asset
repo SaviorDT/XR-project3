@@ -16,7 +16,7 @@ TagManager:
   - TransparentNoFog
   - Interactable
   - Overlay UI
-  - 
+  - OpaqueNoFog
   - 
   - 
   - 
