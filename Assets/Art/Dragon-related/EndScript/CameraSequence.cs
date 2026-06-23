@@ -82,7 +82,7 @@ public class CameraSequence : MonoBehaviour
                 yield return new WaitForSeconds(holdBlackBeforeFadeIn);
 
             // 4. 漸亮
-            yield return StartCoroutine(Fade(1f, 0f, fadeDuration));
+            StartCoroutine(Fade(1f, 0f, fadeDuration));
 
             // 5. 起點停留
             if (shot.holdAtStart > 0f)
