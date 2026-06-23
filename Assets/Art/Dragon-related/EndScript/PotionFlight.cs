@@ -24,6 +24,9 @@ public class PotionFlight : MonoBehaviour
     [Range(0f, 1f)]
     public float eatTriggerAtProgress = 0.6f;  // 飛行進度到此%時觸發Eat(讓龍提前張嘴)
 
+    [Header("Fade 漸黑")]
+    public MeshRenderer fadeMesh;
+
     void Start()
     {
         gameObject.SetActive(true);
@@ -41,6 +44,9 @@ public class PotionFlight : MonoBehaviour
         // 階段1:出現,停起點
         transform.position = startPoint.position;
         transform.localScale = Vector3.one * startScale;
+        
+        StartCoroutine(Fade(1f, 0f, 2));
+        
         SetVisible(renderers, true);
         yield return new WaitForSeconds(holdAtStart);
 
@@ -79,5 +85,23 @@ public class PotionFlight : MonoBehaviour
     {
         foreach (Renderer r in renderers)
             r.enabled = visible;
+    }
+
+    IEnumerator Fade(float from, float to, float duration)
+    {
+        if (fadeMesh == null) yield break;
+
+        Material mat = fadeMesh.material; // 取得材質實例
+        Color startColor = mat.color;
+
+        float t = 0f;
+        while (t < duration)
+        {
+            t += Time.deltaTime;
+            float currentAlpha = Mathf.Lerp(from, to, t / duration);
+            mat.color = new Color(startColor.r, startColor.g, startColor.b, currentAlpha);
+            yield return null;
+        }
+        mat.color = new Color(startColor.r, startColor.g, startColor.b, to);
     }
 }

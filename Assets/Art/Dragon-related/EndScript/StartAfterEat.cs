@@ -28,8 +28,8 @@ public class EndingDirector : MonoBehaviour
     public string blowTrigger = "ToBlow";
 
     [Header("Fade 漸黑")]
-    public CanvasGroup fadeCanvasGroup;
-    public float fadeDuration = 3f;
+    public MeshRenderer fadeMesh;
+    public float fadeOutDuration = 3f;
 
     [Header("第4階段:五鏡頭序列")]
     public CameraSequence cameraSequence;
@@ -85,22 +85,27 @@ public class EndingDirector : MonoBehaviour
 
         // 休息結束,吹氣 + 同步開始漸黑
         dragonAnimator.SetTrigger(blowTrigger);
-        yield return StartCoroutine(FadeToBlack(fadeDuration));  // 等它確實全黑
+        yield return StartCoroutine(Fade(0f, 1f, fadeOutDuration));  // 等它確實全黑
 
         // 全黑後接五鏡頭
         if (cameraSequence != null) cameraSequence.StartSequence();
     }
 
-    IEnumerator FadeToBlack(float duration)
+    IEnumerator Fade(float from, float to, float duration)
     {
-        float elapsed = 0f;
-        while (elapsed < duration)
+        if (fadeMesh == null) yield break;
+
+        Material mat = fadeMesh.material; // 取得材質實例
+        Color startColor = mat.color;
+
+        float t = 0f;
+        while (t < duration)
         {
-            elapsed += Time.deltaTime;
-            float alpha = Mathf.Clamp01(elapsed / duration);
-            if (fadeCanvasGroup != null) fadeCanvasGroup.alpha = alpha;
+            t += Time.deltaTime;
+            float currentAlpha = Mathf.Lerp(from, to, t / duration);
+            mat.color = new Color(startColor.r, startColor.g, startColor.b, currentAlpha);
             yield return null;
         }
-        if (fadeCanvasGroup != null) fadeCanvasGroup.alpha = 1f;
+        mat.color = new Color(startColor.r, startColor.g, startColor.b, to);
     }
 }

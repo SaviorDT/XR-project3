@@ -27,7 +27,7 @@ public class CameraSequence : MonoBehaviour
     public MonoBehaviour[] scriptsToDisable;
 
     [Header("Fade 黑幕")]
-    public CanvasGroup fadeCanvasGroup;
+    public MeshRenderer fadeMesh;
     public float fadeDuration = 2f;
 
     [Header("字幕系統")]
@@ -60,7 +60,7 @@ public class CameraSequence : MonoBehaviour
     IEnumerator RunShots()
     {
         FreezePlayer(true);
-        if (fadeCanvasGroup != null) fadeCanvasGroup.alpha = 1f;
+        SetMeshAlpha(1f);
 
         foreach (Shot shot in shots)
         {
@@ -130,7 +130,7 @@ public class CameraSequence : MonoBehaviour
         }
 
         // 全部播完 — 先強制全黑
-        if (fadeCanvasGroup != null) fadeCanvasGroup.alpha = 1f;
+        SetMeshAlpha(1f);
 
         if (restorePlayerAtEnd)
         {
@@ -140,8 +140,7 @@ public class CameraSequence : MonoBehaviour
         }
         else
         {
-            if (fadeCanvasGroup != null)
-                fadeCanvasGroup.alpha = stayBlackAtEnd ? 1f : 0f;
+            SetMeshAlpha(stayBlackAtEnd ? 1f : 0f);
         }
     }
 
@@ -172,16 +171,29 @@ public class CameraSequence : MonoBehaviour
             if (g != null) g.SetActive(g == active);
     }
 
+    void SetMeshAlpha(float alpha)
+    {
+        if (fadeMesh == null) return;
+        Color c = fadeMesh.material.color;
+        c.a = alpha;
+        fadeMesh.material.color = c;
+    }
+
     IEnumerator Fade(float from, float to, float duration)
     {
-        if (fadeCanvasGroup == null) yield break;
+        if (fadeMesh == null) yield break;
+
+        Material mat = fadeMesh.material; // 取得材質實例
+        Color startColor = mat.color;
+
         float t = 0f;
         while (t < duration)
         {
             t += Time.deltaTime;
-            fadeCanvasGroup.alpha = Mathf.Lerp(from, to, t / duration);
+            float currentAlpha = Mathf.Lerp(from, to, t / duration);
+            mat.color = new Color(startColor.r, startColor.g, startColor.b, currentAlpha);
             yield return null;
         }
-        fadeCanvasGroup.alpha = to;
+        mat.color = new Color(startColor.r, startColor.g, startColor.b, to);
     }
 }
