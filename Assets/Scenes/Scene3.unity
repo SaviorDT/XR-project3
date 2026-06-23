@@ -841,6 +841,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fbffcf4a6758b4b458d1e5fe8c2d2694, type: 3}
+--- !u!4 &80470091 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6079045511087383767, guid: d6221660abff6134ba42e1c091b7215c, type: 3}
+  m_PrefabInstance: {fileID: 982424916}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &81351046
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3675,6 +3680,46 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: fbffcf4a6758b4b458d1e5fe8c2d2694, type: 3}
   m_PrefabInstance: {fileID: 79420395}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &347960948 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 483502388766937093, guid: 3f48c9c6e9cc35a42b32871fc5745ae0, type: 3}
+  m_PrefabInstance: {fileID: 6658121152568981069}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &347960956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347960948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c88d12528eb65fb488e54bb0d3234a7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerBeastDistanceRespawn
+  beast: {fileID: 80470091}
+  respawnDistanceInFrontOfBeast: 3
+  respawnYOffset: 0
+  faceBeast: 1
+  resetVelocity: 1
+  safeAreaMode: 0
+  useRotatedXYZBox: 1
+  minX: -200
+  maxX: 600
+  minY: -220
+  maxY: 220
+  minZ: -500
+  maxZ: 200
+  xyzBoxCenter: {x: 170, y: 0, z: -200}
+  xyzBoxSize: {x: 800, y: 400, z: 400}
+  xyzBoxEulerAngles: {x: 0, y: 45, z: 0}
+  circleCenterXZ: {x: 175, y: -175}
+  circleRadius: 400
+  circleMinY: -2
+  circleMaxY: 5
+  sphereCenter: {x: 0, y: 0, z: 0}
+  sphereRadius: 10
+  pressAToRespawn: 1
 --- !u!1001 &358385988
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26753,10 +26798,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7374800651608046948, guid: 3f48c9c6e9cc35a42b32871fc5745ae0, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 483502388766937093, guid: 3f48c9c6e9cc35a42b32871fc5745ae0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 347960956}
   m_SourcePrefab: {fileID: 100100000, guid: 3f48c9c6e9cc35a42b32871fc5745ae0, type: 3}
 --- !u!23 &7128252929597499102
 MeshRenderer:
