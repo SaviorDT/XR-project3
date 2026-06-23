@@ -7018,6 +7018,7 @@ GameObject:
   - component: {fileID: 8748529932529124704}
   - component: {fileID: 6468565537877509016}
   - component: {fileID: 176042300437317345}
+  - component: {fileID: 4163347481236876303}
   m_Layer: 6
   m_Name: wind100
   m_TagString: Untagged
@@ -7033,8 +7034,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 920205554821405467}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7074156, y: -0, z: -0, w: 0.70679784}
-  m_LocalPosition: {x: 43.59, y: 292.75, z: 66.18}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 43.59, y: 303.17, z: 66.18}
   m_LocalScale: {x: 7, y: 7, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7042,7 +7043,7 @@ Transform:
   - {fileID: 6108651316784035458}
   - {fileID: 7796818611040652860}
   m_Father: {fileID: 62607488670289624}
-  m_LocalEulerAnglesHint: {x: -89.96, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &2736326859703883040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7118,6 +7119,51 @@ MonoBehaviour:
   baseHeight: 6
   centerAlongWind: 1
   centerOffset: {x: 0, y: 0, z: 0}
+--- !u!114 &4163347481236876303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920205554821405467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98e9def1c4127ba4b85c40d747a071af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StatusSlerpMover
+  statusSource: {fileID: 0}
+  statusTargets:
+  - status: 0
+    position: {x: 43.59, y: 303.17, z: 66.18}
+    eulerAngle: {x: 90, y: 0, z: 0}
+  - status: 1
+    position: {x: 43.59, y: 292.75, z: 66.18}
+    eulerAngle: {x: -90, y: 0, z: 0}
+  - status: 2
+    position: {x: 43.59, y: 303.17, z: 66.18}
+    eulerAngle: {x: 90, y: 0, z: 0}
+  - status: 3
+    position: {x: 43.59, y: 292.75, z: 66.18}
+    eulerAngle: {x: -90, y: 0, z: 0}
+  - status: 4
+    position: {x: 43.59, y: 303.17, z: 66.18}
+    eulerAngle: {x: 90, y: 0, z: 0}
+  - status: 5
+    position: {x: 43.59, y: 292.75, z: 66.18}
+    eulerAngle: {x: -90, y: 0, z: 0}
+  moveMode: 2
+  positionSlerpSpeed: 2
+  rotationSlerpSpeed: 2
+  positionSnapDistance: 0.01
+  rotationSnapAngle: 0.5
+  showGizmos: 1
+  gizmoSphereRadius: 0.15
+  gizmoAxisLength: 0.75
+  movingBeaconPrefab: {fileID: 896109822995663612, guid: 08bde3dabe0255847a77c7f37099d116, type: 3}
+  movingBeaconOffset: {x: 0, y: 0, z: 0}
+  movingBeaconFadeDuration: 0.5
+  movingBeaconShowPositionThreshold: 0.05
+  movingBeaconShowRotationThreshold: 1
 --- !u!1 &1013321461348608447
 GameObject:
   m_ObjectHideFlags: 0
@@ -43275,7 +43321,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &262999480705777984
 Transform:
   m_ObjectHideFlags: 0
@@ -43398,7 +43444,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2144711252191403316}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.06693462, y: -0.33081955, z: -0.023531068, w: 0.9410231}
+  m_LocalRotation: {x: -0.090672605, y: -0.010919946, z: -0.044112127, w: 0.9948434}
   m_LocalPosition: {x: 129, y: 259, z: -53.1}
   m_LocalScale: {x: 5, y: 5, z: 10}
   m_ConstrainProportionsScale: 0
@@ -43408,7 +43454,7 @@ Transform:
   - {fileID: 1426857557498722982}
   - {fileID: 3126704883877045063}
   m_Father: {fileID: 62607488670289624}
-  m_LocalEulerAnglesHint: {x: -8.137, y: -38.739, z: 0}
+  m_LocalEulerAnglesHint: {x: -10.45, y: -0.8, z: -5.005}
 --- !u!114 &7576799882910047284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49102,6 +49148,7 @@ GameObject:
   - component: {fileID: 3590212836046016093}
   - component: {fileID: 5373758800699543697}
   - component: {fileID: 5646357803331480561}
+  - component: {fileID: 2630912410648703317}
   m_Layer: 6
   m_Name: wind040
   m_TagString: Untagged
@@ -49117,7 +49164,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2335159582513365493}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.76241803, y: 0.25179547, z: -0.18718573, w: 0.5659323}
+  m_LocalRotation: {x: 0.010877873, y: 0.60806966, z: -0.784985, w: -0.11803205}
   m_LocalPosition: {x: -248, y: 115.35, z: 113.54}
   m_LocalScale: {x: 6, y: 6, z: 7}
   m_ConstrainProportionsScale: 0
@@ -49126,7 +49173,7 @@ Transform:
   - {fileID: 8362420868217823594}
   - {fileID: 1316932692628366361}
   m_Father: {fileID: 62607488670289624}
-  m_LocalEulerAnglesHint: {x: -129.764, y: -63.10199, z: 68.672}
+  m_LocalEulerAnglesHint: {x: -252.19101, y: -211.681, z: -40.477997}
 --- !u!114 &4777791130275622573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49202,6 +49249,39 @@ MonoBehaviour:
   baseHeight: 6
   centerAlongWind: 1
   centerOffset: {x: 0, y: 0, z: 0}
+--- !u!114 &2630912410648703317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2335159582513365493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98e9def1c4127ba4b85c40d747a071af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StatusSlerpMover
+  statusSource: {fileID: 0}
+  statusTargets:
+  - status: 0
+    position: {x: -248, y: 115.35, z: 113.54}
+    eulerAngle: {x: 72.19135, y: 328.3195, z: 139.52238}
+  - status: 1
+    position: {x: -248, y: 115.35, z: 113.54}
+    eulerAngle: {x: 309.7637, y: 116.89767, z: 248.67157}
+  moveMode: 2
+  positionSlerpSpeed: 2
+  rotationSlerpSpeed: 2
+  positionSnapDistance: 0.01
+  rotationSnapAngle: 0.5
+  showGizmos: 1
+  gizmoSphereRadius: 0.15
+  gizmoAxisLength: 0.75
+  movingBeaconPrefab: {fileID: 896109822995663612, guid: 08bde3dabe0255847a77c7f37099d116, type: 3}
+  movingBeaconOffset: {x: 0, y: 0, z: 0}
+  movingBeaconFadeDuration: 0.5
+  movingBeaconShowPositionThreshold: 0.05
+  movingBeaconShowRotationThreshold: 1
 --- !u!1 &2354657610257974061
 GameObject:
   m_ObjectHideFlags: 0
@@ -50615,6 +50695,7 @@ GameObject:
   - component: {fileID: 6391113015271328991}
   - component: {fileID: 5496240655920865192}
   - component: {fileID: 5658004790588920090}
+  - component: {fileID: 215638411085897414}
   m_Layer: 6
   m_Name: wind053
   m_TagString: Untagged
@@ -50632,7 +50713,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.6035688, y: -0.24150246, z: 0.110883094, w: 0.7517223}
   m_LocalPosition: {x: 64.05823, y: 176.68503, z: -136.11737}
-  m_LocalScale: {x: 6, y: 6, z: 6}
+  m_LocalScale: {x: 6, y: 6, z: 8}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8965809906259128333}
@@ -50716,6 +50797,45 @@ MonoBehaviour:
   baseHeight: 6
   centerAlongWind: 1
   centerOffset: {x: 0, y: 0, z: 0}
+--- !u!114 &215638411085897414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3014684422697822053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98e9def1c4127ba4b85c40d747a071af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StatusSlerpMover
+  statusSource: {fileID: 0}
+  statusTargets:
+  - status: 0
+    position: {x: 64.05823, y: 176.68503, z: -136.11737}
+    eulerAngle: {x: 301.36432, y: 287.29834, z: 61.691643}
+  - status: 1
+    position: {x: -171.8, y: 132.8, z: -164.9}
+    eulerAngle: {x: 315.35458, y: 311.82166, z: 38.1443}
+  - status: 2
+    position: {x: -262.9, y: 114.8, z: 98.9}
+    eulerAngle: {x: 310.15808, y: 196.14781, z: 137.04678}
+  - status: 3
+    position: {x: 152.3, y: 166.7, z: -1.6}
+    eulerAngle: {x: 301.98892, y: 176.5282, z: 152.99834}
+  moveMode: 2
+  positionSlerpSpeed: 2
+  rotationSlerpSpeed: 2
+  positionSnapDistance: 0.01
+  rotationSnapAngle: 0.5
+  showGizmos: 1
+  gizmoSphereRadius: 0.15
+  gizmoAxisLength: 0.75
+  movingBeaconPrefab: {fileID: 896109822995663612, guid: 08bde3dabe0255847a77c7f37099d116, type: 3}
+  movingBeaconOffset: {x: 0, y: 0, z: 0}
+  movingBeaconFadeDuration: 0.5
+  movingBeaconShowPositionThreshold: 0.05
+  movingBeaconShowRotationThreshold: 1
 --- !u!1 &3042872914599670014
 GameObject:
   m_ObjectHideFlags: 0
@@ -57216,7 +57336,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2930784742157615217
 Transform:
   m_ObjectHideFlags: 0
@@ -57323,6 +57443,7 @@ GameObject:
   - component: {fileID: 4213531755023903346}
   - component: {fileID: 3112559435086091944}
   - component: {fileID: 6905835437780078991}
+  - component: {fileID: 4609825182205506704}
   m_Layer: 6
   m_Name: wind000
   m_TagString: Untagged
@@ -57424,6 +57545,42 @@ MonoBehaviour:
   baseHeight: 6
   centerAlongWind: 1
   centerOffset: {x: 0, y: 0, z: 0}
+--- !u!114 &4609825182205506704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3919728141472729584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98e9def1c4127ba4b85c40d747a071af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StatusSlerpMover
+  statusSource: {fileID: 0}
+  statusTargets:
+  - status: 0
+    position: {x: -6.5532637, y: 35.11, z: -33.78}
+    eulerAngle: {x: 281.17468, y: 180, z: 180}
+  - status: 1
+    position: {x: -11.2, y: 36.6, z: 41.4}
+    eulerAngle: {x: 286.01398, y: 0, z: 0}
+  - status: 2
+    position: {x: -43.17, y: 40.21, z: -7.34}
+    eulerAngle: {x: 355.6756, y: 288.18445, z: -0.00000021405276}
+  moveMode: 2
+  positionSlerpSpeed: 2
+  rotationSlerpSpeed: 2
+  positionSnapDistance: 0.01
+  rotationSnapAngle: 0.5
+  showGizmos: 1
+  gizmoSphereRadius: 0.15
+  gizmoAxisLength: 0.75
+  movingBeaconPrefab: {fileID: 896109822995663612, guid: 08bde3dabe0255847a77c7f37099d116, type: 3}
+  movingBeaconOffset: {x: 0, y: 0, z: 0}
+  movingBeaconFadeDuration: 0.5
+  movingBeaconShowPositionThreshold: 0.05
+  movingBeaconShowRotationThreshold: 1
 --- !u!1 &3963502198395520446
 GameObject:
   m_ObjectHideFlags: 0
@@ -57787,6 +57944,7 @@ GameObject:
   - component: {fileID: 1564561484377387298}
   - component: {fileID: 167677506104483076}
   - component: {fileID: 773780865267564172}
+  - component: {fileID: 1780002686267714812}
   m_Layer: 6
   m_Name: wind034
   m_TagString: Untagged
@@ -57802,7 +57960,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4024575751645076256}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.92761636, y: -0.08127071, z: 0.07759361, w: 0.35623336}
+  m_LocalRotation: {x: -0.9635821, y: -0.111120954, z: 0.016668195, w: -0.24265987}
   m_LocalPosition: {x: -169.3, y: 74.1, z: 90.8}
   m_LocalScale: {x: 4, y: 4, z: 7}
   m_ConstrainProportionsScale: 0
@@ -57812,7 +57970,7 @@ Transform:
   - {fileID: 5871527601681590963}
   - {fileID: 4121905491007480348}
   m_Father: {fileID: 62607488670289624}
-  m_LocalEulerAnglesHint: {x: -139.588, y: 15.373993, z: -15.701996}
+  m_LocalEulerAnglesHint: {x: -208.122, y: -1.4169922, z: -13.511993}
 --- !u!114 &7904890630328478504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57888,6 +58046,39 @@ MonoBehaviour:
   baseHeight: 6
   centerAlongWind: 1
   centerOffset: {x: 0, y: 0, z: 0}
+--- !u!114 &1780002686267714812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4024575751645076256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98e9def1c4127ba4b85c40d747a071af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StatusSlerpMover
+  statusSource: {fileID: 0}
+  statusTargets:
+  - status: 0
+    position: {x: -169.3, y: 74.1, z: 90.8}
+    eulerAngle: {x: 28.121954, y: 178.58316, z: 166.48848}
+  - status: 0
+    position: {x: -169.3, y: 74.1, z: 90.8}
+    eulerAngle: {x: 319.58768, y: 195.37367, z: 164.29813}
+  moveMode: 2
+  positionSlerpSpeed: 2
+  rotationSlerpSpeed: 2
+  positionSnapDistance: 0.01
+  rotationSnapAngle: 0.5
+  showGizmos: 1
+  gizmoSphereRadius: 0.15
+  gizmoAxisLength: 0.75
+  movingBeaconPrefab: {fileID: 896109822995663612, guid: 08bde3dabe0255847a77c7f37099d116, type: 3}
+  movingBeaconOffset: {x: 0, y: 0, z: 0}
+  movingBeaconFadeDuration: 0.5
+  movingBeaconShowPositionThreshold: 0.05
+  movingBeaconShowRotationThreshold: 1
 --- !u!1 &4193271927270313795
 GameObject:
   m_ObjectHideFlags: 0
@@ -62981,6 +63172,7 @@ GameObject:
   - component: {fileID: 2841014697572871763}
   - component: {fileID: 264539225603527017}
   - component: {fileID: 7358749979538407096}
+  - component: {fileID: 4565551809804032456}
   m_Layer: 6
   m_Name: wind092
   m_TagString: Untagged
@@ -63081,6 +63273,51 @@ MonoBehaviour:
   baseHeight: 6
   centerAlongWind: 1
   centerOffset: {x: 0, y: 0, z: 0}
+--- !u!114 &4565551809804032456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4375674135398279102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98e9def1c4127ba4b85c40d747a071af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StatusSlerpMover
+  statusSource: {fileID: 0}
+  statusTargets:
+  - status: 0
+    position: {x: 17.7, y: 254.5, z: 58.6}
+    eulerAngle: {x: 283.79642, y: 180, z: 206.45953}
+  - status: 1
+    position: {x: 17.7, y: 254.5, z: 58.6}
+    eulerAngle: {x: 349.87024, y: 92.5145, z: 255.98067}
+  - status: 2
+    position: {x: 17.7, y: 254.5, z: 58.6}
+    eulerAngle: {x: 327.00085, y: 199.64577, z: 261.9391}
+  - status: 3
+    position: {x: 17.7, y: 254.5, z: 58.6}
+    eulerAngle: {x: 283.79642, y: 180, z: 206.45953}
+  - status: 4
+    position: {x: 17.7, y: 254.5, z: 58.6}
+    eulerAngle: {x: 349.87024, y: 92.5145, z: 255.98067}
+  - status: 5
+    position: {x: 17.7, y: 254.5, z: 58.6}
+    eulerAngle: {x: 327.00085, y: 199.64577, z: 261.9391}
+  moveMode: 2
+  positionSlerpSpeed: 2
+  rotationSlerpSpeed: 2
+  positionSnapDistance: 0.01
+  rotationSnapAngle: 0.5
+  showGizmos: 1
+  gizmoSphereRadius: 0.15
+  gizmoAxisLength: 0.75
+  movingBeaconPrefab: {fileID: 896109822995663612, guid: 08bde3dabe0255847a77c7f37099d116, type: 3}
+  movingBeaconOffset: {x: 0, y: 0, z: 0}
+  movingBeaconFadeDuration: 0.5
+  movingBeaconShowPositionThreshold: 0.05
+  movingBeaconShowRotationThreshold: 1
 --- !u!1 &4389829787002227368
 GameObject:
   m_ObjectHideFlags: 0
@@ -109345,9 +109582,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5957049208691041403}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.91841006, y: 0.04821935, z: -0.37444696, w: 0.11826811}
+  m_LocalRotation: {x: -0.9190497, y: 0.08345403, z: -0.38362706, w: 0.034835137}
   m_LocalPosition: {x: -190.28317, y: 170.2, z: 100.1}
-  m_LocalScale: {x: 7, y: 7, z: 9}
+  m_LocalScale: {x: 7, y: 7, z: 20}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1317059224898499450}
@@ -109355,7 +109592,7 @@ Transform:
   - {fileID: 8977215538551059353}
   - {fileID: 3947221264713523663}
   m_Father: {fileID: 62607488670289624}
-  m_LocalEulerAnglesHint: {x: -169.565, y: -45.31299, z: 10.376999}
+  m_LocalEulerAnglesHint: {x: -180, y: -45.31299, z: 10.376999}
 --- !u!114 &7487714053316930104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109390,7 +109627,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WindForceZone
   localWindDirection: {x: 0, y: 0, z: 1}
-  windStrength: 20
+  windStrength: 5
 --- !u!136 &5890337085322197115
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -109634,9 +109871,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6154737576820926727}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.91841006, y: 0.04821935, z: -0.37444696, w: 0.11826811}
+  m_LocalRotation: {x: -0.9190497, y: 0.08345403, z: -0.38362706, w: 0.034835137}
   m_LocalPosition: {x: -214.6, y: 167.2, z: 63.7}
-  m_LocalScale: {x: 7, y: 7, z: 9}
+  m_LocalScale: {x: 7, y: 7, z: 20}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1837284909965220695}
@@ -109644,7 +109881,7 @@ Transform:
   - {fileID: 1350686834672728276}
   - {fileID: 7323905047189047102}
   m_Father: {fileID: 62607488670289624}
-  m_LocalEulerAnglesHint: {x: -169.565, y: -45.31299, z: 10.376999}
+  m_LocalEulerAnglesHint: {x: -180, y: -45.31299, z: 10.376999}
 --- !u!114 &3019172143184864763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109679,7 +109916,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WindForceZone
   localWindDirection: {x: 0, y: 0, z: 1}
-  windStrength: 20
+  windStrength: 5
 --- !u!136 &5062929333246259305
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -109739,7 +109976,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4056296888533888347
 Transform:
   m_ObjectHideFlags: 0
@@ -110022,6 +110259,7 @@ GameObject:
   - component: {fileID: 1207231974824807333}
   - component: {fileID: 1459188150832381674}
   - component: {fileID: 5268567791869967579}
+  - component: {fileID: 3720309007458926415}
   m_Layer: 6
   m_Name: wind032
   m_TagString: Untagged
@@ -110122,6 +110360,39 @@ MonoBehaviour:
   baseHeight: 6
   centerAlongWind: 1
   centerOffset: {x: 0, y: 0, z: 0}
+--- !u!114 &3720309007458926415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6243819904497068010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98e9def1c4127ba4b85c40d747a071af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StatusSlerpMover
+  statusSource: {fileID: 0}
+  statusTargets:
+  - status: 0
+    position: {x: -120.95, y: 58.84, z: 0.32}
+    eulerAngle: {x: 333.0538, y: 316.6363, z: 180}
+  - status: 1
+    position: {x: -120.95, y: 58.84, z: 0.32}
+    eulerAngle: {x: 22.343729, y: 136.63628, z: -0.0000046153928}
+  moveMode: 2
+  positionSlerpSpeed: 2
+  rotationSlerpSpeed: 2
+  positionSnapDistance: 0.01
+  rotationSnapAngle: 0.5
+  showGizmos: 1
+  gizmoSphereRadius: 0.15
+  gizmoAxisLength: 0.75
+  movingBeaconPrefab: {fileID: 896109822995663612, guid: 08bde3dabe0255847a77c7f37099d116, type: 3}
+  movingBeaconOffset: {x: 0, y: 0, z: 0}
+  movingBeaconFadeDuration: 0.5
+  movingBeaconShowPositionThreshold: 0.05
+  movingBeaconShowRotationThreshold: 1
 --- !u!1 &6269798470643345202
 GameObject:
   m_ObjectHideFlags: 0
@@ -110675,9 +110946,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6775384906845728064}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.6062554, y: -0.027022146, z: 0.030621013, w: 0.79422075}
+  m_LocalRotation: {x: -0.6866817, y: -0.030102596, z: 0.027598491, w: 0.7258102}
   m_LocalPosition: {x: -23.369427, y: 26.8634, z: 137.1548}
-  m_LocalScale: {x: 12, y: 7, z: 13}
+  m_LocalScale: {x: 12, y: 7, z: 11}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2752457158934061645}
@@ -110685,7 +110956,7 @@ Transform:
   - {fileID: 6379647762980156229}
   - {fileID: 3234199244984966571}
   m_Father: {fileID: 62607488670289624}
-  m_LocalEulerAnglesHint: {x: -74.018, y: -16.902, z: 17.196}
+  m_LocalEulerAnglesHint: {x: -84.349, y: -55.959, z: 55.756}
 --- !u!114 &1502018043630550405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126072,7 +126343,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5537701070897773330
 Transform:
   m_ObjectHideFlags: 0
@@ -126196,7 +126467,7 @@ Transform:
   m_GameObject: {fileID: 7159286144846267087}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 143.8, y: 288.6, z: -192.5}
+  m_LocalPosition: {x: 187.1, y: 288.6, z: -192.5}
   m_LocalScale: {x: 5, y: 5, z: 8}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -151868,6 +152139,7 @@ GameObject:
   - component: {fileID: 3359217244009163715}
   - component: {fileID: 7327513141107533163}
   - component: {fileID: 6541645494350067970}
+  - component: {fileID: 960229857654172362}
   m_Layer: 6
   m_Name: wind072
   m_TagString: Untagged
@@ -151884,7 +152156,7 @@ Transform:
   m_GameObject: {fileID: 8070348070529437014}
   serializedVersion: 2
   m_LocalRotation: {x: -0.6839623, y: -0, z: -0, w: 0.7295174}
-  m_LocalPosition: {x: 187.9, y: 176.7, z: -179.8}
+  m_LocalPosition: {x: 128.1, y: 176.7, z: -179.8}
   m_LocalScale: {x: 12, y: 12, z: 12}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -151968,6 +152240,39 @@ MonoBehaviour:
   baseHeight: 6
   centerAlongWind: 1
   centerOffset: {x: 0, y: 0, z: 0}
+--- !u!114 &960229857654172362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8070348070529437014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98e9def1c4127ba4b85c40d747a071af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StatusSlerpMover
+  statusSource: {fileID: 0}
+  statusTargets:
+  - status: 0
+    position: {x: 128.1, y: 176.7, z: -179.8}
+    eulerAngle: {x: 273.69183, y: 0, z: 0}
+  - status: 1
+    position: {x: 187.9, y: 176.7, z: -179.8}
+    eulerAngle: {x: 273.69183, y: 0, z: 0}
+  moveMode: 2
+  positionSlerpSpeed: 2
+  rotationSlerpSpeed: 2
+  positionSnapDistance: 0.01
+  rotationSnapAngle: 0.5
+  showGizmos: 1
+  gizmoSphereRadius: 0.15
+  gizmoAxisLength: 0.75
+  movingBeaconPrefab: {fileID: 896109822995663612, guid: 08bde3dabe0255847a77c7f37099d116, type: 3}
+  movingBeaconOffset: {x: 0, y: 0, z: 0}
+  movingBeaconFadeDuration: 0.5
+  movingBeaconShowPositionThreshold: 0.05
+  movingBeaconShowRotationThreshold: 1
 --- !u!1 &8112018200458066731
 GameObject:
   m_ObjectHideFlags: 0
@@ -157061,6 +157366,7 @@ GameObject:
   - component: {fileID: 1625837753149289579}
   - component: {fileID: 4601897927575209951}
   - component: {fileID: 1633438359347842970}
+  - component: {fileID: 8968153213863664705}
   m_Layer: 6
   m_Name: wind091
   m_TagString: Untagged
@@ -157076,8 +157382,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8190982722579264927}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.7208506, z: -0, w: 0.6930905}
-  m_LocalPosition: {x: 144.3, y: 269.54, z: 59.6}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 106.5, y: 269.54, z: 59.6}
   m_LocalScale: {x: 3, y: 5, z: 8}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -157086,7 +157392,7 @@ Transform:
   - {fileID: 7621665483701182791}
   - {fileID: 4977840480682087139}
   m_Father: {fileID: 62607488670289624}
-  m_LocalEulerAnglesHint: {x: 0, y: -92.25, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &3539975726086066332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157162,6 +157468,45 @@ MonoBehaviour:
   baseHeight: 6
   centerAlongWind: 1
   centerOffset: {x: 0, y: 0, z: 0}
+--- !u!114 &8968153213863664705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8190982722579264927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98e9def1c4127ba4b85c40d747a071af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StatusSlerpMover
+  statusSource: {fileID: 0}
+  statusTargets:
+  - status: 0
+    position: {x: 106.5, y: 269.54, z: 59.6}
+    eulerAngle: {x: 0, y: 90, z: 0}
+  - status: 1
+    position: {x: 126.9, y: 269.54, z: 73.9}
+    eulerAngle: {x: 0, y: 180, z: 0}
+  - status: 2
+    position: {x: 140.99, y: 269.54, z: 59.21}
+    eulerAngle: {x: 0, y: 270, z: 0}
+  - status: 3
+    position: {x: 127.712364, y: 269.54, z: 43.899284}
+    eulerAngle: {x: -0, y: 0, z: 0}
+  moveMode: 2
+  positionSlerpSpeed: 2
+  rotationSlerpSpeed: 2
+  positionSnapDistance: 0.01
+  rotationSnapAngle: 0.5
+  showGizmos: 1
+  gizmoSphereRadius: 0.15
+  gizmoAxisLength: 0.75
+  movingBeaconPrefab: {fileID: 896109822995663612, guid: 08bde3dabe0255847a77c7f37099d116, type: 3}
+  movingBeaconOffset: {x: 0, y: 0, z: 0}
+  movingBeaconFadeDuration: 0.5
+  movingBeaconShowPositionThreshold: 0.05
+  movingBeaconShowRotationThreshold: 1
 --- !u!1 &8218657494437555685
 GameObject:
   m_ObjectHideFlags: 0
@@ -157350,6 +157695,7 @@ GameObject:
   - component: {fileID: 1252691526205592088}
   - component: {fileID: 3847512488420496090}
   - component: {fileID: 2840665488051577938}
+  - component: {fileID: 5524177781792480533}
   m_Layer: 6
   m_Name: wind033
   m_TagString: Untagged
@@ -157365,7 +157711,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8317516237498833325}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.2809814, y: 0.16945131, z: 0.05047533, w: 0.94328576}
+  m_LocalRotation: {x: 0.12498708, y: 0.17537783, z: -0.022452632, w: 0.976277}
   m_LocalPosition: {x: -202.33, y: 82.79, z: 5.02}
   m_LocalScale: {x: 4, y: 4, z: 7}
   m_ConstrainProportionsScale: 0
@@ -157374,7 +157720,7 @@ Transform:
   - {fileID: 7716251819984934033}
   - {fileID: 1346378806392358532}
   m_Father: {fileID: 62607488670289624}
-  m_LocalEulerAnglesHint: {x: -33.175, y: 20.368, z: 0}
+  m_LocalEulerAnglesHint: {x: 14.591, y: 20.368, z: 0}
 --- !u!114 &6685081103617061852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157450,6 +157796,39 @@ MonoBehaviour:
   baseHeight: 6
   centerAlongWind: 1
   centerOffset: {x: 0, y: 0, z: 0}
+--- !u!114 &5524177781792480533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8317516237498833325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98e9def1c4127ba4b85c40d747a071af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StatusSlerpMover
+  statusSource: {fileID: 0}
+  statusTargets:
+  - status: 0
+    position: {x: -202.33, y: 82.79, z: 5.02}
+    eulerAngle: {x: 14.591124, y: 20.367922, z: -0.0000028672378}
+  - status: 1
+    position: {x: -202.33, y: 82.79, z: 5.02}
+    eulerAngle: {x: 326.825, y: 20.367926, z: -0.0000010200359}
+  moveMode: 2
+  positionSlerpSpeed: 2
+  rotationSlerpSpeed: 2
+  positionSnapDistance: 0.01
+  rotationSnapAngle: 0.5
+  showGizmos: 1
+  gizmoSphereRadius: 0.15
+  gizmoAxisLength: 0.75
+  movingBeaconPrefab: {fileID: 896109822995663612, guid: 08bde3dabe0255847a77c7f37099d116, type: 3}
+  movingBeaconOffset: {x: 0, y: 0, z: 0}
+  movingBeaconFadeDuration: 0.5
+  movingBeaconShowPositionThreshold: 0.05
+  movingBeaconShowRotationThreshold: 1
 --- !u!1 &8331508654361429502
 GameObject:
   m_ObjectHideFlags: 0
@@ -168791,7 +169170,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5443198040456506414
 Transform:
   m_ObjectHideFlags: 0
@@ -168800,8 +169179,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8941578491509553843}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.45108536, y: -0.243543, z: 0.12942865, w: 0.8487974}
-  m_LocalPosition: {x: -171.8, y: 132.8, z: -164.9}
+  m_LocalRotation: {x: -0.8465858, y: -0.21836653, z: -0.13891225, w: 0.46509343}
+  m_LocalPosition: {x: 152.3, y: 166.7, z: -1.6}
   m_LocalScale: {x: 6, y: 6, z: 8}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -168809,7 +169188,7 @@ Transform:
   - {fileID: 439373818405803081}
   - {fileID: 837863687858359536}
   m_Father: {fileID: 62607488670289624}
-  m_LocalEulerAnglesHint: {x: -44.645, y: -48.178, z: 38.144}
+  m_LocalEulerAnglesHint: {x: -58.011, y: -183.472, z: 152.998}
 --- !u!114 &120761404019430399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169193,7 +169572,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7248009760810971225
 Transform:
   m_ObjectHideFlags: 0
