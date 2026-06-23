@@ -66,7 +66,8 @@ public class MeteorBProjectile : MonoBehaviour
             currentDirection = targetDirection;
         }
 
-        rb.MovePosition(rb.position + currentDirection * speed * Time.fixedDeltaTime);
+        // rb.MovePosition(rb.position + currentDirection * speed * Time.fixedDeltaTime);
+        rb.linearVelocity = currentDirection * speed;
 
         if (currentDirection != Vector3.zero)
         {

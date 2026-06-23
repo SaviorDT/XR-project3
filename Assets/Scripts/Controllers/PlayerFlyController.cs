@@ -44,6 +44,8 @@ public class PlayerFlyController : MonoBehaviour
     [Tooltip("1秒後，玩家的速度會有多少比例轉向當前的飛行方向")]
     [SerializeField] private float SteeringSpeed = 1.5f;
     [SerializeField] private Vector3 WindResistance = new(0.8f, 0.6f, 0.8f);
+    [Tooltip("隕石造成的速度每秒會降低多少比例")]
+    [SerializeField] private float MeteorSpeedReduceRatio = 0.5f;
     [Header("References")]
     [SerializeField] private Transform FixPoseTarget;
     [SerializeField] private BoxCollider PlayerCollider;
@@ -81,6 +83,7 @@ public class PlayerFlyController : MonoBehaviour
 
     // 以下為計算用變數
     [SerializeField] private Vector3 Velocity = Vector3.zero;
+    private Vector3 MeteorVelocity = Vector3.zero;
     private float PlayerControllerYaw = 0.0f;
     private float GliderRoll = 0.0f;
     private float PlayerControllerPitch = 0.0f;
@@ -321,8 +324,71 @@ public class PlayerFlyController : MonoBehaviour
             Velocity = Vector3.Scale(Velocity, WindResistance * Time.fixedDeltaTime + Vector3.one * (1 - Time.fixedDeltaTime));
         }
 
+        MeteorVelocity *= 1 - MeteorSpeedReduceRatio * Time.fixedDeltaTime;
+
         // 移動
-        PlayerRigidbody.linearVelocity = Velocity;
+        PlayerRigidbody.linearVelocity = Velocity + MeteorVelocity;
+    }
+
+    // 隕石（trigger 版本）
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!InUniverse || !other.gameObject.CompareTag("Meteor"))
+        {
+            return;
+        }
+
+        if (PlayerRigidbody == null)
+            return;
+
+        // Compute an approximate contact normal using the closest point on the meteor's collider
+        Vector3 closest = other.ClosestPoint(PlayerRigidbody.position);
+        Vector3 normal = PlayerRigidbody.position - closest;
+        if (normal.sqrMagnitude < 1e-6f)
+        {
+            // fallback normal if points coincide
+            normal = Vector3.up;
+        }
+        normal.Normalize();
+
+        // meteor velocity (if it has a Rigidbody)
+        Vector3 meteorVelocity = Vector3.zero;
+        Rigidbody meteorRb = other.attachedRigidbody;
+        if (meteorRb != null)
+        {
+            meteorVelocity = meteorRb.linearVelocity;
+        }
+
+        Vector3 v = Velocity + MeteorVelocity; //MeteorVelocity is the velocity added by meteors that collided before this time. Not meteorVelocity
+        Vector3 u = meteorVelocity;
+
+        float e = 1.0f; // perfectly elastic
+        Vector3 relative = v - u;
+        float vn = Vector3.Dot(relative, normal);
+
+        // If objects are separating, no impulse needed
+        if (vn >= 0f)
+            return;
+
+        Vector3 vPrime = v - (1f + e) * vn * normal;
+
+        MeteorVelocity = vPrime - Velocity;
+
+        // Remove meteor components: collider and optional projectile scripts.
+        GameObject meteor = other.gameObject;
+        if (meteor != null)
+        {
+            if (meteor.TryGetComponent<Collider>(out var meteorCol))
+            {
+                Destroy(meteorCol);
+            }
+
+            if (meteor.TryGetComponent<MeteorAProjectile>(out var meteorA)) Destroy(meteorA);
+
+            if (meteor.TryGetComponent<MeteorBProjectile>(out var meteorB)) Destroy(meteorB);
+
+            if (meteor.TryGetComponent<MeteorCProjectile>(out var meteorC)) Destroy(meteorC);
+        }
     }
 
     public void SetWindVelocity(Vector3 velocity)

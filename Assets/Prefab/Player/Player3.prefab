@@ -15596,19 +15596,20 @@ MonoBehaviour:
   SideBarLPosition: {fileID: 6599044700823505456}
   SideBarAttachDistance: 0.2
   RollMinDiff: 0.1
-  VelocitySteeringRatio: 0.5
+  VelocitySteeringRatio: 0.01
   CorrectPitchRatio: 0.5
   MaxAngularVelocityY: 90
-  Gravity: 1
+  Gravity: 3
   ReducedGravityRatio: 0.75
-  StallSpeed: 5
+  StallSpeed: 0.001
   WindForce: 1
-  DownToForwardRatio: 2
+  DownToForwardRatio: 6
   DownToForwardLossRatio: 0
   VelocityToUpRatio: 0.8
   VelocityToUpLossRatio: 0
-  SteeringSpeed: 1.5
+  SteeringSpeed: 1
   WindResistance: {x: 0.8, y: 0.6, z: 0.8}
+  MeteorSpeedReduceRatio: 0.5
   FixPoseTarget: {fileID: 7292934019019607382}
   PlayerCollider: {fileID: 8089137599362790226}
   CameraTransform: {fileID: 1446558955418695746}

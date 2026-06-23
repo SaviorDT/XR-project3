@@ -3,10 +3,10 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class ProjectileCollisionSetup : MonoBehaviour
 {
-    [Header("¸I¼²³]©w")]
+    [Header("ï¿½Iï¿½ï¿½ï¿½]ï¿½w")]
     public bool autoSetupOnAwake = true;
 
-    [Header("Kinematic Rigidbody ³]©w")]
+    [Header("Kinematic Rigidbody ï¿½]ï¿½w")]
     public bool useGravity = false;
     public bool isKinematic = true;
 
