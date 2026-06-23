@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class TriggerStatusChanger : MonoBehaviour
 {
@@ -21,9 +22,20 @@ public class TriggerStatusChanger : MonoBehaviour
     public float interactDistance = 2f;
     public bool requireGrounded = true;
 
+    [Header("¥ú¬W")]
+    public GameObject beaconPrefab;
+    public float beaconShowDistance = 8f;
+    public float fadeDuration = 0.5f;
+
+    private GameObject beaconInstance;
+    private Renderer[] beaconRenderers;
+    private Coroutine beaconFadeCoroutine;
+    private bool beaconVisible = false;
+
     private void Start()
     {
         AutoFindPlayer();
+        CreateBeacon();
     }
 
     private void Update()
@@ -32,6 +44,7 @@ public class TriggerStatusChanger : MonoBehaviour
             return;
 
         float distance = Vector3.Distance(player.position, transform.position);
+        UpdateBeacon(distance);
 
         if (distance > interactDistance)
             return;
@@ -47,7 +60,101 @@ public class TriggerStatusChanger : MonoBehaviour
         else
             SetStatus(targetStatus);
     }
+    private void CreateBeacon()
+    {
+        if (beaconPrefab == null)
+            return;
 
+        beaconInstance = Instantiate(
+            beaconPrefab,
+            transform.position,
+            Quaternion.identity
+        );
+
+        beaconRenderers =
+            beaconInstance.GetComponentsInChildren<Renderer>();
+
+        SetBeaconAlpha(0f);
+
+        beaconInstance.SetActive(true);
+    }
+    private float GetBeaconAlpha()
+    {
+        if (beaconRenderers == null ||
+            beaconRenderers.Length == 0)
+            return 0f;
+
+        return beaconRenderers[0]
+            .material.color.a;
+    }
+    private void SetBeaconAlpha(float alpha)
+    {
+        if (beaconRenderers == null)
+            return;
+
+        foreach (Renderer renderer in beaconRenderers)
+        {
+            if (renderer == null)
+                continue;
+
+            foreach (Material mat in renderer.materials)
+            {
+                Color color = mat.color;
+                color.a = alpha;
+                mat.color = color;
+            }
+        }
+    }
+    private IEnumerator FadeBeacon(float targetAlpha)
+    {
+        float startAlpha = GetBeaconAlpha();
+
+        float timer = 0f;
+
+        while (timer < fadeDuration)
+        {
+            timer += Time.deltaTime;
+
+            float t =
+                Mathf.Clamp01(
+                    timer / fadeDuration);
+
+            float alpha =
+                Mathf.Lerp(
+                    startAlpha,
+                    targetAlpha,
+                    t);
+
+            SetBeaconAlpha(alpha);
+
+            yield return null;
+        }
+
+        SetBeaconAlpha(targetAlpha);
+    }
+    private void UpdateBeacon(float distance)
+    {
+        if (beaconInstance == null)
+            return;
+
+        bool shouldShow =
+            distance >= beaconShowDistance;
+
+        if (shouldShow == beaconVisible)
+            return;
+
+        beaconVisible = shouldShow;
+
+        if (beaconFadeCoroutine != null)
+            StopCoroutine(beaconFadeCoroutine);
+
+        beaconFadeCoroutine =
+            StartCoroutine(
+                FadeBeacon(
+                    shouldShow ? 1f : 0f
+                )
+            );
+    }
     private void AutoFindPlayer()
     {
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
@@ -115,7 +222,14 @@ public class TriggerStatusChanger : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(transform.position, interactDistance);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(
+            transform.position,
+            beaconShowDistance);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(
+            transform.position,
+            interactDistance);
     }
 }
