@@ -37,6 +37,21 @@ public class CloudSpawner : MonoBehaviour
     private float timer = 0f;
     private List<GameObject> activeClouds = new List<GameObject>();
 
+    // 新增：用來儲存目標 Layer 的索引
+    private int cloudLayerIndex;
+
+    void Start()
+    {
+        // 取得 "TransparenNoFog" 這個 Layer 的整數索引
+        cloudLayerIndex = LayerMask.NameToLayer("TransparentNoFog");
+
+        // 安全檢查：如果拼寫錯誤或編輯器中沒設定這個 Layer，會跳出警告
+        if (cloudLayerIndex == -1)
+        {
+            Debug.LogWarning("找不到名為 'TransparentNoFog' 的 Layer，請確認已在 Unity Editor 的 Tags & Layers 中新增此 Layer！");
+        }
+    }
+
     void Update()
     {
         // 清除已被銷毀的參考
@@ -76,6 +91,12 @@ public class CloudSpawner : MonoBehaviour
         // 建立 GameObject
         GameObject cloud = new GameObject("Cloud_" + idx);
         cloud.transform.position = spawnPos;
+
+        // 新增：設定 GameObject 的 Layer
+        if (cloudLayerIndex != -1)
+        {
+            cloud.layer = cloudLayerIndex;
+        }
 
         // 隨機旋轉 Y 軸
         cloud.transform.rotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
